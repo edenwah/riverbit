@@ -147,14 +147,6 @@ export default () => {
                                 {"$27,345.12"}
                             </span>
                         </div>
-                        <div className="flex flex-col shrink-0 items-start">
-                            <span className="text-zinc-400 text-xs" >
-                                {"Points"}
-                            </span>
-                            <span className="text-white text-sm" >
-                                {"1,250,000"}
-                            </span>
-                        </div>
                         <button className="flex flex-col shrink-0 items-start bg-[#92318D] text-left py-[11px] px-4 rounded-md border-0"
                             onClick={()=>alert("Pressed!")}>
                             <span className="text-white text-sm font-bold" >
@@ -176,83 +168,106 @@ export default () => {
                 {/* Mobile Menu Drawer */}
                 {mobileMenuOpen && (
                     <div className="fixed inset-0 z-50 bg-black bg-opacity-70 flex flex-col xl:hidden">
-                        <div className="flex flex-col bg-zinc-900 w-4/5 max-w-xs h-full shadow-lg p-6">
-                            <button
-                                className="self-end mb-6"
-                                onClick={() => setMobileMenuOpen(false)}
-                                aria-label="Close menu"
-                            >
-                                <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-                                </svg>
-                            </button>
-                            <button className="flex flex-col items-start bg-zinc-700 text-left py-3 px-3 mb-2 rounded-md border-0"
-                                onClick={()=>alert("Pressed!")}>
-                                <span className="text-white text-sm" >
-                                    {"Trading"}
-                                </span>
-                            </button>
-                            <div className="flex flex-col items-start py-3 mb-2 rounded-md">
-                                <span className="text-zinc-400 text-sm" >
-                                    {"RiverPool"}
-                                </span>
+                        <div className="flex flex-col justify-between bg-zinc-900 w-4/5 max-w-xs h-full shadow-lg p-6">
+                            {/* Top: Pages */}
+                            <div>
+                                <button
+                                    className="self-end mb-6"
+                                    onClick={() => setMobileMenuOpen(false)}
+                                    aria-label="Close menu"
+                                >
+                                    <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                                    </svg>
+                                </button>
+                                <button className="flex flex-col items-start bg-zinc-700 text-left py-3 px-3 mb-2 rounded-md border-0"
+                                    onClick={()=>alert("Pressed!")}>
+                                    <span className="text-white text-sm" >
+                                        {"Trading"}
+                                    </span>
+                                </button>
+                                <div className="flex flex-col items-start py-3 mb-2 rounded-md">
+                                    <span className="text-zinc-400 text-sm" >
+                                        {"RiverPool"}
+                                    </span>
+                                </div>
+                                <div className="flex flex-col items-start py-3 mb-2 rounded-md">
+                                    <span className="text-zinc-400 text-sm" >
+                                        {"Earn"}
+                                    </span>
+                                </div>
+                                <div className="flex flex-col items-start py-3 mb-2 rounded-md">
+                                    <span className="text-zinc-400 text-sm" >
+                                        {"Referral"}
+                                    </span>
+                                </div>
+                                <div className="flex flex-col items-start py-3 mb-2 rounded-md">
+                                    <span className="text-zinc-400 text-sm" >
+                                        {"Assets"}
+                                    </span>
+                                </div>
+                                <div className="flex items-center py-3 gap-3 mb-2 rounded-md">
+                                    <span className="text-zinc-400 text-sm" >
+                                        {"More"}
+                                    </span>
+                                    <img
+                                        src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/wo9zz3y5_expires_30_days.png"} 
+                                        className="w-3 h-[15px] rounded-md object-fill"
+                                    />
+                                </div>
                             </div>
-                            <div className="flex flex-col items-start py-3 mb-2 rounded-md">
-                                <span className="text-zinc-400 text-sm" >
-                                    {"Earn"}
-                                </span>
+                            {/* Bottom: Settings */}
+                            <div className="flex flex-col gap-2 pt-4 border-t border-[#30363D]">
+                                <div className="flex items-center bg-zinc-900 py-2.5 px-3 gap-2 rounded-md border border-solid border-[#30363D]">
+                                    {/* Wallet icon */}
+                                    <img
+                                        src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/7ru13dyc_expires_30_days.png"} 
+                                        className="w-5 h-5 rounded-md object-fill"
+                                    />
+                                    <img
+                                        src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/wbxxcfe7_expires_30_days.png"} 
+                                        className="w-3 h-[15px] rounded-md object-fill"
+                                    />
+                                </div>
+                                <div className="flex flex-col shrink-0 items-start">
+                                    <span className="text-zinc-400 text-xs" >
+                                        {"Balance"}
+                                    </span>
+                                    <span className="text-white text-sm" >
+                                        {"$27,345.12"}
+                                    </span>
+                                </div>
+                                <div className="flex flex-col shrink-0 items-start">
+                                    <span className="text-zinc-400 text-xs" >
+                                        {"Points"}
+                                    </span>
+                                    <span className="text-white text-sm" >
+                                        {"1,250,000"}
+                                    </span>
+                                </div>
+                                <button className="flex items-center bg-zinc-900 text-left py-2.5 px-4 gap-2.5 rounded-md border border-solid border-[#30363D]"
+                                    onClick={()=>alert("Pressed!")}>
+                                    <img
+                                        src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/oyc1zap7_expires_30_days.png"} 
+                                        className="w-3.5 h-[19px] rounded-md object-fill"
+                                    />
+                                    <span className="text-[#C9D1D9] text-sm" >
+                                        {"EN"}
+                                    </span>
+                                </button>
+                                <button className="flex flex-col items-start bg-zinc-900 text-left py-3 px-4 rounded-md border border-solid border-[#30363D]"
+                                    onClick={()=>alert("Pressed!")}>
+                                    <span className="text-white text-sm font-bold" >
+                                        {"Withdraw"}
+                                    </span>
+                                </button>
+                                <button className="flex flex-col items-start bg-[#92318D] text-left py-3 px-4 rounded-md border-0"
+                                    onClick={()=>alert("Pressed!")}>
+                                    <span className="text-white text-sm font-bold" >
+                                        {"Deposit"}
+                                    </span>
+                                </button>
                             </div>
-                            <div className="flex flex-col items-start py-3 mb-2 rounded-md">
-                                <span className="text-zinc-400 text-sm" >
-                                    {"Referral"}
-                                </span>
-                            </div>
-                            <div className="flex flex-col items-start py-3 mb-2 rounded-md">
-                                <span className="text-zinc-400 text-sm" >
-                                    {"Assets"}
-                                </span>
-                            </div>
-                            <div className="flex items-center py-3 gap-3 mb-2 rounded-md">
-                                <span className="text-zinc-400 text-sm" >
-                                    {"More"}
-                                </span>
-                                <img
-                                    src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/wo9zz3y5_expires_30_days.png"} 
-                                    className="w-3 h-[15px] rounded-md object-fill"
-                                />
-                            </div>
-                            <div className="flex items-center bg-zinc-900 py-2.5 px-3 gap-2 rounded-md border border-solid border-[#30363D] mb-2">
-                                <img
-                                    src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/7ru13dyc_expires_30_days.png"} 
-                                    className="w-5 h-5 rounded-md object-fill"
-                                />
-                                <img
-                                    src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/wbxxcfe7_expires_30_days.png"} 
-                                    className="w-3 h-[15px] rounded-md object-fill"
-                                />
-                            </div>
-                            <button className="flex items-center bg-zinc-900 text-left py-2.5 px-4 gap-2.5 rounded-md border border-solid border-[#30363D] mb-2"
-                                onClick={()=>alert("Pressed!")}>
-                                <img
-                                    src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/oyc1zap7_expires_30_days.png"} 
-                                    className="w-3.5 h-[19px] rounded-md object-fill"
-                                />
-                                <span className="text-[#C9D1D9] text-sm" >
-                                    {"EN"}
-                                </span>
-                            </button>
-                            <button className="flex flex-col items-start bg-zinc-900 text-left py-3 px-4 rounded-md border border-solid border-[#30363D] mb-2"
-                                onClick={()=>alert("Pressed!")}>
-                                <span className="text-white text-sm font-bold" >
-                                    {"Withdraw"}
-                                </span>
-                            </button>
-                            <button className="flex flex-col items-start bg-[#92318D] text-left py-3 px-4 rounded-md border-0"
-                                onClick={()=>alert("Pressed!")}>
-                                <span className="text-white text-sm font-bold" >
-                                    {"Deposit"}
-                                </span>
-                            </button>
                         </div>
                         {/* Click outside to close */}
                         <div className="flex-1" onClick={() => setMobileMenuOpen(false)} />
@@ -314,55 +329,55 @@ export default () => {
                                 </div>
 
                             <div className="flex flex-wrap items-start self-stretch mx-3 gap-3 text-left">
-                                <div className="flex flex-1 flex-col items-start ">
-                                    <span className="text-[#A6A6B5] text-xs ml-3.5" >
+                                <div className="flex flex-1 flex-col items-start min-w-24">
+                                    <span className="text-[#A6A6B5] text-xs " >
                                         {"Mark Price"}
                                     </span>
-                                    <span className="text-gray-200 text-xs font-bold  mx-3.5" >
+                                    <span className="text-gray-200 text-xs font-bold  " >
                                         {"227.34"}
                                     </span>
                                 </div>
-                                <div className="flex flex-1 flex-col items-start ">
-                                    <span className="text-[#A6A6B5] text-xs ml-[11px]" >
+                                <div className="flex flex-1 flex-col items-start min-w-24">
+                                    <span className="text-[#A6A6B5] text-xs " >
                                         {"Index Price"}
                                     </span>
-                                    <span className="text-gray-200 text-xs font-bold mx-[11px]" >
+                                    <span className="text-gray-200 text-xs font-bold " >
                                         {"227.30"}
                                     </span>
                                 </div>
-                                <div className="flex flex-1 flex-col items-start min-w-[120px]">
-                                    <span className="text-[#A6A6B5] text-xs ml-2" >
+                                <div className="flex flex-1 flex-col items-start min-w-24">
+                                    <span className="text-[#A6A6B5] text-xs " >
                                         {"24h Change"}
                                     </span>
-                                    <span className="text-[#F85149] text-xs font-bold  mx-2" >
+                                    <span className="text-[#F85149] text-xs font-bold  " >
                                         {"-0.97%"}
                                     </span>
                                 </div>
-                                <div className="flex flex-1 flex-col items-start ">
-                                    <span className="text-[#A6A6B5] text-xs ml-[11px]" >
+                                <div className="flex flex-1 flex-col items-start min-w-24">
+                                    <span className="text-[#A6A6B5] text-xs " >
                                         {"24h Volume"}
                                     </span>
-                                    <span className="text-gray-200 text-xs font-bold  mx-[11px]" >
+                                    <span className="text-gray-200 text-xs font-bold  " >
                                         {"3.2B"}
                                     </span>
                                 </div>
-                                <div className="flex flex-1 flex-col items-start ">
-                                    <span className="text-[#A6A6B5] text-xs ml-1.5" >
+                                <div className="flex flex-1 flex-col items-start min-w-24">
+                                    <span className="text-[#A6A6B5] text-xs " >
                                         {"Open Interest"}
                                     </span>
-                                    <span className="text-gray-200 text-xs font-bold mx-1.5" >
+                                    <span className="text-gray-200 text-xs font-bold " >
                                         {"3.5B"}
                                     </span>
                                 </div>
-                                <div className="flex flex-1 flex-col items-start ">
-                                    <span className="text-[#A6A6B5] text-xs ml-2" >
+                                <div className="flex flex-1 flex-col items-start min-w-24">
+                                    <span className="text-[#A6A6B5] text-xs " >
                                         {"Funding Rate"}
                                     </span>
-                                    <span className="text-[#2DA44E] text-xs font-bold  mx-2" >
+                                    <span className="text-[#2DA44E] text-xs font-bold " >
                                         {"0.1300%"}
                                     </span>
                                 </div>
-                                <div className="flex flex-1 flex-col ">
+                                <div className="flex flex-1 flex-col items-start min-w-24">
                                     <span className="text-[#A6A6B5] text-xs " >
                                         {"Next Settlement"}
                                     </span>
