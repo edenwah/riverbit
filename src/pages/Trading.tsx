@@ -1,4 +1,4 @@
-import  { useState } from "react";
+import { useState } from "react";
 export default () => {
     const [input1, onChangeInput1] = useState('');
     const [input2, onChangeInput2] = useState('');
@@ -12,6 +12,7 @@ export default () => {
     const [activeOrderTab, setActiveOrderTab] = useState("Market"); // NEW: tab state
     const [orderTab, setOrderTab] = useState("Order Book"); // Add this with your useState hooks
 	const [activeAccountTab, setActiveAccountTab] = useState("Balance"); // Balance 為預設選中
+    const [mobileMenuOpen, setMobileMenuOpen] = useState(false); // Add this line
 
     const AMOUNT_TOTAL = 1000;
 
@@ -23,13 +24,16 @@ export default () => {
     return (
         <div className="flex flex-col bg-black ">
             <div className="self-stretch ">
+                {/* Header */}
                 <div className="flex justify-between items-start self-stretch bg-[#161B22] py-3.5 px-4">
+                    {/* Left: Logo and nav (desktop only) */}
                     <div className="flex shrink-0 items-start gap-8">
                         <img
                             src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/tsg0s0tv_expires_30_days.png"} 
                             className="w-[118px] h-10 object-fill"
                         />
-                        <div className="flex shrink-0 items-start">
+                        {/* Desktop nav */}
+                        <div className="hidden md:flex shrink-0 items-start">
                             <button className="flex flex-col shrink-0 items-start bg-neutral-700 text-left py-[11px] px-3 mr-[30px] rounded-md border-0"
                                 onClick={()=>alert("Pressed!")}>
                                 <span className="text-white text-sm" >
@@ -65,7 +69,9 @@ export default () => {
                             </div>
                         </div>
                     </div>
-                    <div className="flex shrink-0 items-center gap-4">
+                    {/* Right: Balance, Points, and hamburger (mobile) */}
+                    <div className="flex items-center gap-4">
+                        {/* Balance & Points always visible */}
                         <div className="flex flex-col shrink-0 items-start">
                             <span className="text-[#8B949E] text-xs" >
                                 {"Balance"}
@@ -74,8 +80,7 @@ export default () => {
                                 {"$27,345.12"}
                             </span>
                         </div>
-                        <div className="w-[1px] h-8">
-                        </div>
+                        <div className="w-[1px] h-8 hidden md:block" />
                         <div className="flex flex-col shrink-0 items-start">
                             <span className="text-[#8B949E] text-xs" >
                                 {"Points"}
@@ -84,40 +89,136 @@ export default () => {
                                 {"1,250,000"}
                             </span>
                         </div>
-                        <div className="flex shrink-0 items-center bg-[#161B22] py-2.5 px-3 gap-2 rounded-md border border-solid border-[#30363D]">
-                            <img
-                                src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/7ru13dyc_expires_30_days.png"} 
-                                className="w-5 h-5 rounded-md object-fill"
-                            />
-                            <img
-                                src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/wbxxcfe7_expires_30_days.png"} 
-                                className="w-3 h-[15px] rounded-md object-fill"
-                            />
+                        {/* Desktop: show all buttons, Mobile: hide */}
+                        <div className="hidden md:flex items-center gap-4">
+                            <div className="flex shrink-0 items-center bg-[#161B22] py-2.5 px-3 gap-2 rounded-md border border-solid border-[#30363D]">
+                                <img
+                                    src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/7ru13dyc_expires_30_days.png"} 
+                                    className="w-5 h-5 rounded-md object-fill"
+                                />
+                                <img
+                                    src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/wbxxcfe7_expires_30_days.png"} 
+                                    className="w-3 h-[15px] rounded-md object-fill"
+                                />
+                            </div>
+                            <button className="flex shrink-0 items-center bg-[#161B22] text-left py-2.5 px-4 gap-2.5 rounded-md border border-solid border-[#30363D]"
+                                onClick={()=>alert("Pressed!")}>
+                                <img
+                                    src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/oyc1zap7_expires_30_days.png"} 
+                                    className="w-3.5 h-[19px] rounded-md object-fill"
+                                />
+                                <span className="text-[#C9D1D9] text-sm" >
+                                    {"EN"}
+                                </span>
+                            </button>
+                            <button className="flex flex-col shrink-0 items-start bg-[#161B22] text-left py-[11px] px-4 rounded-md border border-solid border-[#30363D]"
+                                onClick={()=>alert("Pressed!")}>
+                                <span className="text-white text-sm font-bold" >
+                                    {"Withdraw"}
+                                </span>
+                            </button>
+                            <button className="flex flex-col shrink-0 items-start bg-[#92318D] text-left py-[11px] px-4 rounded-md border-0"
+                                onClick={()=>alert("Pressed!")}>
+                                <span className="text-white text-sm font-bold" >
+                                    {"Deposit"}
+                                </span>
+                            </button>
                         </div>
-                        <button className="flex shrink-0 items-center bg-[#161B22] text-left py-2.5 px-4 gap-2.5 rounded-md border border-solid border-[#30363D]"
-                            onClick={()=>alert("Pressed!")}>
-                            <img
-                                src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/oyc1zap7_expires_30_days.png"} 
-                                className="w-3.5 h-[19px] rounded-md object-fill"
-                            />
-                            <span className="text-[#C9D1D9] text-sm" >
-                                {"EN"}
-                            </span>
-                        </button>
-                        <button className="flex flex-col shrink-0 items-start bg-[#161B22] text-left py-[11px] px-4 rounded-md border border-solid border-[#30363D]"
-                            onClick={()=>alert("Pressed!")}>
-                            <span className="text-white text-sm font-bold" >
-                                {"Withdraw"}
-                            </span>
-                        </button>
-                        <button className="flex flex-col shrink-0 items-start bg-[#92318D] text-left py-[11px] px-4 rounded-md border-0"
-                            onClick={()=>alert("Pressed!")}>
-                            <span className="text-white text-sm font-bold" >
-                                {"Deposit"}
-                            </span>
+                        {/* Hamburger for mobile */}
+                        <button
+                            className="md:hidden ml-2 flex items-center justify-center p-2 rounded focus:outline-none"
+                            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                            aria-label="Open menu"
+                        >
+                            <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+                            </svg>
                         </button>
                     </div>
                 </div>
+                {/* Mobile Menu Drawer */}
+                {mobileMenuOpen && (
+                    <div className="fixed inset-0 z-50 bg-black bg-opacity-70 flex flex-col md:hidden">
+                        <div className="flex flex-col bg-[#161B22] w-4/5 max-w-xs h-full shadow-lg p-6">
+                            <button
+                                className="self-end mb-6"
+                                onClick={() => setMobileMenuOpen(false)}
+                                aria-label="Close menu"
+                            >
+                                <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                            </button>
+                            <button className="flex flex-col items-start bg-neutral-700 text-left py-3 px-3 mb-2 rounded-md border-0"
+                                onClick={()=>alert("Pressed!")}>
+                                <span className="text-white text-sm" >
+                                    {"Trading"}
+                                </span>
+                            </button>
+                            <div className="flex flex-col items-start py-3 mb-2 rounded-md">
+                                <span className="text-[#8B949E] text-sm" >
+                                    {"RiverPool"}
+                                </span>
+                            </div>
+                            <div className="flex flex-col items-start py-3 mb-2 rounded-md">
+                                <span className="text-[#8B949E] text-sm" >
+                                    {"Earn"}
+                                </span>
+                            </div>
+                            <span className="text-[#8B949E] text-sm my-3 ml-[1px] mb-2" >
+                                {"Referral"}
+                            </span>
+                            <div className="flex flex-col items-start py-3 mb-2 rounded-md">
+                                <span className="text-[#8B949E] text-sm" >
+                                    {"Assets"}
+                                </span>
+                            </div>
+                            <div className="flex items-center py-3 gap-3 mb-2 rounded-md">
+                                <span className="text-[#8B949E] text-sm" >
+                                    {"More"}
+                                </span>
+                                <img
+                                    src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/wo9zz3y5_expires_30_days.png"} 
+                                    className="w-3 h-[15px] rounded-md object-fill"
+                                />
+                            </div>
+                            <div className="flex items-center bg-[#161B22] py-2.5 px-3 gap-2 rounded-md border border-solid border-[#30363D] mb-2">
+                                <img
+                                    src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/7ru13dyc_expires_30_days.png"} 
+                                    className="w-5 h-5 rounded-md object-fill"
+                                />
+                                <img
+                                    src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/wbxxcfe7_expires_30_days.png"} 
+                                    className="w-3 h-[15px] rounded-md object-fill"
+                                />
+                            </div>
+                            <button className="flex items-center bg-[#161B22] text-left py-2.5 px-4 gap-2.5 rounded-md border border-solid border-[#30363D] mb-2"
+                                onClick={()=>alert("Pressed!")}>
+                                <img
+                                    src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/oyc1zap7_expires_30_days.png"} 
+                                    className="w-3.5 h-[19px] rounded-md object-fill"
+                                />
+                                <span className="text-[#C9D1D9] text-sm" >
+                                    {"EN"}
+                                </span>
+                            </button>
+                            <button className="flex flex-col items-start bg-[#161B22] text-left py-3 px-4 rounded-md border border-solid border-[#30363D] mb-2"
+                                onClick={()=>alert("Pressed!")}>
+                                <span className="text-white text-sm font-bold" >
+                                    {"Withdraw"}
+                                </span>
+                            </button>
+                            <button className="flex flex-col items-start bg-[#92318D] text-left py-3 px-4 rounded-md border-0"
+                                onClick={()=>alert("Pressed!")}>
+                                <span className="text-white text-sm font-bold" >
+                                    {"Deposit"}
+                                </span>
+                            </button>
+                        </div>
+                        {/* Click outside to close */}
+                        <div className="flex-1" onClick={() => setMobileMenuOpen(false)} />
+                    </div>
+                )}
                 <div className="grid grid-cols-1 md:grid-cols-5 items-start self-stretch p-2 gap-2">
                     {/* Main Chart & Account Overview (col-span-3 on desktop, full width on mobile) */}
                     <div className="md:col-span-3 flex flex-col gap-2 w-full">
@@ -230,8 +331,8 @@ export default () => {
                                 <span className="text-white text-lg ml-3" >
                                     {"Account Overview"}
                                 </span>
-                                <div className="flex items-start self-stretch mx-3">
-                                    <div className="flex flex-col shrink-0 items-start mr-[70px]">
+                                <div className="flex justify-between items-start self-stretch mx-3 text-left">
+                                    <div className="flex flex-col  items-start ">
                                         <span className="text-[#8B949E] text-sm" >
                                             {"Total Account Value"}
                                         </span>
@@ -239,7 +340,7 @@ export default () => {
                                             {"$42,845.67"}
                                         </span>
                                     </div>
-                                    <div className="flex flex-col shrink-0 items-start mr-[70px]">
+                                    <div className="flex flex-col  items-start ">
                                         <span className="text-[#8B949E] text-sm" >
                                             {"Total Margin Used"}
                                         </span>
@@ -247,7 +348,7 @@ export default () => {
                                             {"$5,525.00"}
                                         </span>
                                     </div>
-                                    <div className="flex flex-1 flex-col items-start mr-3">
+                                    <div className="flex flex-col items-start ">
                                         <span className="text-[#8B949E] text-sm" >
                                             {"Total Notional Position"}
                                         </span>
@@ -255,7 +356,7 @@ export default () => {
                                             {"$37,000.00"}
                                         </span>
                                     </div>
-                                    <div className="flex flex-col shrink-0 items-start">
+                                    <div className="flex flex-col items-start">
                                         <span className="text-[#8B949E] text-sm" >
                                             {"Withdrawable Amount"}
                                         </span>
@@ -367,9 +468,9 @@ export default () => {
                                 {/* --- BEGIN Order Book Content (lines 353-640) --- */}
                                 {/* Paste all the JSX from line 353 to 640 here */}
                                 <div className="flex flex-col items-start w-full">
-                                    <div className="flex flex-col items-start">
-                                        <div className="flex flex-col items-center py-1">
-                                            <div className="flex items-start pr-[1px]">
+                                    <div className="flex flex-col items-start w-full">
+                                        <div className="flex flex-col items-center py-1 w-full">
+                                            <div className="flex items-start pr-[1px] ">
                                                 <span className="text-[#8B949E] text-xs my-1 mx-8" >
                                                     {"Price"}
                                                 </span>
@@ -381,7 +482,7 @@ export default () => {
                                                 </span>
                                             </div>
                                         </div>
-                                        <div className="flex flex-col items-start">
+                                        <div className="flex flex-col items-start w-full">
                                             <div className="flex items-center mb-[1px] gap-[22px]">
                                                 <div className="flex shrink-0 items-start bg-[#EF44441A] py-[5px]">
                                                     <span className="text-[#F85149] text-xs my-[3px] mx-[15px]" >
@@ -570,19 +671,6 @@ export default () => {
                                                 </span>
                                             </div>
                                             <div className="flex items-center pr-[1px]">
-                                                <div className="flex flex-col shrink-0 items-start bg-[#22C55E1A] py-[9px] pl-[15px] pr-0.5 mr-4">
-                                                    <span className="text-[#2DA44E] text-xs" >
-                                                        {"110,589.00"}
-                                                    </span>
-                                                </div>
-                                                <span className="text-white text-xs my-[3px] mx-8" >
-                                                    {"1.799"}
-                                                </span>
-                                                <span className="text-[#8B949E] text-xs my-[3px] ml-11 mr-[17px]" >
-                                                    {"8.000"}
-                                                </span>
-                                            </div>
-                                            <div className="flex items-center pr-[1px]">
                                                 <div className="flex flex-col shrink-0 items-start bg-[#22C55E1A] py-[9px] pl-[15px] pr-7 mr-[19px]">
                                                     <span className="text-[#2DA44E] text-xs" >
                                                         {"110,588.00"}
@@ -666,11 +754,11 @@ export default () => {
                     {/* Trading Form (col-span-1 on desktop, full width on mobile) */}
                     <div className="md:col-span-1 flex flex-col gap-2 items-center bg-[#161B22] rounded-md border border-solid border-[#30363D] w-full">
                         {/* Tabs */}
-                        <div className="flex items-start pl-3 pr-[13px] border-b border-[#30363D] w-full">
+                        <div className="flex items-start justify-between pl-3 pr-[13px] border-b border-[#30363D] w-full">
                             {["Market", "Limit", "Advanced"].map(tab => (
                                 <button
                                     key={tab}
-                                    className={`text-sm py-[15px] px-4 focus:outline-none ${
+                                    className={`w-fulltext-sm py-[15px] px-4 focus:outline-none ${
                                         activeOrderTab === tab
                                             ? "text-white border-b-2 border-[#92318D] font-bold"
                                             : "text-[#8B949E]"
@@ -934,10 +1022,10 @@ export default () => {
                     </div>
                 </div>
                 <div className="flex flex-col self-stretch bg-[#0D1117] py-6 gap-2">
-                    <span className="text-[#8B949E] text-xs text-center mx-[372px]" >
+                    <span className="text-[#8B949E] text-xs text-center mx-[372px] md:mx-[372px] sm:mx-4 xs:mx-2" >
                         {"Lo‑Fi v1.4 · Based on PRD v1.4 · Points System + Additional Modules + Insurance Pool | Arbitrum One Network | USDC Only"}
                     </span>
-                    <span className="text-[#8B949E] text-xs text-center mx-[363px]" >
+                    <span className="text-[#8B949E] text-xs text-center mx-[363px] md:mx-[363px] sm:mx-4 xs:mx-2" >
                         {"Three-column Trading Layout | Liquidity Pools (Foundation / Main Pool / Insurance Pool) | Asset & Points Center | Full Modules"}
                     </span>
                 </div>
