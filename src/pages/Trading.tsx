@@ -25,15 +25,17 @@ export default () => {
         <div className="flex flex-col bg-black ">
             <div className="self-stretch ">
                 {/* Header */}
-                <div className="flex justify-between items-start self-stretch bg-[#161B22] py-3.5 px-4">
-                    {/* Left: Logo and nav (desktop only) */}
+                {/* Desktop header: show on xl and up */}
+                <div className="hidden xl:flex justify-between items-start self-stretch bg-[#161B22] py-3.5 px-4">
+                    {/* Left: Logo and nav */}
                     <div className="flex shrink-0 items-start gap-8">
                         <img
                             src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/tsg0s0tv_expires_30_days.png"} 
                             className="w-[118px] h-10 object-fill"
                         />
                         {/* Desktop nav */}
-                        <div className="hidden md:flex shrink-0 items-start">
+                        <div className="flex shrink-0 items-start">
+                            {/* ...nav buttons... */}
                             <button className="flex flex-col shrink-0 items-start bg-neutral-700 text-left py-[11px] px-3 mr-[30px] rounded-md border-0"
                                 onClick={()=>alert("Pressed!")}>
                                 <span className="text-white text-sm" >
@@ -69,9 +71,8 @@ export default () => {
                             </div>
                         </div>
                     </div>
-                    {/* Right: Balance, Points, and hamburger (mobile) */}
+                    {/* Right: Balance, Points, and buttons */}
                     <div className="flex items-center gap-4">
-                        {/* Balance & Points always visible */}
                         <div className="flex flex-col shrink-0 items-start">
                             <span className="text-[#8B949E] text-xs" >
                                 {"Balance"}
@@ -80,7 +81,7 @@ export default () => {
                                 {"$27,345.12"}
                             </span>
                         </div>
-                        <div className="w-[1px] h-8 hidden md:block" />
+                        <div className="w-[1px] h-8 hidden xl:block" />
                         <div className="flex flex-col shrink-0 items-start">
                             <span className="text-[#8B949E] text-xs" >
                                 {"Points"}
@@ -89,8 +90,7 @@ export default () => {
                                 {"1,250,000"}
                             </span>
                         </div>
-                        {/* Desktop: show all buttons, Mobile: hide */}
-                        <div className="hidden md:flex items-center gap-4">
+                        <div className="flex items-center gap-4">
                             <div className="flex shrink-0 items-center bg-[#161B22] py-2.5 px-3 gap-2 rounded-md border border-solid border-[#30363D]">
                                 <img
                                     src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/7ru13dyc_expires_30_days.png"} 
@@ -124,9 +124,44 @@ export default () => {
                                 </span>
                             </button>
                         </div>
-                        {/* Hamburger for mobile */}
+                    </div>
+                </div>
+                {/* Mobile header: show below xl */}
+                <div className="flex xl:hidden justify-between items-center self-stretch bg-[#161B22] py-3.5 px-4">
+                    {/* Left: Logo */}
+                    <div className="flex items-center gap-3">
+                        <img
+                            src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/tsg0s0tv_expires_30_days.png"} 
+                            className="w-[100px] h-8 object-fill"
+                        />
+                    </div>
+                    {/* Right: Balance, Points, Deposit, Hamburger */}
+                    <div className="flex items-center gap-3">
+                        <div className="flex flex-col shrink-0 items-start">
+                            <span className="text-[#8B949E] text-xs" >
+                                {"Balance"}
+                            </span>
+                            <span className="text-white text-sm" >
+                                {"$27,345.12"}
+                            </span>
+                        </div>
+                        <div className="flex flex-col shrink-0 items-start">
+                            <span className="text-[#8B949E] text-xs" >
+                                {"Points"}
+                            </span>
+                            <span className="text-white text-sm" >
+                                {"1,250,000"}
+                            </span>
+                        </div>
+                        <button className="flex flex-col shrink-0 items-start bg-[#92318D] text-left py-[11px] px-4 rounded-md border-0"
+                            onClick={()=>alert("Pressed!")}>
+                            <span className="text-white text-sm font-bold" >
+                                {"Deposit"}
+                            </span>
+                        </button>
+                        {/* Hamburger menu */}
                         <button
-                            className="md:hidden ml-2 flex items-center justify-center p-2 rounded focus:outline-none"
+                            className="flex items-center justify-center p-2 rounded focus:outline-none"
                             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                             aria-label="Open menu"
                         >
@@ -138,7 +173,7 @@ export default () => {
                 </div>
                 {/* Mobile Menu Drawer */}
                 {mobileMenuOpen && (
-                    <div className="fixed inset-0 z-50 bg-black bg-opacity-70 flex flex-col md:hidden">
+                    <div className="fixed inset-0 z-50 bg-black bg-opacity-70 flex flex-col xl:hidden">
                         <div className="flex flex-col bg-[#161B22] w-4/5 max-w-xs h-full shadow-lg p-6">
                             <button
                                 className="self-end mb-6"
