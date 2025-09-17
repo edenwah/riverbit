@@ -26,7 +26,7 @@ export default () => {
             <div className="self-stretch ">
                 {/* Header */}
                 {/* Desktop header: show on xl and up */}
-                <div className="hidden xl:flex justify-between items-start self-stretch bg-[#161B22] py-3.5 px-4">
+                <div className="hidden xl:flex justify-between items-start self-stretch bg-zinc-900 py-3.5 px-4">
                     {/* Left: Logo and nav */}
                     <div className="flex shrink-0 items-start gap-8">
                         <img
@@ -36,32 +36,32 @@ export default () => {
                         {/* Desktop nav */}
                         <div className="flex shrink-0 items-start">
                             {/* ...nav buttons... */}
-                            <button className="flex flex-col shrink-0 items-start bg-neutral-700 text-left py-[11px] px-3 mr-[30px] rounded-md border-0"
+                            <button className="flex flex-col shrink-0 items-start bg-zinc-700 text-left py-[11px] px-3 mr-[30px] rounded-md border-0"
                                 onClick={()=>alert("Pressed!")}>
                                 <span className="text-white text-sm" >
                                     {"Trading"}
                                 </span>
                             </button>
                             <div className="flex flex-col shrink-0 items-center py-[11px] mr-[30px] rounded-md">
-                                <span className="text-[#8B949E] text-sm" >
+                                <span className="text-zinc-400 text-sm" >
                                     {"RiverPool"}
                                 </span>
                             </div>
                             <div className="flex flex-col shrink-0 items-center py-[11px] mr-[30px] rounded-md">
-                                <span className="text-[#8B949E] text-sm" >
+                                <span className="text-zinc-400 text-sm" >
                                     {"Earn"}
                                 </span>
                             </div>
-                            <span className="text-[#8B949E] text-sm my-3.5 ml-[1px] mr-[31px]" >
+                            <span className="text-zinc-400 text-sm my-3.5 ml-[1px] mr-[31px]" >
                                 {"Referral"}
                             </span>
                             <div className="flex flex-col shrink-0 items-center py-[11px] mr-[30px] rounded-md">
-                                <span className="text-[#8B949E] text-sm" >
+                                <span className="text-zinc-400 text-sm" >
                                     {"Assets"}
                                 </span>
                             </div>
                             <div className="flex shrink-0 items-center py-[11px] gap-[13px] rounded-md">
-                                <span className="text-[#8B949E] text-sm" >
+                                <span className="text-zinc-400 text-sm" >
                                     {"More"}
                                 </span>
                                 <img
@@ -74,7 +74,7 @@ export default () => {
                     {/* Right: Balance, Points, and buttons */}
                     <div className="flex items-center gap-4">
                         <div className="flex flex-col shrink-0 items-start">
-                            <span className="text-[#8B949E] text-xs" >
+                            <span className="text-zinc-400 text-xs" >
                                 {"Balance"}
                             </span>
                             <span className="text-white text-sm" >
@@ -83,7 +83,7 @@ export default () => {
                         </div>
                         <div className="w-[1px] h-8 hidden xl:block" />
                         <div className="flex flex-col shrink-0 items-start">
-                            <span className="text-[#8B949E] text-xs" >
+                            <span className="text-zinc-400 text-xs" >
                                 {"Points"}
                             </span>
                             <span className="text-white text-sm" >
@@ -91,7 +91,7 @@ export default () => {
                             </span>
                         </div>
                         <div className="flex items-center gap-4">
-                            <div className="flex shrink-0 items-center bg-[#161B22] py-2.5 px-3 gap-2 rounded-md border border-solid border-[#30363D]">
+                            <div className="flex shrink-0 items-center bg-zinc-900 py-2.5 px-3 gap-2 rounded-md border border-solid border-[#30363D]">
                                 <img
                                     src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/7ru13dyc_expires_30_days.png"} 
                                     className="w-5 h-5 rounded-md object-fill"
@@ -101,7 +101,7 @@ export default () => {
                                     className="w-3 h-[15px] rounded-md object-fill"
                                 />
                             </div>
-                            <button className="flex shrink-0 items-center bg-[#161B22] text-left py-2.5 px-4 gap-2.5 rounded-md border border-solid border-[#30363D]"
+                            <button className="flex shrink-0 items-center bg-zinc-900 text-left py-2.5 px-4 gap-2.5 rounded-md border border-solid border-[#30363D]"
                                 onClick={()=>alert("Pressed!")}>
                                 <img
                                     src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/oyc1zap7_expires_30_days.png"} 
@@ -111,7 +111,7 @@ export default () => {
                                     {"EN"}
                                 </span>
                             </button>
-                            <button className="flex flex-col shrink-0 items-start bg-[#161B22] text-left py-[11px] px-4 rounded-md border border-solid border-[#30363D]"
+                            <button className="flex flex-col shrink-0 items-start bg-zinc-900 text-left py-[11px] px-4 rounded-md border border-solid border-[#30363D]"
                                 onClick={()=>alert("Pressed!")}>
                                 <span className="text-white text-sm font-bold" >
                                     {"Withdraw"}
@@ -127,7 +127,7 @@ export default () => {
                     </div>
                 </div>
                 {/* Mobile header: show below xl */}
-                <div className="flex xl:hidden justify-between items-center self-stretch bg-[#161B22] py-3.5 px-4">
+                <div className="flex xl:hidden justify-between items-center self-stretch bg-zinc-900 py-3.5 px-4">
                     {/* Left: Logo */}
                     <div className="flex items-center gap-3">
                         <img
@@ -138,7 +138,7 @@ export default () => {
                     {/* Right: Balance, Points, Deposit, Hamburger */}
                     <div className="flex items-center gap-3">
                         <div className="flex flex-col shrink-0 items-start">
-                            <span className="text-[#8B949E] text-xs" >
+                            <span className="text-zinc-400 text-xs" >
                                 {"Balance"}
                             </span>
                             <span className="text-white text-sm" >
@@ -146,7 +146,7 @@ export default () => {
                             </span>
                         </div>
                         <div className="flex flex-col shrink-0 items-start">
-                            <span className="text-[#8B949E] text-xs" >
+                            <span className="text-zinc-400 text-xs" >
                                 {"Points"}
                             </span>
                             <span className="text-white text-sm" >
@@ -174,7 +174,7 @@ export default () => {
                 {/* Mobile Menu Drawer */}
                 {mobileMenuOpen && (
                     <div className="fixed inset-0 z-50 bg-black bg-opacity-70 flex flex-col xl:hidden">
-                        <div className="flex flex-col bg-[#161B22] w-4/5 max-w-xs h-full shadow-lg p-6">
+                        <div className="flex flex-col bg-zinc-900 w-4/5 max-w-xs h-full shadow-lg p-6">
                             <button
                                 className="self-end mb-6"
                                 onClick={() => setMobileMenuOpen(false)}
@@ -184,32 +184,32 @@ export default () => {
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
                                 </svg>
                             </button>
-                            <button className="flex flex-col items-start bg-neutral-700 text-left py-3 px-3 mb-2 rounded-md border-0"
+                            <button className="flex flex-col items-start bg-zinc-700 text-left py-3 px-3 mb-2 rounded-md border-0"
                                 onClick={()=>alert("Pressed!")}>
                                 <span className="text-white text-sm" >
                                     {"Trading"}
                                 </span>
                             </button>
                             <div className="flex flex-col items-start py-3 mb-2 rounded-md">
-                                <span className="text-[#8B949E] text-sm" >
+                                <span className="text-zinc-400 text-sm" >
                                     {"RiverPool"}
                                 </span>
                             </div>
                             <div className="flex flex-col items-start py-3 mb-2 rounded-md">
-                                <span className="text-[#8B949E] text-sm" >
+                                <span className="text-zinc-400 text-sm" >
                                     {"Earn"}
                                 </span>
                             </div>
-                            <span className="text-[#8B949E] text-sm my-3 ml-[1px] mb-2" >
+                            <span className="text-zinc-400 text-sm my-3 ml-[1px] mb-2" >
                                 {"Referral"}
                             </span>
                             <div className="flex flex-col items-start py-3 mb-2 rounded-md">
-                                <span className="text-[#8B949E] text-sm" >
+                                <span className="text-zinc-400 text-sm" >
                                     {"Assets"}
                                 </span>
                             </div>
                             <div className="flex items-center py-3 gap-3 mb-2 rounded-md">
-                                <span className="text-[#8B949E] text-sm" >
+                                <span className="text-zinc-400 text-sm" >
                                     {"More"}
                                 </span>
                                 <img
@@ -217,7 +217,7 @@ export default () => {
                                     className="w-3 h-[15px] rounded-md object-fill"
                                 />
                             </div>
-                            <div className="flex items-center bg-[#161B22] py-2.5 px-3 gap-2 rounded-md border border-solid border-[#30363D] mb-2">
+                            <div className="flex items-center bg-zinc-900 py-2.5 px-3 gap-2 rounded-md border border-solid border-[#30363D] mb-2">
                                 <img
                                     src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/7ru13dyc_expires_30_days.png"} 
                                     className="w-5 h-5 rounded-md object-fill"
@@ -227,7 +227,7 @@ export default () => {
                                     className="w-3 h-[15px] rounded-md object-fill"
                                 />
                             </div>
-                            <button className="flex items-center bg-[#161B22] text-left py-2.5 px-4 gap-2.5 rounded-md border border-solid border-[#30363D] mb-2"
+                            <button className="flex items-center bg-zinc-900 text-left py-2.5 px-4 gap-2.5 rounded-md border border-solid border-[#30363D] mb-2"
                                 onClick={()=>alert("Pressed!")}>
                                 <img
                                     src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/oyc1zap7_expires_30_days.png"} 
@@ -237,7 +237,7 @@ export default () => {
                                     {"EN"}
                                 </span>
                             </button>
-                            <button className="flex flex-col items-start bg-[#161B22] text-left py-3 px-4 rounded-md border border-solid border-[#30363D] mb-2"
+                            <button className="flex flex-col items-start bg-zinc-900 text-left py-3 px-4 rounded-md border border-solid border-[#30363D] mb-2"
                                 onClick={()=>alert("Pressed!")}>
                                 <span className="text-white text-sm font-bold" >
                                     {"Withdraw"}
@@ -257,7 +257,7 @@ export default () => {
                 <div className="grid grid-cols-1 xl:grid-cols-5 items-start self-stretch p-2 gap-2">
                     {/* Main Chart & Account Overview (col-span-3 on desktop, full width on mobile) */}
                     <div className="md:col-span-3 flex flex-col gap-2 w-full">
-                        <div className="flex flex-col self-stretch bg-[#161B22] py-4 gap-3 rounded-lg border border-solid border-[#30363D]">
+                        <div className="flex flex-col self-stretch bg-zinc-900 py-4 gap-3 rounded-lg border border-solid border-[#30363D]">
                             <div className="flex flex-col md:flex-row items-start md:items-center self-stretch mx-3 gap-2">
                                 {/* Row 1: Asset name */}
                                 <div className="flex items-center gap-2 pr-[1px] md:mr-7">
@@ -286,7 +286,7 @@ export default () => {
                                     <div className="flex gap-2 ml-auto">
                                     {/* Granularity */}
                                     <button
-                                        className="flex items-center bg-[#0D1117] text-left p-3 gap-[17px] rounded-md border border-solid border-[#30363D]"
+                                        className="flex items-center bg-zinc-900 text-left p-3 gap-[17px] rounded-md border border-solid border-[#30363D]"
                                     >
                                         <span className="text-[#A6A6B5] text-xs">{"Granularity"}</span>
                                         <img
@@ -297,7 +297,7 @@ export default () => {
 
                                     {/* Indicator */}
                                     <button
-                                        className="flex items-center bg-[#0D1117] text-left p-3 gap-4 rounded-md border border-solid border-[#30363D]"
+                                        className="flex items-center bg-zinc-900 text-left p-3 gap-4 rounded-md border border-solid border-[#30363D]"
                                     >
                                         <span className="text-[#A6A6B5] text-xs">{"Indicator"}</span>
                                         <img
@@ -368,16 +368,16 @@ export default () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="self-stretch bg-[#161B22] h-[500px] p-[1px] rounded-md border border-solid border-[#30363D]">
+                        <div className="self-stretch bg-zinc-900 h-[500px] p-[1px] rounded-md border border-solid border-[#30363D]">
                         </div>
-                        <div className="self-stretch bg-[#161B22] py-[1px] rounded-md border border-solid border-[#30363D]">
+                        <div className="self-stretch bg-zinc-900 py-[1px] rounded-md border border-solid border-[#30363D]">
                             <div className="flex flex-col items-start self-stretch py-4 mx-[1px] gap-2">
                                 <span className="text-white text-lg ml-3" >
                                     {"Account Overview"}
                                 </span>
                                 <div className="flex justify-between items-start self-stretch mx-3 text-left">
                                     <div className="flex flex-col  items-start ">
-                                        <span className="text-[#8B949E] text-sm" >
+                                        <span className="text-zinc-400 text-sm" >
                                             {"Total Account Value"}
                                         </span>
                                         <span className="text-white text-base" >
@@ -385,7 +385,7 @@ export default () => {
                                         </span>
                                     </div>
                                     <div className="flex flex-col  items-start ">
-                                        <span className="text-[#8B949E] text-sm" >
+                                        <span className="text-zinc-400 text-sm" >
                                             {"Total Margin Used"}
                                         </span>
                                         <span className="text-white text-base" >
@@ -393,7 +393,7 @@ export default () => {
                                         </span>
                                     </div>
                                     <div className="flex flex-col items-start ">
-                                        <span className="text-[#8B949E] text-sm" >
+                                        <span className="text-zinc-400 text-sm" >
                                             {"Total Notional Position"}
                                         </span>
                                         <span className="text-white text-base" >
@@ -401,7 +401,7 @@ export default () => {
                                         </span>
                                     </div>
                                     <div className="flex flex-col items-start">
-                                        <span className="text-[#8B949E] text-sm" >
+                                        <span className="text-zinc-400 text-sm" >
                                             {"Withdrawable Amount"}
                                         </span>
                                         <span className="text-white text-base" >
@@ -428,7 +428,7 @@ export default () => {
                                             className={`py-3 text-sm font-semibold ${
                                             activeAccountTab === tab
                                                 ? "text-white border-b-2 border-[#92318D]"
-                                                : "text-[#8B949E]"
+                                                : "text-zinc-400"
                                             }`}
                                             onClick={() => setActiveAccountTab(tab)}
                                         >
@@ -439,7 +439,7 @@ export default () => {
 
                                     {/* Filter Selector */}
                                     <div className="flex items-center gap-2">
-                                        <span className="text-[#8B949E] text-sm">Filter</span>
+                                        <span className="text-zinc-400 text-sm">Filter</span>
                                         <img
                                         src="https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/qdm0wdb6_expires_30_days.png"
                                         className="w-3 h-[15px] object-fill"
@@ -452,7 +452,7 @@ export default () => {
                                 {activeAccountTab === "Balance" && (
                                     <div className="overflow-x-auto px-4 py-3 text-left">
                                     {/* Table Header */}
-                                    <div className="flex text-xs text-[#8B949E] font-bold mb-2 min-w-[400px]">
+                                    <div className="flex text-xs text-zinc-400 font-bold mb-2 min-w-[400px]">
                                         <span className="flex-1">Currency</span>
                                         <span className="flex-1">Available</span>
                                         <span className="flex-1">In Orders</span>
@@ -484,7 +484,7 @@ export default () => {
                     {/* Order Book + Trading Form wrapper */}
                     <div className="md:col-span-2 grid 2xl:grid-cols-2 flex flex-col gap-2 w-full  xl:gap-2">
                         {/* Order Book/Trades (col-span-1 on desktop, full width on mobile) */}
-                        <div className="flex flex-col gap-2 items-center bg-[#161B22] p-[1px] rounded-md border border-solid border-[#30363D] w-full">
+                        <div className="flex flex-col gap-2 items-center bg-zinc-900 p-[1px] rounded-md border border-solid border-[#30363D] w-full">
                             {/* Tabs for Order Book/Trades */}
                             <div className="flex items-center pl-3 pr-[13px] border-b border-[#30363D] w-full">
                                 {["Order Book", "Trades"].map(tab => (
@@ -493,7 +493,7 @@ export default () => {
                                         className={`text-sm py-[15px] w-full focus:outline-none ${
                                             orderTab === tab
                                                 ? "text-white border-b-2 border-[#92318D] font-bold"
-                                                : "text-[#8B949E]"
+                                                : "text-zinc-400"
                                         }`}
                                         onClick={() => setOrderTab(tab)}
                                     >
@@ -510,13 +510,13 @@ export default () => {
                                         <div className="flex flex-col items-start w-full">
                                             <div className="flex flex-col items-center py-1 w-full">
                                                 <div className="flex items-start pr-[1px] ">
-                                                    <span className="text-[#8B949E] text-xs my-1 mx-8" >
+                                                    <span className="text-zinc-400 text-xs my-1 mx-8" >
                                                         {"Price"}
                                                     </span>
-                                                    <span className="text-[#8B949E] text-xs my-1 mx-[35px]" >
+                                                    <span className="text-zinc-400 text-xs my-1 mx-[35px]" >
                                                         {"Size"}
                                                     </span>
-                                                    <span className="text-[#8B949E] text-xs my-1 ml-[49px] mr-[17px]" >
+                                                    <span className="text-zinc-400 text-xs my-1 ml-[49px] mr-[17px]" >
                                                         {"Total"}
                                                     </span>
                                                 </div>
@@ -531,7 +531,7 @@ export default () => {
                                                             {"2.376"}
                                                         </span>
                                                     </div>
-                                                    <span className="text-[#8B949E] text-xs" >
+                                                    <span className="text-zinc-400 text-xs" >
                                                         {"16.500"}
                                                     </span>
                                                 </div>
@@ -544,7 +544,7 @@ export default () => {
                                                             {"1.359"}
                                                         </span>
                                                     </div>
-                                                    <span className="text-[#8B949E] text-xs my-[3px] ml-[38px] mr-[18px]" >
+                                                    <span className="text-zinc-400 text-xs my-[3px] ml-[38px] mr-[18px]" >
                                                         {"15.200"}
                                                     </span>
                                                 </div>
@@ -557,7 +557,7 @@ export default () => {
                                                             {"0.990"}
                                                         </span>
                                                     </div>
-                                                    <span className="text-[#8B949E] text-xs my-1 ml-[38px] mr-[17px]" >
+                                                    <span className="text-zinc-400 text-xs my-1 ml-[38px] mr-[17px]" >
                                                         {"13.900"}
                                                     </span>
                                                 </div>
@@ -572,7 +572,7 @@ export default () => {
                                                             {"3.025"}
                                                         </span>
                                                     </div>
-                                                    <span className="text-[#8B949E] text-xs my-[3px] ml-[38px] mr-[18px]" >
+                                                    <span className="text-zinc-400 text-xs my-[3px] ml-[38px] mr-[18px]" >
                                                         {"12.600"}
                                                     </span>
                                                 </div>
@@ -587,7 +587,7 @@ export default () => {
                                                             {"1.146"}
                                                         </span>
                                                     </div>
-                                                    <span className="text-[#8B949E] text-xs my-[3px] ml-10 mr-[18px]" >
+                                                    <span className="text-zinc-400 text-xs my-[3px] ml-10 mr-[18px]" >
                                                         {"11.300"}
                                                     </span>
                                                 </div>
@@ -600,7 +600,7 @@ export default () => {
                                                     <span className="text-white text-xs mr-8" >
                                                         {"2.852"}
                                                     </span>
-                                                    <span className="text-[#8B949E] text-xs my-2 ml-[38px] mr-[18px]" >
+                                                    <span className="text-zinc-400 text-xs my-2 ml-[38px] mr-[18px]" >
                                                         {"10.000"}
                                                     </span>
                                                 </div>
@@ -613,7 +613,7 @@ export default () => {
                                                     <span className="text-white text-xs mr-8" >
                                                         {"2.852"}
                                                     </span>
-                                                    <span className="text-[#8B949E] text-xs my-[7px] ml-[38px] mr-[18px]" >
+                                                    <span className="text-zinc-400 text-xs my-[7px] ml-[38px] mr-[18px]" >
                                                         {"10.000"}
                                                     </span>
                                                 </div>
@@ -624,7 +624,7 @@ export default () => {
                                                     <span className="text-white text-xs my-2 mx-[30px]" >
                                                         {"2.852"}
                                                     </span>
-                                                    <span className="text-[#8B949E] text-xs my-2 ml-[38px] mr-[18px]" >
+                                                    <span className="text-zinc-400 text-xs my-2 ml-[38px] mr-[18px]" >
                                                         {"10.000"}
                                                     </span>
                                                 </div>
@@ -635,7 +635,7 @@ export default () => {
                                                     <span className="text-white text-xs my-2 mx-[30px]" >
                                                         {"2.852"}
                                                     </span>
-                                                    <span className="text-[#8B949E] text-xs my-2 ml-[38px] mr-[18px]" >
+                                                    <span className="text-zinc-400 text-xs my-2 ml-[38px] mr-[18px]" >
                                                         {"10.000"}
                                                     </span>
                                                 </div>
@@ -646,13 +646,13 @@ export default () => {
                                                     <span className="text-white text-xs my-2 mx-[30px]" >
                                                         {"2.852"}
                                                     </span>
-                                                    <span className="text-[#8B949E] text-xs my-2 ml-[46px] mr-[18px]" >
+                                                    <span className="text-zinc-400 text-xs my-2 ml-[46px] mr-[18px]" >
                                                         {"0.190"}
                                                     </span>
                                                 </div>
                                             </div>
                                             <div className="flex flex-col items-center pt-3 pb-[13px] pl-4 pr-[158px]">
-                                                <span className="text-[#8B949E] text-xs " >
+                                                <span className="text-zinc-400 text-xs " >
                                                     {"Spread: 1 (0.001%)"}
                                                 </span>
                                             </div>
@@ -664,7 +664,7 @@ export default () => {
                                                     <span className="text-white text-xs my-[3px] mx-8" >
                                                         {"1.799"}
                                                     </span>
-                                                    <span className="text-[#8B949E] text-xs my-[3px] ml-[45px] mr-[17px]" >
+                                                    <span className="text-zinc-400 text-xs my-[3px] ml-[45px] mr-[17px]" >
                                                         {"0.270"}
                                                     </span>
                                                 </div>
@@ -679,7 +679,7 @@ export default () => {
                                                     <span className="text-white text-xs my-[3px] mx-8" >
                                                         {"1.799"}
                                                     </span>
-                                                    <span className="text-[#8B949E] text-xs my-[3px] ml-11 mr-[17px]" >
+                                                    <span className="text-zinc-400 text-xs my-[3px] ml-11 mr-[17px]" >
                                                         {"8.000"}
                                                     </span>
                                                 </div>
@@ -692,7 +692,7 @@ export default () => {
                                                     <span className="text-white text-xs my-[3px] mx-8" >
                                                         {"1.799"}
                                                     </span>
-                                                    <span className="text-[#8B949E] text-xs my-[3px] ml-11 mr-[17px]" >
+                                                    <span className="text-zinc-400 text-xs my-[3px] ml-11 mr-[17px]" >
                                                         {"8.000"}
                                                     </span>
                                                 </div>
@@ -705,7 +705,7 @@ export default () => {
                                                     <span className="text-white text-xs my-[3px] mx-8" >
                                                         {"1.799"}
                                                     </span>
-                                                    <span className="text-[#8B949E] text-xs my-[3px] ml-11 mr-[17px]" >
+                                                    <span className="text-zinc-400 text-xs my-[3px] ml-11 mr-[17px]" >
                                                         {"8.000"}
                                                     </span>
                                                 </div>
@@ -718,7 +718,7 @@ export default () => {
                                                     <span className="text-white text-xs mr-[33px]" >
                                                         {"1.755"}
                                                     </span>
-                                                    <span className="text-[#8B949E] text-xs my-[3px] ml-[46px] mr-[18px]" >
+                                                    <span className="text-zinc-400 text-xs my-[3px] ml-[46px] mr-[18px]" >
                                                         {"9.100"}
                                                     </span>
                                                 </div>
@@ -731,7 +731,7 @@ export default () => {
                                                     <span className="text-white text-xs mr-[33px]" >
                                                         {"0.351"}
                                                     </span>
-                                                    <span className="text-[#8B949E] text-xs my-[3px] ml-[38px] mr-[18px]" >
+                                                    <span className="text-zinc-400 text-xs my-[3px] ml-[38px] mr-[18px]" >
                                                         {"10.200"}
                                                     </span>
                                                 </div>
@@ -746,7 +746,7 @@ export default () => {
                                                             {"2.952"}
                                                         </span>
                                                     </div>
-                                                    <span className="text-[#8B949E] text-xs my-[3px] ml-10 mr-[18px]" >
+                                                    <span className="text-zinc-400 text-xs my-[3px] ml-10 mr-[18px]" >
                                                         {"11.300"}
                                                     </span>
                                                 </div>
@@ -761,7 +761,7 @@ export default () => {
                                                             {"0.172"}
                                                         </span>
                                                     </div>
-                                                    <span className="text-[#8B949E] text-xs my-[3px] ml-[38px] mr-[17px]" >
+                                                    <span className="text-zinc-400 text-xs my-[3px] ml-[38px] mr-[17px]" >
                                                         {"12.400"}
                                                     </span>
                                                 </div>
@@ -774,7 +774,7 @@ export default () => {
                                                             {"2.474"}
                                                         </span>
                                                     </div>
-                                                    <span className="text-[#8B949E] text-xs my-[3px] ml-[38px] mr-[18px]" >
+                                                    <span className="text-zinc-400 text-xs my-[3px] ml-[38px] mr-[18px]" >
                                                         {"13.500"}
                                                     </span>
                                                 </div>
@@ -786,21 +786,21 @@ export default () => {
                             )}
                             {orderTab === "Trades" && (
                                 <div className="flex flex-col items-center justify-center w-full py-12">
-                                    <span className="text-[#8B949E] text-base">Trades coming soon.</span>
+                                    <span className="text-zinc-400 text-base">Trades coming soon.</span>
                                 </div>
                             )}
                         </div>
                         {/* Trading Form (col-span-1 on desktop, full width on mobile) */}
-                        <div className="flex flex-col gap-2 items-center bg-[#161B22] rounded-md border border-solid border-[#30363D] w-full">
+                        <div className="flex flex-col gap-2 items-center bg-zinc-900 rounded-md border border-solid border-[#30363D] w-full">
                             {/* Tabs */}
                             <div className="flex items-start justify-between pl-3 pr-[13px] border-b border-[#30363D] w-full">
                                 {["Market", "Limit", "Advanced"].map(tab => (
                                     <button
                                         key={tab}
-                                        className={`w-fulltext-sm py-[15px] px-4 focus:outline-none ${
+                                        className={`w-full text-sm py-[15px] px-4 focus:outline-none ${
                                             activeOrderTab === tab
                                                 ? "text-white border-b-2 border-[#92318D] font-bold"
-                                                : "text-[#8B949E]"
+                                                : "text-zinc-400"
                                         }`}
                                         onClick={() => setActiveOrderTab(tab)}
                                     >
@@ -812,8 +812,8 @@ export default () => {
                             {activeOrderTab === "Market" && (
                                 <div className="w-full flex flex-col items-start px-4 py-4 gap-4">
                                     {/* --- BEGIN Market Tab Content --- */}
-                                    <div className="flex items-center bg-[#0D1117] py-1 pl-1 pr-[5px] gap-6 rounded-md">
-                                        <div className="flex flex-col shrink-0 items-start bg-[#2DA44E33] py-[11px] px-6 rounded">
+                                    <div className="flex items-center bg-zinc-900 py-1 pl-1 pr-[5px] gap-6 rounded-md w-full">
+                                        <div className="flex flex-col  w-full items-center bg-[#2DA44E33] py-[11px] px-6 rounded">
                                             <span className="text-[#2DA44E] text-sm" >
                                                 {"Buy / Long"}
                                             </span>
@@ -822,7 +822,7 @@ export default () => {
                                             placeholder={"Sell / Short"}
                                             value={input1}
                                             onChange={(event)=>onChangeInput1(event.target.value)}
-                                            className="text-[#8B949E] bg-transparent text-sm w-[95px] py-[11px] border-0"
+                                            className="text-zinc-400 bg-transparent text-sm  py-[11px] border-0 w-full items-center text-center"
                                         />
                                     </div>
                                     <div className="flex flex-col items-start gap-2 w-full">
@@ -831,9 +831,9 @@ export default () => {
                                                 {"Amount"}
                                             </span>
                                         </div>
-                                        <div className="flex flex-col items-start gap-4">
+                                        <div className="flex flex-col items-start gap-4 w-full">
                                             {/* 金額輸入框與貨幣標籤 */}
-                                            <div className="flex items-center bg-[#0D1117] py-[9px] px-3 rounded-md border border-solid border-[#30363D] w-full max-w-md">
+                                            <div className="flex justify-between bg-zinc-900 py-[9px] px-3 rounded-md border border-solid border-[#30363D] w-full ">
                                                 <input
                                                     placeholder="0"
                                                     value={input2}
@@ -843,8 +843,8 @@ export default () => {
                                                     }}
                                                     className="text-white bg-transparent text-base w-40 py-[3px] border-0"
                                                 />
-                                                <div className="flex shrink-0 items-center bg-neutral-700 py-[7px] pl-2 pr-[7px] gap-1.5 rounded">
-                                                    <span className="text-[#8B949E] text-xs font-bold">USDT</span>
+                                                <div className="flex shrink-0 items-center bg-zinc-700 py-[7px] pl-2 pr-[7px] gap-1.5 rounded">
+                                                    <span className="text-zinc-400 text-xs font-bold">USDT</span>
                                                     <img
                                                         src="https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/bvauf8h6_expires_30_days.png"
                                                         className="w-3 h-[15px] rounded object-fill"
@@ -864,7 +864,7 @@ export default () => {
                                                         const amount = Math.round((percent / 100) * AMOUNT_TOTAL);
                                                         onChangeInput2(amount.toString());
                                                     }}
-                                                    className="w-full accent-[#92318D] h-2 rounded-lg appearance-none bg-neutral-700 my-2"
+                                                    className="w-full accent-[#92318D] h-2 rounded-lg appearance-none bg-zinc-700 my-2"
                                                 />
                                                 <div className="flex justify-between gap-2 w-full mt-1">
                                                     {[0, 25, 50, 75, 100].map((percent) => (
@@ -875,7 +875,7 @@ export default () => {
                                                                 percentValue === percent
                                                                     ? "border-2 border-[#92318D] font-bold"
                                                                     : "border border-[#30363D]"
-                                                            } bg-[#0D1117] text-white text-sm`}
+                                                            } bg-zinc-900 text-white text-sm`}
                                                             onClick={() => {
                                                                 const amount = Math.round((percent / 100) * AMOUNT_TOTAL);
                                                                 onChangeInput2(amount.toString());
@@ -897,7 +897,7 @@ export default () => {
                                         {"Reduce Only"}
                                         </span>
                                         <div
-                                        className={`shrink-0 flex items-center transition-colors duration-200 rounded-full ${reduceOnly ? "bg-[#92318D]" : "bg-neutral-700"} py-0.5 pl-2 pr-0.5`}
+                                        className={`shrink-0 flex items-center transition-colors duration-200 rounded-full ${reduceOnly ? "bg-[#92318D]" : "bg-zinc-700"} py-0.5 pl-2 pr-0.5`}
                                         style={{ width: 48, height: 28 }}
                                         >
                                         <div
@@ -916,7 +916,7 @@ export default () => {
                                         <span className="text-[#C9D1D9] text-sm">Take Profit / Stop Loss</span>
                                         <div
                                             className={` shrink-0 flex items-center transition-colors duration-200 rounded-full ${
-                                            isOn ? "bg-[#92318D]" : "bg-neutral-700"
+                                            isOn ? "bg-[#92318D]" : "bg-zinc-700"
                                             } py-0.5 pl-2 pr-0.5`}
                                             style={{ width: 48, height: 28 }}
                                         >
@@ -939,12 +939,12 @@ export default () => {
                                             placeholder="230.00"
                                             value={input3}
                                             onChange={(e) => onChangeInput3(e.target.value)}
-                                            className="w-full text-white bg-[#0D1117] text-base p-3 rounded-md border border-[#30363D] focus:outline-none"
+                                            className="w-full text-white bg-zinc-900 text-base p-3 rounded-md border border-[#30363D] focus:outline-none"
                                             />
                                         </div>
                                         <div className="flex flex-col gap-2 min-w-0 text-left">
                                             <span className="text-[#9D9DAF] text-xs">Take Profit %</span>
-                                            <div className="flex items-center bg-[#0D1117] p-3 rounded-md border border-[#30363D] w-full">
+                                            <div className="flex items-center bg-zinc-900 p-3 rounded-md border border-[#30363D] w-full">
                                             <input
                                                 placeholder="%"
                                                 value={input4}
@@ -964,12 +964,12 @@ export default () => {
                                             placeholder="240.00"
                                             value={input5}
                                             onChange={(e) => onChangeInput5(e.target.value)}
-                                            className="w-full text-white bg-[#0D1117] text-base p-3 rounded-md border border-[#30363D] focus:outline-none"
+                                            className="w-full text-white bg-zinc-900 text-base p-3 rounded-md border border-[#30363D] focus:outline-none"
                                             />
                                         </div>
                                         <div className="flex flex-col gap-2 min-w-0 text-left">
                                             <span className="text-[#9D9DAF] text-xs">Stop Loss %</span>
-                                            <div className="flex items-center bg-[#0D1117] p-3 rounded-md border border-[#30363D] w-full">
+                                            <div className="flex items-center bg-zinc-900 p-3 rounded-md border border-[#30363D] w-full">
                                             <input
                                                 placeholder="%"
                                                 value={input6}
@@ -986,7 +986,7 @@ export default () => {
                                     
                                     <div className="flex flex-col items-start w-full gap-2 ">
                                         <div className="flex flex-col items-center pb-[1px]">
-                                            <span className="text-[#8B949E] text-xs" >
+                                            <span className="text-zinc-400 text-xs" >
                                                 {"Max Slippage %"}
                                             </span>
                                         </div>
@@ -994,10 +994,10 @@ export default () => {
                                             placeholder={"0.5"}
                                             value={input7}
                                             onChange={(event)=>onChangeInput7(event.target.value)}
-                                            className="w-full text-white bg-[#0D1117] text-base p-3 rounded-md border border-solid border-[#30363D]"
+                                            className="w-full text-white bg-zinc-900 text-base p-3 rounded-md border border-solid border-[#30363D]"
                                         />
                                     </div>
-                                    <div className="flex flex-col items-start bg-[#0D1117] py-3 rounded-lg">
+                                    <div className="flex flex-col items-start bg-zinc-900 py-3 rounded-lg">
                                         <div className="flex items-center mb-2 ml-3 gap-2">
                                             <img
                                                 src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/1uh405kh_expires_30_days.png"} 
@@ -1050,22 +1050,22 @@ export default () => {
                             )}
                             {activeOrderTab === "Limit" && (
                                 <div className="w-full flex flex-col items-center justify-center py-12">
-                                    <span className="text-[#8B949E] text-base">Limit order form coming soon.</span>
+                                    <span className="text-zinc-400 text-base">Limit order form coming soon.</span>
                                 </div>
                             )}
                             {activeOrderTab === "Advanced" && (
                                 <div className="w-full flex flex-col items-center justify-center py-12">
-                                    <span className="text-[#8B949E] text-base">Advanced order form coming soon.</span>
+                                    <span className="text-zinc-400 text-base">Advanced order form coming soon.</span>
                                 </div>
                             )}
                         </div>
                     </div>
                 </div>
-                <div className="flex flex-col self-stretch bg-[#0D1117] py-6 gap-2">
-                    <span className="text-[#8B949E] text-xs text-center mx-[372px] md:mx-[372px] sm:mx-4 xs:mx-2" >
+                <div className="flex flex-col self-stretch bg-zinc-900 py-6 px-4 gap-2">
+                    <span className="text-zinc-400 text-xs text-center  sm:mx-4 xs:mx-2" >
                         {"Lo‑Fi v1.4 · Based on PRD v1.4 · Points System + Additional Modules + Insurance Pool | Arbitrum One Network | USDC Only"}
                     </span>
-                    <span className="text-[#8B949E] text-xs text-center mx-[363px] md:mx-[363px] sm:mx-4 xs:mx-2" >
+                    <span className="text-zinc-400 text-xs text-center sm:mx-4 xs:mx-2" >
                         {"Three-column Trading Layout | Liquidity Pools (Foundation / Main Pool / Insurance Pool) | Asset & Points Center | Full Modules"}
                     </span>
                 </div>
