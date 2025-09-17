@@ -411,82 +411,74 @@ export default () => {
                                 </div>
                             </div>
                             <div className="flex flex-col w-full">
-								{/* Tabs + Filter */}
-								<div className="flex justify-between items-center border-b border-[#30363D] px-4">
-									<div className="flex gap-4">
-									{["Balance", "Positions", "Open Orders", "Trade History", "Funding Rate History", "Order History"].map((tab) => (
-										<button
-										key={tab}
-										className={`py-3 text-sm font-semibold ${
-											activeAccountTab === tab ? "text-white border-b-2 border-[#92318D]" : "text-[#8B949E]"
-										}`}
-										onClick={() => setActiveAccountTab(tab)}
-										>
-										{tab}
-										</button>
-									))}
-									</div>
-									{/* Filter Selector */}
-									<div className="flex items-center gap-2">
-									<span className="text-[#8B949E] text-sm">Filter</span>
-									<img
-										src="https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/qdm0wdb6_expires_30_days.png"
-										className="w-3 h-[15px] object-fill"
-									/>
-									</div>
-								</div>
+                                {/* Tabs + Filter */}
+                                <div className="overflow-x-auto">
+                                    <div className="flex justify-between items-center border-b border-[#30363D] px-4 min-w-[600px]">
+                                    <div className="flex gap-4">
+                                        {[
+                                        "Balance",
+                                        "Positions",
+                                        "Open Orders",
+                                        "Trade History",
+                                        "Funding Rate History",
+                                        "Order History",
+                                        ].map((tab) => (
+                                        <button
+                                            key={tab}
+                                            className={`py-3 text-sm font-semibold ${
+                                            activeAccountTab === tab
+                                                ? "text-white border-b-2 border-[#92318D]"
+                                                : "text-[#8B949E]"
+                                            }`}
+                                            onClick={() => setActiveAccountTab(tab)}
+                                        >
+                                            {tab}
+                                        </button>
+                                        ))}
+                                    </div>
 
-								{/* Tab Content */}
-								{activeAccountTab === "Balance" && (
-									<div className="px-4 py-3 text-left">
-										{/* Table Header */}
-										<div className="flex text-xs text-[#8B949E] font-bold mb-2">
-											<span className="flex-1 ">Currency</span>
-											<span className="flex-1">Available</span>
-											<span className="flex-1">In Orders</span>
-											<span className="flex-1 ">Value($)</span>
-										</div>
+                                    {/* Filter Selector */}
+                                    <div className="flex items-center gap-2">
+                                        <span className="text-[#8B949E] text-sm">Filter</span>
+                                        <img
+                                        src="https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/qdm0wdb6_expires_30_days.png"
+                                        className="w-3 h-[15px] object-fill"
+                                        />
+                                    </div>
+                                    </div>
+                                </div>
 
-										{/* Table Rows */}
-										<div className="flex flex-col gap-2 text-sm text-white">
-											<div className="flex">
-											<span className="flex-1">USDC</span>
-											<span className="flex-1">12,345.67</span>
-											<span className="flex-1">1,000.00</span>
-											<span className="flex-1">$13,345.67</span>
-											</div>
-											<div className="flex">
-											<span className="flex-1">Points</span>
-											<span className="flex-1">1,250,000</span>
-											<span className="flex-1">0</span>
-											<span className="flex-1">Points</span>
-											</div>
-										</div>
-										</div>
+                                {/* Tab Content */}
+                                {activeAccountTab === "Balance" && (
+                                    <div className="overflow-x-auto px-4 py-3 text-left">
+                                    {/* Table Header */}
+                                    <div className="flex text-xs text-[#8B949E] font-bold mb-2 min-w-[400px]">
+                                        <span className="flex-1">Currency</span>
+                                        <span className="flex-1">Available</span>
+                                        <span className="flex-1">In Orders</span>
+                                        <span className="flex-1">Value($)</span>
+                                    </div>
 
-								)}
+                                    {/* Table Rows */}
+                                    <div className="flex flex-col gap-2 text-sm text-white min-w-[400px]">
+                                        <div className="flex">
+                                        <span className="flex-1">USDC</span>
+                                        <span className="flex-1">12,345.67</span>
+                                        <span className="flex-1">1,000.00</span>
+                                        <span className="flex-1">$13,345.67</span>
+                                        </div>
+                                        <div className="flex">
+                                        <span className="flex-1">Points</span>
+                                        <span className="flex-1">1,250,000</span>
+                                        <span className="flex-1">0</span>
+                                        <span className="flex-1">Points</span>
+                                        </div>
+                                    </div>
+                                    </div>
+                                )}
+                                </div>
 
-								{activeAccountTab === "Positions" && (
-									<div className="px-4 py-3 text-white">Positions content here...</div>
-								)}
-
-								{activeAccountTab === "Open Orders" && (
-									<div className="px-4 py-3 text-white">Open Orders content here...</div>
-								)}
-
-								{activeAccountTab === "Trade History" && (
-									<div className="px-4 py-3 text-white">Trade History content here...</div>
-								)}
-
-								{activeAccountTab === "Funding Rate History" && (
-									<div className="px-4 py-3 text-white">Funding Rate History content here...</div>
-								)}
-
-								{activeAccountTab === "Order History" && (
-									<div className="px-4 py-3 text-white">Order History content here...</div>
-								)}
-								</div>
-                        	</div>
+                        </div>
                     </div>
 
                     {/* Order Book + Trading Form wrapper */}
