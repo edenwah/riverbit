@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-export default (props) => {
+import  { useState } from "react";
+export default () => {
     const [input1, onChangeInput1] = useState('');
     const [input2, onChangeInput2] = useState('');
     const [input3, onChangeInput3] = useState('');
