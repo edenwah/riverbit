@@ -52,9 +52,11 @@ export default () => {
                                     {"Earn"}
                                 </span>
                             </div>
-                            <span className="text-zinc-400 text-sm my-3.5 ml-[1px] mr-[31px]" >
-                                {"Referral"}
-                            </span>
+                            <div className="flex flex-col shrink-0 items-center py-[11px] mr-[30px] rounded-md">
+                                <span className="text-zinc-400 text-sm" >
+                                    {"Referral"}
+                                </span>
+                            </div>
                             <div className="flex flex-col shrink-0 items-center py-[11px] mr-[30px] rounded-md">
                                 <span className="text-zinc-400 text-sm" >
                                     {"Assets"}
@@ -200,9 +202,11 @@ export default () => {
                                     {"Earn"}
                                 </span>
                             </div>
-                            <span className="text-zinc-400 text-sm my-3 ml-[1px] mb-2" >
-                                {"Referral"}
-                            </span>
+                            <div className="flex flex-col items-start py-3 mb-2 rounded-md">
+                                <span className="text-zinc-400 text-sm" >
+                                    {"Referral"}
+                                </span>
+                            </div>
                             <div className="flex flex-col items-start py-3 mb-2 rounded-md">
                                 <span className="text-zinc-400 text-sm" >
                                     {"Assets"}
