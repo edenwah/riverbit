@@ -119,7 +119,7 @@ export default () => {
                                     {"Withdraw"}
                                 </span>
                             </button>
-                            <button className="flex flex-col shrink-0 items-start bg-[#92318D] text-left py-[11px] px-4 rounded-md border-0"
+                            <button className="flex flex-col shrink-0 items-start bg-fuchsia-800 text-left py-[11px] px-4 rounded-md border-0"
                                 onClick={()=>alert("Pressed!")}>
                                 <span className="text-white text-sm font-bold" >
                                     {"Deposit"}
@@ -147,7 +147,7 @@ export default () => {
                                 {"$27,345.12"}
                             </span>
                         </div>
-                        <button className="flex flex-col shrink-0 items-start bg-[#92318D] text-left py-[11px] px-4 rounded-md border-0"
+                        <button className="flex flex-col shrink-0 items-start bg-fuchsia-800 text-left py-[11px] px-4 rounded-md border-0"
                             onClick={()=>alert("Pressed!")}>
                             <span className="text-white text-sm font-bold" >
                                 {"Deposit"}
@@ -261,7 +261,7 @@ export default () => {
                                         {"Withdraw"}
                                     </span>
                                 </button>
-                                <button className="flex flex-col items-start bg-[#92318D] text-left py-3 px-4 rounded-md border-0"
+                                <button className="flex flex-col items-start bg-fuchsia-800 text-left py-3 px-4 rounded-md border-0"
                                     onClick={()=>alert("Pressed!")}>
                                     <span className="text-white text-sm font-bold" >
                                         {"Deposit"}
@@ -831,7 +831,7 @@ export default () => {
                             {activeOrderTab === "Market" && (
                                 <div className="w-full flex flex-col items-start px-4 py-4 gap-4">
                                     {/* --- BEGIN Market Tab Content --- */}
-                                    <div className="flex items-center bg-zinc-900 py-1 pl-1 pr-[5px] gap-6 rounded-md w-full">
+                                    <div className="flex items-center bg-zinc-950 py-1 pl-1 pr-[5px] gap-6 rounded-md w-full">
                                         <div className="flex flex-col  w-full items-center bg-[#2DA44E33] py-[11px] px-6 rounded">
                                             <span className="text-[#2DA44E] text-sm" >
                                                 {"Buy / Long"}
@@ -852,7 +852,7 @@ export default () => {
                                         </div>
                                         <div className="flex flex-col items-start gap-4 w-full">
                                             {/* 金額輸入框與貨幣標籤 */}
-                                            <div className="flex justify-between bg-zinc-900 py-[9px] px-3 rounded-md border border-solid border-[#30363D] w-full ">
+                                            <div className="flex justify-between bg-zinc-950 py-[9px] px-3 rounded-md border border-solid border-[#30363D] w-full ">
                                                 <input
                                                     placeholder="0"
                                                     value={input2}
@@ -883,7 +883,7 @@ export default () => {
                                                         const amount = Math.round((percent / 100) * AMOUNT_TOTAL);
                                                         onChangeInput2(amount.toString());
                                                     }}
-                                                    className="w-full accent-[#92318D] h-2 rounded-lg appearance-none bg-zinc-700 my-2"
+                                                    className="w-full accent-fuchsia-800 h-2 rounded-lg appearance-none bg-zinc-700 my-2"
                                                 />
                                                 <div className="flex justify-between gap-2 w-full mt-1">
                                                     {[0, 25, 50, 75, 100].map((percent) => (
@@ -916,7 +916,7 @@ export default () => {
                                         {"Reduce Only"}
                                         </span>
                                         <div
-                                        className={`shrink-0 flex items-center transition-colors duration-200 rounded-full ${reduceOnly ? "bg-[#92318D]" : "bg-zinc-700"} py-0.5 pl-2 pr-0.5`}
+                                        className={`shrink-0 flex items-center transition-colors duration-200 rounded-full ${reduceOnly ? "bg-fuchsia-800" : "bg-zinc-700"} py-0.5 pl-2 pr-0.5`}
                                         style={{ width: 48, height: 28 }}
                                         >
                                         <div
@@ -935,7 +935,7 @@ export default () => {
                                         <span className="text-[#C9D1D9] text-sm">Take Profit / Stop Loss</span>
                                         <div
                                             className={` shrink-0 flex items-center transition-colors duration-200 rounded-full ${
-                                            isOn ? "bg-[#92318D]" : "bg-zinc-700"
+                                            isOn ? "bg-fuchsia-800" : "bg-zinc-700"
                                             } py-0.5 pl-2 pr-0.5`}
                                             style={{ width: 48, height: 28 }}
                                         >
@@ -958,12 +958,12 @@ export default () => {
                                             placeholder="230.00"
                                             value={input3}
                                             onChange={(e) => onChangeInput3(e.target.value)}
-                                            className="w-full text-white bg-zinc-900 text-base p-3 rounded-md border border-[#30363D] focus:outline-none"
+                                            className="w-full text-white bg-zinc-950 text-base p-3 rounded-md border border-[#30363D] focus:outline-none"
                                             />
                                         </div>
                                         <div className="flex flex-col gap-2 min-w-0 text-left">
                                             <span className="text-[#9D9DAF] text-xs">Take Profit %</span>
-                                            <div className="flex items-center bg-zinc-900 p-3 rounded-md border border-[#30363D] w-full">
+                                            <div className="flex items-center bg-zinc-950 p-3 rounded-md border border-[#30363D] w-full">
                                             <input
                                                 placeholder="%"
                                                 value={input4}
@@ -983,12 +983,12 @@ export default () => {
                                             placeholder="240.00"
                                             value={input5}
                                             onChange={(e) => onChangeInput5(e.target.value)}
-                                            className="w-full text-white bg-zinc-900 text-base p-3 rounded-md border border-[#30363D] focus:outline-none"
+                                            className="w-full text-white bg-zinc-950 text-base p-3 rounded-md border border-[#30363D] focus:outline-none"
                                             />
                                         </div>
                                         <div className="flex flex-col gap-2 min-w-0 text-left">
                                             <span className="text-[#9D9DAF] text-xs">Stop Loss %</span>
-                                            <div className="flex items-center bg-zinc-900 p-3 rounded-md border border-[#30363D] w-full">
+                                            <div className="flex items-center bg-zinc-950 p-3 rounded-md border border-[#30363D] w-full">
                                             <input
                                                 placeholder="%"
                                                 value={input6}
@@ -1013,10 +1013,10 @@ export default () => {
                                             placeholder={"0.5"}
                                             value={input7}
                                             onChange={(event)=>onChangeInput7(event.target.value)}
-                                            className="w-full text-white bg-zinc-900 text-base p-3 rounded-md border border-solid border-[#30363D]"
+                                            className="w-full text-white bg-zinc-950 text-base p-3 rounded-md border border-solid border-[#30363D]"
                                         />
                                     </div>
-                                    <div className="flex flex-col items-start bg-zinc-900 py-3 rounded-lg">
+                                    <div className="flex flex-col items-start bg-zinc-950 py-3 rounded-lg w-full">
                                         <div className="flex items-center mb-2 ml-3 gap-2">
                                             <img
                                                 src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/1uh405kh_expires_30_days.png"} 
@@ -1057,7 +1057,7 @@ export default () => {
                                         </div>
                                     </div>
                                     <button
-                                        className="w-full flex justify-center items-center bg-[#92318D] py-3.5 rounded-md border-0"
+                                        className="w-full flex justify-center items-center bg-fuchsia-800 py-3.5 rounded-md border-0"
                                         onClick={() => alert("Pressed!")}
                                     >
                                         <span className="text-white text-base font-bold text-center">
