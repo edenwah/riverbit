@@ -118,8 +118,9 @@ export default () => {
                         </button>
                     </div>
                 </div>
-                <div className="grid grid-cols-5 items-start self-stretch p-2 gap-2">
-                    <div className="col-span-3 flex flex-col gap-2 ">
+                <div className="grid grid-cols-1 md:grid-cols-5 items-start self-stretch p-2 gap-2">
+                    {/* Main Chart & Account Overview (col-span-3 on desktop, full width on mobile) */}
+                    <div className="md:col-span-3 flex flex-col gap-2 w-full">
                         <div className="flex flex-col self-stretch bg-[#161B22] py-4 gap-3 rounded-lg border border-solid border-[#30363D]">
                             <div className="flex items-center self-stretch mx-3">
                                 <div className="flex shrink-0 items-start pr-[1px] mr-7 gap-2">
@@ -342,7 +343,8 @@ export default () => {
 								</div>
                         	</div>
                     </div>
-                    <div className="col-span-1 flex flex-col gap-2 items-center bg-[#161B22] p-[1px] rounded-md border border-solid border-[#30363D]">
+                    {/* Order Book/Trades (col-span-1 on desktop, full width on mobile) */}
+                    <div className="md:col-span-1 flex flex-col gap-2 items-center bg-[#161B22] p-[1px] rounded-md border border-solid border-[#30363D] w-full">
                         {/* Tabs for Order Book/Trades */}
                         <div className="flex items-center pl-3 pr-[13px] border-b border-[#30363D] w-full">
                             {["Order Book", "Trades"].map(tab => (
@@ -661,7 +663,8 @@ export default () => {
                             </div>
                         )}
                     </div>
-                    <div className="col-span-1 flex flex-col gap-2 items-center bg-[#161B22] rounded-md border border-solid border-[#30363D]">
+                    {/* Trading Form (col-span-1 on desktop, full width on mobile) */}
+                    <div className="md:col-span-1 flex flex-col gap-2 items-center bg-[#161B22] rounded-md border border-solid border-[#30363D] w-full">
                         {/* Tabs */}
                         <div className="flex items-start pl-3 pr-[13px] border-b border-[#30363D] w-full">
                             {["Market", "Limit", "Advanced"].map(tab => (
