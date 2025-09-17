@@ -258,102 +258,111 @@ export default () => {
                     {/* Main Chart & Account Overview (col-span-3 on desktop, full width on mobile) */}
                     <div className="md:col-span-3 flex flex-col gap-2 w-full">
                         <div className="flex flex-col self-stretch bg-[#161B22] py-4 gap-3 rounded-lg border border-solid border-[#30363D]">
-                            <div className="flex items-center self-stretch mx-3">
-                                <div className="flex shrink-0 items-start pr-[1px] mr-7 gap-2">
+                            <div className="flex flex-col md:flex-row items-start md:items-center self-stretch mx-3 gap-2">
+                                {/* Row 1: Asset name */}
+                                <div className="flex items-center gap-2 pr-[1px] md:mr-7">
                                     <img
-                                        src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/11z6u7t1_expires_30_days.png"} 
-                                        className="w-3 h-7 object-fill"
+                                    src="https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/11z6u7t1_expires_30_days.png"
+                                    className="w-3 h-7 object-fill"
                                     />
-                                    <span className="text-gray-200 text-lg font-bold" >
-                                        {"ETH-PERP"}
+                                    <span className="text-gray-200 text-lg font-bold">
+                                    {"ETH-PERP"}
                                     </span>
                                 </div>
-                                <span className="text-[#A6A6B5] text-xs font-bold mr-[13px]" >
-                                    {"Select Asset"}
-                                </span>
-                                <img
-                                    src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/rnvmw36i_expires_30_days.png"} 
-                                    className="w-3 h-[15px] rounded-md object-fill"
-                                />
-                                <div className="flex-1 self-stretch">
-                                </div>
-                                <div className="flex shrink-0 items-start gap-2.5">
-                                    <button className="flex shrink-0 items-center bg-[#0D1117] text-left p-3 gap-[17px] rounded-md border border-solid border-[#30363D]"
-                                        onClick={()=>alert("Pressed!")}>
-                                        <span className="text-[#A6A6B5] text-xs" >
-                                            {"Granularity"}
-                                        </span>
+
+                                {/* Row 2: Select Asset + Controls */}
+                                <div className="flex flex-wrap md:flex-nowrap items-center gap-2 flex-1">
+                                    {/* Select Asset */}
+                                    <div className="flex items-center gap-1">
+                                    <span className="text-[#A6A6B5] text-xs font-bold">
+                                        {"Select Asset"}
+                                    </span>
+                                    <img
+                                        src="https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/rnvmw36i_expires_30_days.png"
+                                        className="w-3 h-[15px] rounded-md object-fill"
+                                    />
+                                    </div>
+
+                                    <div className="flex gap-2 ml-auto">
+                                    {/* Granularity */}
+                                    <button
+                                        className="flex items-center bg-[#0D1117] text-left p-3 gap-[17px] rounded-md border border-solid border-[#30363D]"
+                                    >
+                                        <span className="text-[#A6A6B5] text-xs">{"Granularity"}</span>
                                         <img
-                                            src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/xgj953xu_expires_30_days.png"} 
-                                            className="w-3 h-[15px] rounded-md object-fill"
+                                        src="https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/xgj953xu_expires_30_days.png"
+                                        className="w-3 h-[15px] rounded-md object-fill"
                                         />
                                     </button>
-                                    <button className="flex shrink-0 items-center bg-[#0D1117] text-left p-3 gap-4 rounded-md border border-solid border-[#30363D]"
-                                        onClick={()=>alert("Pressed!")}>
-                                        <span className="text-[#A6A6B5] text-xs" >
-                                            {"Indicator"}
-                                        </span>
+
+                                    {/* Indicator */}
+                                    <button
+                                        className="flex items-center bg-[#0D1117] text-left p-3 gap-4 rounded-md border border-solid border-[#30363D]"
+                                    >
+                                        <span className="text-[#A6A6B5] text-xs">{"Indicator"}</span>
                                         <img
-                                            src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/tsge5u2t_expires_30_days.png"} 
-                                            className="w-3 h-[15px] rounded-md object-fill"
+                                        src="https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/tsge5u2t_expires_30_days.png"
+                                        className="w-3 h-[15px] rounded-md object-fill"
                                         />
                                     </button>
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="flex items-start self-stretch mx-3 gap-3">
-                                <div className="flex flex-1 flex-col items-start">
+                                </div>
+
+                            <div className="flex flex-wrap items-start self-stretch mx-3 gap-3 text-left">
+                                <div className="flex flex-1 flex-col items-start ">
                                     <span className="text-[#A6A6B5] text-xs ml-3.5" >
                                         {"Mark Price"}
                                     </span>
-                                    <span className="text-gray-200 text-xs font-bold text-center mx-3.5" >
+                                    <span className="text-gray-200 text-xs font-bold  mx-3.5" >
                                         {"227.34"}
                                     </span>
                                 </div>
-                                <div className="flex flex-1 flex-col items-start">
+                                <div className="flex flex-1 flex-col items-start ">
                                     <span className="text-[#A6A6B5] text-xs ml-[11px]" >
                                         {"Index Price"}
                                     </span>
-                                    <span className="text-gray-200 text-xs font-bold text-center mx-[11px]" >
+                                    <span className="text-gray-200 text-xs font-bold mx-[11px]" >
                                         {"227.30"}
                                     </span>
                                 </div>
-                                <div className="flex flex-1 flex-col items-start">
+                                <div className="flex flex-1 flex-col items-start min-w-[120px]">
                                     <span className="text-[#A6A6B5] text-xs ml-2" >
                                         {"24h Change"}
                                     </span>
-                                    <span className="text-[#F85149] text-xs font-bold text-center mx-2" >
+                                    <span className="text-[#F85149] text-xs font-bold  mx-2" >
                                         {"-0.97%"}
                                     </span>
                                 </div>
-                                <div className="flex flex-1 flex-col items-start">
+                                <div className="flex flex-1 flex-col items-start ">
                                     <span className="text-[#A6A6B5] text-xs ml-[11px]" >
                                         {"24h Volume"}
                                     </span>
-                                    <span className="text-gray-200 text-xs font-bold text-center mx-[11px]" >
+                                    <span className="text-gray-200 text-xs font-bold  mx-[11px]" >
                                         {"3.2B"}
                                     </span>
                                 </div>
-                                <div className="flex flex-1 flex-col items-start">
+                                <div className="flex flex-1 flex-col items-start ">
                                     <span className="text-[#A6A6B5] text-xs ml-1.5" >
                                         {"Open Interest"}
                                     </span>
-                                    <span className="text-gray-200 text-xs font-bold text-center mx-1.5" >
+                                    <span className="text-gray-200 text-xs font-bold mx-1.5" >
                                         {"3.5B"}
                                     </span>
                                 </div>
-                                <div className="flex flex-1 flex-col items-start">
+                                <div className="flex flex-1 flex-col items-start ">
                                     <span className="text-[#A6A6B5] text-xs ml-2" >
                                         {"Funding Rate"}
                                     </span>
-                                    <span className="text-[#2DA44E] text-xs font-bold text-center mx-2" >
+                                    <span className="text-[#2DA44E] text-xs font-bold  mx-2" >
                                         {"0.1300%"}
                                     </span>
                                 </div>
-                                <div className="flex flex-1 flex-col">
-                                    <span className="text-[#A6A6B5] text-xs text-center" >
+                                <div className="flex flex-1 flex-col ">
+                                    <span className="text-[#A6A6B5] text-xs " >
                                         {"Next Settlement"}
                                     </span>
-                                    <span className="text-gray-200 text-xs font-bold text-center" >
+                                    <span className="text-gray-200 text-xs font-bold " >
                                         {"00:52:54"}
                                     </span>
                                 </div>
