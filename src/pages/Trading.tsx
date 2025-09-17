@@ -219,7 +219,7 @@ export default () => {
                         <div className="flex-1" onClick={() => setMobileMenuOpen(false)} />
                     </div>
                 )}
-                <div className="grid grid-cols-1 md:grid-cols-5 items-start self-stretch p-2 gap-2">
+                <div className="grid grid-cols-1 xl:grid-cols-5 items-start self-stretch p-2 gap-2">
                     {/* Main Chart & Account Overview (col-span-3 on desktop, full width on mobile) */}
                     <div className="md:col-span-3 flex flex-col gap-2 w-full">
                         <div className="flex flex-col self-stretch bg-[#161B22] py-4 gap-3 rounded-lg border border-solid border-[#30363D]">
@@ -444,581 +444,585 @@ export default () => {
 								</div>
                         	</div>
                     </div>
-                    {/* Order Book/Trades (col-span-1 on desktop, full width on mobile) */}
-                    <div className="md:col-span-1 flex flex-col gap-2 items-center bg-[#161B22] p-[1px] rounded-md border border-solid border-[#30363D] w-full">
-                        {/* Tabs for Order Book/Trades */}
-                        <div className="flex items-center pl-3 pr-[13px] border-b border-[#30363D] w-full">
-                            {["Order Book", "Trades"].map(tab => (
-                                <button
-                                    key={tab}
-                                    className={`text-sm py-[15px] w-full focus:outline-none ${
-                                        orderTab === tab
-                                            ? "text-white border-b-2 border-[#92318D] font-bold"
-                                            : "text-[#8B949E]"
-                                    }`}
-                                    onClick={() => setOrderTab(tab)}
-                                >
-                                    {tab}
-                                </button>
-                            ))}
-                        </div>
-                        {/* Tab Content */}
-                        {orderTab === "Order Book" && (
-                            <div className="flex flex-col items-start w-full">
-                                {/* --- BEGIN Order Book Content (lines 353-640) --- */}
-                                {/* Paste all the JSX from line 353 to 640 here */}
+
+                    {/* Order Book + Trading Form wrapper */}
+                    <div className="md:col-span-2 grid 2xl:grid-cols-2 flex flex-col gap-2 w-full  xl:gap-2">
+                        {/* Order Book/Trades (col-span-1 on desktop, full width on mobile) */}
+                        <div className="flex flex-col gap-2 items-center bg-[#161B22] p-[1px] rounded-md border border-solid border-[#30363D] w-full">
+                            {/* Tabs for Order Book/Trades */}
+                            <div className="flex items-center pl-3 pr-[13px] border-b border-[#30363D] w-full">
+                                {["Order Book", "Trades"].map(tab => (
+                                    <button
+                                        key={tab}
+                                        className={`text-sm py-[15px] w-full focus:outline-none ${
+                                            orderTab === tab
+                                                ? "text-white border-b-2 border-[#92318D] font-bold"
+                                                : "text-[#8B949E]"
+                                        }`}
+                                        onClick={() => setOrderTab(tab)}
+                                    >
+                                        {tab}
+                                    </button>
+                                ))}
+                            </div>
+                            {/* Tab Content */}
+                            {orderTab === "Order Book" && (
                                 <div className="flex flex-col items-start w-full">
+                                    {/* --- BEGIN Order Book Content (lines 353-640) --- */}
+                                    {/* Paste all the JSX from line 353 to 640 here */}
                                     <div className="flex flex-col items-start w-full">
-                                        <div className="flex flex-col items-center py-1 w-full">
-                                            <div className="flex items-start pr-[1px] ">
-                                                <span className="text-[#8B949E] text-xs my-1 mx-8" >
-                                                    {"Price"}
-                                                </span>
-                                                <span className="text-[#8B949E] text-xs my-1 mx-[35px]" >
-                                                    {"Size"}
-                                                </span>
-                                                <span className="text-[#8B949E] text-xs my-1 ml-[49px] mr-[17px]" >
-                                                    {"Total"}
-                                                </span>
-                                            </div>
-                                        </div>
                                         <div className="flex flex-col items-start w-full">
-                                            <div className="flex items-center mb-[1px] gap-[22px]">
-                                                <div className="flex shrink-0 items-start bg-[#EF44441A] py-[5px]">
-                                                    <span className="text-[#F85149] text-xs my-[3px] mx-[15px]" >
-                                                        {"110,595.00"}
+                                            <div className="flex flex-col items-center py-1 w-full">
+                                                <div className="flex items-start pr-[1px] ">
+                                                    <span className="text-[#8B949E] text-xs my-1 mx-8" >
+                                                        {"Price"}
                                                     </span>
-                                                    <span className="text-white text-xs my-[3px] mx-[30px]" >
-                                                        {"2.376"}
+                                                    <span className="text-[#8B949E] text-xs my-1 mx-[35px]" >
+                                                        {"Size"}
                                                     </span>
-                                                </div>
-                                                <span className="text-[#8B949E] text-xs" >
-                                                    {"16.500"}
-                                                </span>
-                                            </div>
-                                            <div className="flex items-center pr-[1px]">
-                                                <div className="flex shrink-0 items-center bg-[#EF44441A] py-1 mr-1.5">
-                                                    <span className="text-[#F85149] text-xs my-[3px] ml-[15px] mr-[46px]" >
-                                                        {"110,594.00"}
-                                                    </span>
-                                                    <span className="text-white text-xs" >
-                                                        {"1.359"}
+                                                    <span className="text-[#8B949E] text-xs my-1 ml-[49px] mr-[17px]" >
+                                                        {"Total"}
                                                     </span>
                                                 </div>
-                                                <span className="text-[#8B949E] text-xs my-[3px] ml-[38px] mr-[18px]" >
-                                                    {"15.200"}
-                                                </span>
                                             </div>
-                                            <div className="flex items-center pr-[1px]">
-                                                <div className="flex shrink-0 items-center bg-[#EF44441A] py-1 pr-2.5 mr-[21px]">
-                                                    <span className="text-[#F85149] text-xs my-1 ml-[15px] mr-[45px]" >
-                                                        {"110,593.00"}
-                                                    </span>
-                                                    <span className="text-white text-xs" >
-                                                        {"0.990"}
-                                                    </span>
-                                                </div>
-                                                <span className="text-[#8B949E] text-xs my-1 ml-[38px] mr-[17px]" >
-                                                    {"13.900"}
-                                                </span>
-                                            </div>
-                                            <div className="flex items-center pr-[1px]">
-                                                <div className="flex flex-col shrink-0 items-start relative mr-[38px]">
-                                                    <div className="flex flex-col items-start bg-[#EF44441A] py-2 pl-[15px] pr-[70px]">
-                                                        <span className="text-[#F85149] text-xs" >
-                                                            {"110,592.00"}
+                                            <div className="flex flex-col items-start w-full">
+                                                <div className="flex items-center mb-[1px] gap-[22px]">
+                                                    <div className="flex shrink-0 items-start bg-[#EF44441A] py-[5px]">
+                                                        <span className="text-[#F85149] text-xs my-[3px] mx-[15px]" >
+                                                            {"110,595.00"}
+                                                        </span>
+                                                        <span className="text-white text-xs my-[3px] mx-[30px]" >
+                                                            {"2.376"}
                                                         </span>
                                                     </div>
-                                                    <span className="text-white text-xs absolute top-2 right-[-5px]" >
-                                                        {"3.025"}
+                                                    <span className="text-[#8B949E] text-xs" >
+                                                        {"16.500"}
                                                     </span>
                                                 </div>
-                                                <span className="text-[#8B949E] text-xs my-[3px] ml-[38px] mr-[18px]" >
-                                                    {"12.600"}
-                                                </span>
-                                            </div>
-                                            <div className="flex items-center pr-[1px]">
-                                                <div className="flex flex-col shrink-0 items-start relative mr-[53px]">
-                                                    <div className="flex flex-col items-start bg-[#EF44441A] py-2 pl-4 pr-14">
-                                                        <span className="text-[#F85149] text-xs" >
-                                                            {"110,591.00"}
+                                                <div className="flex items-center pr-[1px]">
+                                                    <div className="flex shrink-0 items-center bg-[#EF44441A] py-1 mr-1.5">
+                                                        <span className="text-[#F85149] text-xs my-[3px] ml-[15px] mr-[46px]" >
+                                                            {"110,594.00"}
+                                                        </span>
+                                                        <span className="text-white text-xs" >
+                                                            {"1.359"}
                                                         </span>
                                                     </div>
-                                                    <span className="text-white text-xs absolute top-2 right-[-18px]" >
-                                                        {"1.146"}
+                                                    <span className="text-[#8B949E] text-xs my-[3px] ml-[38px] mr-[18px]" >
+                                                        {"15.200"}
                                                     </span>
                                                 </div>
-                                                <span className="text-[#8B949E] text-xs my-[3px] ml-10 mr-[18px]" >
-                                                    {"11.300"}
-                                                </span>
-                                            </div>
-                                            <div className="flex items-center pr-[1px] mb-[1px]">
-                                                <div className="flex flex-col shrink-0 items-start bg-[#EF44441A] py-2 pl-[15px] pr-[38px] mr-[7px]">
-                                                        <span className="text-[#F85149] text-xs" >
-                                                            {"110,590.00"}
+                                                <div className="flex items-center pr-[1px]">
+                                                    <div className="flex shrink-0 items-center bg-[#EF44441A] py-1 pr-2.5 mr-[21px]">
+                                                        <span className="text-[#F85149] text-xs my-1 ml-[15px] mr-[45px]" >
+                                                            {"110,593.00"}
                                                         </span>
-                                                </div>
-                                                <span className="text-white text-xs mr-8" >
-                                                    {"2.852"}
-                                                </span>
-                                                <span className="text-[#8B949E] text-xs my-2 ml-[38px] mr-[18px]" >
-                                                    {"10.000"}
-                                                </span>
-                                            </div>
-                                            <div className="flex items-center pr-[1px]">
-                                                <div className="flex flex-col shrink-0 items-start bg-[#EF44441A] py-[7px] pl-[15px] pr-[38px] mr-[7px]">
-                                                        <span className="text-[#F85149] text-xs" >
-                                                            {"110,590.00"}
+                                                        <span className="text-white text-xs" >
+                                                            {"0.990"}
                                                         </span>
+                                                    </div>
+                                                    <span className="text-[#8B949E] text-xs my-1 ml-[38px] mr-[17px]" >
+                                                        {"13.900"}
+                                                    </span>
                                                 </div>
-                                                <span className="text-white text-xs mr-8" >
-                                                    {"2.852"}
-                                                </span>
-                                                <span className="text-[#8B949E] text-xs my-[7px] ml-[38px] mr-[18px]" >
-                                                    {"10.000"}
+                                                <div className="flex items-center pr-[1px]">
+                                                    <div className="flex flex-col shrink-0 items-start relative mr-[38px]">
+                                                        <div className="flex flex-col items-start bg-[#EF44441A] py-2 pl-[15px] pr-[70px]">
+                                                            <span className="text-[#F85149] text-xs" >
+                                                                {"110,592.00"}
+                                                            </span>
+                                                        </div>
+                                                        <span className="text-white text-xs absolute top-2 right-[-5px]" >
+                                                            {"3.025"}
+                                                        </span>
+                                                    </div>
+                                                    <span className="text-[#8B949E] text-xs my-[3px] ml-[38px] mr-[18px]" >
+                                                        {"12.600"}
+                                                    </span>
+                                                </div>
+                                                <div className="flex items-center pr-[1px]">
+                                                    <div className="flex flex-col shrink-0 items-start relative mr-[53px]">
+                                                        <div className="flex flex-col items-start bg-[#EF44441A] py-2 pl-4 pr-14">
+                                                            <span className="text-[#F85149] text-xs" >
+                                                                {"110,591.00"}
+                                                            </span>
+                                                        </div>
+                                                        <span className="text-white text-xs absolute top-2 right-[-18px]" >
+                                                            {"1.146"}
+                                                        </span>
+                                                    </div>
+                                                    <span className="text-[#8B949E] text-xs my-[3px] ml-10 mr-[18px]" >
+                                                        {"11.300"}
+                                                    </span>
+                                                </div>
+                                                <div className="flex items-center pr-[1px] mb-[1px]">
+                                                    <div className="flex flex-col shrink-0 items-start bg-[#EF44441A] py-2 pl-[15px] pr-[38px] mr-[7px]">
+                                                            <span className="text-[#F85149] text-xs" >
+                                                                {"110,590.00"}
+                                                            </span>
+                                                    </div>
+                                                    <span className="text-white text-xs mr-8" >
+                                                        {"2.852"}
+                                                    </span>
+                                                    <span className="text-[#8B949E] text-xs my-2 ml-[38px] mr-[18px]" >
+                                                        {"10.000"}
+                                                    </span>
+                                                </div>
+                                                <div className="flex items-center pr-[1px]">
+                                                    <div className="flex flex-col shrink-0 items-start bg-[#EF44441A] py-[7px] pl-[15px] pr-[38px] mr-[7px]">
+                                                            <span className="text-[#F85149] text-xs" >
+                                                                {"110,590.00"}
+                                                            </span>
+                                                    </div>
+                                                    <span className="text-white text-xs mr-8" >
+                                                        {"2.852"}
+                                                    </span>
+                                                    <span className="text-[#8B949E] text-xs my-[7px] ml-[38px] mr-[18px]" >
+                                                        {"10.000"}
+                                                    </span>
+                                                </div>
+                                                <div className="flex items-start pr-[1px]">
+                                                    <span className="text-[#F85149] text-xs my-2 mx-[15px]" >
+                                                        {"110,590.00"}
+                                                    </span>
+                                                    <span className="text-white text-xs my-2 mx-[30px]" >
+                                                        {"2.852"}
+                                                    </span>
+                                                    <span className="text-[#8B949E] text-xs my-2 ml-[38px] mr-[18px]" >
+                                                        {"10.000"}
+                                                    </span>
+                                                </div>
+                                                <div className="flex items-start pr-[1px]">
+                                                    <span className="text-[#F85149] text-xs my-2 mx-[15px]" >
+                                                        {"110,590.00"}
+                                                    </span>
+                                                    <span className="text-white text-xs my-2 mx-[30px]" >
+                                                        {"2.852"}
+                                                    </span>
+                                                    <span className="text-[#8B949E] text-xs my-2 ml-[38px] mr-[18px]" >
+                                                        {"10.000"}
+                                                    </span>
+                                                </div>
+                                                <div className="flex items-start pr-[1px]">
+                                                    <span className="text-[#F85149] text-xs my-2 mx-[15px]" >
+                                                        {"110,590.00"}
+                                                    </span>
+                                                    <span className="text-white text-xs my-2 mx-[30px]" >
+                                                        {"2.852"}
+                                                    </span>
+                                                    <span className="text-[#8B949E] text-xs my-2 ml-[46px] mr-[18px]" >
+                                                        {"0.190"}
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div className="flex flex-col items-center pt-3 pb-[13px] pl-4 pr-[158px]">
+                                                <span className="text-[#8B949E] text-xs " >
+                                                    {"Spread: 1 (0.001%)"}
                                                 </span>
                                             </div>
-                                            <div className="flex items-start pr-[1px]">
-                                                <span className="text-[#F85149] text-xs my-2 mx-[15px]" >
-                                                    {"110,590.00"}
-                                                </span>
-                                                <span className="text-white text-xs my-2 mx-[30px]" >
-                                                    {"2.852"}
-                                                </span>
-                                                <span className="text-[#8B949E] text-xs my-2 ml-[38px] mr-[18px]" >
-                                                    {"10.000"}
-                                                </span>
-                                            </div>
-                                            <div className="flex items-start pr-[1px]">
-                                                <span className="text-[#F85149] text-xs my-2 mx-[15px]" >
-                                                    {"110,590.00"}
-                                                </span>
-                                                <span className="text-white text-xs my-2 mx-[30px]" >
-                                                    {"2.852"}
-                                                </span>
-                                                <span className="text-[#8B949E] text-xs my-2 ml-[38px] mr-[18px]" >
-                                                    {"10.000"}
-                                                </span>
-                                            </div>
-                                            <div className="flex items-start pr-[1px]">
-                                                <span className="text-[#F85149] text-xs my-2 mx-[15px]" >
-                                                    {"110,590.00"}
-                                                </span>
-                                                <span className="text-white text-xs my-2 mx-[30px]" >
-                                                    {"2.852"}
-                                                </span>
-                                                <span className="text-[#8B949E] text-xs my-2 ml-[46px] mr-[18px]" >
-                                                    {"0.190"}
-                                                </span>
+                                            <div className="flex flex-col items-start">
+                                                <div className="flex items-start py-[7px] pr-[1px] mb-[1px]">
+                                                    <span className="text-[#2DA44E] text-xs my-[3px] mx-[15px]" >
+                                                        {"110,589.00"}
+                                                    </span>
+                                                    <span className="text-white text-xs my-[3px] mx-8" >
+                                                        {"1.799"}
+                                                    </span>
+                                                    <span className="text-[#8B949E] text-xs my-[3px] ml-[45px] mr-[17px]" >
+                                                        {"0.270"}
+                                                    </span>
+                                                </div>
+                                                <div className="flex items-center pr-[1px]">
+                                                    <div className="flex flex-col shrink-0 items-center relative mr-[45px]">
+                                                        <div className="bg-[#22C55E1A] w-12 h-[35px]">
+                                                        </div>
+                                                        <span className="text-[#2DA44E] text-xs absolute top-[9px] left-[15px]" >
+                                                            {"110,589.00"}
+                                                        </span>
+                                                    </div>
+                                                    <span className="text-white text-xs my-[3px] mx-8" >
+                                                        {"1.799"}
+                                                    </span>
+                                                    <span className="text-[#8B949E] text-xs my-[3px] ml-11 mr-[17px]" >
+                                                        {"8.000"}
+                                                    </span>
+                                                </div>
+                                                <div className="flex items-center pr-[1px]">
+                                                    <div className="flex flex-col shrink-0 items-start bg-[#22C55E1A] py-[9px] pl-[15px] pr-0.5 mr-4">
+                                                        <span className="text-[#2DA44E] text-xs" >
+                                                            {"110,589.00"}
+                                                        </span>
+                                                    </div>
+                                                    <span className="text-white text-xs my-[3px] mx-8" >
+                                                        {"1.799"}
+                                                    </span>
+                                                    <span className="text-[#8B949E] text-xs my-[3px] ml-11 mr-[17px]" >
+                                                        {"8.000"}
+                                                    </span>
+                                                </div>
+                                                <div className="flex items-center pr-[1px] mb-[1px]">
+                                                    <div className="flex flex-col shrink-0 items-start bg-[#22C55E1A] py-[9px] pl-[15px] pr-0.5 mr-4">
+                                                        <span className="text-[#2DA44E] text-xs" >
+                                                            {"110,589.00"}
+                                                        </span>
+                                                    </div>
+                                                    <span className="text-white text-xs my-[3px] mx-8" >
+                                                        {"1.799"}
+                                                    </span>
+                                                    <span className="text-[#8B949E] text-xs my-[3px] ml-11 mr-[17px]" >
+                                                        {"8.000"}
+                                                    </span>
+                                                </div>
+                                                <div className="flex items-center pr-[1px]">
+                                                    <div className="flex flex-col shrink-0 items-start bg-[#22C55E1A] py-[9px] pl-[15px] pr-7 mr-[19px]">
+                                                        <span className="text-[#2DA44E] text-xs" >
+                                                            {"110,588.00"}
+                                                        </span>
+                                                    </div>
+                                                    <span className="text-white text-xs mr-[33px]" >
+                                                        {"1.755"}
+                                                    </span>
+                                                    <span className="text-[#8B949E] text-xs my-[3px] ml-[46px] mr-[18px]" >
+                                                        {"9.100"}
+                                                    </span>
+                                                </div>
+                                                <div className="flex items-center pr-[1px] mb-[1px]">
+                                                    <div className="flex flex-col shrink-0 items-start bg-[#22C55E1A] py-[9px] pl-4 pr-11 mr-[3px]">
+                                                        <span className="text-[#2DA44E] text-xs" >
+                                                            {"110,587.00"}
+                                                        </span>
+                                                    </div>
+                                                    <span className="text-white text-xs mr-[33px]" >
+                                                        {"0.351"}
+                                                    </span>
+                                                    <span className="text-[#8B949E] text-xs my-[3px] ml-[38px] mr-[18px]" >
+                                                        {"10.200"}
+                                                    </span>
+                                                </div>
+                                                <div className="flex items-center pr-[1px]">
+                                                    <div className="flex flex-col shrink-0 items-start relative mr-[53px]">
+                                                        <div className="flex flex-col items-start bg-[#22C55E1A] py-[9px] pl-[15px] pr-[55px]">
+                                                            <span className="text-[#2DA44E] text-xs" >
+                                                                {"110,586.00"}
+                                                            </span>
+                                                        </div>
+                                                        <span className="text-white text-xs absolute top-[9px] right-[-20px]" >
+                                                            {"2.952"}
+                                                        </span>
+                                                    </div>
+                                                    <span className="text-[#8B949E] text-xs my-[3px] ml-10 mr-[18px]" >
+                                                        {"11.300"}
+                                                    </span>
+                                                </div>
+                                                <div className="flex items-center pr-[1px]">
+                                                    <div className="flex flex-col shrink-0 items-start relative mr-10">
+                                                        <div className="flex flex-col items-start bg-[#22C55E1A] py-[9px] pl-[15px] pr-[68px]">
+                                                            <span className="text-[#2DA44E] text-xs" >
+                                                                {"110,585.00"}
+                                                            </span>
+                                                        </div>
+                                                        <span className="text-white text-xs absolute top-[9px] right-[-6px]" >
+                                                            {"0.172"}
+                                                        </span>
+                                                    </div>
+                                                    <span className="text-[#8B949E] text-xs my-[3px] ml-[38px] mr-[17px]" >
+                                                        {"12.400"}
+                                                    </span>
+                                                </div>
+                                                <div className="flex items-center pr-[1px]">
+                                                    <div className="flex shrink-0 items-center bg-[#22C55E1A] py-1.5 pr-[5px] mr-[27px]">
+                                                        <span className="text-[#2DA44E] text-xs my-[3px] ml-[15px] mr-[45px]" >
+                                                            {"110,584.00"}
+                                                        </span>
+                                                        <span className="text-white text-xs" >
+                                                            {"2.474"}
+                                                        </span>
+                                                    </div>
+                                                    <span className="text-[#8B949E] text-xs my-[3px] ml-[38px] mr-[18px]" >
+                                                        {"13.500"}
+                                                    </span>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div className="flex flex-col items-center pt-3 pb-[13px] pl-4 pr-[158px]">
-                                            <span className="text-[#8B949E] text-xs " >
-                                                {"Spread: 1 (0.001%)"}
+                                    </div>
+                                    {/* --- END Order Book Content --- */}
+                                </div>
+                            )}
+                            {orderTab === "Trades" && (
+                                <div className="flex flex-col items-center justify-center w-full py-12">
+                                    <span className="text-[#8B949E] text-base">Trades coming soon.</span>
+                                </div>
+                            )}
+                        </div>
+                        {/* Trading Form (col-span-1 on desktop, full width on mobile) */}
+                        <div className="flex flex-col gap-2 items-center bg-[#161B22] rounded-md border border-solid border-[#30363D] w-full">
+                            {/* Tabs */}
+                            <div className="flex items-start justify-between pl-3 pr-[13px] border-b border-[#30363D] w-full">
+                                {["Market", "Limit", "Advanced"].map(tab => (
+                                    <button
+                                        key={tab}
+                                        className={`w-fulltext-sm py-[15px] px-4 focus:outline-none ${
+                                            activeOrderTab === tab
+                                                ? "text-white border-b-2 border-[#92318D] font-bold"
+                                                : "text-[#8B949E]"
+                                        }`}
+                                        onClick={() => setActiveOrderTab(tab)}
+                                    >
+                                        {tab}
+                                    </button>
+                                ))}
+                            </div>
+                            {/* Tab Content */}
+                            {activeOrderTab === "Market" && (
+                                <div className="w-full flex flex-col items-start px-4 py-4 gap-4">
+                                    {/* --- BEGIN Market Tab Content --- */}
+                                    <div className="flex items-center bg-[#0D1117] py-1 pl-1 pr-[5px] gap-6 rounded-md">
+                                        <div className="flex flex-col shrink-0 items-start bg-[#2DA44E33] py-[11px] px-6 rounded">
+                                            <span className="text-[#2DA44E] text-sm" >
+                                                {"Buy / Long"}
                                             </span>
                                         </div>
-                                        <div className="flex flex-col items-start">
-                                            <div className="flex items-start py-[7px] pr-[1px] mb-[1px]">
-                                                <span className="text-[#2DA44E] text-xs my-[3px] mx-[15px]" >
-                                                    {"110,589.00"}
+                                        <input
+                                            placeholder={"Sell / Short"}
+                                            value={input1}
+                                            onChange={(event)=>onChangeInput1(event.target.value)}
+                                            className="text-[#8B949E] bg-transparent text-sm w-[95px] py-[11px] border-0"
+                                        />
+                                    </div>
+                                    <div className="flex flex-col items-start gap-2 w-full">
+                                        <div className="flex flex-col items-center pb-[1px]">
+                                            <span className="text-[#9D9DAF] text-xs" >
+                                                {"Amount"}
+                                            </span>
+                                        </div>
+                                        <div className="flex flex-col items-start gap-4">
+                                            {/* 金額輸入框與貨幣標籤 */}
+                                            <div className="flex items-center bg-[#0D1117] py-[9px] px-3 rounded-md border border-solid border-[#30363D] w-full max-w-md">
+                                                <input
+                                                    placeholder="0"
+                                                    value={input2}
+                                                    onChange={(e) => {
+                                                        const value = Number(e.target.value.replace(/,/g, ""));
+                                                        onChangeInput2(isNaN(value) ? "" : value.toString());
+                                                    }}
+                                                    className="text-white bg-transparent text-base w-40 py-[3px] border-0"
+                                                />
+                                                <div className="flex shrink-0 items-center bg-neutral-700 py-[7px] pl-2 pr-[7px] gap-1.5 rounded">
+                                                    <span className="text-[#8B949E] text-xs font-bold">USDT</span>
+                                                    <img
+                                                        src="https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/bvauf8h6_expires_30_days.png"
+                                                        className="w-3 h-[15px] rounded object-fill"
+                                                    />
+                                                </div>
+                                            </div>
+                                            {/* 滑桿與快捷百分比按鈕 */}
+                                            <div className="flex flex-col w-full">
+                                                <input
+                                                    type="range"
+                                                    min={0}
+                                                    max={100}
+                                                    step={1}
+                                                    value={percentValue}
+                                                    onChange={(e) => {
+                                                        const percent = Number(e.target.value);
+                                                        const amount = Math.round((percent / 100) * AMOUNT_TOTAL);
+                                                        onChangeInput2(amount.toString());
+                                                    }}
+                                                    className="w-full accent-[#92318D] h-2 rounded-lg appearance-none bg-neutral-700 my-2"
+                                                />
+                                                <div className="flex justify-between gap-2 w-full mt-1">
+                                                    {[0, 25, 50, 75, 100].map((percent) => (
+                                                        <button
+                                                            key={percent}
+                                                            type="button"
+                                                            className={`py-[11px] w-full rounded border ${
+                                                                percentValue === percent
+                                                                    ? "border-2 border-[#92318D] font-bold"
+                                                                    : "border border-[#30363D]"
+                                                            } bg-[#0D1117] text-white text-sm`}
+                                                            onClick={() => {
+                                                                const amount = Math.round((percent / 100) * AMOUNT_TOTAL);
+                                                                onChangeInput2(amount.toString());
+                                                            }}
+                                                        >
+                                                            {percent}%
+                                                        </button>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button
+                                        type="button"
+                                        className="py-2 w-full flex items-center  justify-between focus:outline-none"
+                                        onClick={() => setReduceOnly((prev) => !prev)}
+                                    >
+                                        <span className="text-[#C9D1D9] text-sm">
+                                        {"Reduce Only"}
+                                        </span>
+                                        <div
+                                        className={`shrink-0 flex items-center transition-colors duration-200 rounded-full ${reduceOnly ? "bg-[#92318D]" : "bg-neutral-700"} py-0.5 pl-2 pr-0.5`}
+                                        style={{ width: 48, height: 28 }}
+                                        >
+                                        <div
+                                            className={`bg-white w-5 h-5 rounded-full border border-solid border-white shadow transition-transform duration-200 `}
+                                            style={{
+                                            transform: reduceOnly ? "translateX(16px)" : "translateX(0)",
+                                            }}
+                                        />
+                                        </div>
+                                    </button>
+                                    <button
+                                        type="button"
+                                        className="py-2 flex items-center w-full justify-between focus:outline-none"
+                                        onClick={() => setIsOn((prev) => !prev)}
+                                        >
+                                        <span className="text-[#C9D1D9] text-sm">Take Profit / Stop Loss</span>
+                                        <div
+                                            className={` shrink-0 flex items-center transition-colors duration-200 rounded-full ${
+                                            isOn ? "bg-[#92318D]" : "bg-neutral-700"
+                                            } py-0.5 pl-2 pr-0.5`}
+                                            style={{ width: 48, height: 28 }}
+                                        >
+                                            <div
+                                            className={`bg-white w-5 h-5 rounded-full border border-solid border-white shadow transition-transform duration-200`}
+                                            style={{
+                                                transform: isOn ? "translateX(16px)" : "translateX(0)",
+                                            }}
+                                            />
+                                        </div>
+                                    </button>
+                                    {/* Conditional TP/SL inputs */}
+                                    {isOn && (
+                                    <div className="flex flex-col gap-4 py-2 w-full">
+                                        {/* Take Profit */}
+                                        <div className="grid grid-cols-2 gap-4 w-full max-w-2xl">
+                                        <div className="flex flex-col gap-2 min-w-0 text-left">
+                                            <span className="text-[#9D9DAF] text-xs">Take Profit Price</span>
+                                            <input
+                                            placeholder="230.00"
+                                            value={input3}
+                                            onChange={(e) => onChangeInput3(e.target.value)}
+                                            className="w-full text-white bg-[#0D1117] text-base p-3 rounded-md border border-[#30363D] focus:outline-none"
+                                            />
+                                        </div>
+                                        <div className="flex flex-col gap-2 min-w-0 text-left">
+                                            <span className="text-[#9D9DAF] text-xs">Take Profit %</span>
+                                            <div className="flex items-center bg-[#0D1117] p-3 rounded-md border border-[#30363D] w-full">
+                                            <input
+                                                placeholder="%"
+                                                value={input4}
+                                                onChange={(e) => onChangeInput4(e.target.value)}
+                                                className="flex-1 text-white bg-transparent text-base font-bold border-0 focus:outline-none min-w-0"
+                                            />
+                                            <span className="text-white text-base ml-2">%</span>
+                                            </div>
+                                        </div>
+                                        </div>
+
+                                        {/* Stop Loss */}
+                                        <div className="grid grid-cols-2 gap-4 w-full max-w-2xl">
+                                        <div className="flex flex-col gap-2 min-w-0 text-left">
+                                            <span className="text-[#9D9DAF] text-xs">Stop Loss Price</span>
+                                            <input
+                                            placeholder="240.00"
+                                            value={input5}
+                                            onChange={(e) => onChangeInput5(e.target.value)}
+                                            className="w-full text-white bg-[#0D1117] text-base p-3 rounded-md border border-[#30363D] focus:outline-none"
+                                            />
+                                        </div>
+                                        <div className="flex flex-col gap-2 min-w-0 text-left">
+                                            <span className="text-[#9D9DAF] text-xs">Stop Loss %</span>
+                                            <div className="flex items-center bg-[#0D1117] p-3 rounded-md border border-[#30363D] w-full">
+                                            <input
+                                                placeholder="%"
+                                                value={input6}
+                                                onChange={(e) => onChangeInput6(e.target.value)}
+                                                className="flex-1 text-white bg-transparent text-base font-bold border-0 focus:outline-none min-w-0"
+                                            />
+                                            <span className="text-white text-base ml-2">%</span>
+                                            </div>
+                                        </div>
+                                        </div>
+                                    </div>
+                                    )}
+
+                                    
+                                    <div className="flex flex-col items-start w-full gap-2 ">
+                                        <div className="flex flex-col items-center pb-[1px]">
+                                            <span className="text-[#8B949E] text-xs" >
+                                                {"Max Slippage %"}
+                                            </span>
+                                        </div>
+                                        <input
+                                            placeholder={"0.5"}
+                                            value={input7}
+                                            onChange={(event)=>onChangeInput7(event.target.value)}
+                                            className="w-full text-white bg-[#0D1117] text-base p-3 rounded-md border border-solid border-[#30363D]"
+                                        />
+                                    </div>
+                                    <div className="flex flex-col items-start bg-[#0D1117] py-3 rounded-lg">
+                                        <div className="flex items-center mb-2 ml-3 gap-2">
+                                            <img
+                                                src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/1uh405kh_expires_30_days.png"} 
+                                                className="w-3 h-6 object-fill"
+                                            />
+                                            <span className="text-white text-s text-left" >
+                                                {"AI Insight"}
+                                            </span>
+                                        </div>
+                                        <span className="text-[#9D9DAF] text-xs mx-3 text-left" >
+                                            {"Bullish trend 78% · Resistance $228.50 ·"}
+                                        </span>
+                                        <span className="text-[#9D9DAF] text-xs ml-3 text-left" >
+                                            {"Suitable for small position entry"}
+                                        </span>
+                                    </div>
+                                    <div className="flex flex-col items-start pt-4 gap-2 w-full">
+                                        <span className="text-[#9D9DAF] text-sm font-bold" >
+                                            {"Estimation"}
+                                        </span>
+                                        <div className="flex flex-col items-start gap-1 w-full">
+                                            <div className="flex justify-between items-center w-full">
+                                                <span className="text-[#9D9DAF] text-xs " >
+                                                    {"Liquidation Price"}
                                                 </span>
-                                                <span className="text-white text-xs my-[3px] mx-8" >
-                                                    {"1.799"}
-                                                </span>
-                                                <span className="text-[#8B949E] text-xs my-[3px] ml-[45px] mr-[17px]" >
-                                                    {"0.270"}
+                                                <span className="text-white text-xs" >
+                                                    {"$39,130.00"}
                                                 </span>
                                             </div>
-                                            <div className="flex items-center pr-[1px]">
-                                                <div className="flex flex-col shrink-0 items-center relative mr-[45px]">
-                                                    <div className="bg-[#22C55E1A] w-12 h-[35px]">
-                                                    </div>
-                                                    <span className="text-[#2DA44E] text-xs absolute top-[9px] left-[15px]" >
-                                                        {"110,589.00"}
-                                                    </span>
-                                                </div>
-                                                <span className="text-white text-xs my-[3px] mx-8" >
-                                                    {"1.799"}
+                                            <div className="flex justify-between items-center w-full">
+                                                <span className="text-[#9D9DAF] text-xs " >
+                                                    {"Est. Fee"}
                                                 </span>
-                                                <span className="text-[#8B949E] text-xs my-[3px] ml-11 mr-[17px]" >
-                                                    {"8.000"}
-                                                </span>
-                                            </div>
-                                            <div className="flex items-center pr-[1px]">
-                                                <div className="flex flex-col shrink-0 items-start bg-[#22C55E1A] py-[9px] pl-[15px] pr-0.5 mr-4">
-                                                    <span className="text-[#2DA44E] text-xs" >
-                                                        {"110,589.00"}
-                                                    </span>
-                                                </div>
-                                                <span className="text-white text-xs my-[3px] mx-8" >
-                                                    {"1.799"}
-                                                </span>
-                                                <span className="text-[#8B949E] text-xs my-[3px] ml-11 mr-[17px]" >
-                                                    {"8.000"}
-                                                </span>
-                                            </div>
-                                            <div className="flex items-center pr-[1px] mb-[1px]">
-                                                <div className="flex flex-col shrink-0 items-start bg-[#22C55E1A] py-[9px] pl-[15px] pr-0.5 mr-4">
-                                                    <span className="text-[#2DA44E] text-xs" >
-                                                        {"110,589.00"}
-                                                    </span>
-                                                </div>
-                                                <span className="text-white text-xs my-[3px] mx-8" >
-                                                    {"1.799"}
-                                                </span>
-                                                <span className="text-[#8B949E] text-xs my-[3px] ml-11 mr-[17px]" >
-                                                    {"8.000"}
-                                                </span>
-                                            </div>
-                                            <div className="flex items-center pr-[1px]">
-                                                <div className="flex flex-col shrink-0 items-start bg-[#22C55E1A] py-[9px] pl-[15px] pr-7 mr-[19px]">
-                                                    <span className="text-[#2DA44E] text-xs" >
-                                                        {"110,588.00"}
-                                                    </span>
-                                                </div>
-                                                <span className="text-white text-xs mr-[33px]" >
-                                                    {"1.755"}
-                                                </span>
-                                                <span className="text-[#8B949E] text-xs my-[3px] ml-[46px] mr-[18px]" >
-                                                    {"9.100"}
-                                                </span>
-                                            </div>
-                                            <div className="flex items-center pr-[1px] mb-[1px]">
-                                                <div className="flex flex-col shrink-0 items-start bg-[#22C55E1A] py-[9px] pl-4 pr-11 mr-[3px]">
-                                                    <span className="text-[#2DA44E] text-xs" >
-                                                        {"110,587.00"}
-                                                    </span>
-                                                </div>
-                                                <span className="text-white text-xs mr-[33px]" >
-                                                    {"0.351"}
-                                                </span>
-                                                <span className="text-[#8B949E] text-xs my-[3px] ml-[38px] mr-[18px]" >
-                                                    {"10.200"}
-                                                </span>
-                                            </div>
-                                            <div className="flex items-center pr-[1px]">
-                                                <div className="flex flex-col shrink-0 items-start relative mr-[53px]">
-                                                    <div className="flex flex-col items-start bg-[#22C55E1A] py-[9px] pl-[15px] pr-[55px]">
-                                                        <span className="text-[#2DA44E] text-xs" >
-                                                            {"110,586.00"}
-                                                        </span>
-                                                    </div>
-                                                    <span className="text-white text-xs absolute top-[9px] right-[-20px]" >
-                                                        {"2.952"}
-                                                    </span>
-                                                </div>
-                                                <span className="text-[#8B949E] text-xs my-[3px] ml-10 mr-[18px]" >
-                                                    {"11.300"}
-                                                </span>
-                                            </div>
-                                            <div className="flex items-center pr-[1px]">
-                                                <div className="flex flex-col shrink-0 items-start relative mr-10">
-                                                    <div className="flex flex-col items-start bg-[#22C55E1A] py-[9px] pl-[15px] pr-[68px]">
-                                                        <span className="text-[#2DA44E] text-xs" >
-                                                            {"110,585.00"}
-                                                        </span>
-                                                    </div>
-                                                    <span className="text-white text-xs absolute top-[9px] right-[-6px]" >
-                                                        {"0.172"}
-                                                    </span>
-                                                </div>
-                                                <span className="text-[#8B949E] text-xs my-[3px] ml-[38px] mr-[17px]" >
-                                                    {"12.400"}
-                                                </span>
-                                            </div>
-                                            <div className="flex items-center pr-[1px]">
-                                                <div className="flex shrink-0 items-center bg-[#22C55E1A] py-1.5 pr-[5px] mr-[27px]">
-                                                    <span className="text-[#2DA44E] text-xs my-[3px] ml-[15px] mr-[45px]" >
-                                                        {"110,584.00"}
-                                                    </span>
-                                                    <span className="text-white text-xs" >
-                                                        {"2.474"}
-                                                    </span>
-                                                </div>
-                                                <span className="text-[#8B949E] text-xs my-[3px] ml-[38px] mr-[18px]" >
-                                                    {"13.500"}
+                                                <span className="text-white text-xs" >
+                                                    {"$2.50"}
                                                 </span>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                {/* --- END Order Book Content --- */}
-                            </div>
-                        )}
-                        {orderTab === "Trades" && (
-                            <div className="flex flex-col items-center justify-center w-full py-12">
-                                <span className="text-[#8B949E] text-base">Trades coming soon.</span>
-                            </div>
-                        )}
-                    </div>
-                    {/* Trading Form (col-span-1 on desktop, full width on mobile) */}
-                    <div className="md:col-span-1 flex flex-col gap-2 items-center bg-[#161B22] rounded-md border border-solid border-[#30363D] w-full">
-                        {/* Tabs */}
-                        <div className="flex items-start justify-between pl-3 pr-[13px] border-b border-[#30363D] w-full">
-                            {["Market", "Limit", "Advanced"].map(tab => (
-                                <button
-                                    key={tab}
-                                    className={`w-fulltext-sm py-[15px] px-4 focus:outline-none ${
-                                        activeOrderTab === tab
-                                            ? "text-white border-b-2 border-[#92318D] font-bold"
-                                            : "text-[#8B949E]"
-                                    }`}
-                                    onClick={() => setActiveOrderTab(tab)}
-                                >
-                                    {tab}
-                                </button>
-                            ))}
-                        </div>
-                        {/* Tab Content */}
-                        {activeOrderTab === "Market" && (
-                            <div className="w-full flex flex-col items-start px-4 py-4 gap-4">
-                                {/* --- BEGIN Market Tab Content --- */}
-                                <div className="flex items-center bg-[#0D1117] py-1 pl-1 pr-[5px] gap-6 rounded-md">
-                                    <div className="flex flex-col shrink-0 items-start bg-[#2DA44E33] py-[11px] px-6 rounded">
-                                        <span className="text-[#2DA44E] text-sm" >
+                                    <button
+                                        className="w-full flex justify-center items-center bg-[#92318D] py-3.5 rounded-md border-0"
+                                        onClick={() => alert("Pressed!")}
+                                    >
+                                        <span className="text-white text-base font-bold text-center">
                                             {"Buy / Long"}
                                         </span>
-                                    </div>
-                                    <input
-                                        placeholder={"Sell / Short"}
-                                        value={input1}
-                                        onChange={(event)=>onChangeInput1(event.target.value)}
-                                        className="text-[#8B949E] bg-transparent text-sm w-[95px] py-[11px] border-0"
-                                    />
+                                    </button>
+                                    {/* --- END Market Tab Content --- */}
                                 </div>
-                                <div className="flex flex-col items-start gap-2 w-full">
-                                    <div className="flex flex-col items-center pb-[1px]">
-                                        <span className="text-[#9D9DAF] text-xs" >
-                                            {"Amount"}
-                                        </span>
-                                    </div>
-                                    <div className="flex flex-col items-start gap-4">
-                                        {/* 金額輸入框與貨幣標籤 */}
-                                        <div className="flex items-center bg-[#0D1117] py-[9px] px-3 rounded-md border border-solid border-[#30363D] w-full max-w-md">
-                                            <input
-                                                placeholder="0"
-                                                value={input2}
-                                                onChange={(e) => {
-                                                    const value = Number(e.target.value.replace(/,/g, ""));
-                                                    onChangeInput2(isNaN(value) ? "" : value.toString());
-                                                }}
-                                                className="text-white bg-transparent text-base w-40 py-[3px] border-0"
-                                            />
-                                            <div className="flex shrink-0 items-center bg-neutral-700 py-[7px] pl-2 pr-[7px] gap-1.5 rounded">
-                                                <span className="text-[#8B949E] text-xs font-bold">USDT</span>
-                                                <img
-                                                    src="https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/bvauf8h6_expires_30_days.png"
-                                                    className="w-3 h-[15px] rounded object-fill"
-                                                />
-                                            </div>
-                                        </div>
-                                        {/* 滑桿與快捷百分比按鈕 */}
-                                        <div className="flex flex-col w-full">
-                                            <input
-                                                type="range"
-                                                min={0}
-                                                max={100}
-                                                step={1}
-                                                value={percentValue}
-                                                onChange={(e) => {
-                                                    const percent = Number(e.target.value);
-                                                    const amount = Math.round((percent / 100) * AMOUNT_TOTAL);
-                                                    onChangeInput2(amount.toString());
-                                                }}
-                                                className="w-full accent-[#92318D] h-2 rounded-lg appearance-none bg-neutral-700 my-2"
-                                            />
-                                            <div className="flex justify-between gap-2 w-full mt-1">
-                                                {[0, 25, 50, 75, 100].map((percent) => (
-                                                    <button
-                                                        key={percent}
-                                                        type="button"
-                                                        className={`py-[11px] w-full rounded border ${
-                                                            percentValue === percent
-                                                                ? "border-2 border-[#92318D] font-bold"
-                                                                : "border border-[#30363D]"
-                                                        } bg-[#0D1117] text-white text-sm`}
-                                                        onClick={() => {
-                                                            const amount = Math.round((percent / 100) * AMOUNT_TOTAL);
-                                                            onChangeInput2(amount.toString());
-                                                        }}
-                                                    >
-                                                        {percent}%
-                                                    </button>
-                                                ))}
-                                            </div>
-                                        </div>
-                                    </div>
+                            )}
+                            {activeOrderTab === "Limit" && (
+                                <div className="w-full flex flex-col items-center justify-center py-12">
+                                    <span className="text-[#8B949E] text-base">Limit order form coming soon.</span>
                                 </div>
-                                <button
-                                    type="button"
-                                    className="py-2 w-full flex items-center  justify-between focus:outline-none"
-                                    onClick={() => setReduceOnly((prev) => !prev)}
-                                >
-                                    <span className="text-[#C9D1D9] text-sm">
-                                    {"Reduce Only"}
-                                    </span>
-                                    <div
-                                    className={`shrink-0 flex items-center transition-colors duration-200 rounded-full ${reduceOnly ? "bg-[#92318D]" : "bg-neutral-700"} py-0.5 pl-2 pr-0.5`}
-                                    style={{ width: 48, height: 28 }}
-                                    >
-                                    <div
-                                        className={`bg-white w-5 h-5 rounded-full border border-solid border-white shadow transition-transform duration-200 `}
-                                        style={{
-                                        transform: reduceOnly ? "translateX(16px)" : "translateX(0)",
-                                        }}
-                                    />
-                                    </div>
-                                </button>
-                                <button
-                                    type="button"
-                                    className="py-2 flex items-center w-full justify-between focus:outline-none"
-                                    onClick={() => setIsOn((prev) => !prev)}
-                                    >
-                                    <span className="text-[#C9D1D9] text-sm">Take Profit / Stop Loss</span>
-                                    <div
-                                        className={` shrink-0 flex items-center transition-colors duration-200 rounded-full ${
-                                        isOn ? "bg-[#92318D]" : "bg-neutral-700"
-                                        } py-0.5 pl-2 pr-0.5`}
-                                        style={{ width: 48, height: 28 }}
-                                    >
-                                        <div
-                                        className={`bg-white w-5 h-5 rounded-full border border-solid border-white shadow transition-transform duration-200`}
-                                        style={{
-                                            transform: isOn ? "translateX(16px)" : "translateX(0)",
-                                        }}
-                                        />
-                                    </div>
-                                </button>
-                                {/* Conditional TP/SL inputs */}
-                                {isOn && (
-                                <div className="flex flex-col gap-4 py-2 w-full">
-                                    {/* Take Profit */}
-                                    <div className="grid grid-cols-2 gap-4 w-full max-w-2xl">
-                                    <div className="flex flex-col gap-2 min-w-0 text-left">
-                                        <span className="text-[#9D9DAF] text-xs">Take Profit Price</span>
-                                        <input
-                                        placeholder="230.00"
-                                        value={input3}
-                                        onChange={(e) => onChangeInput3(e.target.value)}
-                                        className="w-full text-white bg-[#0D1117] text-base p-3 rounded-md border border-[#30363D] focus:outline-none"
-                                        />
-                                    </div>
-                                    <div className="flex flex-col gap-2 min-w-0 text-left">
-                                        <span className="text-[#9D9DAF] text-xs">Take Profit %</span>
-                                        <div className="flex items-center bg-[#0D1117] p-3 rounded-md border border-[#30363D] w-full">
-                                        <input
-                                            placeholder="%"
-                                            value={input4}
-                                            onChange={(e) => onChangeInput4(e.target.value)}
-                                            className="flex-1 text-white bg-transparent text-base font-bold border-0 focus:outline-none min-w-0"
-                                        />
-                                        <span className="text-white text-base ml-2">%</span>
-                                        </div>
-                                    </div>
-                                    </div>
-
-                                    {/* Stop Loss */}
-                                    <div className="grid grid-cols-2 gap-4 w-full max-w-2xl">
-                                    <div className="flex flex-col gap-2 min-w-0 text-left">
-                                        <span className="text-[#9D9DAF] text-xs">Stop Loss Price</span>
-                                        <input
-                                        placeholder="240.00"
-                                        value={input5}
-                                        onChange={(e) => onChangeInput5(e.target.value)}
-                                        className="w-full text-white bg-[#0D1117] text-base p-3 rounded-md border border-[#30363D] focus:outline-none"
-                                        />
-                                    </div>
-                                    <div className="flex flex-col gap-2 min-w-0 text-left">
-                                        <span className="text-[#9D9DAF] text-xs">Stop Loss %</span>
-                                        <div className="flex items-center bg-[#0D1117] p-3 rounded-md border border-[#30363D] w-full">
-                                        <input
-                                            placeholder="%"
-                                            value={input6}
-                                            onChange={(e) => onChangeInput6(e.target.value)}
-                                            className="flex-1 text-white bg-transparent text-base font-bold border-0 focus:outline-none min-w-0"
-                                        />
-                                        <span className="text-white text-base ml-2">%</span>
-                                        </div>
-                                    </div>
-                                    </div>
+                            )}
+                            {activeOrderTab === "Advanced" && (
+                                <div className="w-full flex flex-col items-center justify-center py-12">
+                                    <span className="text-[#8B949E] text-base">Advanced order form coming soon.</span>
                                 </div>
-                                )}
-
-                                
-                                <div className="flex flex-col items-start w-full gap-2 ">
-                                    <div className="flex flex-col items-center pb-[1px]">
-                                        <span className="text-[#8B949E] text-xs" >
-                                            {"Max Slippage %"}
-                                        </span>
-                                    </div>
-                                    <input
-                                        placeholder={"0.5"}
-                                        value={input7}
-                                        onChange={(event)=>onChangeInput7(event.target.value)}
-                                        className="w-full text-white bg-[#0D1117] text-base p-3 rounded-md border border-solid border-[#30363D]"
-                                    />
-                                </div>
-                                <div className="flex flex-col items-start bg-[#0D1117] py-3 rounded-lg">
-                                    <div className="flex items-center mb-2 ml-3 gap-2">
-                                        <img
-                                            src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/1uh405kh_expires_30_days.png"} 
-                                            className="w-3 h-6 object-fill"
-                                        />
-                                        <span className="text-white text-s text-left" >
-                                            {"AI Insight"}
-                                        </span>
-                                    </div>
-                                    <span className="text-[#9D9DAF] text-xs mx-3 text-left" >
-                                        {"Bullish trend 78% · Resistance $228.50 ·"}
-                                    </span>
-                                    <span className="text-[#9D9DAF] text-xs ml-3 text-left" >
-                                        {"Suitable for small position entry"}
-                                    </span>
-                                </div>
-                                <div className="flex flex-col items-start pt-4 gap-2 w-full">
-                                    <span className="text-[#9D9DAF] text-sm font-bold" >
-                                        {"Estimation"}
-                                    </span>
-                                    <div className="flex flex-col items-start gap-1 w-full">
-                                        <div className="flex justify-between items-center w-full">
-                                            <span className="text-[#9D9DAF] text-xs " >
-                                                {"Liquidation Price"}
-                                            </span>
-                                            <span className="text-white text-xs" >
-                                                {"$39,130.00"}
-                                            </span>
-                                        </div>
-                                        <div className="flex justify-between items-center w-full">
-                                            <span className="text-[#9D9DAF] text-xs " >
-                                                {"Est. Fee"}
-                                            </span>
-                                            <span className="text-white text-xs" >
-                                                {"$2.50"}
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <button
-                                    className="w-full flex justify-center items-center bg-[#92318D] py-3.5 rounded-md border-0"
-                                    onClick={() => alert("Pressed!")}
-                                >
-                                    <span className="text-white text-base font-bold text-center">
-                                        {"Buy / Long"}
-                                    </span>
-                                </button>
-                                {/* --- END Market Tab Content --- */}
-                            </div>
-                        )}
-                        {activeOrderTab === "Limit" && (
-                            <div className="w-full flex flex-col items-center justify-center py-12">
-                                <span className="text-[#8B949E] text-base">Limit order form coming soon.</span>
-                            </div>
-                        )}
-                        {activeOrderTab === "Advanced" && (
-                            <div className="w-full flex flex-col items-center justify-center py-12">
-                                <span className="text-[#8B949E] text-base">Advanced order form coming soon.</span>
-                            </div>
-                        )}
+                            )}
+                        </div>
                     </div>
                 </div>
                 <div className="flex flex-col self-stretch bg-[#0D1117] py-6 gap-2">
