@@ -573,264 +573,84 @@ export default () => {
                                                     </span>
                                                 </div>
                                             </div>
-                                            <div className="flex flex-col items-start w-full">
-                                                <div className="flex items-center mb-[1px] gap-[22px]">
-                                                    <div className="flex shrink-0 items-start bg-[#EF44441A] py-[5px]">
-                                                        <span className="text-[#F85149] text-sm my-[3px] mx-[15px]" >
-                                                            {"110,595.00"}
-                                                        </span>
-                                                        <span className="text-white text-sm my-[3px] mx-[30px]" >
-                                                            {"2.376"}
-                                                        </span>
+                                            <div className="flex flex-col w-full">
+                                                {[
+                                                    { price: "110,595.00", size: "2.376", total: "16.500", barWidth: "80%" },
+                                                    { price: "110,594.00", size: "1.359", total: "15.200", barWidth: "70%" },
+                                                    { price: "110,593.00", size: "0.990", total: "13.900", barWidth: "60%" },
+                                                    { price: "110,592.00", size: "3.025", total: "12.600", barWidth: "50%" },
+                                                    { price: "110,591.00", size: "1.146", total: "11.300", barWidth: "45%" },
+                                                    { price: "110,590.00", size: "2.852", total: "10.000", barWidth: "37%" },
+                                                    { price: "110,589.00", size: "2.852", total: "10.000", barWidth: "33%" },
+                                                    { price: "110,588.00", size: "2.852", total: "10.000", barWidth: "25%" },
+                                                    { price: "110,587.00", size: "2.852", total: "0.190",  barWidth: "20%" },
+                                                ].map((row, idx) => (
+                                                    <div
+                                                    key={idx}
+                                                    className="relative flex w-full items-center text-sm text-white"
+                                                    >
+                                                    {/* 背景色 box */}
+                                                    <div
+                                                        className="absolute left-0 top-0 h-full bg-[#EF44441A]"
+                                                        style={{ width: row.barWidth }}
+                                                    />
+
+                                                    {/* 三欄內容 */}
+                                                    <div className="grid grid-cols-3 w-full relative z-10 px-4 py-2">
+                                                        <span className="text-[#F85149]">{row.price}</span>
+                                                        <span>{row.size}</span>
+                                                        <span className="text-zinc-400">{row.total}</span>
                                                     </div>
-                                                    <span className="text-zinc-400 text-sm" >
-                                                        {"16.500"}
-                                                    </span>
-                                                </div>
-                                                <div className="flex items-center pr-[1px]">
-                                                    <div className="flex shrink-0 items-center bg-[#EF44441A] py-1 mr-1.5">
-                                                        <span className="text-[#F85149] text-sm my-[3px] ml-[15px] mr-[46px]" >
-                                                            {"110,594.00"}
-                                                        </span>
-                                                        <span className="text-white text-sm" >
-                                                            {"1.359"}
-                                                        </span>
                                                     </div>
-                                                    <span className="text-zinc-400 text-sm my-[3px] ml-[38px] mr-[18px]" >
-                                                        {"15.200"}
-                                                    </span>
-                                                </div>
-                                                <div className="flex items-center pr-[1px]">
-                                                    <div className="flex shrink-0 items-center bg-[#EF44441A] py-1 pr-2.5 mr-[21px]">
-                                                        <span className="text-[#F85149] text-sm my-1 ml-[15px] mr-[45px]" >
-                                                            {"110,593.00"}
-                                                        </span>
-                                                        <span className="text-white text-sm" >
-                                                            {"0.990"}
-                                                        </span>
-                                                    </div>
-                                                    <span className="text-zinc-400 text-sm my-1 ml-[38px] mr-[17px]" >
-                                                        {"13.900"}
-                                                    </span>
-                                                </div>
-                                                <div className="flex items-center pr-[1px]">
-                                                    <div className="flex flex-col shrink-0 items-start relative mr-[38px]">
-                                                        <div className="flex flex-col items-start bg-[#EF44441A] py-2 pl-[15px] pr-[70px]">
-                                                            <span className="text-[#F85149] text-sm" >
-                                                                {"110,592.00"}
-                                                            </span>
-                                                        </div>
-                                                        <span className="text-white text-sm absolute top-2 right-[-5px]" >
-                                                            {"3.025"}
-                                                        </span>
-                                                    </div>
-                                                    <span className="text-zinc-400 text-sm my-[3px] ml-[38px] mr-[18px]" >
-                                                        {"12.600"}
-                                                    </span>
-                                                </div>
-                                                <div className="flex items-center pr-[1px]">
-                                                    <div className="flex flex-col shrink-0 items-start relative mr-[53px]">
-                                                        <div className="flex flex-col items-start bg-[#EF44441A] py-2 pl-4 pr-14">
-                                                            <span className="text-[#F85149] text-sm" >
-                                                                {"110,591.00"}
-                                                            </span>
-                                                        </div>
-                                                        <span className="text-white text-sm absolute top-2 right-[-18px]" >
-                                                            {"1.146"}
-                                                        </span>
-                                                    </div>
-                                                    <span className="text-zinc-400 text-sm my-[3px] ml-10 mr-[18px]" >
-                                                        {"11.300"}
-                                                    </span>
-                                                </div>
-                                                <div className="flex items-center pr-[1px] mb-[1px]">
-                                                    <div className="flex flex-col shrink-0 items-start bg-[#EF44441A] py-2 pl-[15px] pr-[38px] mr-[7px]">
-                                                            <span className="text-[#F85149] text-sm" >
-                                                                {"110,590.00"}
-                                                            </span>
-                                                    </div>
-                                                    <span className="text-white text-sm mr-8" >
-                                                        {"2.852"}
-                                                    </span>
-                                                    <span className="text-zinc-400 text-sm my-2 ml-[38px] mr-[18px]" >
-                                                        {"10.000"}
-                                                    </span>
-                                                </div>
-                                                <div className="flex items-center pr-[1px]">
-                                                    <div className="flex flex-col shrink-0 items-start bg-[#EF44441A] py-[7px] pl-[15px] pr-[38px] mr-[7px]">
-                                                            <span className="text-[#F85149] text-sm" >
-                                                                {"110,590.00"}
-                                                            </span>
-                                                    </div>
-                                                    <span className="text-white text-sm mr-8" >
-                                                        {"2.852"}
-                                                    </span>
-                                                    <span className="text-zinc-400 text-sm my-[7px] ml-[38px] mr-[18px]" >
-                                                        {"10.000"}
-                                                    </span>
-                                                </div>
-                                                <div className="flex items-start pr-[1px]">
-                                                    <span className="text-[#F85149] text-sm my-2 mx-[15px]" >
-                                                        {"110,590.00"}
-                                                    </span>
-                                                    <span className="text-white text-sm my-2 mx-[30px]" >
-                                                        {"2.852"}
-                                                    </span>
-                                                    <span className="text-zinc-400 text-sm my-2 ml-[38px] mr-[18px]" >
-                                                        {"10.000"}
-                                                    </span>
-                                                </div>
-                                                <div className="flex items-start pr-[1px]">
-                                                    <span className="text-[#F85149] text-sm my-2 mx-[15px]" >
-                                                        {"110,590.00"}
-                                                    </span>
-                                                    <span className="text-white text-sm my-2 mx-[30px]" >
-                                                        {"2.852"}
-                                                    </span>
-                                                    <span className="text-zinc-400 text-sm my-2 ml-[38px] mr-[18px]" >
-                                                        {"10.000"}
-                                                    </span>
-                                                </div>
-                                                <div className="flex items-start pr-[1px]">
-                                                    <span className="text-[#F85149] text-sm my-2 mx-[15px]" >
-                                                        {"110,590.00"}
-                                                    </span>
-                                                    <span className="text-white text-sm my-2 mx-[30px]" >
-                                                        {"2.852"}
-                                                    </span>
-                                                    <span className="text-zinc-400 text-sm my-2 ml-[46px] mr-[18px]" >
-                                                        {"0.190"}
-                                                    </span>
-                                                </div>
+                                                ))}
                                             </div>
+
                                             <div className="flex w-full flex-col items-center p-3">
                                                 <span className="text-zinc-400 text-sm " >
                                                     {"Spread: 1 (0.001%)"}
                                                 </span>
                                             </div>
-                                            <div className="flex flex-col items-start">
-                                                <div className="flex items-start py-[7px] pr-[1px] mb-[1px]">
-                                                    <span className="text-[#2DA44E] text-sm my-[3px] mx-[15px]" >
-                                                        {"110,589.00"}
-                                                    </span>
-                                                    <span className="text-white text-sm my-[3px] mx-8" >
-                                                        {"1.799"}
-                                                    </span>
-                                                    <span className="text-zinc-400 text-sm my-[3px] ml-[45px] mr-[17px]" >
-                                                        {"0.270"}
-                                                    </span>
-                                                </div>
-                                                <div className="flex items-center pr-[1px]">
-                                                    <div className="flex flex-col shrink-0 items-center relative mr-[45px]">
-                                                        <div className="bg-[#22C55E1A] w-12 h-[35px]">
+                                            <div className="flex flex-col w-full">
+                                                {(() => {
+                                                    const bids = [
+                                                    { price: "110,589.00", size: 1.799, total: 0.270 },
+                                                    { price: "110,589.00", size: 1.799, total: 8.000 },
+                                                    { price: "110,589.00", size: 1.799, total: 8.000 },
+                                                    { price: "110,588.00", size: 1.755, total: 9.100 },
+                                                    { price: "110,587.00", size: 0.351, total: 10.200 },
+                                                    { price: "110,586.00", size: 2.952, total: 11.300 },
+                                                    { price: "110,585.00", size: 0.172, total: 12.400 },
+                                                    { price: "110,584.00", size: 2.474, total: 13.500 },
+                                                    ];
+
+                                                    const maxTotal = Math.max(...bids.map(b => b.total));
+
+                                                    return bids.map((row, idx) => {
+                                                    const barWidth = `${(row.total / maxTotal) * 100}%`;
+
+                                                    return (
+                                                        <div
+                                                        key={idx}
+                                                        className="relative flex w-full items-center text-sm text-white"
+                                                        >
+                                                        {/* 背景色 bar */}
+                                                        <div
+                                                            className="absolute left-0 top-0 h-full bg-[#22C55E1A]"
+                                                            style={{ width: barWidth }}
+                                                        />
+
+                                                        {/* 三欄內容 */}
+                                                        <div className="grid grid-cols-3 w-full relative z-10 px-4 py-2">
+                                                            <span className="text-[#2DA44E]">{row.price}</span>
+                                                            <span>{row.size}</span>
+                                                            <span className="text-zinc-400">{row.total}</span>
                                                         </div>
-                                                        <span className="text-[#2DA44E] text-sm absolute top-[9px] left-[15px]" >
-                                                            {"110,589.00"}
-                                                        </span>
-                                                    </div>
-                                                    <span className="text-white text-sm my-[3px] mx-8" >
-                                                        {"1.799"}
-                                                    </span>
-                                                    <span className="text-zinc-400 text-sm my-[3px] ml-11 mr-[17px]" >
-                                                        {"8.000"}
-                                                    </span>
-                                                </div>
-                                                <div className="flex items-center pr-[1px]">
-                                                    <div className="flex flex-col shrink-0 items-start bg-[#22C55E1A] py-[9px] pl-[15px] pr-0.5 mr-4">
-                                                        <span className="text-[#2DA44E] text-sm" >
-                                                            {"110,589.00"}
-                                                        </span>
-                                                    </div>
-                                                    <span className="text-white text-sm my-[3px] mx-8" >
-                                                        {"1.799"}
-                                                    </span>
-                                                    <span className="text-zinc-400 text-sm my-[3px] ml-11 mr-[17px]" >
-                                                        {"8.000"}
-                                                    </span>
-                                                </div>
-                                                <div className="flex items-center pr-[1px] mb-[1px]">
-                                                    <div className="flex flex-col shrink-0 items-start bg-[#22C55E1A] py-[9px] pl-[15px] pr-0.5 mr-4">
-                                                        <span className="text-[#2DA44E] text-sm" >
-                                                            {"110,589.00"}
-                                                        </span>
-                                                    </div>
-                                                    <span className="text-white text-sm my-[3px] mx-8" >
-                                                        {"1.799"}
-                                                    </span>
-                                                    <span className="text-zinc-400 text-sm my-[3px] ml-11 mr-[17px]" >
-                                                        {"8.000"}
-                                                    </span>
-                                                </div>
-                                                <div className="flex items-center pr-[1px]">
-                                                    <div className="flex flex-col shrink-0 items-start bg-[#22C55E1A] py-[9px] pl-[15px] pr-7 mr-[19px]">
-                                                        <span className="text-[#2DA44E] text-sm" >
-                                                            {"110,588.00"}
-                                                        </span>
-                                                    </div>
-                                                    <span className="text-white text-sm mr-[33px]" >
-                                                        {"1.755"}
-                                                    </span>
-                                                    <span className="text-zinc-400 text-sm my-[3px] ml-[46px] mr-[18px]" >
-                                                        {"9.100"}
-                                                    </span>
-                                                </div>
-                                                <div className="flex items-center pr-[1px] mb-[1px]">
-                                                    <div className="flex flex-col shrink-0 items-start bg-[#22C55E1A] py-[9px] pl-4 pr-11 mr-[3px]">
-                                                        <span className="text-[#2DA44E] text-sm" >
-                                                            {"110,587.00"}
-                                                        </span>
-                                                    </div>
-                                                    <span className="text-white text-sm mr-[33px]" >
-                                                        {"0.351"}
-                                                    </span>
-                                                    <span className="text-zinc-400 text-sm my-[3px] ml-[38px] mr-[18px]" >
-                                                        {"10.200"}
-                                                    </span>
-                                                </div>
-                                                <div className="flex items-center pr-[1px]">
-                                                    <div className="flex flex-col shrink-0 items-start relative mr-[53px]">
-                                                        <div className="flex flex-col items-start bg-[#22C55E1A] py-[9px] pl-[15px] pr-[55px]">
-                                                            <span className="text-[#2DA44E] text-sm" >
-                                                                {"110,586.00"}
-                                                            </span>
                                                         </div>
-                                                        <span className="text-white text-sm absolute top-[9px] right-[-20px]" >
-                                                            {"2.952"}
-                                                        </span>
-                                                    </div>
-                                                    <span className="text-zinc-400 text-sm my-[3px] ml-10 mr-[18px]" >
-                                                        {"11.300"}
-                                                    </span>
-                                                </div>
-                                                <div className="flex items-center pr-[1px]">
-                                                    <div className="flex flex-col shrink-0 items-start relative mr-10">
-                                                        <div className="flex flex-col items-start bg-[#22C55E1A] py-[9px] pl-[15px] pr-[68px]">
-                                                            <span className="text-[#2DA44E] text-sm" >
-                                                                {"110,585.00"}
-                                                            </span>
-                                                        </div>
-                                                        <span className="text-white text-sm absolute top-[9px] right-[-6px]" >
-                                                            {"0.172"}
-                                                        </span>
-                                                    </div>
-                                                    <span className="text-zinc-400 text-sm my-[3px] ml-[38px] mr-[17px]" >
-                                                        {"12.400"}
-                                                    </span>
-                                                </div>
-                                                <div className="flex items-center pr-[1px]">
-                                                    <div className="flex shrink-0 items-center bg-[#22C55E1A] py-1.5 pr-[5px] mr-[27px]">
-                                                        <span className="text-[#2DA44E] text-sm my-[3px] ml-[15px] mr-[45px]" >
-                                                            {"110,584.00"}
-                                                        </span>
-                                                        <span className="text-white text-sm" >
-                                                            {"2.474"}
-                                                        </span>
-                                                    </div>
-                                                    <span className="text-zinc-400 text-sm my-[3px] ml-[38px] mr-[18px]" >
-                                                        {"13.500"}
-                                                    </span>
-                                                </div>
+                                                    );
+                                                    });
+                                                })()}
                                             </div>
+
                                         </div>
                                     </div>
                                     {/* --- END Order Book Content --- */}
