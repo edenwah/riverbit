@@ -456,8 +456,8 @@ export default () => {
                             <div className="flex flex-col w-full">
                                 {/* Tabs + Filter */}
                                 <div className="overflow-x-auto">
-                                    <div className="flex justify-between items-center border-b border-[#30363D] px-4 min-w-[600px]">
-                                        <div className="flex gap-4">
+                                    <div className="flex justify-between items-center border-b border-[#30363D] px-4 min-w-[600px] flex-nowrap">
+                                        <div className="flex gap-4 whitespace-nowrap mr-4">
                                             {[
                                             "Balance",
                                             "Positions",
@@ -664,6 +664,31 @@ export default () => {
                         </div>
                         {/* Trading Form (col-span-1 on desktop, full width on mobile) */}
                         <div className="flex flex-col gap-2 items-center bg-zinc-900 rounded-md border border-solid border-[#30363D] w-full">
+                            <div className="flex items-start p-3">
+                                <button className="flex flex-col shrink-0 items-start bg-[#0D1117] text-left py-3 px-1.5 mr-[9px] rounded border border-solid border-[#30363D]"
+                                    onClick={()=>alert("Pressed!")}>
+                                    <span className="text-[#A6A6B5] text-xs" >
+                                        {"Cross Margin"}
+                                    </span>
+                                </button>
+                                <button className="flex shrink-0 items-start bg-[#0D1117] text-left p-3 mr-2 gap-[11px] rounded-md border border-solid border-[#30363D]"
+                                    onClick={()=>alert("Pressed!")}>
+                                    <span className="text-white text-xs" >
+                                        {"20x"}
+                                    </span>
+                                    <img
+                                        src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/jw98n908_expires_30_days.png"} 
+                                        className="w-3 h-[15px] rounded-md object-fill"
+                                    />
+                                </button>
+                                <button className="flex flex-col shrink-0 items-start bg-[#0D1117] text-left py-3 px-[15px] rounded border border-solid border-[#30363D]"
+                                    onClick={()=>alert("Pressed!")}>
+                                    <span className="text-[#A6A6B5] text-xs" >
+                                        {"AI Trading"}
+                                    </span>
+                                </button>
+                            </div>
+
                             {/* Tabs */}
                             <div className="flex items-start justify-between pl-3 pr-[13px] border-b border-[#30363D] w-full">
                                 {["Market", "Limit", "Advanced"].map(tab => (
