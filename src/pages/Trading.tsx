@@ -16,6 +16,7 @@ export default () => {
     const [granularity, setGranularity] = useState("")
     const [indicator, setIndicator] = useState("")
     const [filterValue, setFilterValue] = useState("")
+    const [pressedButton, setPressedButton] = useState(""); // For tracking which button is pressed
 
     const AMOUNT_TOTAL = 1000;
 
@@ -39,39 +40,39 @@ export default () => {
                         {/* Desktop nav */}
                         <div className="flex shrink-0 items-start">
                             {/* ...nav buttons... */}
-                            <button className="flex flex-col shrink-0 items-start bg-zinc-700 text-left py-[11px] px-3 mr-[30px] rounded-md border-0"
+                            <button className="flex flex-col shrink-0 items-start bg-zinc-700 text-left py-[11px] px-3 mr-[30px] rounded-sm border-0"
                                 onClick={()=>alert("Pressed!")}>
                                 <span className="text-white text-sm" >
                                     {"Trading"}
                                 </span>
                             </button>
-                            <div className="flex flex-col shrink-0 items-center py-[11px] mr-[30px] rounded-md">
+                            <div className="flex flex-col shrink-0 items-center py-[11px] mr-[30px] rounded-sm">
                                 <span className="text-zinc-400 text-sm" >
                                     {"RiverPool"}
                                 </span>
                             </div>
-                            <div className="flex flex-col shrink-0 items-center py-[11px] mr-[30px] rounded-md">
+                            <div className="flex flex-col shrink-0 items-center py-[11px] mr-[30px] rounded-sm">
                                 <span className="text-zinc-400 text-sm" >
                                     {"Earn"}
                                 </span>
                             </div>
-                            <div className="flex flex-col shrink-0 items-center py-[11px] mr-[30px] rounded-md">
+                            <div className="flex flex-col shrink-0 items-center py-[11px] mr-[30px] rounded-sm">
                                 <span className="text-zinc-400 text-sm" >
                                     {"Referral"}
                                 </span>
                             </div>
-                            <div className="flex flex-col shrink-0 items-center py-[11px] mr-[30px] rounded-md">
+                            <div className="flex flex-col shrink-0 items-center py-[11px] mr-[30px] rounded-sm">
                                 <span className="text-zinc-400 text-sm" >
                                     {"Assets"}
                                 </span>
                             </div>
-                            <div className="flex shrink-0 items-center py-[11px] gap-[13px] rounded-md">
+                            <div className="flex shrink-0 items-center py-[11px] gap-[13px] rounded-sm">
                                 <span className="text-zinc-400 text-sm" >
                                     {"More"}
                                 </span>
                                 <img
                                     src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/wo9zz3y5_expires_30_days.png"} 
-                                    className="w-3 h-[15px] rounded-md object-fill"
+                                    className="w-3 h-[15px] rounded-sm object-fill"
                                 />
                             </div>
                         </div>
@@ -96,33 +97,33 @@ export default () => {
                             </span>
                         </div>
                         <div className="flex items-center gap-4">
-                            <div className="flex shrink-0 items-center bg-zinc-900 py-2.5 px-3 gap-2 rounded-md border border-solid border-[#30363D]">
+                            <div className="flex shrink-0 items-center bg-zinc-900 py-2.5 px-3 gap-2 rounded-sm border border-solid border-[#30363D]">
                                 <img
                                     src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/7ru13dyc_expires_30_days.png"} 
-                                    className="w-5 h-5 rounded-md object-fill"
+                                    className="w-5 h-5 rounded-sm object-fill"
                                 />
                                 <img
                                     src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/wbxxcfe7_expires_30_days.png"} 
-                                    className="w-3 h-[15px] rounded-md object-fill"
+                                    className="w-3 h-[15px] rounded-sm object-fill"
                                 />
                             </div>
-                            <button className="flex shrink-0 items-center bg-zinc-900 text-left py-2.5 px-4 gap-2.5 rounded-md border border-solid border-[#30363D]"
+                            <button className="flex shrink-0 items-center bg-zinc-900 text-left py-2.5 px-4 gap-2.5 rounded-sm border border-solid border-[#30363D]"
                                 onClick={()=>alert("Pressed!")}>
                                 <img
                                     src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/oyc1zap7_expires_30_days.png"} 
-                                    className="w-3.5 h-[19px] rounded-md object-fill"
+                                    className="w-3.5 h-[19px] rounded-sm object-fill"
                                 />
                                 <span className="text-[#C9D1D9] text-sm" >
                                     {"EN"}
                                 </span>
                             </button>
-                            <button className="flex flex-col shrink-0 items-start bg-zinc-900 text-left py-[11px] px-4 rounded-md border border-solid border-[#30363D]"
+                            <button className="flex flex-col shrink-0 items-start bg-zinc-900 text-left py-[11px] px-4 rounded-sm border border-solid border-[#30363D]"
                                 onClick={()=>alert("Pressed!")}>
                                 <span className="text-white text-sm font-bold" >
                                     {"Withdraw"}
                                 </span>
                             </button>
-                            <button className="flex flex-col shrink-0 items-start bg-fuchsia-800 text-left py-[11px] px-4 rounded-md border-0"
+                            <button className="flex flex-col shrink-0 items-start bg-fuchsia-800 text-left py-[11px] px-4 rounded-sm border-0"
                                 onClick={()=>alert("Pressed!")}>
                                 <span className="text-white text-sm font-bold" >
                                     {"Deposit"}
@@ -150,7 +151,7 @@ export default () => {
                                 {"$27,345.12"}
                             </span>
                         </div>
-                        <button className="flex flex-col shrink-0 items-start bg-fuchsia-800 text-left py-[11px] px-4 rounded-md border-0"
+                        <button className="flex flex-col shrink-0 items-start bg-fuchsia-800 text-left py-[11px] px-4 rounded-sm border-0"
                             onClick={()=>alert("Pressed!")}>
                             <span className="text-white text-sm font-bold" >
                                 {"Deposit"}
@@ -158,7 +159,7 @@ export default () => {
                         </button>
                         {/* Hamburger menu */}
                         <button
-                            className="flex items-center justify-center p-2 rounded focus:outline-none"
+                            className="flex items-center justify-center p-2 rounded-sm focus:outline-none"
                             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                             aria-label="Open menu"
                         >
@@ -183,53 +184,53 @@ export default () => {
                                         <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
                                     </svg>
                                 </button>
-                                <button className="flex flex-col items-start bg-zinc-700 text-left py-3 px-3 mb-2 rounded-md border-0"
+                                <button className="flex flex-col items-start bg-zinc-700 text-left py-3 px-3 mb-2 rounded-sm border-0"
                                     onClick={()=>alert("Pressed!")}>
                                     <span className="text-white text-sm" >
                                         {"Trading"}
                                     </span>
                                 </button>
-                                <div className="flex flex-col items-start py-3 mb-2 rounded-md">
+                                <div className="flex flex-col items-start py-3 mb-2 rounded-sm">
                                     <span className="text-zinc-400 text-sm" >
                                         {"RiverPool"}
                                     </span>
                                 </div>
-                                <div className="flex flex-col items-start py-3 mb-2 rounded-md">
+                                <div className="flex flex-col items-start py-3 mb-2 rounded-sm">
                                     <span className="text-zinc-400 text-sm" >
                                         {"Earn"}
                                     </span>
                                 </div>
-                                <div className="flex flex-col items-start py-3 mb-2 rounded-md">
+                                <div className="flex flex-col items-start py-3 mb-2 rounded-sm">
                                     <span className="text-zinc-400 text-sm" >
                                         {"Referral"}
                                     </span>
                                 </div>
-                                <div className="flex flex-col items-start py-3 mb-2 rounded-md">
+                                <div className="flex flex-col items-start py-3 mb-2 rounded-sm">
                                     <span className="text-zinc-400 text-sm" >
                                         {"Assets"}
                                     </span>
                                 </div>
-                                <div className="flex items-center py-3 gap-3 mb-2 rounded-md">
+                                <div className="flex items-center py-3 gap-3 mb-2 rounded-sm">
                                     <span className="text-zinc-400 text-sm" >
                                         {"More"}
                                     </span>
                                     <img
                                         src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/wo9zz3y5_expires_30_days.png"} 
-                                        className="w-3 h-[15px] rounded-md object-fill"
+                                        className="w-3 h-[15px] rounded-sm object-fill"
                                     />
                                 </div>
                             </div>
                             {/* Bottom: Settings */}
                             <div className="flex flex-col gap-2 pt-4 border-t border-[#30363D]">
-                                <div className="flex items-center bg-zinc-900 py-2.5 px-3 gap-2 rounded-md border border-solid border-[#30363D]">
+                                <div className="flex items-center bg-zinc-900 py-2.5 px-3 gap-2 rounded-sm border border-solid border-[#30363D]">
                                     {/* Wallet icon */}
                                     <img
                                         src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/7ru13dyc_expires_30_days.png"} 
-                                        className="w-5 h-5 rounded-md object-fill"
+                                        className="w-5 h-5 rounded-sm object-fill"
                                     />
                                     <img
                                         src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/wbxxcfe7_expires_30_days.png"} 
-                                        className="w-3 h-[15px] rounded-md object-fill"
+                                        className="w-3 h-[15px] rounded-sm object-fill"
                                     />
                                 </div>
                                 <div className="flex flex-col shrink-0 items-start">
@@ -248,23 +249,23 @@ export default () => {
                                         {"1,250,000"}
                                     </span>
                                 </div>
-                                <button className="flex items-center bg-zinc-900 text-left py-2.5 px-4 gap-2.5 rounded-md border border-solid border-[#30363D]"
+                                <button className="flex items-center bg-zinc-900 text-left py-2.5 px-4 gap-2.5 rounded-sm border border-solid border-[#30363D]"
                                     onClick={()=>alert("Pressed!")}>
                                     <img
                                         src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/oyc1zap7_expires_30_days.png"} 
-                                        className="w-3.5 h-[19px] rounded-md object-fill"
+                                        className="w-3.5 h-[19px] rounded-sm object-fill"
                                     />
                                     <span className="text-[#C9D1D9] text-sm" >
                                         {"EN"}
                                     </span>
                                 </button>
-                                <button className="flex flex-col items-start bg-zinc-900 text-left py-3 px-4 rounded-md border border-solid border-[#30363D]"
+                                <button className="flex flex-col items-start bg-zinc-900 text-left py-3 px-4 rounded-sm border border-solid border-[#30363D]"
                                     onClick={()=>alert("Pressed!")}>
                                     <span className="text-white text-sm font-bold" >
                                         {"Withdraw"}
                                     </span>
                                 </button>
-                                <button className="flex flex-col items-start bg-fuchsia-800 text-left py-3 px-4 rounded-md border-0"
+                                <button className="flex flex-col items-start bg-fuchsia-800 text-left py-3 px-4 rounded-sm border-0"
                                     onClick={()=>alert("Pressed!")}>
                                     <span className="text-white text-sm font-bold" >
                                         {"Deposit"}
@@ -297,7 +298,7 @@ export default () => {
                                         </span>
                                         <img
                                             src="https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/rnvmw36i_expires_30_days.png"
-                                            className="w-3 h-[15px] rounded-md object-fill"
+                                            className="w-3 h-[15px] rounded-sm object-fill"
                                         />
                                     </div>
                                 </div>
@@ -306,7 +307,7 @@ export default () => {
                                     {/* Granularity */}
                                     <div className="relative inline-flex min-w-32">
                                         <select
-                                            className="appearance-none flex items-center bg-zinc-950 text-left p-3 pr-8 rounded-md border border-solid border-[#30363D] text-zinc-400 text-sm w-full"
+                                            className="appearance-none flex items-center bg-zinc-950 text-left p-3 pr-8 rounded-sm border border-solid border-[#30363D] text-zinc-400 text-sm w-full"
                                             value={granularity}
                                             onChange={e => setGranularity(e.target.value)}
                                         >
@@ -322,14 +323,14 @@ export default () => {
                                         <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-zinc-400">
                                             <img
                                                 src="https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/bvauf8h6_expires_30_days.png"
-                                                className="w-3 h-[15px] rounded object-fill"
+                                                className="w-3 h-[15px] rounded-sm object-fill"
                                             />
                                         </span>
                                     </div>
                                     {/* Indicator */}
                                     <div className="relative inline-flex min-w-32">
                                         <select
-                                            className="appearance-none flex items-center bg-zinc-950 text-left p-3 pr-8 rounded-md border border-solid border-[#30363D] text-zinc-400 text-sm w-full"
+                                            className="appearance-none flex items-center bg-zinc-950 text-left p-3 pr-8 rounded-sm border border-solid border-[#30363D] text-zinc-400 text-sm w-full"
                                             value={indicator}
                                             onChange={e => setIndicator(e.target.value)}
                                         >
@@ -345,7 +346,7 @@ export default () => {
                                         <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-zinc-400">
                                             <img
                                                 src="https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/bvauf8h6_expires_30_days.png"
-                                                className="w-3 h-[15px] rounded object-fill"
+                                                className="w-3 h-[15px] rounded-sm object-fill"
                                             />
                                         </span>
                                     </div>
@@ -411,9 +412,9 @@ export default () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="self-stretch bg-zinc-900 h-[500px] p-[1px] rounded-md border border-solid border-[#30363D]">
+                        <div className="self-stretch bg-zinc-900 h-[500px] p-[1px] rounded-sm border border-solid border-[#30363D]">
                         </div>
-                        <div className="self-stretch bg-zinc-900 py-[1px] rounded-md border border-solid border-[#30363D]">
+                        <div className="self-stretch bg-zinc-900 py-[1px] rounded-sm border border-solid border-[#30363D]">
                             <div className="flex flex-col items-start self-stretch py-4 mx-[1px] gap-2">
                                 <span className="text-white text-lg ml-3" >
                                     {"Account Overview"}
@@ -483,7 +484,7 @@ export default () => {
                                         {/* Filter Selector */}
                                         <div className="relative">
                                             <select
-                                                className="appearance-none bg-zinc-900 text-zinc-400 text-sm py-2 pl-3 pr-8 rounded-md border border-solid border-[#30363D] focus:outline-none"
+                                                className="appearance-none bg-zinc-900 text-zinc-400 text-sm py-2 pl-3 pr-8 rounded-sm border border-solid border-[#30363D] focus:outline-none"
                                                 value={filterValue}
                                                 onChange={e => setFilterValue(e.target.value)}
                                             >
@@ -539,7 +540,7 @@ export default () => {
                     {/* Order Book + Trading Form wrapper */}
                     <div className="md:col-span-2 grid 2xl:grid-cols-2 flex flex-col gap-2 w-full  xl:gap-2">
                         {/* Order Book/Trades (col-span-1 on desktop, full width on mobile) */}
-                        <div className="flex flex-col gap-2 items-center bg-zinc-900 p-[1px] rounded-md border border-solid border-[#30363D] w-full">
+                        <div className="flex flex-col gap-2 items-center bg-zinc-900 p-[1px] rounded-sm border border-solid border-[#30363D] w-full">
                             {/* Tabs for Order Book/Trades */}
                             <div className="flex items-center pl-3 pr-[13px] border-b border-[#30363D] w-full">
                                 {["Order Book", "Trades"].map(tab => (
@@ -663,27 +664,40 @@ export default () => {
                             )}
                         </div>
                         {/* Trading Form (col-span-1 on desktop, full width on mobile) */}
-                        <div className="flex flex-col gap-2 items-center bg-zinc-900 rounded-md border border-solid border-[#30363D] w-full">
-                            <div className="flex items-start p-3">
-                                <button className="flex flex-col shrink-0 items-start bg-[#0D1117] text-left py-3 px-1.5 mr-[9px] rounded border border-solid border-[#30363D]"
-                                    onClick={()=>alert("Pressed!")}>
-                                    <span className="text-[#A6A6B5] text-xs" >
+                        <div className="flex flex-col gap-2 items-center bg-zinc-900 rounded-sm border border-solid border-[#30363D] w-full ">
+                            {/* Cross Margin, Leverage and AI Trading */}
+                            <div className="flex items-start p-3 w-full gap-2">
+                                <button
+                                    className={`max-2xl:flex-1 flex flex-col shrink-0 items-start bg-zinc-950 text-left py-3 px-2  rounded-sm border ${
+                                        pressedButton === "cross" ? "border-fuchsia-800" : "border-[#30363D]"
+                                    } border-solid`}
+                                    onClick={() => setPressedButton("cross")}
+                                >
+                                    <span className="text-[#A6A6B5] text-sm">
                                         {"Cross Margin"}
                                     </span>
                                 </button>
-                                <button className="flex shrink-0 items-start bg-[#0D1117] text-left p-3 mr-2 gap-[11px] rounded-md border border-solid border-[#30363D]"
-                                    onClick={()=>alert("Pressed!")}>
-                                    <span className="text-white text-xs" >
+                                <button
+                                    className={`max-2xl:flex-1 justify-between flex shrink-0 items-start bg-zinc-950 text-left py-3 px-2 gap-[11px] rounded-sm border ${
+                                        pressedButton === "leverage" ? "border-fuchsia-800" : "border-[#30363D]"
+                                    } border-solid`}
+                                    onClick={() => setPressedButton("leverage")}
+                                >
+                                    <span className="text-white text-sm">
                                         {"20x"}
                                     </span>
                                     <img
                                         src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/jw98n908_expires_30_days.png"} 
-                                        className="w-3 h-[15px] rounded-md object-fill"
+                                        className="w-3 h-[15px] rounded-sm object-fill"
                                     />
                                 </button>
-                                <button className="flex flex-col shrink-0 items-start bg-[#0D1117] text-left py-3 px-[15px] rounded border border-solid border-[#30363D]"
-                                    onClick={()=>alert("Pressed!")}>
-                                    <span className="text-[#A6A6B5] text-xs" >
+                                <button
+                                    className={`max-2xl:flex-1 flex flex-col shrink-0 items-start bg-zinc-950 text-left py-3 px-2 rounded-sm border ${
+                                        pressedButton === "ai" ? "border-fuchsia-800" : "border-[#30363D]"
+                                    } border-solid`}
+                                    onClick={() => setPressedButton("ai")}
+                                >
+                                    <span className="text-[#A6A6B5] text-sm">
                                         {"AI Trading"}
                                     </span>
                                 </button>
@@ -709,12 +723,12 @@ export default () => {
                             {activeOrderTab === "Market" && (
                                 <div className="w-full flex flex-col items-start px-4 py-4 gap-4">
                                     {/* --- BEGIN Market Tab Content --- */}
-                                    <div className="flex items-center bg-zinc-950 py-1 pl-1 pr-[5px] gap-6 rounded-md w-full">
+                                    <div className="flex items-center bg-zinc-950 py-1 pl-1 pr-[5px] gap-6 rounded-sm w-full">
                                         {/* Toggle Buttons */}
                                         <div className="flex w-full gap-2">
                                             <button
                                                 type="button"
-                                                className={`flex-1 flex flex-col items-center py-[11px] px-6 rounded transition-all
+                                                className={`flex-1 flex flex-col items-center py-[11px] px-6 rounded-sm transition-all
                                                     ${input1 !== "Sell / Short"
                                                         ? "bg-[#2DA44E33] text-[#2DA44E]"
                                                         : "bg-transparent text-zinc-400"
@@ -725,7 +739,7 @@ export default () => {
                                             </button>
                                             <button
                                                 type="button"
-                                                className={`flex-1 flex flex-col items-center py-[11px] px-6 rounded transition-all
+                                                className={`flex-1 flex flex-col items-center py-[11px] px-6 rounded-sm transition-all
                                                     ${input1 === "Sell / Short"
                                                         ? "bg-[#EF444433] text-[#F85149]"
                                                         : "bg-transparent text-zinc-400"
@@ -744,7 +758,7 @@ export default () => {
                                         </div>
                                         <div className="flex flex-col items-start gap-4 w-full">
                                             {/* 金額輸入框與貨幣標籤 */}
-                                            <div className="flex justify-between bg-zinc-950 py-[9px] px-3 rounded-md border border-solid border-[#30363D] w-full ">
+                                            <div className="flex justify-between bg-zinc-950 py-[9px] px-3 rounded-sm border border-solid border-[#30363D] w-full ">
                                                 <input
                                                     placeholder="0"
                                                     value={input2}
@@ -758,7 +772,7 @@ export default () => {
                                                     <span className="text-zinc-400 text-sm font-bold">USDT</span>
                                                     <img
                                                         src="https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/bvauf8h6_expires_30_days.png"
-                                                        className="w-3 h-[15px] rounded object-fill"
+                                                        className="w-3 h-[15px] rounded-sm object-fill"
                                                     />
                                                 </div>
                                             </div>
@@ -782,7 +796,7 @@ export default () => {
                                                         <button
                                                             key={percent}
                                                             type="button"
-                                                            className={`py-[11px] w-full rounded border ${
+                                                            className={`py-[11px] w-full rounded-sm border ${
                                                                 percentValue === percent
                                                                     ? "border-2 border-[#92318D] font-bold"
                                                                     : "border border-[#30363D]"
@@ -850,12 +864,12 @@ export default () => {
                                             placeholder="230.00"
                                             value={input3}
                                             onChange={(e) => onChangeInput3(e.target.value)}
-                                            className="w-full text-white bg-zinc-950 text-base p-3 rounded-md border border-[#30363D] focus:outline-none"
+                                            className="w-full text-white bg-zinc-950 text-base p-3 rounded-sm border border-[#30363D] focus:outline-none"
                                             />
                                         </div>
                                         <div className="flex flex-col gap-2 min-w-0 text-left">
                                             <span className="text-[#9D9DAF] text-sm">Take Profit %</span>
-                                            <div className="flex items-center bg-zinc-950 p-3 rounded-md border border-[#30363D] w-full">
+                                            <div className="flex items-center bg-zinc-950 p-3 rounded-sm border border-[#30363D] w-full">
                                             <input
                                                 placeholder="%"
                                                 value={input4}
@@ -875,12 +889,12 @@ export default () => {
                                             placeholder="240.00"
                                             value={input5}
                                             onChange={(e) => onChangeInput5(e.target.value)}
-                                            className="w-full text-white bg-zinc-950 text-base p-3 rounded-md border border-[#30363D] focus:outline-none"
+                                            className="w-full text-white bg-zinc-950 text-base p-3 rounded-sm border border-[#30363D] focus:outline-none"
                                             />
                                         </div>
                                         <div className="flex flex-col gap-2 min-w-0 text-left">
                                             <span className="text-[#9D9DAF] text-sm">Stop Loss %</span>
-                                            <div className="flex items-center bg-zinc-950 p-3 rounded-md border border-[#30363D] w-full">
+                                            <div className="flex items-center bg-zinc-950 p-3 rounded-sm border border-[#30363D] w-full">
                                             <input
                                                 placeholder="%"
                                                 value={input6}
@@ -909,7 +923,7 @@ export default () => {
                                             placeholder={"0.5"}
                                             value={input7}
                                             onChange={(event)=>onChangeInput7(event.target.value)}
-                                            className="w-full text-white bg-zinc-950 text-base p-3 rounded-md border border-solid border-[#30363D]"
+                                            className="w-full text-white bg-zinc-950 text-base p-3 rounded-sm border border-solid border-[#30363D]"
                                         />
                                     </div>
                                     <div className="flex flex-col items-start bg-zinc-950 py-3 rounded-lg w-full">
@@ -953,7 +967,7 @@ export default () => {
                                         </div>
                                     </div>
                                     <button
-                                        className="w-full flex justify-center items-center bg-fuchsia-800 py-3.5 rounded-md border-0"
+                                        className="w-full flex justify-center items-center bg-fuchsia-800 py-3.5 rounded-sm border-0"
                                         onClick={() => alert("Pressed!")}
                                     >
                                         <span className="text-white text-base font-bold text-center">
