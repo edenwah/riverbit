@@ -832,17 +832,31 @@ export default () => {
                                 <div className="w-full flex flex-col items-start px-4 py-4 gap-4">
                                     {/* --- BEGIN Market Tab Content --- */}
                                     <div className="flex items-center bg-zinc-950 py-1 pl-1 pr-[5px] gap-6 rounded-md w-full">
-                                        <div className="flex flex-col  w-full items-center bg-[#2DA44E33] py-[11px] px-6 rounded">
-                                            <span className="text-[#2DA44E] text-sm" >
-                                                {"Buy / Long"}
-                                            </span>
+                                        {/* Toggle Buttons */}
+                                        <div className="flex w-full gap-2">
+                                            <button
+                                                type="button"
+                                                className={`flex-1 flex flex-col items-center py-[11px] px-6 rounded transition-all
+                                                    ${input1 !== "Sell / Short"
+                                                        ? "bg-[#2DA44E33] text-[#2DA44E]"
+                                                        : "bg-transparent text-zinc-400"
+                                                    }`}
+                                                onClick={() => onChangeInput1("Buy / Long")}
+                                            >
+                                                <span className="text-sm">{"Buy / Long"}</span>
+                                            </button>
+                                            <button
+                                                type="button"
+                                                className={`flex-1 flex flex-col items-center py-[11px] px-6 rounded transition-all
+                                                    ${input1 === "Sell / Short"
+                                                        ? "bg-[#EF444433] text-[#F85149]"
+                                                        : "bg-transparent text-zinc-400"
+                                                    }`}
+                                                onClick={() => onChangeInput1("Sell / Short")}
+                                            >
+                                                <span className="text-sm">{"Sell / Short"}</span>
+                                            </button>
                                         </div>
-                                        <input
-                                            placeholder={"Sell / Short"}
-                                            value={input1}
-                                            onChange={(event)=>onChangeInput1(event.target.value)}
-                                            className="text-zinc-400 bg-transparent text-sm  py-[11px] border-0 w-full items-center text-center"
-                                        />
                                     </div>
                                     <div className="flex flex-col items-start gap-2 w-full">
                                         <div className="flex flex-col items-center pb-[1px]">
@@ -1010,6 +1024,10 @@ export default () => {
                                             </span>
                                         </div>
                                         <input
+                                            type="number"
+                                            min={0}
+                                            max={100}
+                                            step="0.1"
                                             placeholder={"0.5"}
                                             value={input7}
                                             onChange={(event)=>onChangeInput7(event.target.value)}
@@ -1061,7 +1079,7 @@ export default () => {
                                         onClick={() => alert("Pressed!")}
                                     >
                                         <span className="text-white text-base font-bold text-center">
-                                            {"Buy / Long"}
+                                            {input1 === "Sell / Short" ? "Sell / Short" : "Buy / Long"}
                                         </span>
                                     </button>
                                     {/* --- END Market Tab Content --- */}
