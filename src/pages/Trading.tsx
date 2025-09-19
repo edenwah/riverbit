@@ -13,6 +13,8 @@ export default () => {
     const [orderTab, setOrderTab] = useState("Order Book"); // Add this with your useState hooks
 	const [activeAccountTab, setActiveAccountTab] = useState("Balance"); // Balance 為預設選中
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false); // Add this line
+    const [granularity, setGranularity] = useState("")
+    const [indicator, setIndicator] = useState("")
 
     const AMOUNT_TOTAL = 1000;
 
@@ -303,27 +305,58 @@ export default () => {
                                     </div>
 
                                     <div className="flex gap-2 ml-auto">
-                                    {/* Granularity */}
-                                    <button
-                                        className="flex items-center bg-zinc-900 text-left p-3 gap-[17px] rounded-md border border-solid border-[#30363D]"
-                                    >
-                                        <span className="text-zinc-400 text-sm">{"Granularity"}</span>
-                                        <img
-                                        src="https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/xgj953xu_expires_30_days.png"
-                                        className="w-3 h-[15px] rounded-md object-fill"
-                                        />
-                                    </button>
+                                        {/* Granularity */}
+                                        <div className="relative">
+                                            <select
+                                                className="appearance-none flex items-center bg-zinc-950 text-left p-3 pr-8 rounded-md border border-solid border-[#30363D] text-zinc-400 text-sm"
+                                                value={granularity}
+                                                onChange={e => setGranularity(e.target.value)}
+                                            >
+                                                <option value="" disabled hidden>
+                                                    Granularity
+                                                </option>
+                                                <option value="1m">1m</option>
+                                                <option value="5m">5m</option>
+                                                <option value="15m">15m</option>
+                                                <option value="1h">1h</option>
+                                                <option value="1d">1d</option>
 
-                                    {/* Indicator */}
-                                    <button
-                                        className="flex items-center bg-zinc-900 text-left p-3 gap-4 rounded-md border border-solid border-[#30363D]"
-                                    >
-                                        <span className="text-zinc-400 text-sm">{"Indicator"}</span>
-                                        <img
-                                        src="https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/tsge5u2t_expires_30_days.png"
-                                        className="w-3 h-[15px] rounded-md object-fill"
-                                        />
-                                    </button>
+                                            </select>
+
+                                            {/* 自訂右邊箭嘴 */}
+                                            <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-zinc-400">
+                                                <img
+                                                        src="https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/bvauf8h6_expires_30_days.png"
+                                                        className="w-3 h-[15px] rounded object-fill"
+                                                    />
+                                            </span>
+                                        </div>
+
+                                        {/* Indicator */}
+                                        <div className="relative">
+                                            <select
+                                                className="appearance-none flex items-center bg-zinc-950 text-left p-3 pr-8 rounded-md border border-solid border-[#30363D] text-zinc-400 text-sm"
+                                                value={indicator}
+                                                onChange={e => setIndicator(e.target.value)}
+                                            >
+                                                <option value="" disabled hidden>
+                                                    Indicator
+                                                </option>
+                                                <option value="None">None</option>
+                                                <option value="EMA">EMA</option>
+                                                <option value="SMA">SMA</option>
+                                                <option value="RSI">RSI</option>
+                                                <option value="MACD">MACD</option>
+                                            </select>
+
+                                            {/* 自訂右邊箭嘴 */}
+                                            <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-zinc-400">
+                                                <img
+                                                        src="https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/bvauf8h6_expires_30_days.png"
+                                                        className="w-3 h-[15px] rounded object-fill"
+                                                    />
+                                            </span>
+                                        </div>
                                     </div>
                                 </div>
                                 </div>
@@ -395,7 +428,7 @@ export default () => {
                                     {"Account Overview"}
                                 </span>
                                 <div className="flex flex-wrap justify-between items-start self-stretch mx-3 text-left gap-3">
-                                    <div className="flex flex-1 flex-col items-start min-w-24">
+                                    <div className="flex flex-1 flex-col items-start min-w-32">
                                         <span className="text-zinc-400 text-sm" >
                                             {"Total Account Value"}
                                         </span>
@@ -403,7 +436,7 @@ export default () => {
                                             {"$42,845.67"}
                                         </span>
                                     </div>
-                                    <div className="flex flex-1 flex-col items-start min-w-24">
+                                    <div className="flex flex-1 flex-col items-start min-w-32">
                                         <span className="text-zinc-400 text-sm" >
                                             {"Total Margin Used"}
                                         </span>
@@ -411,7 +444,7 @@ export default () => {
                                             {"$5,525.00"}
                                         </span>
                                     </div>
-                                    <div className="flex flex-1 flex-col items-start min-w-24">
+                                    <div className="flex flex-1 flex-col items-start min-w-32">
                                         <span className="text-zinc-400 text-sm" >
                                             {"Total Notional Position"}
                                         </span>
@@ -419,7 +452,7 @@ export default () => {
                                             {"$37,000.00"}
                                         </span>
                                     </div>
-                                    <div className="flex flex-1 flex-col items-start min-w-24">
+                                    <div className="flex flex-1 flex-col items-start min-w-32">
                                         <span className="text-zinc-400 text-sm" >
                                             {"Withdrawable Amount"}
                                         </span>
@@ -670,7 +703,7 @@ export default () => {
                                                     </span>
                                                 </div>
                                             </div>
-                                            <div className="flex flex-col items-center pt-3 pb-[13px] pl-4 pr-[158px]">
+                                            <div className="flex w-full flex-col items-center p-3">
                                                 <span className="text-zinc-400 text-sm " >
                                                     {"Spread: 1 (0.001%)"}
                                                 </span>
