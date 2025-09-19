@@ -981,7 +981,7 @@ export default () => {
                             )}
                             {activeOrderTab === "Limit" && (
                                 <div className="w-full flex flex-col items-start px-4 py-4 gap-4">
-                                    {/* --- BEGIN Market Tab Content --- */}
+                                    {/* --- BEGIN Limit Tab Content --- */}
                                     <div className="flex items-center bg-zinc-950 py-1 pl-1 pr-[5px] gap-6 rounded-sm w-full">
                                         {/* Toggle Buttons */}
                                         <div className="flex w-full gap-2">
@@ -1183,8 +1183,8 @@ export default () => {
 
                                     <div className="flex items-center gap-2 w-full">
                                         <div className="flex flex-col items-start w-full gap-2">
-                                            <div className="flex flex-col items-center pb-[1px]">
-                                                <span className="text-zinc-400 text-sm" >
+                                            <div className="flex flex-col items-center pb-[1px] h-6">
+                                                <span className="text-zinc-400 text-sm " >
                                                     {"Max Slippage %"}
                                                 </span>
                                             </div>
@@ -1200,8 +1200,8 @@ export default () => {
                                             />
                                         </div>
                                         <div className="flex flex-col items-start w-full gap-2">
-                                            <div className="flex items-center pb-[1px] gap-2">
-                                                <span className="text-[#9D9DAF] text-xs">
+                                            <div className="flex items-center pb-[1px] gap-2 h-6">
+                                                <span className="text-[#9D9DAF] text-sm">
                                                     {"TIF"}
                                                 </span>
 
@@ -1221,7 +1221,7 @@ export default () => {
                                                     </button>
 
                                                     {showTifTooltip && (
-                                                    <div className="absolute left-1/2 -translate-x-1/2 top-full mt-2 z-50 bg-zinc-900 text-xs text-white rounded px-3 py-2 border border-[#30363D] shadow-lg w-56">
+                                                    <div className="absolute left-1/2 -translate-x-1/2 top-full mt-2 z-50 bg-zinc-900 text-sm text-white rounded px-3 py-2 border border-[#30363D] shadow-lg w-56">
                                                         <span className="font-bold">TIF (Time in Force)</span>
                                                         <br />
                                                         <br />
@@ -1304,12 +1304,335 @@ export default () => {
                                             {input1 === "Sell / Short" ? "Sell / Short" : "Buy / Long"}
                                         </span>
                                     </button>
-                                    {/* --- END Market Tab Content --- */}
+                                    {/* --- END Limit Tab Content --- */}
                                 </div>
                             )}
                             {activeOrderTab === "Advanced" && (
-                                <div className="w-full flex flex-col items-center justify-center py-12">
-                                    <span className="text-zinc-400 text-base">Advanced order form coming soon.</span>
+                                <div className="w-full flex flex-col items-start px-4 py-4 gap-4">
+                                    {/* --- BEGIN Advanced Tab Content --- */}
+                                    <div className="flex items-center bg-zinc-950 py-1 pl-1 pr-[5px] gap-6 rounded-sm w-full">
+                                        {/* Toggle Buttons */}
+                                        <div className="flex w-full gap-2">
+                                            <button
+                                                type="button"
+                                                className={`flex-1 flex flex-col items-center py-[11px] px-6 rounded-sm transition-all
+                                                    ${input1 !== "Sell / Short"
+                                                        ? "bg-[#2DA44E33] text-[#2DA44E]"
+                                                        : "bg-transparent text-zinc-400"
+                                                    }`}
+                                                onClick={() => onChangeInput1("Buy / Long")}
+                                            >
+                                                <span className="text-sm">{"Buy / Long"}</span>
+                                            </button>
+                                            <button
+                                                type="button"
+                                                className={`flex-1 flex flex-col items-center py-[11px] px-6 rounded-sm transition-all
+                                                    ${input1 === "Sell / Short"
+                                                        ? "bg-[#EF444433] text-[#F85149]"
+                                                        : "bg-transparent text-zinc-400"
+                                                    }`}
+                                                onClick={() => onChangeInput1("Sell / Short")}
+                                            >
+                                                <span className="text-sm">{"Sell / Short"}</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div className="flex flex-col items-start gap-2 w-full">
+                                        <div className="flex flex-col items-center pb-[1px]">
+                                            <span className="text-[#9D9DAF] text-sm" >
+                                                {"Price (USDC)"}
+                                            </span>
+                                        </div>
+                                        <input
+                                            type="number"
+                                            placeholder={"227.00"}
+                                            value={input3}
+                                            onChange={(event)=>onChangeInput3(event.target.value)}
+                                            className="text-white bg-[#0D1117] text-base p-3 rounded-md border border-solid border-[#30363D] w-full"
+                                        />
+                                    </div>
+                                    <div className="flex flex-col items-start gap-2 w-full">
+                                        <div className="flex flex-col items-center pb-[1px]">
+                                            <span className="text-[#9D9DAF] text-sm" >
+                                                {"Amount"}
+                                            </span>
+                                        </div>
+                                        <div className="flex flex-col items-start gap-4 w-full">
+                                            {/* 金額輸入框與貨幣標籤 */}
+                                            <div className="flex justify-between bg-zinc-950 py-[9px] px-3 rounded-sm border border-solid border-[#30363D] w-full ">
+                                                <input
+                                                    placeholder="0"
+                                                    value={input2}
+                                                    onChange={(e) => {
+                                                        const value = Number(e.target.value.replace(/,/g, ""));
+                                                        onChangeInput2(isNaN(value) ? "" : value.toString());
+                                                    }}
+                                                    className="text-white bg-transparent text-base w-40 py-[3px] border-0"
+                                                />
+                                                <div className="flex shrink-0 items-center bg-zinc-700 py-[7px] pl-2 pr-[7px] gap-1.5 rounded">
+                                                    <span className="text-zinc-400 text-sm font-bold">USDT</span>
+                                                    <img
+                                                        src="https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/bvauf8h6_expires_30_days.png"
+                                                        className="w-3 h-[15px] rounded-sm object-fill"
+                                                    />
+                                                </div>
+                                            </div>
+                                            {/* 滑桿與快捷百分比按鈕 */}
+                                            <div className="flex flex-col w-full">
+                                                <input
+                                                    type="range"
+                                                    min={0}
+                                                    max={100}
+                                                    step={1}
+                                                    value={percentValue}
+                                                    onChange={(e) => {
+                                                        const percent = Number(e.target.value);
+                                                        const amount = Math.round((percent / 100) * AMOUNT_TOTAL);
+                                                        onChangeInput2(amount.toString());
+                                                    }}
+                                                    className="w-full accent-fuchsia-800 h-2 rounded-lg appearance-none bg-zinc-700 my-2"
+                                                />
+                                                <div className="flex justify-between gap-2 w-full mt-1">
+                                                    {[0, 25, 50, 75, 100].map((percent) => (
+                                                        <button
+                                                            key={percent}
+                                                            type="button"
+                                                            className={`py-[11px] w-full rounded-sm border ${
+                                                                percentValue === percent
+                                                                    ? "border-2 border-[#92318D] font-bold"
+                                                                    : "border border-[#30363D]"
+                                                            } bg-zinc-900 text-white text-sm`}
+                                                            onClick={() => {
+                                                                const amount = Math.round((percent / 100) * AMOUNT_TOTAL);
+                                                                onChangeInput2(amount.toString());
+                                                            }}
+                                                        >
+                                                            {percent}%
+                                                        </button>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button
+                                        type="button"
+                                        className="py-2 w-full flex items-center  justify-between focus:outline-none"
+                                        onClick={() => setReduceOnly((prev) => !prev)}
+                                    >
+                                        <span className="text-[#C9D1D9] text-sm">
+                                        {"Reduce Only"}
+                                        </span>
+                                        <div
+                                        className={`shrink-0 flex items-center transition-colors duration-200 rounded-full ${reduceOnly ? "bg-fuchsia-800" : "bg-zinc-700"} py-0.5 pl-2 pr-0.5`}
+                                        style={{ width: 48, height: 28 }}
+                                        >
+                                        <div
+                                            className={`bg-white w-5 h-5 rounded-full border border-solid border-white shadow transition-transform duration-200 `}
+                                            style={{
+                                            transform: reduceOnly ? "translateX(16px)" : "translateX(0)",
+                                            }}
+                                        />
+                                        </div>
+                                    </button>
+                                    <button
+                                        type="button"
+                                        className="py-2 flex items-center w-full justify-between focus:outline-none"
+                                        onClick={() => setIsOn((prev) => !prev)}
+                                        >
+                                        <span className="text-[#C9D1D9] text-sm">Take Profit / Stop Loss</span>
+                                        <div
+                                            className={` shrink-0 flex items-center transition-colors duration-200 rounded-full ${
+                                            isOn ? "bg-fuchsia-800" : "bg-zinc-700"
+                                            } py-0.5 pl-2 pr-0.5`}
+                                            style={{ width: 48, height: 28 }}
+                                        >
+                                            <div
+                                            className={`bg-white w-5 h-5 rounded-full border border-solid border-white shadow transition-transform duration-200`}
+                                            style={{
+                                                transform: isOn ? "translateX(16px)" : "translateX(0)",
+                                            }}
+                                            />
+                                        </div>
+                                    </button>
+                                    {/* Conditional TP/SL inputs */}
+                                    {isOn && (
+                                    <div className="flex flex-col gap-4 py-2 w-full">
+                                        {/* Take Profit */}
+                                        <div className="grid grid-cols-2 gap-4 w-full max-w-2xl">
+                                        <div className="flex flex-col gap-2 min-w-0 text-left">
+                                            <span className="text-[#9D9DAF] text-sm">Take Profit Price</span>
+                                            <input
+                                            placeholder="230.00"
+                                            value={input3}
+                                            onChange={(e) => onChangeInput3(e.target.value)}
+                                            className="w-full text-white bg-zinc-950 text-base p-3 rounded-sm border border-[#30363D] focus:outline-none"
+                                            />
+                                        </div>
+                                        <div className="flex flex-col gap-2 min-w-0 text-left">
+                                            <span className="text-[#9D9DAF] text-sm">Take Profit %</span>
+                                            <div className="flex items-center bg-zinc-950 p-3 rounded-sm border border-[#30363D] w-full">
+                                            <input
+                                                placeholder="%"
+                                                value={input4}
+                                                onChange={(e) => onChangeInput4(e.target.value)}
+                                                className="flex-1 text-white bg-transparent text-base font-bold border-0 focus:outline-none min-w-0"
+                                            />
+                                            <span className="text-white text-base ml-2">%</span>
+                                            </div>
+                                        </div>
+                                        </div>
+
+                                        {/* Stop Loss */}
+                                        <div className="grid grid-cols-2 gap-4 w-full max-w-2xl">
+                                        <div className="flex flex-col gap-2 min-w-0 text-left">
+                                            <span className="text-[#9D9DAF] text-sm">Stop Loss Price</span>
+                                            <input
+                                            placeholder="240.00"
+                                            value={input5}
+                                            onChange={(e) => onChangeInput5(e.target.value)}
+                                            className="w-full text-white bg-zinc-950 text-base p-3 rounded-sm border border-[#30363D] focus:outline-none"
+                                            />
+                                        </div>
+                                        <div className="flex flex-col gap-2 min-w-0 text-left">
+                                            <span className="text-[#9D9DAF] text-sm">Stop Loss %</span>
+                                            <div className="flex items-center bg-zinc-950 p-3 rounded-sm border border-[#30363D] w-full">
+                                            <input
+                                                placeholder="%"
+                                                value={input6}
+                                                onChange={(e) => onChangeInput6(e.target.value)}
+                                                className="flex-1 text-white bg-transparent text-base font-bold border-0 focus:outline-none min-w-0"
+                                            />
+                                            <span className="text-white text-base ml-2">%</span>
+                                            </div>
+                                        </div>
+                                        </div>
+                                    </div>
+                                    )}
+
+                                    <div className="flex items-center gap-2 w-full">
+                                        <div className="flex flex-col items-start w-full gap-2">
+                                            <div className="flex flex-col items-center pb-[1px] h-6">
+                                                <span className="text-zinc-400 text-sm " >
+                                                    {"Max Slippage %"}
+                                                </span>
+                                            </div>
+                                            <input
+                                                type="number"
+                                                min={0}
+                                                max={100}
+                                                step="0.1"
+                                                placeholder={"0.5"}
+                                                value={input7}
+                                                onChange={(event)=>onChangeInput7(event.target.value)}
+                                                className="w-full text-white bg-zinc-950 text-base p-3 rounded-sm border border-solid border-[#30363D]"
+                                            />
+                                        </div>
+                                        <div className="flex flex-col items-start w-full gap-2">
+                                            <div className="flex items-center pb-[1px] gap-2 h-6">
+                                                <span className="text-[#9D9DAF] text-sm">
+                                                    {"TIF"}
+                                                </span>
+
+                                                {/* Wrap icon + tooltip in relative */}
+                                                <div className="relative">
+                                                    <button
+                                                    type="button"
+                                                    className="focus:outline-none"
+                                                    onClick={() => setShowTifTooltip((v) => !v)}
+                                                    tabIndex={0}
+                                                    >
+                                                    <img
+                                                        src="https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/32hekqyb_expires_30_days.png"
+                                                        className="w-3 h-3 object-fill"
+                                                        alt="TIF Info"
+                                                    />
+                                                    </button>
+
+                                                    {showTifTooltip && (
+                                                    <div className="absolute left-1/2 -translate-x-1/2 top-full mt-2 z-50 bg-zinc-900 text-sm text-white rounded px-3 py-2 border border-[#30363D] shadow-lg w-56">
+                                                        <span className="font-bold">TIF (Time in Force)</span>
+                                                        <br />
+                                                        <br />
+                                                        <span>
+                                                        TIF determines how long an order remains active.<br />
+                                                        <b>GTC</b>: Good Till Cancelled<br />
+                                                        <b>IOC</b>: Immediate Or Cancel<br />
+                                                        <b>ALO</b>: Add Liquidity Only
+                                                        </span>
+                                                    </div>
+                                                    )}
+                                                </div>
+                                            </div>
+
+                                            <div className="relative w-full">
+                                                <select
+                                                    className="appearance-none w-full flex items-center bg-zinc-950 text-left p-3 pr-8 rounded-sm border border-solid border-[#30363D] text-white text-base"
+                                                    value={tif}
+                                                    onChange={e => setTif(e.target.value)}
+                                                >
+                                                    <option value="GTC">GTC</option>
+                                                    <option value="IOC">IOC</option>
+                                                    <option value="ALO">ALO</option>
+                                                </select>
+                                                <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2">
+                                                    <img
+                                                        src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/w4taczak_expires_30_days.png"}
+                                                        className="w-3 h-[15px] rounded-md object-fill"
+                                                        alt="Dropdown"
+                                                    />
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="flex flex-col items-start bg-zinc-950 py-3 rounded-lg w-full">
+                                        <div className="flex items-center mb-2 ml-3 gap-2">
+                                            <img
+                                                src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/1uh405kh_expires_30_days.png"} 
+                                                className="w-3 h-6 object-fill"
+                                            />
+                                            <span className="text-white text-s text-left" >
+                                                {"AI Insight"}
+                                            </span>
+                                        </div>
+                                        <span className="text-[#9D9DAF] text-sm mx-3 text-left" >
+                                            {"Bullish trend 78% · Resistance $228.50 ·"}
+                                        </span>
+                                        <span className="text-[#9D9DAF] text-sm ml-3 text-left" >
+                                            {"Suitable for small position entry"}
+                                        </span>
+                                    </div>
+                                    <div className="flex flex-col items-start pt-4 gap-2 w-full">
+                                        <span className="text-[#9D9DAF] text-sm font-bold" >
+                                            {"Estimation"}
+                                        </span>
+                                        <div className="flex flex-col items-start gap-1 w-full">
+                                            <div className="flex justify-between items-center w-full">
+                                                <span className="text-[#9D9DAF] text-sm " >
+                                                    {"Liquidation Price"}
+                                                </span>
+                                                <span className="text-white text-sm" >
+                                                    {"$39,130.00"}
+                                                </span>
+                                            </div>
+                                            <div className="flex justify-between items-center w-full">
+                                                <span className="text-[#9D9DAF] text-sm " >
+                                                    {"Est. Fee"}
+                                                </span>
+                                                <span className="text-white text-sm" >
+                                                    {"$2.50"}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button
+                                        className="w-full flex justify-center items-center bg-fuchsia-800 py-3.5 rounded-sm border-0"
+                                        onClick={() => alert("Pressed!")}
+                                    >
+                                        <span className="text-white text-base font-bold text-center">
+                                            {input1 === "Sell / Short" ? "Sell / Short" : "Buy / Long"}
+                                        </span>
+                                    </button>
+                                    {/* --- END Advanced Tab Content --- */}
                                 </div>
                             )}
                         </div>
