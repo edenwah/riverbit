@@ -15,6 +15,7 @@ export default () => {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false); // Add this line
     const [granularity, setGranularity] = useState("")
     const [indicator, setIndicator] = useState("")
+    const [filterValue, setFilterValue] = useState("")
 
     const AMOUNT_TOTAL = 1000;
 
@@ -279,87 +280,77 @@ export default () => {
                     {/* Main Chart & Account Overview (col-span-3 on desktop, full width on mobile) */}
                     <div className="md:col-span-3 flex flex-col gap-2 w-full">
                         <div className="flex flex-col self-stretch bg-zinc-900 py-4 gap-3 rounded-lg border border-solid border-[#30363D]">
-                            <div className="flex flex-col md:flex-row items-start md:items-center self-stretch mx-3 gap-2">
-                                {/* Row 1: Asset name */}
-                                <div className="flex items-center gap-2 pr-[1px] md:mr-7">
+                            <div className="flex flex-col md:flex-row md:items-center self-stretch mx-3 gap-2">
+                                {/* Row 1: Asset Name + Select Asset */}
+                                <div className="flex w-full items-center gap-2 mb-1 md:mb-0 md:mr-7">
                                     <img
-                                    src="https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/11z6u7t1_expires_30_days.png"
-                                    className="w-3 h-7 object-fill"
+                                        src="https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/11z6u7t1_expires_30_days.png"
+                                        className="w-3 h-7 object-fill"
                                     />
                                     <span className="text-gray-200 text-lg font-bold">
-                                    {"ETH-PERP"}
+                                        {"ETH-PERP"}
                                     </span>
-                                </div>
-
-                                {/* Row 2: Select Asset + Controls */}
-                                <div className="flex flex-wrap w-full md:flex-nowrap items-center gap-2 flex-1">
                                     {/* Select Asset */}
-                                    <div className="flex items-center gap-1">
-                                    <span className="text-zinc-400 text-sm font-bold">
-                                        {"Select Asset"}
-                                    </span>
-                                    <img
-                                        src="https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/rnvmw36i_expires_30_days.png"
-                                        className="w-3 h-[15px] rounded-md object-fill"
-                                    />
-                                    </div>
-
-                                    <div className="flex gap-2 ml-auto">
-                                        {/* Granularity */}
-                                        <div className="relative">
-                                            <select
-                                                className="appearance-none flex items-center bg-zinc-950 text-left p-3 pr-8 rounded-md border border-solid border-[#30363D] text-zinc-400 text-sm"
-                                                value={granularity}
-                                                onChange={e => setGranularity(e.target.value)}
-                                            >
-                                                <option value="" disabled hidden>
-                                                    Granularity
-                                                </option>
-                                                <option value="1m">1m</option>
-                                                <option value="5m">5m</option>
-                                                <option value="15m">15m</option>
-                                                <option value="1h">1h</option>
-                                                <option value="1d">1d</option>
-
-                                            </select>
-
-                                            {/* 自訂右邊箭嘴 */}
-                                            <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-zinc-400">
-                                                <img
-                                                        src="https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/bvauf8h6_expires_30_days.png"
-                                                        className="w-3 h-[15px] rounded object-fill"
-                                                    />
-                                            </span>
-                                        </div>
-
-                                        {/* Indicator */}
-                                        <div className="relative">
-                                            <select
-                                                className="appearance-none flex items-center bg-zinc-950 text-left p-3 pr-8 rounded-md border border-solid border-[#30363D] text-zinc-400 text-sm"
-                                                value={indicator}
-                                                onChange={e => setIndicator(e.target.value)}
-                                            >
-                                                <option value="" disabled hidden>
-                                                    Indicator
-                                                </option>
-                                                <option value="None">None</option>
-                                                <option value="EMA">EMA</option>
-                                                <option value="SMA">SMA</option>
-                                                <option value="RSI">RSI</option>
-                                                <option value="MACD">MACD</option>
-                                            </select>
-
-                                            {/* 自訂右邊箭嘴 */}
-                                            <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-zinc-400">
-                                                <img
-                                                        src="https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/bvauf8h6_expires_30_days.png"
-                                                        className="w-3 h-[15px] rounded object-fill"
-                                                    />
-                                            </span>
-                                        </div>
+                                    <div className="flex items-center gap-1 ml-4">
+                                        <span className="text-zinc-400 text-sm font-bold">
+                                            {"Select Asset"}
+                                        </span>
+                                        <img
+                                            src="https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/rnvmw36i_expires_30_days.png"
+                                            className="w-3 h-[15px] rounded-md object-fill"
+                                        />
                                     </div>
                                 </div>
+                                {/* Row 2: Granularity + Indicator */}
+                                <div className="flex gap-2  md:ml-auto">
+                                    {/* Granularity */}
+                                    <div className="relative inline-flex min-w-32">
+                                        <select
+                                            className="appearance-none flex items-center bg-zinc-950 text-left p-3 pr-8 rounded-md border border-solid border-[#30363D] text-zinc-400 text-sm w-full"
+                                            value={granularity}
+                                            onChange={e => setGranularity(e.target.value)}
+                                        >
+                                            <option value="" disabled hidden>
+                                                Granularity
+                                            </option>
+                                            <option value="1m">1m</option>
+                                            <option value="5m">5m</option>
+                                            <option value="15m">15m</option>
+                                            <option value="1h">1h</option>
+                                            <option value="1d">1d</option>
+                                        </select>
+                                        <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-zinc-400">
+                                            <img
+                                                src="https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/bvauf8h6_expires_30_days.png"
+                                                className="w-3 h-[15px] rounded object-fill"
+                                            />
+                                        </span>
+                                    </div>
+                                    {/* Indicator */}
+                                    <div className="relative inline-flex min-w-32">
+                                        <select
+                                            className="appearance-none flex items-center bg-zinc-950 text-left p-3 pr-8 rounded-md border border-solid border-[#30363D] text-zinc-400 text-sm w-full"
+                                            value={indicator}
+                                            onChange={e => setIndicator(e.target.value)}
+                                        >
+                                            <option value="" disabled hidden>
+                                                Indicator
+                                            </option>
+                                            <option value="None">None</option>
+                                            <option value="EMA">EMA</option>
+                                            <option value="SMA">SMA</option>
+                                            <option value="RSI">RSI</option>
+                                            <option value="MACD">MACD</option>
+                                        </select>
+                                        <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-zinc-400">
+                                            <img
+                                                src="https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/bvauf8h6_expires_30_days.png"
+                                                className="w-3 h-[15px] rounded object-fill"
+                                            />
+                                        </span>
+                                    </div>
                                 </div>
+                            </div>
 
                             <div className="flex flex-wrap items-start self-stretch mx-3 gap-3 text-left">
                                 <div className="flex flex-1 flex-col items-start min-w-24">
@@ -466,37 +457,49 @@ export default () => {
                                 {/* Tabs + Filter */}
                                 <div className="overflow-x-auto">
                                     <div className="flex justify-between items-center border-b border-[#30363D] px-4 min-w-[600px]">
-                                    <div className="flex gap-4">
-                                        {[
-                                        "Balance",
-                                        "Positions",
-                                        "Open Orders",
-                                        "Trade History",
-                                        "Funding Rate History",
-                                        "Order History",
-                                        ].map((tab) => (
-                                        <button
-                                            key={tab}
-                                            className={`py-3 text-sm font-semibold ${
-                                            activeAccountTab === tab
-                                                ? "text-white border-b-2 border-[#92318D]"
-                                                : "text-zinc-400"
-                                            }`}
-                                            onClick={() => setActiveAccountTab(tab)}
-                                        >
-                                            {tab}
-                                        </button>
-                                        ))}
-                                    </div>
+                                        <div className="flex gap-4">
+                                            {[
+                                            "Balance",
+                                            "Positions",
+                                            "Open Orders",
+                                            "Trade History",
+                                            "Funding Rate History",
+                                            "Order History",
+                                            ].map((tab) => (
+                                            <button
+                                                key={tab}
+                                                className={`py-3 text-sm font-semibold ${
+                                                activeAccountTab === tab
+                                                    ? "text-white border-b-2 border-[#92318D]"
+                                                    : "text-zinc-400"
+                                                }`}
+                                                onClick={() => setActiveAccountTab(tab)}
+                                            >
+                                                {tab}
+                                            </button>
+                                            ))}
+                                        </div>
 
-                                    {/* Filter Selector */}
-                                    <div className="flex items-center gap-2">
-                                        <span className="text-zinc-400 text-sm">Filter</span>
-                                        <img
-                                        src="https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/qdm0wdb6_expires_30_days.png"
-                                        className="w-3 h-[15px] object-fill"
-                                        />
-                                    </div>
+                                        {/* Filter Selector */}
+                                        <div className="relative">
+                                            <select
+                                                className="appearance-none bg-zinc-900 text-zinc-400 text-sm py-2 pl-3 pr-8 rounded-md border border-solid border-[#30363D] focus:outline-none"
+                                                value={filterValue}
+                                                onChange={e => setFilterValue(e.target.value)}
+                                            >
+                                                <option value="" disabled hidden>Filter</option>
+                                                <option value="All">All</option>
+                                                <option value="Active">Active</option>
+                                                <option value="Long">Long</option>
+                                                <option value="Short">Short</option>
+                                            </select>
+                                            <span className="pointer-events-none absolute right-2 top-1/2 -translate-y-1/2">
+                                                <img
+                                                    src="https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/qdm0wdb6_expires_30_days.png"
+                                                    className="w-3 h-[15px] object-fill"
+                                                />
+                                            </span>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -559,101 +562,98 @@ export default () => {
                                     {/* --- BEGIN Order Book Content (lines 353-640) --- */}
                                     {/* Paste all the JSX from line 353 to 640 here */}
                                     <div className="flex flex-col items-start w-full">
-                                        <div className="flex flex-col items-start w-full">
-                                            <div className="flex flex-col items-center py-1 w-full">
-                                                <div className="flex items-start pr-[1px] ">
-                                                    <span className="text-zinc-400 text-sm my-1 mx-8" >
-                                                        {"Price"}
-                                                    </span>
-                                                    <span className="text-zinc-400 text-sm my-1 mx-[35px]" >
-                                                        {"Size"}
-                                                    </span>
-                                                    <span className="text-zinc-400 text-sm my-1 ml-[49px] mr-[17px]" >
-                                                        {"Total"}
-                                                    </span>
-                                                </div>
+                                        <div className="flex flex-col items-center py-1 w-full">
+                                            <div className="flex items-start pr-[1px] ">
+                                                <span className="text-zinc-400 text-sm my-1 mx-8" >
+                                                    {"Price"}
+                                                </span>
+                                                <span className="text-zinc-400 text-sm my-1 mx-[35px]" >
+                                                    {"Size"}
+                                                </span>
+                                                <span className="text-zinc-400 text-sm my-1 ml-[49px] mr-[17px]" >
+                                                    {"Total"}
+                                                </span>
                                             </div>
-                                            <div className="flex flex-col w-full">
-                                                {[
-                                                    { price: "110,595.00", size: "2.376", total: "16.500", barWidth: "80%" },
-                                                    { price: "110,594.00", size: "1.359", total: "15.200", barWidth: "70%" },
-                                                    { price: "110,593.00", size: "0.990", total: "13.900", barWidth: "60%" },
-                                                    { price: "110,592.00", size: "3.025", total: "12.600", barWidth: "50%" },
-                                                    { price: "110,591.00", size: "1.146", total: "11.300", barWidth: "45%" },
-                                                    { price: "110,590.00", size: "2.852", total: "10.000", barWidth: "37%" },
-                                                    { price: "110,589.00", size: "2.852", total: "10.000", barWidth: "33%" },
-                                                    { price: "110,588.00", size: "2.852", total: "10.000", barWidth: "25%" },
-                                                    { price: "110,587.00", size: "2.852", total: "0.190",  barWidth: "20%" },
-                                                ].map((row, idx) => (
+                                        </div>
+                                        <div className="flex flex-col w-full">
+                                            {[
+                                                { price: "110,595.00", size: "2.376", total: "16.500", barWidth: "80%" },
+                                                { price: "110,594.00", size: "1.359", total: "15.200", barWidth: "70%" },
+                                                { price: "110,593.00", size: "0.990", total: "13.900", barWidth: "60%" },
+                                                { price: "110,592.00", size: "3.025", total: "12.600", barWidth: "50%" },
+                                                { price: "110,591.00", size: "1.146", total: "11.300", barWidth: "45%" },
+                                                { price: "110,590.00", size: "2.852", total: "10.000", barWidth: "37%" },
+                                                { price: "110,589.00", size: "2.852", total: "10.000", barWidth: "33%" },
+                                                { price: "110,588.00", size: "2.852", total: "10.000", barWidth: "25%" },
+                                                { price: "110,587.00", size: "2.852", total: "0.190",  barWidth: "20%" },
+                                            ].map((row, idx) => (
+                                                <div
+                                                key={idx}
+                                                className="relative flex w-full items-center text-sm text-white"
+                                                >
+                                                {/* 背景色 box */}
+                                                <div
+                                                    className="absolute left-0 top-0 h-full bg-[#EF44441A]"
+                                                    style={{ width: row.barWidth }}
+                                                />
+
+                                                {/* 三欄內容 */}
+                                                <div className="grid grid-cols-3 w-full relative z-10 px-4 py-2">
+                                                    <span className="text-[#F85149]">{row.price}</span>
+                                                    <span>{row.size}</span>
+                                                    <span className="text-zinc-400">{row.total}</span>
+                                                </div>
+                                                </div>
+                                            ))}
+                                        </div>
+
+                                        <div className="flex w-full flex-col items-center p-3">
+                                            <span className="text-zinc-400 text-sm " >
+                                                {"Spread: 1 (0.001%)"}
+                                            </span>
+                                        </div>
+                                        <div className="flex flex-col w-full">
+                                            {(() => {
+                                                const bids = [
+                                                { price: "110,589.00", size: 1.799, total: 0.270 },
+                                                { price: "110,589.00", size: 1.799, total: 8.000 },
+                                                { price: "110,589.00", size: 1.799, total: 8.000 },
+                                                { price: "110,588.00", size: 1.755, total: 9.100 },
+                                                { price: "110,587.00", size: 0.351, total: 10.200 },
+                                                { price: "110,586.00", size: 2.952, total: 11.300 },
+                                                { price: "110,585.00", size: 0.172, total: 12.400 },
+                                                { price: "110,584.00", size: 2.474, total: 13.500 },
+                                                ];
+
+                                                const maxTotal = Math.max(...bids.map(b => b.total));
+
+                                                return bids.map((row, idx) => {
+                                                const barWidth = `${(row.total / maxTotal) * 100}%`;
+
+                                                return (
                                                     <div
                                                     key={idx}
                                                     className="relative flex w-full items-center text-sm text-white"
                                                     >
-                                                    {/* 背景色 box */}
+                                                    {/* 背景色 bar */}
                                                     <div
-                                                        className="absolute left-0 top-0 h-full bg-[#EF44441A]"
-                                                        style={{ width: row.barWidth }}
+                                                        className="absolute left-0 top-0 h-full bg-[#22C55E1A]"
+                                                        style={{ width: barWidth }}
                                                     />
 
                                                     {/* 三欄內容 */}
                                                     <div className="grid grid-cols-3 w-full relative z-10 px-4 py-2">
-                                                        <span className="text-[#F85149]">{row.price}</span>
+                                                        <span className="text-[#2DA44E]">{row.price}</span>
                                                         <span>{row.size}</span>
                                                         <span className="text-zinc-400">{row.total}</span>
                                                     </div>
                                                     </div>
-                                                ))}
-                                            </div>
-
-                                            <div className="flex w-full flex-col items-center p-3">
-                                                <span className="text-zinc-400 text-sm " >
-                                                    {"Spread: 1 (0.001%)"}
-                                                </span>
-                                            </div>
-                                            <div className="flex flex-col w-full">
-                                                {(() => {
-                                                    const bids = [
-                                                    { price: "110,589.00", size: 1.799, total: 0.270 },
-                                                    { price: "110,589.00", size: 1.799, total: 8.000 },
-                                                    { price: "110,589.00", size: 1.799, total: 8.000 },
-                                                    { price: "110,588.00", size: 1.755, total: 9.100 },
-                                                    { price: "110,587.00", size: 0.351, total: 10.200 },
-                                                    { price: "110,586.00", size: 2.952, total: 11.300 },
-                                                    { price: "110,585.00", size: 0.172, total: 12.400 },
-                                                    { price: "110,584.00", size: 2.474, total: 13.500 },
-                                                    ];
-
-                                                    const maxTotal = Math.max(...bids.map(b => b.total));
-
-                                                    return bids.map((row, idx) => {
-                                                    const barWidth = `${(row.total / maxTotal) * 100}%`;
-
-                                                    return (
-                                                        <div
-                                                        key={idx}
-                                                        className="relative flex w-full items-center text-sm text-white"
-                                                        >
-                                                        {/* 背景色 bar */}
-                                                        <div
-                                                            className="absolute left-0 top-0 h-full bg-[#22C55E1A]"
-                                                            style={{ width: barWidth }}
-                                                        />
-
-                                                        {/* 三欄內容 */}
-                                                        <div className="grid grid-cols-3 w-full relative z-10 px-4 py-2">
-                                                            <span className="text-[#2DA44E]">{row.price}</span>
-                                                            <span>{row.size}</span>
-                                                            <span className="text-zinc-400">{row.total}</span>
-                                                        </div>
-                                                        </div>
-                                                    );
-                                                    });
-                                                })()}
-                                            </div>
-
+                                                );
+                                                });
+                                            })()}
                                         </div>
+
                                     </div>
-                                    {/* --- END Order Book Content --- */}
                                 </div>
                             )}
                             {orderTab === "Trades" && (
