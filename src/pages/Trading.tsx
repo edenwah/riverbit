@@ -21,6 +21,10 @@ export default () => {
     const [pressedButton, setPressedButton] = useState(""); // For tracking which button is pressed
     const [tif, setTif] = useState("GTC");
     const [showTifTooltip, setShowTifTooltip] = useState(false);
+    const [leverage, setLeverage] = useState("20x"); // Add this state
+    const [crossSelected, setCrossSelected] = useState(false);
+    const [aiSelected, setAiSelected] = useState(false);
+    const [showAssetPopup, setShowAssetPopup] = useState(false);
 
     const AMOUNT_TOTAL = 1000;
 
@@ -296,14 +300,321 @@ export default () => {
                                         {"ETH-PERP"}
                                     </span>
                                     {/* Select Asset */}
-                                    <div className="flex items-center gap-1 ml-4">
-                                        <span className="text-zinc-400 text-sm font-bold">
-                                            {"Select Asset"}
-                                        </span>
-                                        <img
-                                            src="https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/rnvmw36i_expires_30_days.png"
-                                            className="w-3 h-[15px] rounded-sm object-fill"
-                                        />
+                                    <div className="relative">
+                                        <button
+                                            type="button"
+                                            className="flex items-center gap-1 ml-4 px-3 py-2 bg-zinc-900 rounded-sm  text-zinc-400 text-sm font-bold focus:outline-none"
+                                            onClick={() => setShowAssetPopup((v) => !v)}
+                                        >
+                                            <span>Select Asset</span>
+                                            <img
+                                                src="https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/rnvmw36i_expires_30_days.png"
+                                                className="w-3 h-[15px] rounded-sm object-fill"
+                                                alt="Select Asset"
+                                            />
+                                        </button>
+                                        {showAssetPopup && (
+                                            <div
+                                                className="absolute left-0 top-full mt-2 z-50 min-w-[910px] border border-[#30363D] shadow-lg flex flex-col items-start bg-[#272B2F] rounded-lg border-solid"
+                                                style={{
+                                                    boxShadow: "0 8px 24px 0 rgba(0,0,0,0.18)",
+                                                }}
+                                                >
+                                                {/* START of Custom Select Asset Popup */}
+                                                
+                                                    <div className="flex items-center justify-between self-stretch mt-[25px] mb-6 mx-4 gap-4 w-full">
+                                                        <div className="flex w-full items-center bg-[#0D1117] py-[13px] rounded-sm border border-solid border-[#30363D] text-center">
+                                                            <img
+                                                                src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/alyycaw7_expires_30_days.png"} 
+                                                                className="w-4 h-6 mx-4 object-fill"
+                                                            />
+                                                            <input
+                                                                placeholder={"Search"}
+                                                                value={input1}
+                                                                onChange={(event)=>onChangeInput1(event.target.value)}
+                                                                className="flex-1 self-stretch text-[#ADAEBC] bg-transparent text-base border-0"
+                                                            />
+                                                        </div>
+                                                        <div className="flex shrink-0 items-center bg-[#0D1117] p-1 rounded-sm border border-solid border-[#30363D] text-center min-w-48">
+                                                            <button className="flex flex-col shrink-0 items-start bg-[#92318D] text-left py-[11px] px-[27px] rounded border-0"
+                                                                onClick={()=>alert("Pressed!")}>
+                                                                <span className="text-white text-sm w-full" >
+                                                                    {"Strict"}
+                                                                </span>
+                                                            </button>
+                                                            <span className="text-[#8B949E] text-sm w-full" >
+                                                                {"All"}
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div className="flex items-center ml-[13px]">
+                                                        <span className="text-white text-sm my-[15px] ml-[3px] mr-[19px]" >
+                                                            {"All Coins"}
+                                                        </span>
+                                                        <span className="text-[#8B949E] text-sm my-[15px] ml-[7px] mr-[23px]" >
+                                                            {"Perps"}
+                                                        </span>
+                                                        <span className="text-[#8B949E] text-sm my-[15px] ml-[3px] mr-[19px]" >
+                                                            {"Spot"}
+                                                        </span>
+                                                        <span className="text-[#8B949E] text-sm my-[15px] ml-[9px] mr-[25px]" >
+                                                            {"Trending"}
+                                                        </span>
+                                                        <span className="text-[#8B949E] text-sm my-[15px] ml-3.5 mr-[30px]" >
+                                                            {"DEX Only"}
+                                                        </span>
+                                                        <span className="text-[#8B949E] text-sm my-[15px] ml-[9px] mr-[25px]" >
+                                                            {"Pre-launch"}
+                                                        </span>
+                                                        <span className="text-[#8B949E] text-sm my-[15px] ml-[9px] mr-[25px]" >
+                                                            {"AI"}
+                                                        </span>
+                                                        <span className="text-[#8B949E] text-sm my-[15px] ml-[9px] mr-[25px]" >
+                                                            {"DeFi"}
+                                                        </span>
+                                                        <span className="text-[#8B949E] text-sm my-[15px] ml-[9px] mr-[25px]" >
+                                                            {"Layer 1"}
+                                                        </span>
+                                                        <span className="text-[#8B949E] text-sm my-[15px] ml-[9px] mr-[34px]" >
+                                                            {"Layer 2"}
+                                                        </span>
+                                                        <span className="text-[#8B949E] text-sm" >
+                                                            {"Meme"}
+                                                        </span>
+                                                    </div>
+                                                    <div className="flex items-center mb-[1px] ml-[1px]">
+                                                        <span className="text-[#8B949E] text-xs font-bold my-[18px] ml-4 mr-28" >
+                                                            {"Symbol"}
+                                                        </span>
+                                                        <span className="text-[#8B949E] text-xs font-bold my-[18px] mx-4" >
+                                                            {"Leverage"}
+                                                        </span>
+                                                        <span className="text-[#8B949E] text-xs font-bold my-[18px] ml-[34px] mr-3" >
+                                                            {"Last Price"}
+                                                        </span>
+                                                        <span className="text-[#8B949E] text-xs font-bold my-[18px] ml-[72px] mr-3" >
+                                                            {"24h Change"}
+                                                        </span>
+                                                        <span className="text-[#8B949E] text-xs font-bold my-[18px] ml-[29px] mr-[11px]" >
+                                                            {"8h Funding"}
+                                                        </span>
+                                                        <span className="text-[#8B949E] text-xs font-bold my-[18px] ml-[52px] mr-[55px]" >
+                                                            {"24h Volume"}
+                                                        </span>
+                                                        <span className="text-[#8B949E] text-xs font-bold" >
+                                                            {"Open Interest"}
+                                                        </span>
+                                                    </div>
+                                                    <div className="flex items-center ml-[1px]">
+                                                        <div className="flex shrink-0 items-center p-4 gap-3">
+                                                            <button className="flex flex-col shrink-0 items-start bg-[#F97316] text-left py-2 px-3 rounded-[9999px] border-0"
+                                                                onClick={()=>alert("Pressed!")}>
+                                                                <span className="text-white text-sm font-bold" >
+                                                                    {"₿"}
+                                                                </span>
+                                                            </button>
+                                                            <div className="flex flex-col shrink-0 items-start gap-[1px]">
+                                                                <div className="flex flex-col items-center py-0.5">
+                                                                    <span className="text-white text-base font-bold" >
+                                                                        {"BTC-USD"}
+                                                                    </span>
+                                                                </div>
+                                                                <span className="text-gray-400 text-xs mr-[30px]" >
+                                                                    {"Bitcoin"}
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <span className="text-white text-sm my-7 ml-4 mr-[52px]" >
+                                                            {"40x"}
+                                                        </span>
+                                                        <span className="text-white text-base font-bold my-[26px] ml-[23px] mr-3" >
+                                                            {"$113,479"}
+                                                        </span>
+                                                        <span className="text-[#2DA44E] text-base my-[26px] ml-[13px] mr-3.5" >
+                                                            {"+2,530 / +2.28%"}
+                                                        </span>
+                                                        <span className="text-white text-sm my-7 ml-[37px] mr-[13px]" >
+                                                            {"0.0100%"}
+                                                        </span>
+                                                        <span className="text-white text-sm my-7 ml-[21px] mr-[41px]" >
+                                                            {"$3,294,291,814"}
+                                                        </span>
+                                                        <span className="text-white text-sm" >
+                                                            {"$3,989,216,288"}
+                                                        </span>
+                                                    </div>
+                                                    <div className="flex items-center ml-[1px]">
+                                                        <div className="flex shrink-0 items-center p-4 gap-3">
+                                                            <button className="flex flex-col shrink-0 items-start bg-blue-500 text-left py-2 px-3 rounded-[9999px] border-0"
+                                                                onClick={()=>alert("Pressed!")}>
+                                                                <span className="text-white text-sm font-bold" >
+                                                                    {"E"}
+                                                                </span>
+                                                            </button>
+                                                            <div className="flex flex-col shrink-0 items-start gap-[1px]">
+                                                                <div className="flex flex-col items-center py-0.5">
+                                                                    <span className="text-white text-base font-bold" >
+                                                                        {"ETH-USD"}
+                                                                    </span>
+                                                                </div>
+                                                                <span className="text-gray-400 text-xs mr-3.5" >
+                                                                    {"Ethereum"}
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <span className="text-white text-sm my-7 ml-4 mr-[53px]" >
+                                                            {"25x"}
+                                                        </span>
+                                                        <span className="text-white text-base font-bold my-[26px] ml-6 mr-3" >
+                                                            {"$4,350.7"}
+                                                        </span>
+                                                        <span className="text-[#2DA44E] text-base my-[26px] ml-[26px] mr-[27px]" >
+                                                            {"+66.3 / +1.55%"}
+                                                        </span>
+                                                        <span className="text-white text-sm my-7 ml-[37px] mr-[13px]" >
+                                                            {"0.0100%"}
+                                                        </span>
+                                                        <span className="text-white text-sm my-7 ml-4 mr-[38px]" >
+                                                            {"$2,603,760,484"}
+                                                        </span>
+                                                        <span className="text-white text-sm" >
+                                                            {"$2,911,409,736"}
+                                                        </span>
+                                                    </div>
+                                                    <div className="flex items-center ml-[1px]">
+                                                        <div className="flex shrink-0 items-center p-4 gap-3">
+                                                            <button className="flex flex-col shrink-0 items-start bg-[#A855F7] text-left py-[7px] px-[11px] rounded-[9999px] border-0"
+                                                                onClick={()=>alert("Pressed!")}>
+                                                                <span className="text-white text-sm font-bold" >
+                                                                    {"S"}
+                                                                </span>
+                                                            </button>
+                                                            <div className="flex flex-col shrink-0 items-start gap-[1px]">
+                                                                <div className="flex flex-col items-center py-0.5">
+                                                                    <span className="text-white text-base font-bold" >
+                                                                        {"SOL-USD"}
+                                                                    </span>
+                                                                </div>
+                                                                <span className="text-gray-400 text-xs mr-[30px]" >
+                                                                    {"Solana"}
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <span className="text-white text-sm my-7 ml-4 mr-[52px]" >
+                                                            {"20x"}
+                                                        </span>
+                                                        <span className="text-white text-base font-bold my-[26px] ml-[31px] mr-[11px]" >
+                                                            {"$221.94"}
+                                                        </span>
+                                                        <span className="text-[#2DA44E] text-base my-[26px] ml-[25px] mr-[26px]" >
+                                                            {"+7.47 / +3.48%"}
+                                                        </span>
+                                                        <span className="text-white text-sm my-7 ml-[37px] mr-[13px]" >
+                                                            {"0.0100%"}
+                                                        </span>
+                                                        <span className="text-white text-sm my-7 ml-[27px] mr-[35px]" >
+                                                            {"$1,314,153,194"}
+                                                        </span>
+                                                        <span className="text-white text-sm" >
+                                                            {"$1,516,333,384"}
+                                                        </span>
+                                                    </div>
+                                                    <div className="flex items-center mb-4 ml-[1px]">
+                                                        <div className="flex shrink-0 items-center p-4 gap-3">
+                                                            <button className="flex flex-col shrink-0 items-start bg-pink-500 text-left py-2 px-[11px] rounded-[9999px] border-0"
+                                                                onClick={()=>alert("Pressed!")}>
+                                                                <span className="text-white text-sm font-bold" >
+                                                                    {"H"}
+                                                                </span>
+                                                            </button>
+                                                            <div className="flex flex-col shrink-0 items-start gap-[1px]">
+                                                                <div className="flex flex-col items-center py-0.5">
+                                                                    <span className="text-white text-base font-bold" >
+                                                                        {"HYPE-USD"}
+                                                                    </span>
+                                                                </div>
+                                                                <span className="text-gray-400 text-xs mr-3.5" >
+                                                                    {"Hyperliquid"}
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <span className="text-white text-sm my-7 ml-4 mr-[54px]" >
+                                                            {"10x"}
+                                                        </span>
+                                                        <span className="text-white text-base font-bold my-[26px] ml-[30px] mr-[13px]" >
+                                                            {"$54.531"}
+                                                        </span>
+                                                        <span className="text-[#2DA44E] text-base my-[26px] ml-[17px] mr-[18px]" >
+                                                            {"+1.625 / +3.07%"}
+                                                        </span>
+                                                        <span className="text-white text-sm my-7 ml-[37px] mr-[13px]" >
+                                                            {"0.0100%"}
+                                                        </span>
+                                                        <span className="text-white text-sm my-7 ml-8 mr-[37px]" >
+                                                            {"$709,614,355"}
+                                                        </span>
+                                                        <span className="text-white text-sm" >
+                                                            {"$1,487,051,890"}
+                                                        </span>
+                                                    </div>
+                                                    <div className="flex items-center self-stretch mb-8 mx-[17px]">
+                                                        <div className="flex shrink-0 items-center pr-[7px] mr-8 gap-3">
+                                                            <button className="flex flex-col shrink-0 items-start bg-pink-500 text-left py-2 px-[11px] rounded-[9999px] border-0"
+                                                                onClick={()=>alert("Pressed!")}>
+                                                                <span className="text-white text-sm font-bold" >
+                                                                    {"H"}
+                                                                </span>
+                                                            </button>
+                                                            <div className="flex flex-col shrink-0 items-start gap-[1px]">
+                                                                <div className="flex flex-col items-center py-0.5">
+                                                                    <span className="text-white text-base font-bold" >
+                                                                        {"HYPE/USDC"}
+                                                                    </span>
+                                                                </div>
+                                                                <span className="text-gray-400 text-xs mr-[57px]" >
+                                                                    {"SPOT"}
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <span className="text-white text-sm mr-[102px]" >
+                                                            {"–"}
+                                                        </span>
+                                                        <span className="text-white text-base font-bold mr-[31px]" >
+                                                            {"$54.511"}
+                                                        </span>
+                                                        <span className="text-[#2DA44E] text-base mr-[106px]" >
+                                                            {"+1.593 / +3.01%"}
+                                                        </span>
+                                                        <span className="text-white text-sm mr-[42px]" >
+                                                            {"–"}
+                                                        </span>
+                                                        <span className="text-white text-sm mr-[130px]" >
+                                                            {"$250,910,508"}
+                                                        </span>
+                                                        <span className="text-white text-sm" >
+                                                            {"–"}
+                                                        </span>
+                                                    </div>
+                                                    <div className="flex items-center self-stretch mb-4 mx-[17px]">
+                                                        <span className="flex-1 text-[#8B949E] text-sm" >
+                                                            {"Showing 5 of 247 markets"}
+                                                        </span>
+                                                        <span className="text-[#8B949E] text-sm mr-2" >
+                                                            {"Press"}
+                                                        </span>
+                                                        <button className="flex flex-col shrink-0 items-start bg-gray-600 text-left py-1 px-2 mr-[9px] rounded border-0"
+                                                            onClick={()=>alert("Pressed!")}>
+                                                            <span className="text-[#8B949E] text-xs" >
+                                                                {"ESC"}
+                                                            </span>
+                                                        </button>
+                                                        <span className="text-[#8B949E] text-sm" >
+                                                            {"to close"}
+                                                        </span>
+                                                    </div>
+                                                {/* END of Custom Select Asset Popup */}
+                                            </div>
+                                        )}
                                     </div>
                                 </div>
                                 {/* Row 2: Granularity + Indicator */}
@@ -714,34 +1025,42 @@ export default () => {
                             {/* Cross Margin, Leverage and AI Trading */}
                             <div className="flex items-start p-3 w-full gap-2">
                                 <button
-                                    className={`flex-1 flex flex-col shrink-0 text-nowrap items-start bg-zinc-950 text-left py-3 px-2  rounded-sm border ${
-                                        pressedButton === "cross" ? "border-fuchsia-800" : "border-[#30363D]"
+                                    className={`flex-1 flex flex-col shrink-0 text-nowrap items-start bg-zinc-950 text-left py-3 px-2 rounded-sm border ${
+                                        crossSelected ? "border-fuchsia-800" : "border-[#30363D]"
                                     } border-solid`}
-                                    onClick={() => setPressedButton("cross")}
+                                    onClick={() => setCrossSelected((v) => !v)}
                                 >
                                     <span className="text-[#A6A6B5] text-sm">
                                         {"Cross Margin"}
                                     </span>
                                 </button>
-                                <button
-                                    className={`flex-1 justify-between flex shrink-0 items-start bg-zinc-950 text-left py-3 px-2 gap-[11px] rounded-sm border ${
-                                        pressedButton === "leverage" ? "border-fuchsia-800" : "border-[#30363D]"
-                                    } border-solid`}
-                                    onClick={() => setPressedButton("leverage")}
-                                >
-                                    <span className="text-white text-sm">
-                                        {"20x"}
+                                {/* Replace the button with this selector */}
+                                <div className="relative flex-1">
+                                    <select
+                                        className={`appearance-none w-full bg-zinc-950 text-white text-sm py-3 px-2 rounded-sm border border-solid border-[#30363D] "} focus:outline-none`}
+                                        value={leverage}
+                                        onChange={e => {
+                                            setLeverage(e.target.value);
+                                        }}
+                                    >
+                                        <option value="5x">5x</option>
+                                        <option value="10x">10x</option>
+                                        <option value="20x">20x</option>
+                                        <option value="50x">50x</option>
+                                        <option value="100x">100x</option>
+                                    </select>
+                                    <span className="pointer-events-none absolute right-2 top-1/2 -translate-y-1/2">
+                                        <img
+                                            src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/jw98n908_expires_30_days.png"} 
+                                            className="w-3 h-[15px] rounded-sm object-fill"
+                                        />
                                     </span>
-                                    <img
-                                        src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/jw98n908_expires_30_days.png"} 
-                                        className="w-3 h-[15px] rounded-sm object-fill"
-                                    />
-                                </button>
+                                </div>
                                 <button
                                     className={`flex-1 flex flex-col shrink-0 items-start text-nowrap bg-zinc-950 text-left py-3 px-2 rounded-sm border ${
-                                        pressedButton === "ai" ? "border-fuchsia-800" : "border-[#30363D]"
+                                        aiSelected ? "border-fuchsia-800" : "border-[#30363D]"
                                     } border-solid`}
-                                    onClick={() => setPressedButton("ai")}
+                                    onClick={() => setAiSelected((v) => !v)}
                                 >
                                     <span className="text-[#A6A6B5] text-sm">
                                         {"AI Trading"}
@@ -1225,80 +1544,22 @@ export default () => {
                                     </div>
                                     )}
 
-                                    <div className="flex items-center gap-2 w-full">
-                                        <div className="flex flex-col items-start w-full gap-2">
-                                            <div className="flex flex-col items-center pb-[1px] h-6">
-                                                <span className="text-zinc-400 text-sm " >
-                                                    {"Max Slippage %"}
-                                                </span>
-                                            </div>
-                                            <input
-                                                type="number"
-                                                min={0}
-                                                max={100}
-                                                step="0.1"
-                                                placeholder={"0.5"}
-                                                value={input7}
-                                                onChange={(event)=>onChangeInput7(event.target.value)}
-                                                className="w-full text-white bg-zinc-950 text-base p-3 rounded-sm border border-solid border-[#30363D]"
-                                            />
+                                    <div className="flex flex-col items-start w-full gap-2 ">
+                                        <div className="flex flex-col items-center pb-[1px]">
+                                            <span className="text-zinc-400 text-sm" >
+                                                {"Max Slippage %"}
+                                            </span>
                                         </div>
-                                        <div className="flex flex-col items-start w-full gap-2">
-                                            <div className="flex items-center pb-[1px] gap-2 h-6">
-                                                <span className="text-[#9D9DAF] text-sm">
-                                                    {"TIF"}
-                                                </span>
-
-                                                {/* Wrap icon + tooltip in relative */}
-                                                <div className="relative">
-                                                    <button
-                                                    type="button"
-                                                    className="focus:outline-none"
-                                                    onClick={() => setShowTifTooltip((v) => !v)}
-                                                    tabIndex={0}
-                                                    >
-                                                    <img
-                                                        src="https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/32hekqyb_expires_30_days.png"
-                                                        className="w-3 h-3 object-fill"
-                                                        alt="TIF Info"
-                                                    />
-                                                    </button>
-
-                                                    {showTifTooltip && (
-                                                    <div className="absolute left-1/2 -translate-x-1/2 top-full mt-2 z-50 bg-zinc-900 text-sm text-white rounded px-3 py-2 border border-[#30363D] shadow-lg w-56">
-                                                        <span className="font-bold">TIF (Time in Force)</span>
-                                                        <br />
-                                                        <br />
-                                                        <span>
-                                                        TIF determines how long an order remains active.<br />
-                                                        <b>GTC</b>: Good Till Cancelled<br />
-                                                        <b>IOC</b>: Immediate Or Cancel<br />
-                                                        <b>ALO</b>: Add Liquidity Only
-                                                        </span>
-                                                    </div>
-                                                    )}
-                                                </div>
-                                            </div>
-
-                                            <div className="relative w-full">
-                                                <select
-                                                    className="appearance-none w-full flex items-center bg-zinc-950 text-left p-3 pr-8 rounded-sm border border-solid border-[#30363D] text-white text-base"
-                                                    value={tif}
-                                                    onChange={e => setTif(e.target.value)}
-                                                >
-                                                    <option value="GTC">GTC</option>
-                                                    <option value="IOC">IOC</option>
-                                                    <option value="ALO">ALO</option>
-                                                </select>
-                                                <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2">
-                                                    <img
-                                                        src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/w4taczak_expires_30_days.png"}
-                                                        className="w-3 h-[15px] rounded-md object-fill"
-                                                        alt="Dropdown"
-                                                    />
-                                                </span>
-                                            </div>
-                                        </div>
+                                        <input
+                                            type="number"
+                                            min={0}
+                                            max={100}
+                                            step="0.1"
+                                            placeholder={"0.5"}
+                                            value={input7}
+                                            onChange={(event)=>onChangeInput7(event.target.value)}
+                                            className="w-full text-white bg-zinc-950 text-base p-3 rounded-sm border border-solid border-[#30363D]"
+                                        />
                                     </div>
                                     <div className="flex flex-col items-start bg-zinc-950 py-3 rounded-lg w-full">
                                         <div className="flex items-center mb-2 ml-3 gap-2">
