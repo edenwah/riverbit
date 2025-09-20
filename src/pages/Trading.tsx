@@ -314,307 +314,96 @@ export default () => {
                                             />
                                         </button>
                                         {showAssetPopup && (
-                                            <div
-                                                className="absolute left-0 top-full mt-2 z-50 min-w-[910px] border border-[#30363D] shadow-lg flex flex-col items-start bg-[#272B2F] rounded-lg border-solid"
-                                                style={{
-                                                    boxShadow: "0 8px 24px 0 rgba(0,0,0,0.18)",
-                                                }}
-                                                >
-                                                {/* START of Custom Select Asset Popup */}
+                                            <div className="fixed inset-0 z-50 flex items-start md:mt-40 md:ml-4">
+                                                {/* 背景遮罩 */}
+                                                <div
+                                                className="absolute inset-0 bg-black/50 md:bg-transparent"
+                                                onClick={() => setShowAssetPopup(false)}
+                                                />
                                                 
-                                                    <div className="flex items-center justify-between self-stretch mt-[25px] mb-6 mx-4 gap-4 w-full">
-                                                        <div className="flex w-full items-center bg-[#0D1117] py-[13px] rounded-sm border border-solid border-[#30363D] text-center">
-                                                            <img
-                                                                src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/alyycaw7_expires_30_days.png"} 
-                                                                className="w-4 h-6 mx-4 object-fill"
-                                                            />
-                                                            <input
-                                                                placeholder={"Search"}
-                                                                value={input1}
-                                                                onChange={(event)=>onChangeInput1(event.target.value)}
-                                                                className="flex-1 self-stretch text-[#ADAEBC] bg-transparent text-base border-0"
-                                                            />
-                                                        </div>
-                                                        <div className="flex shrink-0 items-center bg-[#0D1117] p-1 rounded-sm border border-solid border-[#30363D] text-center min-w-48">
-                                                            <button className="flex flex-col shrink-0 items-start bg-[#92318D] text-left py-[11px] px-[27px] rounded border-0"
-                                                                onClick={()=>alert("Pressed!")}>
-                                                                <span className="text-white text-sm w-full" >
-                                                                    {"Strict"}
-                                                                </span>
-                                                            </button>
-                                                            <span className="text-[#8B949E] text-sm w-full" >
-                                                                {"All"}
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                    <div className="flex items-center ml-[13px]">
-                                                        <span className="text-white text-sm my-[15px] ml-[3px] mr-[19px]" >
-                                                            {"All Coins"}
-                                                        </span>
-                                                        <span className="text-[#8B949E] text-sm my-[15px] ml-[7px] mr-[23px]" >
-                                                            {"Perps"}
-                                                        </span>
-                                                        <span className="text-[#8B949E] text-sm my-[15px] ml-[3px] mr-[19px]" >
-                                                            {"Spot"}
-                                                        </span>
-                                                        <span className="text-[#8B949E] text-sm my-[15px] ml-[9px] mr-[25px]" >
-                                                            {"Trending"}
-                                                        </span>
-                                                        <span className="text-[#8B949E] text-sm my-[15px] ml-3.5 mr-[30px]" >
-                                                            {"DEX Only"}
-                                                        </span>
-                                                        <span className="text-[#8B949E] text-sm my-[15px] ml-[9px] mr-[25px]" >
-                                                            {"Pre-launch"}
-                                                        </span>
-                                                        <span className="text-[#8B949E] text-sm my-[15px] ml-[9px] mr-[25px]" >
-                                                            {"AI"}
-                                                        </span>
-                                                        <span className="text-[#8B949E] text-sm my-[15px] ml-[9px] mr-[25px]" >
-                                                            {"DeFi"}
-                                                        </span>
-                                                        <span className="text-[#8B949E] text-sm my-[15px] ml-[9px] mr-[25px]" >
-                                                            {"Layer 1"}
-                                                        </span>
-                                                        <span className="text-[#8B949E] text-sm my-[15px] ml-[9px] mr-[34px]" >
-                                                            {"Layer 2"}
-                                                        </span>
-                                                        <span className="text-[#8B949E] text-sm" >
-                                                            {"Meme"}
-                                                        </span>
-                                                    </div>
-                                                    <div className="flex items-center mb-[1px] ml-[1px]">
-                                                        <span className="text-[#8B949E] text-xs font-bold my-[18px] ml-4 mr-28" >
-                                                            {"Symbol"}
-                                                        </span>
-                                                        <span className="text-[#8B949E] text-xs font-bold my-[18px] mx-4" >
-                                                            {"Leverage"}
-                                                        </span>
-                                                        <span className="text-[#8B949E] text-xs font-bold my-[18px] ml-[34px] mr-3" >
-                                                            {"Last Price"}
-                                                        </span>
-                                                        <span className="text-[#8B949E] text-xs font-bold my-[18px] ml-[72px] mr-3" >
-                                                            {"24h Change"}
-                                                        </span>
-                                                        <span className="text-[#8B949E] text-xs font-bold my-[18px] ml-[29px] mr-[11px]" >
-                                                            {"8h Funding"}
-                                                        </span>
-                                                        <span className="text-[#8B949E] text-xs font-bold my-[18px] ml-[52px] mr-[55px]" >
-                                                            {"24h Volume"}
-                                                        </span>
-                                                        <span className="text-[#8B949E] text-xs font-bold" >
-                                                            {"Open Interest"}
-                                                        </span>
-                                                    </div>
-                                                    <div className="flex items-center ml-[1px]">
-                                                        <div className="flex shrink-0 items-center p-4 gap-3">
-                                                            <button className="flex flex-col shrink-0 items-start bg-[#F97316] text-left py-2 px-3 rounded-[9999px] border-0"
-                                                                onClick={()=>alert("Pressed!")}>
-                                                                <span className="text-white text-sm font-bold" >
-                                                                    {"₿"}
-                                                                </span>
-                                                            </button>
-                                                            <div className="flex flex-col shrink-0 items-start gap-[1px]">
-                                                                <div className="flex flex-col items-center py-0.5">
-                                                                    <span className="text-white text-base font-bold" >
-                                                                        {"BTC-USD"}
-                                                                    </span>
-                                                                </div>
-                                                                <span className="text-gray-400 text-xs mr-[30px]" >
-                                                                    {"Bitcoin"}
-                                                                </span>
-                                                            </div>
-                                                        </div>
-                                                        <span className="text-white text-sm my-7 ml-4 mr-[52px]" >
-                                                            {"40x"}
-                                                        </span>
-                                                        <span className="text-white text-base font-bold my-[26px] ml-[23px] mr-3" >
-                                                            {"$113,479"}
-                                                        </span>
-                                                        <span className="text-[#2DA44E] text-base my-[26px] ml-[13px] mr-3.5" >
-                                                            {"+2,530 / +2.28%"}
-                                                        </span>
-                                                        <span className="text-white text-sm my-7 ml-[37px] mr-[13px]" >
-                                                            {"0.0100%"}
-                                                        </span>
-                                                        <span className="text-white text-sm my-7 ml-[21px] mr-[41px]" >
-                                                            {"$3,294,291,814"}
-                                                        </span>
-                                                        <span className="text-white text-sm" >
-                                                            {"$3,989,216,288"}
-                                                        </span>
-                                                    </div>
-                                                    <div className="flex items-center ml-[1px]">
-                                                        <div className="flex shrink-0 items-center p-4 gap-3">
-                                                            <button className="flex flex-col shrink-0 items-start bg-blue-500 text-left py-2 px-3 rounded-[9999px] border-0"
-                                                                onClick={()=>alert("Pressed!")}>
-                                                                <span className="text-white text-sm font-bold" >
-                                                                    {"E"}
-                                                                </span>
-                                                            </button>
-                                                            <div className="flex flex-col shrink-0 items-start gap-[1px]">
-                                                                <div className="flex flex-col items-center py-0.5">
-                                                                    <span className="text-white text-base font-bold" >
-                                                                        {"ETH-USD"}
-                                                                    </span>
-                                                                </div>
-                                                                <span className="text-gray-400 text-xs mr-3.5" >
-                                                                    {"Ethereum"}
-                                                                </span>
-                                                            </div>
-                                                        </div>
-                                                        <span className="text-white text-sm my-7 ml-4 mr-[53px]" >
-                                                            {"25x"}
-                                                        </span>
-                                                        <span className="text-white text-base font-bold my-[26px] ml-6 mr-3" >
-                                                            {"$4,350.7"}
-                                                        </span>
-                                                        <span className="text-[#2DA44E] text-base my-[26px] ml-[26px] mr-[27px]" >
-                                                            {"+66.3 / +1.55%"}
-                                                        </span>
-                                                        <span className="text-white text-sm my-7 ml-[37px] mr-[13px]" >
-                                                            {"0.0100%"}
-                                                        </span>
-                                                        <span className="text-white text-sm my-7 ml-4 mr-[38px]" >
-                                                            {"$2,603,760,484"}
-                                                        </span>
-                                                        <span className="text-white text-sm" >
-                                                            {"$2,911,409,736"}
-                                                        </span>
-                                                    </div>
-                                                    <div className="flex items-center ml-[1px]">
-                                                        <div className="flex shrink-0 items-center p-4 gap-3">
-                                                            <button className="flex flex-col shrink-0 items-start bg-[#A855F7] text-left py-[7px] px-[11px] rounded-[9999px] border-0"
-                                                                onClick={()=>alert("Pressed!")}>
-                                                                <span className="text-white text-sm font-bold" >
-                                                                    {"S"}
-                                                                </span>
-                                                            </button>
-                                                            <div className="flex flex-col shrink-0 items-start gap-[1px]">
-                                                                <div className="flex flex-col items-center py-0.5">
-                                                                    <span className="text-white text-base font-bold" >
-                                                                        {"SOL-USD"}
-                                                                    </span>
-                                                                </div>
-                                                                <span className="text-gray-400 text-xs mr-[30px]" >
-                                                                    {"Solana"}
-                                                                </span>
-                                                            </div>
-                                                        </div>
-                                                        <span className="text-white text-sm my-7 ml-4 mr-[52px]" >
-                                                            {"20x"}
-                                                        </span>
-                                                        <span className="text-white text-base font-bold my-[26px] ml-[31px] mr-[11px]" >
-                                                            {"$221.94"}
-                                                        </span>
-                                                        <span className="text-[#2DA44E] text-base my-[26px] ml-[25px] mr-[26px]" >
-                                                            {"+7.47 / +3.48%"}
-                                                        </span>
-                                                        <span className="text-white text-sm my-7 ml-[37px] mr-[13px]" >
-                                                            {"0.0100%"}
-                                                        </span>
-                                                        <span className="text-white text-sm my-7 ml-[27px] mr-[35px]" >
-                                                            {"$1,314,153,194"}
-                                                        </span>
-                                                        <span className="text-white text-sm" >
-                                                            {"$1,516,333,384"}
-                                                        </span>
-                                                    </div>
-                                                    <div className="flex items-center mb-4 ml-[1px]">
-                                                        <div className="flex shrink-0 items-center p-4 gap-3">
-                                                            <button className="flex flex-col shrink-0 items-start bg-pink-500 text-left py-2 px-[11px] rounded-[9999px] border-0"
-                                                                onClick={()=>alert("Pressed!")}>
-                                                                <span className="text-white text-sm font-bold" >
-                                                                    {"H"}
-                                                                </span>
-                                                            </button>
-                                                            <div className="flex flex-col shrink-0 items-start gap-[1px]">
-                                                                <div className="flex flex-col items-center py-0.5">
-                                                                    <span className="text-white text-base font-bold" >
-                                                                        {"HYPE-USD"}
-                                                                    </span>
-                                                                </div>
-                                                                <span className="text-gray-400 text-xs mr-3.5" >
-                                                                    {"Hyperliquid"}
-                                                                </span>
-                                                            </div>
-                                                        </div>
-                                                        <span className="text-white text-sm my-7 ml-4 mr-[54px]" >
-                                                            {"10x"}
-                                                        </span>
-                                                        <span className="text-white text-base font-bold my-[26px] ml-[30px] mr-[13px]" >
-                                                            {"$54.531"}
-                                                        </span>
-                                                        <span className="text-[#2DA44E] text-base my-[26px] ml-[17px] mr-[18px]" >
-                                                            {"+1.625 / +3.07%"}
-                                                        </span>
-                                                        <span className="text-white text-sm my-7 ml-[37px] mr-[13px]" >
-                                                            {"0.0100%"}
-                                                        </span>
-                                                        <span className="text-white text-sm my-7 ml-8 mr-[37px]" >
-                                                            {"$709,614,355"}
-                                                        </span>
-                                                        <span className="text-white text-sm" >
-                                                            {"$1,487,051,890"}
-                                                        </span>
-                                                    </div>
-                                                    <div className="flex items-center self-stretch mb-8 mx-[17px]">
-                                                        <div className="flex shrink-0 items-center pr-[7px] mr-8 gap-3">
-                                                            <button className="flex flex-col shrink-0 items-start bg-pink-500 text-left py-2 px-[11px] rounded-[9999px] border-0"
-                                                                onClick={()=>alert("Pressed!")}>
-                                                                <span className="text-white text-sm font-bold" >
-                                                                    {"H"}
-                                                                </span>
-                                                            </button>
-                                                            <div className="flex flex-col shrink-0 items-start gap-[1px]">
-                                                                <div className="flex flex-col items-center py-0.5">
-                                                                    <span className="text-white text-base font-bold" >
-                                                                        {"HYPE/USDC"}
-                                                                    </span>
-                                                                </div>
-                                                                <span className="text-gray-400 text-xs mr-[57px]" >
-                                                                    {"SPOT"}
-                                                                </span>
-                                                            </div>
-                                                        </div>
-                                                        <span className="text-white text-sm mr-[102px]" >
-                                                            {"–"}
-                                                        </span>
-                                                        <span className="text-white text-base font-bold mr-[31px]" >
-                                                            {"$54.511"}
-                                                        </span>
-                                                        <span className="text-[#2DA44E] text-base mr-[106px]" >
-                                                            {"+1.593 / +3.01%"}
-                                                        </span>
-                                                        <span className="text-white text-sm mr-[42px]" >
-                                                            {"–"}
-                                                        </span>
-                                                        <span className="text-white text-sm mr-[130px]" >
-                                                            {"$250,910,508"}
-                                                        </span>
-                                                        <span className="text-white text-sm" >
-                                                            {"–"}
-                                                        </span>
-                                                    </div>
-                                                    <div className="flex items-center self-stretch mb-4 mx-[17px]">
-                                                        <span className="flex-1 text-[#8B949E] text-sm" >
-                                                            {"Showing 5 of 247 markets"}
-                                                        </span>
-                                                        <span className="text-[#8B949E] text-sm mr-2" >
-                                                            {"Press"}
-                                                        </span>
-                                                        <button className="flex flex-col shrink-0 items-start bg-gray-600 text-left py-1 px-2 mr-[9px] rounded border-0"
-                                                            onClick={()=>alert("Pressed!")}>
-                                                            <span className="text-[#8B949E] text-xs" >
-                                                                {"ESC"}
-                                                            </span>
+                                                {/* Popup 內容 */}
+                                                <div className="relative w-full max-w-[910px] mt-4 ml-auto mr-auto md:mt-0 md:ml-0 md:mr-0 bg-[#272B2F] overflow-auto md:rounded-lg md:border md:border-[#30363D] flex flex-col">
+                                                
+                                                    {/* Close button for mobile */}
+                                                    <div className="md:hidden w-full flex justify-end p-4">
+                                                        <button className="text-white text-lg font-bold" onClick={() => setShowAssetPopup(false)}>
+                                                        ✕
                                                         </button>
-                                                        <span className="text-[#8B949E] text-sm" >
-                                                            {"to close"}
-                                                        </span>
                                                     </div>
-                                                {/* END of Custom Select Asset Popup */}
+
+                                                    {/* Search + Filter */}
+                                                    <div className="flex items-center justify-between w-full gap-4 px-4 mt-6 mb-6">
+                                                        <div className="flex items-center flex-1 bg-[#0D1117] py-3 px-2 rounded-sm border border-[#30363D]">
+                                                        <img
+                                                            src="https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/alyycaw7_expires_30_days.png"
+                                                            className="w-4 h-6 mx-4 object-fill"
+                                                        />
+                                                        <input
+                                                            placeholder="Search"
+                                                            value={input1}
+                                                            onChange={(event) => onChangeInput1(event.target.value)}
+                                                            className="flex-1 text-[#ADAEBC] text-base border-0"
+                                                        />
+                                                        </div>
+                                                        <div className="flex items-center gap-2 shrink-0 bg-[#0D1117] p-1 rounded-sm border border-[#30363D]">
+                                                        <button
+                                                            className="flex flex-col items-start bg-[#92318D] text-left py-3 px-3 rounded border-0"
+                                                            onClick={() => alert("Pressed!")}
+                                                        >
+                                                            <span className="text-white text-sm w-full">Strict</span>
+                                                        </button>
+                                                        <span className="text-[#8B949E] text-sm w-full py-3 px-3">All</span>
+                                                        </div>
+                                                    </div>
+
+                                                    {/* Tabs */}
+                                                    <div className="flex whitespace-nowrap gap-x-4 gap-y-2 px-4 mb-2 text-sm">
+                                                        {["All Coins","Perps","Spot","Trending","DEX Only","Pre-launch","AI","DeFi","Layer 1","Layer 2","Meme"].map(tab => (
+                                                        <span key={tab} className={`my-1 ${tab==="All Coins"?"text-white":"text-[#8B949E]"}`}>{tab}</span>
+                                                        ))}
+                                                    </div>
+
+                                                    {/* Table Header */}
+                                                    <div className="flex whitespace-nowrap gap-4 items-center px-4 text-xs text-[#8B949E] font-bold mb-2">
+                                                        {["Symbol","Leverage","Last Price","24h Change","8h Funding","24h Volume","Open Interest"].map((col, i) => (
+                                                        <span key={i} className={`flex-1 ${i===0?"flex-[2]":""}`}>{col}</span>
+                                                        ))}
+                                                    </div>
+
+                                                    {/* Table Rows */}
+                                                    {[
+                                                        {symbol:"BTC-USD",name:"Bitcoin",bg:"bg-orange-500",leverage:"40x",price:"$113,479",change:"+2,530 / +2.28%",funding:"0.0100%",volume:"$3,294,291,814",oi:"$3,989,216,288"},
+                                                        {symbol:"ETH-USD",name:"Ethereum",bg:"bg-blue-500",leverage:"25x",price:"$4,350.7",change:"+66.3 / +1.55%",funding:"0.0100%",volume:"$2,603,760,484",oi:"$2,911,409,736"},
+                                                        {symbol:"SOL-USD",name:"Solana",bg:"bg-purple-500",leverage:"20x",price:"$221.94",change:"+7.47 / +3.48%",funding:"0.0100%",volume:"$1,314,153,194",oi:"$1,516,333,384"},
+                                                        {symbol:"HYPE-USD",name:"Hyperliquid",bg:"bg-pink-500",leverage:"10x",price:"$54.531",change:"+1.625 / +3.07%",funding:"0.0100%",volume:"$709,614,355",oi:"$1,487,051,890"}
+                                                    ].map((row, idx) => (
+                                                        <div key={idx} className="flex gap-2 items-center px-4 py-2 text-sm text-white border-b border-[#30363D]">
+                                                        <div className="flex items-center gap-3 flex-[2]">
+                                                            <button className={`${row.bg} text-white py-2 px-3 rounded-full border-0`}>{row.symbol.charAt(0)}</button>
+                                                            <div className="flex flex-col">
+                                                            <span className="font-bold">{row.symbol}</span>
+                                                            <span className="text-gray-400 text-xs">{row.name}</span>
+                                                            </div>
+                                                        </div>
+                                                        <span className="flex-1">{row.leverage}</span>
+                                                        <span className="flex-1 font-bold">{row.price}</span>
+                                                        <span className="flex-1 text-[#2DA44E]">{row.change}</span>
+                                                        <span className="flex-1">{row.funding}</span>
+                                                        <span className="flex-1">{row.volume}</span>
+                                                        <span className="flex-1">{row.oi}</span>
+                                                        </div>
+                                                    ))}
+
+                                                    {/* Footer */}
+                                                    <div className="flex items-center justify-between px-4 py-2 text-sm text-[#8B949E] mt-4">
+                                                        <span>Showing 4 of 247 markets</span>
+                                                        <span>Press <button className="px-2 py-1 bg-gray-600 rounded text-xs">ESC</button> to close</span>
+                                                    </div>
+
+                                                </div>
                                             </div>
                                         )}
+
                                     </div>
                                 </div>
                                 {/* Row 2: Granularity + Indicator */}
