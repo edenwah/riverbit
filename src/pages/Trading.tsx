@@ -7,6 +7,8 @@ export default () => {
     const [input5, onChangeInput5] = useState('');
     const [input6, onChangeInput6] = useState('');
     const [input7, onChangeInput7] = useState('');
+    const [input8, onChangeInput8] = useState('');
+    const [input9, onChangeInput9] = useState('');
     const [isOn, setIsOn] = useState(false);
     const [reduceOnly, setReduceOnly] = useState(false);
     const [activeOrderTab, setActiveOrderTab] = useState("Market"); // NEW: tab state
@@ -566,14 +568,14 @@ export default () => {
                                     {/* Paste all the JSX from line 353 to 640 here */}
                                     <div className="flex flex-col items-start w-full">
                                         <div className="flex flex-col items-center py-1 w-full">
-                                            <div className="flex items-start pr-[1px] ">
-                                                <span className="text-zinc-400 text-sm my-1 mx-8" >
+                                            <div className="flex items-start pr-[1px] w-full">
+                                                <span className="text-zinc-400 text-sm my-1 w-full" >
                                                     {"Price"}
                                                 </span>
-                                                <span className="text-zinc-400 text-sm my-1 mx-[35px]" >
+                                                <span className="text-zinc-400 text-sm my-1 w-full" >
                                                     {"Size"}
                                                 </span>
-                                                <span className="text-zinc-400 text-sm my-1 ml-[49px] mr-[17px]" >
+                                                <span className="text-zinc-400 text-sm my-1 w-full" >
                                                     {"Total"}
                                                 </span>
                                             </div>
@@ -601,7 +603,7 @@ export default () => {
                                                 />
 
                                                 {/* 三欄內容 */}
-                                                <div className="grid grid-cols-3 w-full relative z-10 px-4 py-2">
+                                                <div className="grid grid-cols-3 w-full relative z-10 py-2">
                                                     <span className="text-[#F85149]">{row.price}</span>
                                                     <span>{row.size}</span>
                                                     <span className="text-zinc-400">{row.total}</span>
@@ -645,7 +647,7 @@ export default () => {
                                                     />
 
                                                     {/* 三欄內容 */}
-                                                    <div className="grid grid-cols-3 w-full relative z-10 px-4 py-2">
+                                                    <div className="grid grid-cols-3 w-full relative z-10 py-2">
                                                         <span className="text-[#2DA44E]">{row.price}</span>
                                                         <span>{row.size}</span>
                                                         <span className="text-zinc-400">{row.total}</span>
@@ -660,8 +662,50 @@ export default () => {
                                 </div>
                             )}
                             {orderTab === "Trades" && (
-                                <div className="flex flex-col items-center justify-center w-full py-12">
-                                    <span className="text-zinc-400 text-base">Trades coming soon.</span>
+                                <div className="flex flex-col items-start w-full">
+                                    <div className="flex flex-col items-center py-1 w-full">
+                                        <div className="flex items-start pr-[1px] w-full">
+                                            <span className="text-zinc-400 text-sm my-1 w-full" >
+                                                {"Price"}
+                                            </span>
+                                            <span className="text-zinc-400 text-sm my-1 w-full" >
+                                                {"Size"}
+                                            </span>
+                                            <span className="text-zinc-400 text-sm my-1 w-full" >
+                                                {"Time"}
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div className="flex flex-col w-full">
+                                        {[
+                                            { price: "110,584.00", priceColor: "text-[#2DA44E]", qty: "14.35", time: "00:49:51" },
+                                            { price: "110,589.00", priceColor: "text-[#2DA44E]", qty: "0.31", time: "00:49:51" },
+                                            { price: "110,595.00", priceColor: "text-[#F85149]", qty: "0.20", time: "00:49:51" },
+                                            { price: "110,594.00", priceColor: "text-[#F85149]", qty: "1.359", time: "00:49:51" },
+                                            { price: "110,585.00", priceColor: "text-[#2DA44E]", qty: "0.172", time: "00:49:51" },
+                                            { price: "110,593.00", priceColor: "text-[#F85149]", qty: "0.990", time: "00:49:51" },
+                                            { price: "110,588.00", priceColor: "text-[#2DA44E]", qty: "1.755", time: "00:49:51" },
+                                            { price: "110,592.00", priceColor: "text-[#F85149]", qty: "3.025", time: "00:49:51" },
+                                            { price: "110,589.00", priceColor: "text-[#2DA44E]", qty: "1.799", time: "00:49:51" },
+                                            { price: "110,591.00", priceColor: "text-[#F85149]", qty: "1.146", time: "00:49:51" },
+                                            { price: "110,589.00", priceColor: "text-[#2DA44E]", qty: "1.799", time: "00:49:51" },
+                                            { price: "110,590.00", priceColor: "text-[#F85149]", qty: "2.852", time: "00:49:51" },
+                                            { price: "110,587.00", priceColor: "text-[#2DA44E]", qty: "0.351", time: "00:49:51" },
+                                            { price: "110,590.00", priceColor: "text-[#F85149]", qty: "2.852", time: "00:49:51" },
+                                            { price: "110,589.00", priceColor: "text-[#2DA44E]", qty: "1.799", time: "00:49:51" },
+                                            { price: "110,590.00", priceColor: "text-[#F85149]", qty: "2.852", time: "00:49:51" },
+                                            { price: "110,590.00", priceColor: "text-[#F85149]", qty: "2.852", time: "00:49:51" },
+                                            { price: "110,586.00", priceColor: "text-[#2DA44E]", qty: "2.952", time: "00:49:51" },
+                                            { price: "110,590.00", priceColor: "text-[#F85149]", qty: "2.852", time: "00:49:51" },
+                                            { price: "110,589.00", priceColor: "text-[#2DA44E]", qty: "1.799", time: "00:49:51" },
+                                        ].map((row, idx) => (
+                                            <div key={idx} className="grid grid-cols-3 w-full text-sm py-2">
+                                            <span className={row.priceColor}>{row.price}</span>
+                                            <span className="text-white">{row.qty}</span>
+                                            <span className="text-zinc-400">{row.time}</span>
+                                            </div>
+                                        ))}
+                                    </div>
                                 </div>
                             )}
                         </div>
@@ -1340,16 +1384,52 @@ export default () => {
                                     <div className="flex flex-col items-start gap-2 w-full">
                                         <div className="flex flex-col items-center pb-[1px]">
                                             <span className="text-[#9D9DAF] text-sm" >
-                                                {"Price (USDC)"}
+                                                {"Stop-Loss Type"}
+                                            </span>
+                                        </div>
+                                        <button className="flex w-full items-center bg-[#0D1117] text-left p-3 rounded-md border border-solid border-[#30363D]"
+                                            onClick={()=>alert("Pressed!")}>
+                                            <span className="text-white text-base mr-[123px]" >
+                                                {"Stop Market"}
+                                            </span>
+                                            <img
+                                                src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/lwwwj2o4_expires_30_days.png"} 
+                                                className="w-3 h-[15px] rounded-md object-fill"
+                                            />
+                                        </button>
+                                    </div>
+                                    <div className="flex flex-col items-start gap-2 w-full">
+                                        <div className="flex flex-col items-center pb-[1px]">
+                                            <span className="text-[#9D9DAF] text-sm" >
+                                                {"Trigger Price (USDC)"}
                                             </span>
                                         </div>
                                         <input
                                             type="number"
-                                            placeholder={"227.00"}
-                                            value={input3}
-                                            onChange={(event)=>onChangeInput3(event.target.value)}
-                                            className="text-white bg-[#0D1117] text-base p-3 rounded-md border border-solid border-[#30363D] w-full"
+                                            placeholder={"226.00"}
+                                            value={input8}
+                                            onChange={(event)=>onChangeInput8(event.target.value)}
+                                            className="w-full text-white bg-[#0D1117] text-base p-3 rounded-md border border-solid border-[#30363D]"
                                         />
+                                    </div>
+                                    <div className="flex flex-col items-start gap-2 w-full">
+                                        <div className="flex flex-col items-center pb-[1px]">
+                                            <span className="text-[#9D9DAF] text-sm" >
+                                                {"Limit Price"}
+                                            </span>
+                                        </div>
+                                        <div className="flex flex-col items-start gap-1 w-full">
+                                            <input
+                                                type="number"
+                                                placeholder={"225.78"}
+                                                value={input9}
+                                                onChange={(event)=>onChangeInput9(event.target.value)}
+                                                className="w-full text-white bg-[#0D1117] text-base p-3 rounded-md border border-solid border-[#30363D]"
+                                            />
+                                            <span className="text-[#9D9DAF] text-sm" >
+                                                {"Limit Rule: Limit = Stop ± 0.1%"}
+                                            </span>
+                                        </div>
                                     </div>
                                     <div className="flex flex-col items-start gap-2 w-full">
                                         <div className="flex flex-col items-center pb-[1px]">
