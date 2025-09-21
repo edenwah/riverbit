@@ -711,7 +711,7 @@ export default () => {
                     </div>
 
                     {/* Order Book + Trading Form wrapper */}
-                    <div className="md:col-span-2 grid 2xl:grid-cols-2 flex flex-col gap-2 w-full  xl:gap-2">
+                    <div className="md:col-span-2 grid 2xl:grid-cols-2 gap-2 w-full  xl:gap-2">
                         {/* Order Book/Trades (col-span-1 on desktop, full width on mobile) */}
                         <div className="flex flex-col gap-2 items-center bg-zinc-900 p-[1px] rounded-sm border border-solid border-[#30363D] w-full">
                             {/* Tabs for Order Book/Trades */}
