@@ -10,6 +10,7 @@ export default () => {
     const [input8, onChangeInput8] = useState('');
     const [input9, onChangeInput9] = useState('');
     const [input10, onChangeInput10] = useState('');
+    const [input11, onChangeInput11] = useState('Strict');
     const [isOn, setIsOn] = useState(false);
     const [reduceOnly, setReduceOnly] = useState(false);
     const [activeOrderTab, setActiveOrderTab] = useState("Market"); // NEW: tab state
@@ -19,7 +20,6 @@ export default () => {
     const [granularity, setGranularity] = useState("")
     const [indicator, setIndicator] = useState("")
     const [filterValue, setFilterValue] = useState("")
-    const [pressedButton, setPressedButton] = useState(""); // For tracking which button is pressed
     const [tif, setTif] = useState("GTC");
     const [showTifTooltip, setShowTifTooltip] = useState(false);
     const [leverage, setLeverage] = useState("20x"); // Add this state
@@ -347,14 +347,26 @@ export default () => {
                                                         />
                                                         </div>
                                                         <div className="flex items-center gap-2 shrink-0 bg-[#0D1117] p-1 rounded-sm border border-[#30363D]">
-                                                        <button
-                                                            className="flex flex-col items-start bg-[#92318D] text-left py-3 px-3 rounded border-0"
-                                                            onClick={() => alert("Pressed!")}
-                                                        >
-                                                            <span className="text-white text-sm w-full">Strict</span>
-                                                        </button>
-                                                        <span className="text-[#8B949E] text-sm w-full py-3 px-3">All</span>
+                                                            <button
+                                                                className={`flex flex-col items-start py-3 px-3 rounded border-0 transition-all ${
+                                                                    input11 === "Strict" ? "bg-[#92318D] text-white" : "bg-transparent text-[#8B949E]"
+                                                                }`}
+                                                                onClick={() => onChangeInput11("Strict")}
+                                                                type="button"
+                                                            >
+                                                                <span className="text-sm w-full">Strict</span>
+                                                            </button>
+                                                            <button
+                                                                className={`flex flex-col items-start py-3 px-3 rounded border-0 transition-all ${
+                                                                    input11 === "All" ? "bg-[#92318D] text-white" : "bg-transparent text-[#8B949E]"
+                                                                }`}
+                                                                onClick={() => onChangeInput11("All")}
+                                                                type="button"
+                                                            >
+                                                                <span className="text-sm w-full">All</span>
+                                                            </button>
                                                         </div>
+
                                                     </div>
 
                                                     {/* Tabs */}
