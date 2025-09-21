@@ -1,4 +1,10 @@
 import { useState, useRef, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { PrimaryButton } from "../components/Button/PrimaryButton";
+import { SecondaryButton } from "../components/Button/SecondaryButton";
+import PrimaryButtonLarge from "../components/Button/PrimaryButtonLarge";
+
+
 export default () => {
     const [input1, onChangeInput1] = useState('');
     const [input2, onChangeInput2] = useState('');
@@ -29,12 +35,20 @@ export default () => {
     const [language, setLanguage] = useState("EN");
     const [showLangDropdown, setShowLangDropdown] = useState(false);
     const [showWalletDropdown, setShowWalletDropdown] = useState(false);
+    const [showMoreDropdown, setShowMoreDropdown] = useState(false);
 
     const walletDropdownRef = useRef<HTMLDivElement>(null);
     const langDropdownRef = useRef<HTMLDivElement>(null);
+    const moreDropdownRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         function handleClickOutside(event: MouseEvent) {
+            if (
+                moreDropdownRef.current &&
+                !moreDropdownRef.current.contains(event.target as Node)
+            ) {
+                setShowMoreDropdown(false);
+            }
             if (
                 walletDropdownRef.current &&
                 !walletDropdownRef.current.contains(event.target as Node)
@@ -48,13 +62,13 @@ export default () => {
                 setShowLangDropdown(false);
             }
         }
-        if (showWalletDropdown || showLangDropdown) {
+        if (showMoreDropdown || showWalletDropdown || showLangDropdown) {
             document.addEventListener("mousedown", handleClickOutside);
         }
         return () => {
             document.removeEventListener("mousedown", handleClickOutside);
         };
-    }, [showWalletDropdown, showLangDropdown]);
+    }, [showMoreDropdown, showWalletDropdown, showLangDropdown]);
 
 
     const AMOUNT_TOTAL = 1000;
@@ -78,41 +92,79 @@ export default () => {
                         />
                         {/* Desktop nav */}
                         <div className="flex shrink-0 items-start">
-                            {/* ...nav buttons... */}
-                            <button className="flex flex-col shrink-0 items-start bg-zinc-700 text-left py-[11px] px-3 mr-[30px] rounded-sm border-0"
-                                onClick={()=>alert("Pressed!")}>
-                                <span className="text-white text-sm" >
-                                    {"Trading"}
-                                </span>
-                            </button>
-                            <div className="flex flex-col shrink-0 items-center py-[11px] mr-[30px] rounded-sm">
-                                <span className="text-zinc-400 text-sm" >
-                                    {"RiverPool"}
-                                </span>
-                            </div>
-                            <div className="flex flex-col shrink-0 items-center py-[11px] mr-[30px] rounded-sm">
-                                <span className="text-zinc-400 text-sm" >
-                                    {"Earn"}
-                                </span>
-                            </div>
-                            <div className="flex flex-col shrink-0 items-center py-[11px] mr-[30px] rounded-sm">
-                                <span className="text-zinc-400 text-sm" >
-                                    {"Referral"}
-                                </span>
-                            </div>
-                            <div className="flex flex-col shrink-0 items-center py-[11px] mr-[30px] rounded-sm">
-                                <span className="text-zinc-400 text-sm" >
-                                    {"Assets"}
-                                </span>
-                            </div>
-                            <div className="flex shrink-0 items-center py-[11px] gap-[13px] rounded-sm">
-                                <span className="text-zinc-400 text-sm" >
-                                    {"More"}
-                                </span>
-                                <img
-                                    src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/wo9zz3y5_expires_30_days.png"} 
-                                    className="w-3 h-[15px] rounded-sm object-fill"
-                                />
+                            <Link
+                                to="/trading"
+                                className="flex flex-col shrink-0 items-start bg-zinc-700 text-left py-[11px] px-3 mr-[30px] rounded-sm border-0"
+                            >
+                                <span className="text-white text-sm">Trading</span>
+                            </Link>
+
+                            <Link
+                                to="/riverpool"
+                                className="flex flex-col shrink-0 items-center py-[11px] mr-[30px] rounded-sm"
+                            >
+                                <span className="text-zinc-400 text-sm">RiverPool</span>
+                            </Link>
+
+                            <Link
+                                to="/earn"
+                                className="flex flex-col shrink-0 items-center py-[11px] mr-[30px] rounded-sm"
+                            >
+                                <span className="text-zinc-400 text-sm">Earn</span>
+                            </Link>
+
+                            <Link
+                                to="/referral/candidate"
+                                className="flex flex-col shrink-0 items-center py-[11px] mr-[30px] rounded-sm"
+                            >
+                                <span className="text-zinc-400 text-sm">Referral</span>
+                            </Link>
+
+                            <Link
+                                to="/assets"
+                                className="flex flex-col shrink-0 items-center py-[11px] mr-[30px] rounded-sm"
+                            >
+                                <span className="text-zinc-400 text-sm">Assets</span>
+                            </Link>
+
+                            <div className="relative" ref={moreDropdownRef}>
+                                <button
+                                    className="flex shrink-0 items-center py-[11px] gap-[13px] rounded-sm focus:outline-none"
+                                    onClick={() => setShowMoreDropdown((v) => !v)}
+                                    type="button"
+                                >
+                                    <span className="text-zinc-400 text-sm">More</span>
+                                    <img
+                                        src="https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/wo9zz3y5_expires_30_days.png"
+                                        className="w-3 h-[15px] rounded-sm object-fill"
+                                        alt="More"
+                                    />
+                                </button>
+                                {showMoreDropdown && (
+                                    <div className="text-left absolute left-0 mt-2 z-50 min-w-[180px] bg-zinc-900 border border-[#30363D] rounded shadow-lg">
+                                        <a
+                                            href="/api"
+                                            className="block px-4 py-2 text-sm text-white hover:bg-zinc-800"
+                                            onClick={() => setShowMoreDropdown(false)}
+                                        >
+                                            API
+                                        </a>
+                                        <a
+                                            href="/docs"
+                                            className="block px-4 py-2 text-sm text-white hover:bg-zinc-800"
+                                            onClick={() => setShowMoreDropdown(false)}
+                                        >
+                                            Documentation
+                                        </a>
+                                        <a
+                                            href="/announcement"
+                                            className="block px-4 py-2 text-sm text-white hover:bg-zinc-800"
+                                            onClick={() => setShowMoreDropdown(false)}
+                                        >
+                                            Announcement
+                                        </a>
+                                    </div>
+                                )}
                             </div>
                         </div>
                     </div>
@@ -202,18 +254,10 @@ export default () => {
                                 )}
                             </div>
                             {/* Withdraw & Deposit Buttons */}
-                            <button className="flex flex-col shrink-0 items-start bg-zinc-900 text-left py-[11px] px-4 rounded-sm border border-solid border-[#30363D]"
-                                onClick={()=>alert("Pressed!")}>
-                                <span className="text-white text-sm font-bold" >
-                                    {"Withdraw"}
-                                </span>
-                            </button>
-                            <button className="flex flex-col shrink-0 items-start bg-fuchsia-800 text-left py-[11px] px-4 rounded-sm border-0"
-                                onClick={()=>alert("Pressed!")}>
-                                <span className="text-white text-sm font-bold" >
-                                    {"Deposit"}
-                                </span>
-                            </button>
+                            <div className="flex gap-2">
+                                <SecondaryButton onClick={() => alert("Pressed!")}>Withdraw</SecondaryButton>
+                                <PrimaryButton onClick={() => alert("Pressed!")}>Deposit</PrimaryButton>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1254,14 +1298,9 @@ export default () => {
                                             </div>
                                         </div>
                                     </div>
-                                    <button
-                                        className="w-full flex justify-center items-center bg-fuchsia-800 py-3.5 rounded-sm border-0"
-                                        onClick={() => alert("Pressed!")}
-                                    >
-                                        <span className="text-white text-base font-bold text-center">
-                                            {input1 === "Sell / Short" ? "Sell / Short" : "Buy / Long"}
-                                        </span>
-                                    </button>
+                                    <PrimaryButtonLarge onClick={() => alert("Pressed!")}>
+                                        {input1 === "Sell / Short" ? "Sell / Short" : "Buy / Long"}
+                                    </PrimaryButtonLarge>
                                     {/* --- END Market Tab Content --- */}
                                 </div>
                             )}
