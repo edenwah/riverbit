@@ -1,51 +1,14 @@
 import React from "react";
+import RiverbitLogo from "../components/RiverbitLogo";
+import DesktopNav from "../components/DesktopNav";
 export default (props) => {
 	return (
 		<div className="flex flex-col bg-white">
 			<div className="self-stretch bg-white h-[1099px] rounded-lg border-2 border-solid border-[#CED4DA]">
 				<div className="flex justify-between items-start self-stretch bg-[#161B22] py-3.5 px-4">
 					<div className="flex shrink-0 items-start gap-8">
-						<img
-							src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/cjhukig1_expires_30_days.png"} 
-							className="w-[118px] h-10 object-fill"
-						/>
-						<div className="flex shrink-0 items-start gap-[30px]">
-							<div className="flex flex-col shrink-0 items-center py-[15px] rounded-md">
-								<span className="text-[#8B949E] text-sm" >
-									{"Trading"}
-								</span>
-							</div>
-							<div className="flex flex-col shrink-0 items-center py-[11px] rounded-md">
-								<span className="text-[#8B949E] text-sm" >
-									{"RiverPool"}
-								</span>
-							</div>
-							<div className="flex flex-col shrink-0 items-center py-[11px] rounded-md">
-								<span className="text-[#8B949E] text-sm" >
-									{"Earn"}
-								</span>
-							</div>
-							<button className="flex flex-col shrink-0 items-start bg-[#30363D80] text-left py-[11px] px-3 rounded-md border-0"
-								onClick={()=>alert("Pressed!")}>
-								<span className="text-white text-sm" >
-									{"Referral"}
-								</span>
-							</button>
-							<div className="flex flex-col shrink-0 items-center py-[11px] rounded-md">
-								<span className="text-[#8B949E] text-sm" >
-									{"Assets"}
-								</span>
-							</div>
-							<div className="flex shrink-0 items-center py-[11px] gap-[13px] rounded-md">
-								<span className="text-[#8B949E] text-sm" >
-									{"More"}
-								</span>
-								<img
-									src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/2v6mn0a1_expires_30_days.png"} 
-									className="w-3 h-[15px] rounded-md object-fill"
-								/>
-							</div>
-						</div>
+						<RiverbitLogo />
+                        <DesktopNav />
 					</div>
 					<div className="flex shrink-0 items-center gap-4">
 						<div className="flex flex-col shrink-0 items-start">

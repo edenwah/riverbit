@@ -1,5 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
+import RiverbitLogo from "../components/RiverbitLogo";
+import DesktopNav from "../components/DesktopNav";
 import PrimaryButton from "../components/Button/PrimaryButton";
 import { SecondaryButton } from "../components/Button/SecondaryButton";
 export default () => {
@@ -83,87 +85,8 @@ export default () => {
                 <div className="hidden xl:flex justify-between items-start self-stretch bg-zinc-900 py-3.5 px-4">
                     {/* Left: Logo and nav */}
                     <div className="flex shrink-0 items-start gap-8">
-                        <img
-                            src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/tsg0s0tv_expires_30_days.png"} 
-                            className="w-[118px] h-10 object-fill"
-                        />
-                        {/* Desktop nav */}
-                        <div className="flex shrink-0 items-start">
-                            <Link
-                                to="/trading"
-                                className="flex flex-col shrink-0 items-start bg-zinc-700 text-left py-[11px] px-3 mr-[30px] rounded-sm border-0"
-                            >
-                                <span className="text-white text-sm">Trading</span>
-                            </Link>
-
-                            <Link
-                                to="/riverpool"
-                                className="flex flex-col shrink-0 items-center py-[11px] mr-[30px] rounded-sm"
-                            >
-                                <span className="text-zinc-400 text-sm">RiverPool</span>
-                            </Link>
-
-                            <Link
-                                to="/earn"
-                                className="flex flex-col shrink-0 items-center py-[11px] mr-[30px] rounded-sm"
-                            >
-                                <span className="text-zinc-400 text-sm">Earn</span>
-                            </Link>
-
-                            <Link
-                                to="/referral/candidate"
-                                className="flex flex-col shrink-0 items-center py-[11px] mr-[30px] rounded-sm"
-                            >
-                                <span className="text-zinc-400 text-sm">Referral</span>
-                            </Link>
-
-                            <Link
-                                to="/assets"
-                                className="flex flex-col shrink-0 items-center py-[11px] mr-[30px] rounded-sm"
-                            >
-                                <span className="text-zinc-400 text-sm">Assets</span>
-                            </Link>
-
-                            <div className="relative" ref={moreDropdownRef}>
-                                <button
-                                    className="flex shrink-0 items-center py-[11px] gap-[13px] rounded-sm focus:outline-none"
-                                    onClick={() => setShowMoreDropdown((v) => !v)}
-                                    type="button"
-                                >
-                                    <span className="text-zinc-400 text-sm">More</span>
-                                    <img
-                                        src="https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/wo9zz3y5_expires_30_days.png"
-                                        className="w-3 h-[15px] rounded-sm object-fill"
-                                        alt="More"
-                                    />
-                                </button>
-                                {showMoreDropdown && (
-                                    <div className="text-left absolute left-0 mt-2 z-50 min-w-[180px] bg-zinc-900 border border-[#30363D] rounded shadow-lg">
-                                        <a
-                                            href="/api"
-                                            className="block px-4 py-2 text-sm text-white hover:bg-zinc-800"
-                                            onClick={() => setShowMoreDropdown(false)}
-                                        >
-                                            API
-                                        </a>
-                                        <a
-                                            href="/docs"
-                                            className="block px-4 py-2 text-sm text-white hover:bg-zinc-800"
-                                            onClick={() => setShowMoreDropdown(false)}
-                                        >
-                                            Documentation
-                                        </a>
-                                        <a
-                                            href="/announcement"
-                                            className="block px-4 py-2 text-sm text-white hover:bg-zinc-800"
-                                            onClick={() => setShowMoreDropdown(false)}
-                                        >
-                                            Announcement
-                                        </a>
-                                    </div>
-                                )}
-                            </div>
-                        </div>
+                        <RiverbitLogo />
+                        <DesktopNav />
                     </div>
                     {/* Right: Balance, Points, and buttons */}
                     <div className="flex items-center gap-4">

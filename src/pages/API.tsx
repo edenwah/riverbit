@@ -1,4 +1,6 @@
 import React, {useState} from "react";
+import RiverbitLogo from "../components/RiverbitLogo";
+import DesktopNav from "../components/DesktopNav";
 export default (props) => {
 	const [input1, onChangeInput1] = useState('');
 	const [input2, onChangeInput2] = useState('');
@@ -9,44 +11,8 @@ export default (props) => {
 			<div className="self-stretch bg-white h-[1294px] rounded-lg border-2 border-solid border-[#CED4DA]">
 				<div className="flex justify-between items-start self-stretch bg-[#161B22] py-3.5 px-4">
 					<div className="flex shrink-0 items-start gap-8">
-						<img
-							src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/b0rk8eg2_expires_30_days.png"} 
-							className="w-[118px] h-10 object-fill"
-						/>
-						<div className="flex shrink-0 items-start">
-							<div className="flex flex-col shrink-0 items-center py-[15px] mr-[30px] rounded-md">
-								<span className="text-[#8B949E] text-sm" >
-									{"Trading"}
-								</span>
-							</div>
-							<div className="flex flex-col shrink-0 items-center py-[11px] mr-[30px] rounded-md">
-								<span className="text-[#8B949E] text-sm" >
-									{"RiverPool"}
-								</span>
-							</div>
-							<div className="flex flex-col shrink-0 items-center py-[11px] mr-[30px] rounded-md">
-								<span className="text-[#8B949E] text-sm" >
-									{"Earn"}
-								</span>
-							</div>
-							<span className="text-[#8B949E] text-sm my-3.5 ml-[1px] mr-[31px]" >
-								{"Referral"}
-							</span>
-							<div className="flex flex-col shrink-0 items-center py-[11px] mr-[30px] rounded-md">
-								<span className="text-[#8B949E] text-sm" >
-									{"Assets"}
-								</span>
-							</div>
-							<div className="flex shrink-0 items-center py-[11px] gap-[13px] rounded-md">
-								<span className="text-[#8B949E] text-sm" >
-									{"More"}
-								</span>
-								<img
-									src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/3d7r757t_expires_30_days.png"} 
-									className="w-3 h-[15px] rounded-md object-fill"
-								/>
-							</div>
-						</div>
+						<RiverbitLogo />
+                        <DesktopNav />
 					</div>
 					<div className="flex shrink-0 items-center gap-4">
 						<div className="flex flex-col shrink-0 items-start">
