@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 export default () => {
     const [input1, onChangeInput1] = useState('');
     const [input2, onChangeInput2] = useState('');
@@ -26,6 +26,36 @@ export default () => {
     const [crossSelected, setCrossSelected] = useState(false);
     const [aiSelected, setAiSelected] = useState(false);
     const [showAssetPopup, setShowAssetPopup] = useState(false);
+    const [language, setLanguage] = useState("EN");
+    const [showLangDropdown, setShowLangDropdown] = useState(false);
+    const [showWalletDropdown, setShowWalletDropdown] = useState(false);
+
+    const walletDropdownRef = useRef<HTMLDivElement>(null);
+    const langDropdownRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        function handleClickOutside(event: MouseEvent) {
+            if (
+                walletDropdownRef.current &&
+                !walletDropdownRef.current.contains(event.target as Node)
+            ) {
+                setShowWalletDropdown(false);
+            }
+            if (
+                langDropdownRef.current &&
+                !langDropdownRef.current.contains(event.target as Node)
+            ) {
+                setShowLangDropdown(false);
+            }
+        }
+        if (showWalletDropdown || showLangDropdown) {
+            document.addEventListener("mousedown", handleClickOutside);
+        }
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [showWalletDropdown, showLangDropdown]);
+
 
     const AMOUNT_TOTAL = 1000;
 
@@ -106,26 +136,72 @@ export default () => {
                             </span>
                         </div>
                         <div className="flex items-center gap-4">
-                            <div className="flex shrink-0 items-center bg-zinc-900 py-2.5 px-3 gap-2 rounded-sm border border-solid border-[#30363D]">
-                                <img
-                                    src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/7ru13dyc_expires_30_days.png"} 
-                                    className="w-5 h-5 rounded-sm object-fill"
-                                />
-                                <img
-                                    src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/wbxxcfe7_expires_30_days.png"} 
-                                    className="w-3 h-[15px] rounded-sm object-fill"
-                                />
+                            {/* Wallet Icon */}
+                            <div className="relative" ref={walletDropdownRef}>
+                                <button
+                                    className="flex shrink-0 items-center bg-zinc-900 py-2.5 px-3 gap-2 rounded-sm border border-solid border-[#30363D] focus:outline-none"
+                                    onClick={() => setShowWalletDropdown((v) => !v)}
+                                >
+                                    <img
+                                        src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/7ru13dyc_expires_30_days.png"} 
+                                        className="w-5 h-5 rounded-sm object-fill"
+                                    />
+                                    <img
+                                        src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/wbxxcfe7_expires_30_days.png"} 
+                                        className="w-3 h-[15px] rounded-sm object-fill"
+                                    />
+                                </button>
+                                {showWalletDropdown && (
+                                    <div className="absolute right-0 mt-2 z-50 min-w-48 bg-zinc-900 border border-[#30363D] rounded shadow-lg">
+                                        <button
+                                            className="w-full text-left px-4 py-2 hover:bg-zinc-800 text-sm text-red-400"
+                                            onClick={() => {
+                                                // Add your disconnect wallet logic here
+                                                setShowWalletDropdown(false);
+                                            }}
+                                        >
+                                            Disconnect Wallet
+                                        </button>
+                                    </div>
+                                )}
                             </div>
-                            <button className="flex shrink-0 items-center bg-zinc-900 text-left py-2.5 px-4 gap-2.5 rounded-sm border border-solid border-[#30363D]"
-                                onClick={()=>alert("Pressed!")}>
-                                <img
-                                    src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/oyc1zap7_expires_30_days.png"} 
-                                    className="w-3.5 h-[19px] rounded-sm object-fill"
-                                />
-                                <span className="text-[#C9D1D9] text-sm" >
-                                    {"EN"}
-                                </span>
-                            </button>
+                            {/* Language Dropdown */}
+                            <div className="relative" ref={langDropdownRef}>
+                                <button
+                                    className="flex shrink-0 items-center bg-zinc-900 text-left py-2.5 px-4 gap-2.5 rounded-sm border border-solid border-[#30363D]"
+                                    onClick={() => setShowLangDropdown((v) => !v)}
+                                >
+                                    <img
+                                        src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/oyc1zap7_expires_30_days.png"}
+                                        className="w-3.5 h-[19px] rounded-sm object-fill"
+                                    />
+                                    <span className="text-[#C9D1D9] text-sm">{language}</span>
+                                    <img
+                                        src="https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/qdm0wdb6_expires_30_days.png"
+                                        className="w-3 h-[15px] object-fill"
+                                        alt="Dropdown"
+                                    />
+                                </button>
+                                {showLangDropdown && (
+                                    <div className="absolute right-0 mt-2 z-50 min-w-[100px] bg-zinc-900 border border-[#30363D] rounded shadow-lg">
+                                        {["EN", "中文"].map((lang) => (
+                                            <button
+                                                key={lang}
+                                                className={`w-full text-left px-4 py-2 hover:bg-zinc-800 text-sm ${
+                                                    language === lang ? "text-fuchsia-400 font-bold" : "text-white"
+                                                }`}
+                                                onClick={() => {
+                                                    setLanguage(lang);
+                                                    setShowLangDropdown(false);
+                                                }}
+                                            >
+                                                {lang}
+                                            </button>
+                                        ))}
+                                    </div>
+                                )}
+                            </div>
+                            {/* Withdraw & Deposit Buttons */}
                             <button className="flex flex-col shrink-0 items-start bg-zinc-900 text-left py-[11px] px-4 rounded-sm border border-solid border-[#30363D]"
                                 onClick={()=>alert("Pressed!")}>
                                 <span className="text-white text-sm font-bold" >
@@ -574,28 +650,48 @@ export default () => {
                             <div className="flex flex-col w-full">
                                 {/* Tabs + Filter */}
                                 <div className="overflow-x-auto">
-                                    <div className="flex justify-between items-center border-b border-[#30363D] px-4 min-w-[600px] flex-nowrap">
-                                        <div className="flex gap-4 whitespace-nowrap mr-4">
-                                            {[
-                                            "Balance",
-                                            "Positions",
-                                            "Open Orders",
-                                            "Trade History",
-                                            "Funding Rate History",
-                                            "Order History",
-                                            ].map((tab) => (
-                                            <button
-                                                key={tab}
-                                                className={`py-3 text-sm font-semibold ${
-                                                activeAccountTab === tab
-                                                    ? "text-white border-b-2 border-[#92318D]"
-                                                    : "text-zinc-400"
-                                                }`}
-                                                onClick={() => setActiveAccountTab(tab)}
-                                            >
-                                                {tab}
-                                            </button>
-                                            ))}
+                                    <div className="flex gap-4 justify-between items-center border-b border-[#30363D] px-4 min-w-[600px] flex-nowrap">
+                                        <div className="relative w-full">
+                                            <div className="flex border-b border-[#30363D] w-full">
+                                                {[
+                                                "Balance",
+                                                "Positions",
+                                                "Open Orders",
+                                                "Trade History",
+                                                "Funding History",
+                                                "Order History",
+                                                ].map(tab => (
+                                                <button
+                                                    key={tab}
+                                                    className={`flex-1 text-sm py-3 text-center focus:outline-none transition-colors duration-300 ${
+                                                    activeAccountTab === tab ? "text-white font-bold" : "text-zinc-400"
+                                                    }`}
+                                                    onClick={() => setActiveAccountTab(tab)}
+                                                >
+                                                    {tab}
+                                                </button>
+                                                ))}
+                                            </div>
+
+                                            {/* Sliding underline */}
+                                            <span
+                                                className="absolute bottom-0 left-0 h-[2px] bg-[#92318D] transition-transform duration-300 ease-in-out"
+                                                style={{
+                                                width: `calc(100% / 6)`, // 6 個 tabs
+                                                transform:
+                                                    activeAccountTab === "Balance"
+                                                    ? "translateX(0%)"
+                                                    : activeAccountTab === "Positions"
+                                                    ? "translateX(100%)"
+                                                    : activeAccountTab === "Open Orders"
+                                                    ? "translateX(200%)"
+                                                    : activeAccountTab === "Trade History"
+                                                    ? "translateX(300%)"
+                                                    : activeAccountTab === "Funding History"
+                                                    ? "translateX(400%)"
+                                                    : "translateX(500%)",
+                                                }}
+                                            />
                                         </div>
 
                                         {/* Filter Selector */}
@@ -624,29 +720,29 @@ export default () => {
                                 {/* Tab Content */}
                                 {activeAccountTab === "Balance" && (
                                     <div className="overflow-x-auto px-4 py-3 text-left">
-                                    {/* Table Header */}
-                                    <div className="flex text-sm text-zinc-400 font-bold mb-2 min-w-[400px]">
-                                        <span className="flex-1">Currency</span>
-                                        <span className="flex-1">Available</span>
-                                        <span className="flex-1">In Orders</span>
-                                        <span className="flex-1">Value($)</span>
-                                    </div>
+                                        {/* Table Header */}
+                                        <div className="flex text-sm text-zinc-400 font-bold mb-2 min-w-[400px]">
+                                            <span className="flex-1">Currency</span>
+                                            <span className="flex-1">Available</span>
+                                            <span className="flex-1">In Orders</span>
+                                            <span className="flex-1">Value($)</span>
+                                        </div>
 
-                                    {/* Table Rows */}
-                                    <div className="flex flex-col gap-2 text-sm text-white min-w-[400px]">
-                                        <div className="flex">
-                                        <span className="flex-1">USDC</span>
-                                        <span className="flex-1">12,345.67</span>
-                                        <span className="flex-1">1,000.00</span>
-                                        <span className="flex-1">$13,345.67</span>
+                                        {/* Table Rows */}
+                                        <div className="flex flex-col gap-2 text-sm text-white min-w-[400px]">
+                                            <div className="flex">
+                                            <span className="flex-1">USDC</span>
+                                            <span className="flex-1">12,345.67</span>
+                                            <span className="flex-1">1,000.00</span>
+                                            <span className="flex-1">$13,345.67</span>
+                                            </div>
+                                            <div className="flex">
+                                            <span className="flex-1">Points</span>
+                                            <span className="flex-1">1,250,000</span>
+                                            <span className="flex-1">0</span>
+                                            <span className="flex-1">Points</span>
+                                            </div>
                                         </div>
-                                        <div className="flex">
-                                        <span className="flex-1">Points</span>
-                                        <span className="flex-1">1,250,000</span>
-                                        <span className="flex-1">0</span>
-                                        <span className="flex-1">Points</span>
-                                        </div>
-                                    </div>
                                     </div>
                                 )}
                                 </div>
@@ -659,21 +755,31 @@ export default () => {
                         {/* Order Book/Trades (col-span-1 on desktop, full width on mobile) */}
                         <div className="flex flex-col gap-2 items-center bg-zinc-900 p-[1px] rounded-sm border border-solid border-[#30363D] w-full">
                             {/* Tabs for Order Book/Trades */}
-                            <div className="flex items-center pl-3 pr-[13px] border-b border-[#30363D] w-full">
-                                {["Order Book", "Trades"].map(tab => (
+                            <div className="relative w-full">
+                                <div className="flex items-center border-b border-[#30363D]">
+                                    {["Order Book", "Trades"].map(tab => (
                                     <button
                                         key={tab}
-                                        className={`text-sm py-[15px] w-full focus:outline-none ${
-                                            orderTab === tab
-                                                ? "text-white border-b-2 border-[#92318D] font-bold"
-                                                : "text-zinc-400"
+                                        className={`relative text-sm py-[15px] w-full focus:outline-none transition-colors duration-300 ${
+                                        orderTab === tab ? "text-white font-bold" : "text-zinc-400"
                                         }`}
                                         onClick={() => setOrderTab(tab)}
                                     >
                                         {tab}
                                     </button>
-                                ))}
+                                    ))}
+                                </div>
+
+                                {/* Sliding underline */}
+                                <span
+                                    className="absolute bottom-0 left-0 h-[2px] bg-[#92318D] transition-transform duration-300 ease-in-out"
+                                    style={{
+                                    width: "50%",
+                                    transform: orderTab === "Order Book" ? "translateX(0%)" : "translateX(100%)",
+                                    }}
+                                />
                             </div>
+
                             {/* Tab Content */}
                             {orderTab === "Order Book" && (
                                 <div className="flex flex-col items-start w-full">
@@ -871,21 +977,36 @@ export default () => {
                             </div>
 
                             {/* Tabs */}
-                            <div className="flex items-start justify-between pl-3 pr-[13px] border-b border-[#30363D] w-full">
-                                {["Market", "Limit", "Advanced"].map(tab => (
-                                    <button
-                                        key={tab}
-                                        className={`w-full text-sm py-[15px] px-4 focus:outline-none ${
-                                            activeOrderTab === tab
-                                                ? "text-white border-b-2 border-[#92318D] font-bold"
-                                                : "text-zinc-400"
-                                        }`}
-                                        onClick={() => setActiveOrderTab(tab)}
-                                    >
-                                        {tab}
-                                    </button>
-                                ))}
-                            </div>
+                        <div className="relative w-full px-4">
+                        <div className="flex border-b border-[#30363D] w-full">
+                            {["Market", "Limit", "Advanced"].map(tab => (
+                            <button
+                                key={tab}
+                                className={`flex-1 text-sm py-[15px] px-4 text-center focus:outline-none transition-colors duration-300 ${
+                                activeOrderTab === tab ? "text-white font-bold" : "text-zinc-400"
+                                }`}
+                                onClick={() => setActiveOrderTab(tab)}
+                            >
+                                {tab}
+                            </button>
+                            ))}
+                        </div>
+
+                        {/* Sliding underline */}
+                        <span
+                            className="absolute bottom-0 left-0 h-[2px] bg-[#92318D] transition-transform duration-300 ease-in-out"
+                            style={{
+                            width: `calc(100% / 3)`,
+                            transform:
+                                activeOrderTab === "Market"
+                                ? "translateX(0%)"
+                                : activeOrderTab === "Limit"
+                                ? "translateX(100%)"
+                                : "translateX(200%)",
+                            }}
+                        />
+                        </div>
+
                             {/* Tab Content */}
                             {activeOrderTab === "Market" && (
                                 <div className="w-full flex flex-col items-start px-4 py-4 gap-4">
@@ -998,7 +1119,7 @@ export default () => {
                                             transform: reduceOnly ? "translateX(16px)" : "translateX(0)",
                                             }}
                                         />
-                                        </div>
+                                    </div>
                                     </button>
                                     <button
                                         type="button"
@@ -1269,7 +1390,7 @@ export default () => {
                                             transform: reduceOnly ? "translateX(16px)" : "translateX(0)",
                                             }}
                                         />
-                                        </div>
+                                    </div>
                                     </button>
                                     <button
                                         type="button"
@@ -1575,7 +1696,7 @@ export default () => {
                                             transform: reduceOnly ? "translateX(16px)" : "translateX(0)",
                                             }}
                                         />
-                                        </div>
+                                    </div>
                                     </button>
                                     <button
                                         type="button"
