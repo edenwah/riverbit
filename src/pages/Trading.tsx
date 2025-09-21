@@ -1,10 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { PrimaryButton } from "../components/Button/PrimaryButton";
+import PrimaryButton from "../components/Button/PrimaryButton";
 import { SecondaryButton } from "../components/Button/SecondaryButton";
-import PrimaryButtonLarge from "../components/Button/PrimaryButtonLarge";
-
-
 export default () => {
     const [input1, onChangeInput1] = useState('');
     const [input2, onChangeInput2] = useState('');
@@ -255,8 +252,8 @@ export default () => {
                             </div>
                             {/* Withdraw & Deposit Buttons */}
                             <div className="flex gap-2">
-                                <SecondaryButton onClick={() => alert("Pressed!")}>Withdraw</SecondaryButton>
-                                <PrimaryButton onClick={() => alert("Pressed!")}>Deposit</PrimaryButton>
+                                <SecondaryButton size="medium" onClick={() => alert("Pressed!")}>Withdraw</SecondaryButton>
+                                <PrimaryButton size="medium" onClick={() => alert("Pressed!")}>Deposit</PrimaryButton>
                             </div>
                         </div>
                     </div>
@@ -280,12 +277,7 @@ export default () => {
                                 {"$27,345.12"}
                             </span>
                         </div>
-                        <button className="flex flex-col shrink-0 items-start bg-fuchsia-800 text-left py-[11px] px-4 rounded-sm border-0"
-                            onClick={()=>alert("Pressed!")}>
-                            <span className="text-white text-sm font-bold" >
-                                {"Deposit"}
-                            </span>
-                        </button>
+                        <PrimaryButton size="medium" onClick={() => alert("Pressed!")}>Deposit</PrimaryButton>
                         {/* Hamburger menu */}
                         <button
                             className="flex items-center justify-center p-2 rounded-sm focus:outline-none"
@@ -1298,9 +1290,9 @@ export default () => {
                                             </div>
                                         </div>
                                     </div>
-                                    <PrimaryButtonLarge onClick={() => alert("Pressed!")}>
+                                    <PrimaryButton size="large" onClick={() => alert("Pressed!")}>
                                         {input1 === "Sell / Short" ? "Sell / Short" : "Buy / Long"}
-                                    </PrimaryButtonLarge>
+                                    </PrimaryButton>
                                     {/* --- END Market Tab Content --- */}
                                 </div>
                             )}
