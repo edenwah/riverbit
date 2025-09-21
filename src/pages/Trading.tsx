@@ -1,5 +1,4 @@
 import { useState, useRef, useEffect } from "react";
-import { Link } from "react-router-dom";
 import RiverbitLogo from "../components/RiverbitLogo";
 import DesktopNav from "../components/DesktopNav";
 import PrimaryButton from "../components/Button/PrimaryButton";
@@ -19,10 +18,9 @@ export default () => {
     const [input11, onChangeInput11] = useState('Strict');
     const [isOn, setIsOn] = useState(false);
     const [reduceOnly, setReduceOnly] = useState(false);
-    const [activeOrderTab, setActiveOrderTab] = useState("Market"); // NEW: tab state
-    const [orderTab, setOrderTab] = useState("Order Book"); // Add this with your useState hooks
-	const [activeAccountTab, setActiveAccountTab] = useState("Balance"); // Balance 為預設選中
-    const [mobileMenuOpen, setMobileMenuOpen] = useState(false); // Add this line
+    const [activeOrderTab, setActiveOrderTab] = useState("Market"); 
+    const [orderTab, setOrderTab] = useState("Order Book"); 
+	const [activeAccountTab, setActiveAccountTab] = useState("Balance"); 
     const [granularity, setGranularity] = useState("")
     const [indicator, setIndicator] = useState("")
     const [filterValue, setFilterValue] = useState("")
@@ -32,6 +30,8 @@ export default () => {
     const [crossSelected, setCrossSelected] = useState(false);
     const [aiSelected, setAiSelected] = useState(false);
     const [showAssetPopup, setShowAssetPopup] = useState(false);
+
+    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [language, setLanguage] = useState("EN");
     const [showLangDropdown, setShowLangDropdown] = useState(false);
     const [showWalletDropdown, setShowWalletDropdown] = useState(false);
