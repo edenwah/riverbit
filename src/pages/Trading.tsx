@@ -9,6 +9,7 @@ export default () => {
     const [input7, onChangeInput7] = useState('');
     const [input8, onChangeInput8] = useState('');
     const [input9, onChangeInput9] = useState('');
+    const [input10, onChangeInput10] = useState('');
     const [isOn, setIsOn] = useState(false);
     const [reduceOnly, setReduceOnly] = useState(false);
     const [activeOrderTab, setActiveOrderTab] = useState("Market"); // NEW: tab state
@@ -340,8 +341,8 @@ export default () => {
                                                         />
                                                         <input
                                                             placeholder="Search"
-                                                            value={input1}
-                                                            onChange={(event) => onChangeInput1(event.target.value)}
+                                                            value={input10}
+                                                            onChange={(event) => onChangeInput10(event.target.value)}
                                                             className="flex-1 text-[#ADAEBC] text-base border-0"
                                                         />
                                                         </div>
