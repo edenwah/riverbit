@@ -4,6 +4,7 @@ import RiverbitLogo from "../components/RiverbitLogo";
 import DesktopNav from "../components/DesktopNav";
 import PrimaryButton from "../components/Button/PrimaryButton";
 import { SecondaryButton } from "../components/Button/SecondaryButton";
+import Tabs from "../components/Tabs";
 export default () => {
     const [input1, onChangeInput1] = useState('');
     const [input2, onChangeInput2] = useState('');
@@ -936,35 +937,11 @@ export default () => {
                             </div>
 
                             {/* Tabs */}
-                        <div className="relative w-full px-4">
-                        <div className="flex border-b border-[#30363D] w-full">
-                            {["Market", "Limit", "Advanced"].map(tab => (
-                            <button
-                                key={tab}
-                                className={`flex-1 text-sm py-[15px] px-4 text-center focus:outline-none transition-colors duration-300 ${
-                                activeOrderTab === tab ? "text-white font-bold" : "text-zinc-400"
-                                }`}
-                                onClick={() => setActiveOrderTab(tab)}
-                            >
-                                {tab}
-                            </button>
-                            ))}
-                        </div>
-
-                        {/* Sliding underline */}
-                        <span
-                            className="absolute bottom-0 left-0 h-[2px] bg-[#92318D] transition-transform duration-300 ease-in-out"
-                            style={{
-                            width: `calc(100% / 3)`,
-                            transform:
-                                activeOrderTab === "Market"
-                                ? "translateX(0%)"
-                                : activeOrderTab === "Limit"
-                                ? "translateX(100%)"
-                                : "translateX(200%)",
-                            }}
-                        />
-                        </div>
+                            <Tabs
+                                tabs={["Market", "Limit", "Advanced"]}
+                                activeTab={activeOrderTab}
+                                onTabChange={setActiveOrderTab}
+                            />
 
                             {/* Tab Content */}
                             {activeOrderTab === "Market" && (
