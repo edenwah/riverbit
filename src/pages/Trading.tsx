@@ -446,7 +446,7 @@ export default () => {
                                                         <div className="flex items-center gap-2 shrink-0 bg-[#0D1117] p-1 rounded-sm border border-[#30363D]">
                                                             <button
                                                                 className={`flex flex-col items-start py-3 px-3 rounded border-0 transition-all ${
-                                                                    input11 === "Strict" ? "bg-[#92318D] text-white" : "bg-transparent text-zinc-400"
+                                                                    input11 === "Strict" ? "bg-fuchsia-800 text-white" : "bg-transparent text-zinc-400"
                                                                 }`}
                                                                 onClick={() => onChangeInput11("Strict")}
                                                                 type="button"
@@ -455,7 +455,7 @@ export default () => {
                                                             </button>
                                                             <button
                                                                 className={`flex flex-col items-start py-3 px-3 rounded border-0 transition-all ${
-                                                                    input11 === "All" ? "bg-[#92318D] text-white" : "bg-transparent text-zinc-400"
+                                                                    input11 === "All" ? "bg-fuchsia-800 text-white" : "bg-transparent text-zinc-400"
                                                                 }`}
                                                                 onClick={() => onChangeInput11("All")}
                                                                 type="button"
@@ -473,7 +473,7 @@ export default () => {
                                                                 key={tab}
                                                                 className={`my-1 px-3 py-1 rounded transition ${
                                                                     activeMarketTab === tab
-                                                                        ? "bg-[#92318D] text-white font-bold"
+                                                                        ? "bg-fuchsia-800 text-white font-bold"
                                                                         : "bg-transparent text-zinc-400"
                                                                 }`}
                                                                 onClick={() => setActiveMarketTab(tab)}
@@ -713,7 +713,7 @@ export default () => {
 
                                             {/* Sliding underline */}
                                             <span
-                                                className="absolute bottom-0 left-0 gap-4 h-[2px] bg-[#92318D] transition-transform duration-300 ease-in-out"
+                                                className="absolute bottom-0 left-0 gap-4 h-[2px] bg-fuchsia-800 transition-transform duration-300 ease-in-out"
                                                 style={{
                                                 width: `calc(100% / 6)`, // 6 個 tabs
                                                 transform:
@@ -901,7 +901,7 @@ export default () => {
                                                     </td>
 
                                                     {/* Actions */}
-                                                    <td className="py-2 px-2 text-[#92318D] font-bold">{row.action}</td>
+                                                    <td className="py-2 px-2 text-fuchsia-800 font-bold">{row.action}</td>
                                                     </tr>
                                                 ))}
                                                 </tbody>
@@ -932,7 +932,7 @@ export default () => {
                                         </div>
                                         {/* Close All button */}
                                         <div className="flex justify-end mt-3">
-                                            <button className="bg-[#92318D] w-[100px] py-3.5 rounded-md text-white font-bold">
+                                            <button className="bg-fuchsia-800 w-[100px] py-3.5 rounded-md text-white font-bold">
                                             Close All
                                             </button>
                                         </div>
@@ -972,7 +972,7 @@ export default () => {
                                                     price: "Market / Price > 60",
                                                     reduceOnly: "Yes",
                                                     tpSl: "--",
-                                                    action: { text: "Cancel", color: "text-[#92318D]" },
+                                                    action: { text: "Cancel", color: "text-fuchsia-800" },
                                                     },
                                                 ].map((row, idx) => (
                                                     <tr key={idx} className="border-b border-[#30363D]">
@@ -993,7 +993,7 @@ export default () => {
                                         </div>
                                         {/* View All button */}
                                         <div className="flex justify-end mt-3">
-                                            <button className="bg-[#92318D] w-[100px] py-3.5 rounded-md text-white font-bold">
+                                            <button className="bg-fuchsia-800 w-[100px] py-3.5 rounded-md text-white font-bold">
                                             View All
                                             </button>
                                         </div>
@@ -1049,13 +1049,13 @@ export default () => {
                                         {/* Buttons */}
                                         <div className="flex justify-end mt-3 gap-4">
                                             <button
-                                            className="bg-[#92318D] py-3.5 px-[19px] rounded-md text-white font-bold"
+                                            className="bg-fuchsia-800 py-3.5 px-[19px] rounded-md text-white font-bold"
                                             onClick={() => alert("Pressed!")}
                                             >
                                             View All
                                             </button>
                                             <button
-                                            className="bg-[#92318D] py-3.5 px-4 rounded-md text-white font-bold"
+                                            className="bg-fuchsia-800 py-3.5 px-4 rounded-md text-white font-bold"
                                             onClick={() => alert("Pressed!")}
                                             >
                                             Export as CSV
@@ -1108,13 +1108,13 @@ export default () => {
                                         {/* Buttons */}
                                         <div className="flex justify-end mt-3 gap-4">
                                             <button
-                                            className="bg-[#92318D] py-3.5 px-[19px] rounded-md text-white font-bold"
+                                            className="bg-fuchsia-800 py-3.5 px-[19px] rounded-md text-white font-bold"
                                             onClick={() => alert("Pressed!")}
                                             >
                                             View All
                                             </button>
                                             <button
-                                            className="bg-[#92318D] py-3.5 px-4 rounded-md text-white font-bold"
+                                            className="bg-fuchsia-800 py-3.5 px-4 rounded-md text-white font-bold"
                                             onClick={() => alert("Pressed!")}
                                             >
                                             Export as CSV
@@ -1195,7 +1195,7 @@ export default () => {
                                         {/* Buttons */}
                                         <div className="flex justify-end mt-3">
                                             <button
-                                            className="bg-[#92318D] py-3.5 px-[19px] rounded-md text-white font-bold"
+                                            className="bg-fuchsia-800 py-3.5 px-[19px] rounded-md text-white font-bold"
                                             onClick={() => alert("Pressed!")}
                                             >
                                             View All
@@ -1230,7 +1230,7 @@ export default () => {
 
                                 {/* Sliding underline */}
                                 <span
-                                    className="absolute bottom-0 left-0 h-[2px] bg-[#92318D] transition-transform duration-300 ease-in-out"
+                                    className="absolute bottom-0 left-0 h-[2px] bg-fuchsia-800 transition-transform duration-300 ease-in-out"
                                     style={{
                                     width: "50%",
                                     transform: orderTab === "Order Book" ? "translateX(0%)" : "translateX(100%)",
@@ -1520,7 +1520,7 @@ export default () => {
                                                             type="button"
                                                             className={`py-[11px] w-full rounded-sm border ${
                                                                 percentValue === percent
-                                                                    ? "border-2 border-[#92318D] font-bold"
+                                                                    ? "border-2 border-fuchsia-800 font-bold"
                                                                     : "border border-[#30363D]"
                                                             } bg-zinc-900 text-white text-sm`}
                                                             onClick={() => {
@@ -1756,7 +1756,7 @@ export default () => {
                                                             type="button"
                                                             className={`py-[11px] w-full rounded-sm border ${
                                                                 percentValue === percent
-                                                                    ? "border-2 border-[#92318D] font-bold"
+                                                                    ? "border-2 border-fuchsia-800 font-bold"
                                                                     : "border border-[#30363D]"
                                                             } bg-zinc-900 text-white text-sm`}
                                                             onClick={() => {
@@ -2120,7 +2120,7 @@ export default () => {
                                                             type="button"
                                                             className={`py-[11px] w-full rounded-sm border ${
                                                                 percentValue === percent
-                                                                    ? "border-2 border-[#92318D] font-bold"
+                                                                    ? "border-2 border-fuchsia-800 font-bold"
                                                                     : "border border-[#30363D]"
                                                             } bg-zinc-900 text-white text-sm`}
                                                             onClick={() => {

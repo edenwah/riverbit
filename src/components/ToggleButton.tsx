@@ -22,7 +22,7 @@ const ToggleButton: React.FC<ToggleButtonProps> = ({ label, value, onChange }) =
       >
         <div
           className="bg-white w-5 h-5 rounded-full border border-solid border-white shadow transition-transform duration-200"
-          style={{ transform: value ? "translateX(16px)" : "translateX(0)" }}
+          style={{ transform: value ? "translateX(12px)" : "translateX(0)" }}
         />
       </div>
     </button>
