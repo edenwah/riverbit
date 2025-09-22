@@ -3,9 +3,11 @@ import RiverbitLogo from "../components/RiverbitLogo";
 import DesktopNav from "../components/DesktopNav";
 import PrimaryButton from "../components/Button/PrimaryButton";
 import { SecondaryButton } from "../components/Button/SecondaryButton";
+import Slider from "../components/PercentSlider";
 
 export default () => {
 	const [input1, onChangeInput1] = useState('');
+	const [leverage, setLeverage] = useState(10);
 
 	const [language, setLanguage] = useState("EN");
 	const [showLangDropdown, setShowLangDropdown] = useState(false);
@@ -466,47 +468,17 @@ export default () => {
 															{"10x"}
 														</span>
 													</div>
-													<div className="flex flex-col items-end bg-[#30363D] pr-[253px] rounded-[9999px]">
-														<div className="bg-[#92318D] w-[78px] h-2 rounded-[9999px]">
-														</div>
-														<img
-															src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/obny0nvi_expires_30_days.png"} 
-															className="w-[18px] h-2 rounded-[9999px] object-fill"
-														/>
-													</div>
-													<div className="flex items-start gap-[9px]">
-														<button className="flex flex-col shrink-0 items-start bg-[#0D1117] text-left py-[11px] px-[23px] rounded border border-solid border-[#30363D]"
-															onClick={()=>alert("Pressed!")}>
-															<span className="text-white text-sm" >
-																{"5x"}
-															</span>
-														</button>
-														<button className="flex flex-col shrink-0 items-start bg-[#0D1117] text-left py-[11px] px-[19px] rounded border-2 border-solid border-[#92318D]"
-															onClick={()=>alert("Pressed!")}>
-															<span className="text-white text-sm font-bold" >
-																{"10x"}
-															</span>
-														</button>
-														<button className="flex flex-col shrink-0 items-start bg-[#0D1117] text-left py-[11px] px-[18px] rounded border border-solid border-[#30363D]"
-															onClick={()=>alert("Pressed!")}>
-															<span className="text-white text-sm" >
-																{"20x"}
-															</span>
-														</button>
-														<button className="flex flex-col shrink-0 items-start bg-[#0D1117] text-left py-[11px] px-[18px] rounded border border-solid border-[#30363D]"
-															onClick={()=>alert("Pressed!")}>
-															<span className="text-white text-sm" >
-																{"50x"}
-															</span>
-														</button>
-														<button className="flex flex-col shrink-0 items-start bg-[#0D1117] text-left py-[11px] px-[15px] rounded border border-solid border-[#30363D]"
-															onClick={()=>alert("Pressed!")}>
-															<span className="text-white text-sm" >
-																{"100x"}
-															</span>
-														</button>
-													</div>
+													
+													<Slider
+													value={leverage}
+													max={100}
+													onChange={setLeverage}
+													options={[5, 10, 20, 50, 100]}
+													unit="x"
+													/>
 												</div>
+												
+
 												<button className="flex flex-col items-center bg-[#0D1117] text-left p-3 mx-6 rounded-lg border-0"
 													onClick={()=>alert("Pressed!")}>
 													<span className="text-[#8B949E] text-xs mx-[26px]" >

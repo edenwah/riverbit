@@ -6,7 +6,7 @@ import { SecondaryButton } from "../components/Button/SecondaryButton";
 import Tabs from "../components/Tabs";
 import PositionsTPSLModal from "../components/PositionsTPSLModal";
 import ToggleButton from "../components/ToggleButton";
-import Slider from "../components/Slider";
+import PercentSlider from "../components/PercentSlider";
 export default () => {
     const [input1, onChangeInput1] = useState('');
     const [input2, onChangeInput2] = useState('');
@@ -1500,7 +1500,7 @@ export default () => {
                                                 </div>
                                             </div>
                                             {/* 滑桿與快捷百分比按鈕 */}
-                                            <Slider
+                                            <PercentSlider
                                                 value={percentValue}
                                                 maxAmount={AMOUNT_TOTAL}
                                                 onChangeAmount={onChangeInput2}
