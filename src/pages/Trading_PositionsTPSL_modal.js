@@ -1,7 +1,6 @@
 import React, {useState} from "react";
 export default (props) => {
 	const [input1, onChangeInput1] = useState('');
-	const [input2, onChangeInput2] = useState('');
 	return (
 		<div className="bg-white">
 			<div className="flex flex-col items-center self-stretch bg-[#000000B0] py-[197px]">
@@ -11,7 +10,7 @@ export default (props) => {
 							{"Positions TP/SL"}
 						</span>
 						<img
-							src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/fo5vxfvw_expires_30_days.png"} 
+							src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/73d3cc65_expires_30_days.png"} 
 							className="w-11 h-11 object-fill"
 						/>
 					</div>
@@ -79,23 +78,15 @@ export default (props) => {
 								<span className="text-[#9D9DAF] text-xs" >
 									{"Stop Loss %"}
 								</span>
-								<div className="flex items-center self-stretch bg-[#0D1117] py-[9px] px-3 rounded-md border border-solid border-[#30363D]">
-									<input
-										placeholder={"Loss"}
-										value={input2}
-										onChange={(event)=>onChangeInput2(event.target.value)}
-										className="flex-1 self-stretch text-[#8B949E] bg-transparent text-base py-[3px] border-0"
-									/>
-									<div className="flex shrink-0 items-start bg-[#30363D] py-[7px] px-2 gap-[7px] rounded">
-										<span className="text-[#8B949E] text-xs font-bold" >
-											{"%"}
-										</span>
-										<img
-											src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/3k9cwfgy_expires_30_days.png"} 
-											className="w-3 h-[15px] rounded object-fill"
-										/>
-									</div>
-								</div>
+								<button className="flex items-center self-stretch bg-[#0D1117] text-left p-3 rounded-md border border-solid border-[#30363D]"
+									onClick={()=>alert("Pressed!")}>
+									<span className="flex-1 text-[#8B949E] text-base" >
+										{"Loss"}
+									</span>
+									<span className="text-[#8B949E] text-xs font-bold" >
+										{"%"}
+									</span>
+								</button>
 							</div>
 						</div>
 						<div className="flex items-start self-stretch mx-6 gap-3">

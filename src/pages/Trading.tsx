@@ -4,6 +4,8 @@ import DesktopNav from "../components/DesktopNav";
 import PrimaryButton from "../components/Button/PrimaryButton";
 import { SecondaryButton } from "../components/Button/SecondaryButton";
 import Tabs from "../components/Tabs";
+import PositionsTPSLModal from "../components/PositionsTPSLModal";
+import ToggleButton from "../components/ToggleButton";
 export default () => {
     const [input1, onChangeInput1] = useState('');
     const [input2, onChangeInput2] = useState('');
@@ -16,6 +18,7 @@ export default () => {
     const [input9, onChangeInput9] = useState('');
     const [input10, onChangeInput10] = useState('');
     const [input11, onChangeInput11] = useState('Strict');
+    const [inputTPSL, setInputTPSL] = useState('');
     const [isOn, setIsOn] = useState(false);
     const [reduceOnly, setReduceOnly] = useState(false);
     const [activeOrderTab, setActiveOrderTab] = useState("Market"); 
@@ -31,6 +34,14 @@ export default () => {
     const [aiSelected, setAiSelected] = useState(false);
     const [showAssetPopup, setShowAssetPopup] = useState(false);
     const [activeMarketTab, setActiveMarketTab] = useState("All Coins");
+
+    {/* Show and Hide TP/SL modal */}
+    const [showTPSLModal, setShowTPSLModal] = useState(false); // 控制 modal 顯示
+    const [modalData, setModalData] = useState(null); // 儲存傳遞給 modal 的資料
+    const handleTPSLClick = (row) => { // 點擊 Table cell 彈 modal
+        setModalData(row);
+        setShowTPSLModal(true);
+    };
 
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [language, setLanguage] = useState("EN");
@@ -868,14 +879,29 @@ export default () => {
 
                                                     {/* TP/SL */}
                                                     <td className="py-2 px-2">
-                                                        <div className="flex gap-1 items-center">
-                                                        <span>{row.tpSl}</span>
-                                                        <img
-                                                            src="https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/l0hc3xdh_expires_30_days.png"
-                                                            className="w-4 h-4 object-fill"
-                                                        />
-                                                        </div>
-                                                    </td>
+  <div className="flex gap-1 items-center">
+    <span>{row.tpSl}</span>
+    <img
+      src="https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/l0hc3xdh_expires_30_days.png"
+      className="w-4 h-4 object-fill cursor-pointer"
+      onClick={() => {
+        setModalData({
+          time: "9/12/2025 17:30:13",
+          coin: row.coin,
+          position: row.position.value,
+          entryPrice: "55.116",
+          markPrice: "55.252",
+          takeProfit: "Price above 60",
+          stopLoss: "--",
+          orderId: "160687782672",
+          expectedProfit: "39.51 USDC",
+        });
+        setShowTPSLModal(true);
+      }}
+      alt="TP/SL"
+    />
+  </div>
+</td>
 
                                                     {/* Actions */}
                                                     <td className="py-2 px-2 text-[#92318D] font-bold">{row.action}</td>
@@ -883,6 +909,28 @@ export default () => {
                                                 ))}
                                                 </tbody>
                                             </table>
+
+                                            {showTPSLModal && modalData && (
+                                        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60">
+                                            <div
+                                            className="relative w-full h-full md:w-[420px] md:h-auto md:rounded-xl flex flex-col p-6 justify-center"
+                                            style={{ maxWidth: "95vw", maxHeight: "95vh" }}
+                                            >
+                                            {/* Modal Content */}
+                                            <PositionsTPSLModal
+                                                data={modalData}
+                                                inputTPSL={inputTPSL} // 例如用 useState 管理
+                                                onChangeInputTPSL={setInputTPSL} // 更新 inputTPSL
+                                                onClose={() => setShowTPSLModal(false)}
+                                                onConfirm={() => {
+                                                console.log("Confirmed", inputTPSL);
+                                                setShowTPSLModal(false);
+                                                }}
+                                            />
+                                            </div>
+                                        </div>
+                                        )}
+
                                         </div>
                                         {/* Close All button */}
                                         <div className="flex justify-end mt-3">
@@ -1489,26 +1537,11 @@ export default () => {
                                             </div>
                                         </div>
                                     </div>
-                                    <button
-                                        type="button"
-                                        className="py-2 w-full flex items-center  justify-between focus:outline-none"
-                                        onClick={() => setReduceOnly((prev) => !prev)}
-                                    >
-                                        <span className="text-[#C9D1D9] text-sm">
-                                        {"Reduce Only"}
-                                        </span>
-                                        <div
-                                        className={`shrink-0 flex items-center transition-colors duration-200 rounded-full ${reduceOnly ? "bg-fuchsia-800" : "bg-zinc-700"} py-0.5 pl-2 pr-0.5`}
-                                        style={{ width: 48, height: 28 }}
-                                        >
-                                        <div
-                                            className={`bg-white w-5 h-5 rounded-full border border-solid border-white shadow transition-transform duration-200 `}
-                                            style={{
-                                            transform: reduceOnly ? "translateX(16px)" : "translateX(0)",
-                                            }}
+                                    <ToggleButton
+                                        label="Reduce Only"
+                                        value={reduceOnly}
+                                        onChange={setReduceOnly}
                                         />
-                                    </div>
-                                    </button>
                                     <button
                                         type="button"
                                         className="py-2 flex items-center w-full justify-between focus:outline-none"
