@@ -3,8 +3,8 @@ import RiverbitLogo from "../components/RiverbitLogo";
 import DesktopNav from "../components/DesktopNav";
 export default (props) => {
 	return (
-		<div className="flex flex-col bg-white">
-			<div className="self-stretch bg-white h-[1043px] rounded-lg border-2 border-solid border-[#CED4DA]">
+		<div className="flex flex-col bg-black h-[100vh]">
+			<div className="self-stretch">
 				<div className="flex justify-between items-start self-stretch bg-[#161B22] py-3.5 px-4">
 					<div className="flex shrink-0 items-start gap-8">
 						<RiverbitLogo />
@@ -63,7 +63,7 @@ export default (props) => {
 						</button>
 					</div>
 				</div>
-				<div className="flex flex-col self-stretch bg-[#0D0F13] gap-2.5">
+				<div className="flex flex-col self-stretch gap-2.5">
 					<div className="flex flex-col items-start self-stretch py-12 px-6 mx-20 gap-6">
 						<span className="text-white text-3xl font-bold" >
 							{"Earn Points"}

@@ -3,7 +3,7 @@ import RiverbitLogo from "../components/RiverbitLogo";
 import DesktopNav from "../components/DesktopNav";
 import PrimaryButton from "../components/Button/PrimaryButton";
 import { SecondaryButton } from "../components/Button/SecondaryButton";
-import Slider from "../components/PercentSlider";
+import LeverageSlider from "../components/LeverageSlider";
 
 export default () => {
 	const [input1, onChangeInput1] = useState('');
@@ -48,8 +48,8 @@ export default () => {
     }, [showMoreDropdown, showWalletDropdown, showLangDropdown]);
 
 	return (
-		<div className="flex flex-col bg-white">
-			<div className="self-stretch bg-[#0D1117] h-[1648px] rounded-lg border-2 border-solid border-[#CED4DA]">
+		<div className="flex flex-col bg-black">
+			<div className="self-stretch">
 				{/* Header */}
                 {/* Desktop header: show on xl and up */}
                 <div className="hidden xl:flex justify-between items-start self-stretch bg-zinc-900 py-3.5 px-4">
@@ -291,7 +291,7 @@ export default () => {
                         <div className="flex-1" onClick={() => setMobileMenuOpen(false)} />
                     </div>
                 )}
-				<div className="flex flex-col self-stretch bg-[#0D1117] gap-2.5">
+				<div className="flex flex-col self-stretch gap-2.5">
 					<div className="flex flex-col self-stretch py-12 mx-20 gap-8">
 						<div className="flex items-start self-stretch mx-6">
 							<span className="text-white text-sm my-[15px] mx-2" >
@@ -469,12 +469,10 @@ export default () => {
 														</span>
 													</div>
 													
-													<Slider
-													value={leverage}
-													max={100}
-													onChange={setLeverage}
-													options={[5, 10, 20, 50, 100]}
-													unit="x"
+													<LeverageSlider
+														value={leverage}
+														maxLeverage={100}
+														onChange={setLeverage}
 													/>
 												</div>
 												

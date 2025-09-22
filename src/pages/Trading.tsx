@@ -136,7 +136,7 @@ export default () => {
         });
 
     return (
-        <div className="flex flex-col bg-black ">
+        <div className="flex flex-col bg-black">
             <div className="self-stretch ">
                 {/* Header */}
                 {/* Desktop header: show on xl and up */}
