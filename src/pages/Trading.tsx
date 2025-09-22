@@ -899,7 +899,7 @@ export default () => {
                                             <table className="w-full text-left border-collapse">
                                                 {/* Table Head */}
                                                 <thead>
-                                                <tr className="text-[#8B949E] text-sm font-bold">
+                                                <tr className="text-zinc-400 text-sm font-bold">
                                                     <th className="py-2 px-2">Time</th>
                                                     <th className="py-2 px-2">Type</th>
                                                     <th className="py-2 px-2">Coin</th>
@@ -960,7 +960,7 @@ export default () => {
                                             <table className="w-full text-left border-collapse">
                                                 {/* Table Head */}
                                                 <thead>
-                                                <tr className="text-[#8B949E] text-sm font-bold">
+                                                <tr className="text-zinc-400 text-sm font-bold">
                                                     <th className="py-2 px-2">Time</th>
                                                     <th className="py-2 px-2">Coin</th>
                                                     <th className="py-2 px-2">Direction</th>
@@ -1017,8 +1017,148 @@ export default () => {
                                         </div>
                                     </div>
                                 )}
-                                </div>
+                                {/* Funding History */}
+                                {activeAccountTab === "Funding History" && (
+                                    <div className="py-4">
+                                        <div className="overflow-x-auto">
+                                            <table className="w-full text-left border-collapse">
+                                            {/* Table Head */}
+                                            <thead>
+                                                <tr className="text-zinc-400 text-sm font-bold">
+                                                <th className="py-2 px-2">Time</th>
+                                                <th className="py-2 px-2">Coin</th>
+                                                <th className="py-2 px-2">Size</th>
+                                                <th className="py-2 px-2">Position Side</th>
+                                                <th className="py-2 px-2">Payment</th>
+                                                <th className="py-2 px-2">Rate</th>
+                                                </tr>
+                                            </thead>
 
+                                            {/* Table Body */}
+                                            <tbody className="text-sm text-white">
+                                                {[
+                                                {
+                                                    time: "9/12/2025 17:00:00",
+                                                    coin: "HYPE",
+                                                    size: "8.09 HYPE",
+                                                    side: { text: "Long", color: "text-[#2DA44E]" },
+                                                    payment: { text: "$0.0012", color: "text-[#2DA44E]" },
+                                                    rate: "-0.0003%",
+                                                },
+                                                ].map((row, idx) => (
+                                                <tr key={idx} className="border-b border-[#30363D]">
+                                                    <td className="py-2 px-2 whitespace-pre">{row.time}</td>
+                                                    <td className="py-2 px-2">{row.coin}</td>
+                                                    <td className="py-2 px-2">{row.size}</td>
+                                                    <td className={`py-2 px-2 ${row.side.color}`}>{row.side.text}</td>
+                                                    <td className={`py-2 px-2 ${row.payment.color}`}>{row.payment.text}</td>
+                                                    <td className="py-2 px-2">{row.rate}</td>
+                                                </tr>
+                                                ))}
+                                            </tbody>
+                                            </table>
+                                        </div>
+
+                                        {/* Buttons */}
+                                        <div className="flex justify-end mt-3 gap-4">
+                                            <button
+                                            className="bg-[#92318D] py-3.5 px-[19px] rounded-md text-white font-bold"
+                                            onClick={() => alert("Pressed!")}
+                                            >
+                                            View All
+                                            </button>
+                                            <button
+                                            className="bg-[#92318D] py-3.5 px-4 rounded-md text-white font-bold"
+                                            onClick={() => alert("Pressed!")}
+                                            >
+                                            Export as CSV
+                                            </button>
+                                        </div>
+                                    </div>
+                                )}
+                                {/* Order History */}
+                                {activeAccountTab === "Order History" && (
+                                    <div className="py-4">
+                                        <div className="overflow-x-auto">
+                                            <table className="w-full text-left border-collapse">
+                                            {/* Table Head */}
+                                            <thead>
+                                                <tr className="text-zinc-400 text-sm font-bold">
+                                                <th className="py-2 px-2">Time</th>
+                                                <th className="py-2 px-2">Type</th>
+                                                <th className="py-2 px-2">Coin</th>
+                                                <th className="py-2 px-2">Direction</th>
+                                                <th className="py-2 px-2">Size / Filled Size</th>
+                                                <th className="py-2 px-2">Order Value</th>
+                                                <th className="py-2 px-2">Price / Trigger</th>
+                                                <th className="py-2 px-2">Reduce Only</th>
+                                                <th className="py-2 px-2">TP/SL</th>
+                                                <th className="py-2 px-2">Status</th>
+                                                <th className="py-2 px-2">Order ID</th>
+                                                </tr>
+                                            </thead>
+
+                                            {/* Table Body */}
+                                            <tbody className="text-sm text-white">
+                                                {[
+                                                {
+                                                    time: "9/12/2025 17:30:13",
+                                                    type: "Take Profit Market",
+                                                    coin: "HYPE",
+                                                    direction: { text: "Close Long", color: "text-[#F85149]" },
+                                                    size: "-- / --",
+                                                    orderValue: "--",
+                                                    trigger: "Market /Price > 60",
+                                                    reduceOnly: "Yes",
+                                                    tpSl: "--",
+                                                    status: "Open",
+                                                    orderId: "160687782672",
+                                                },
+                                                {
+                                                    time: "9/12/2025 17:03:27",
+                                                    type: "Take Profit Market",
+                                                    coin: "HYPE",
+                                                    direction: { text: "Close Long", color: "text-[#F85149]" },
+                                                    size: "-- / --",
+                                                    orderValue: "--",
+                                                    trigger: "Market /Price > 56",
+                                                    reduceOnly: "Yes",
+                                                    tpSl: "--",
+                                                    status: "Cancelled",
+                                                    orderId: "160656988197",
+                                                },
+                                                ].map((row, idx) => (
+                                                <tr key={idx} className="border-b border-[#30363D]">
+                                                    <td className="py-2 px-2 whitespace-pre">{row.time}</td>
+                                                    <td className="py-2 px-2">{row.type}</td>
+                                                    <td className="py-2 px-2">{row.coin}</td>
+                                                    <td className={`py-2 px-2 ${row.direction.color}`}>{row.direction.text}</td>
+                                                    <td className="py-2 px-2">{row.size}</td>
+                                                    <td className="py-2 px-2">{row.orderValue}</td>
+                                                    <td className="py-2 px-2">{row.trigger}</td>
+                                                    <td className="py-2 px-2">{row.reduceOnly}</td>
+                                                    <td className="py-2 px-2">{row.tpSl}</td>
+                                                    <td className="py-2 px-2">{row.status}</td>
+                                                    <td className="py-2 px-2">{row.orderId}</td>
+                                                </tr>
+                                                ))}
+                                            </tbody>
+                                            </table>
+                                        </div>
+
+                                        {/* Buttons */}
+                                        <div className="flex justify-end mt-3">
+                                            <button
+                                            className="bg-[#92318D] py-3.5 px-[19px] rounded-md text-white font-bold"
+                                            onClick={() => alert("Pressed!")}
+                                            >
+                                            View All
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                )}
+                            </div>
                         </div>
                     </div>
 
