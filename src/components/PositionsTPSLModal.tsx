@@ -54,8 +54,8 @@ const PositionsTPSLModal = ({
   const [allocatedAmount, setAllocatedAmount] = useState(false);
   const [limitPrice, setLimitPrice] = useState(false);
   return (
-    <div className="flex flex-col items-center self-stretch bg-[#000000B0] py-[197px]">
-      <div className="flex flex-col bg-[#272B2F] w-[500px] py-[1px] rounded-lg border border-solid border-gray-700">
+    <div className="w-full flex flex-col items-center self-stretch bg-[#000000B0] py-[197px]">
+      <div className="w-full m-0 md:m-auto flex flex-col bg-[#272B2F] h-[100vh] md:h-auto py-[1px] rounded-lg border border-solid border-gray-700">
         
         {/* Header */}
         <div className="flex items-center self-stretch p-6 mx-[1px]">

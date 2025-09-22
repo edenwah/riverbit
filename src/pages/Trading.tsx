@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import RiverbitLogo from "../components/RiverbitLogo";
 import DesktopNav from "../components/DesktopNav";
 import PrimaryButton from "../components/Button/PrimaryButton";
@@ -908,28 +908,27 @@ export default () => {
                                             </table>
 
                                             {showTPSLModal && modalData && (
-                                        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60">
-                                            <div
-                                            className="relative w-full h-full md:w-[420px] md:h-auto md:rounded-xl flex flex-col p-6 justify-center"
-                                            style={{ maxWidth: "95vw", maxHeight: "95vh" }}
-                                            >
-                                            {/* Modal Content */}
-                                            <PositionsTPSLModal
-                                                data={modalData} 
-                                                inputTPSLPrice={inputTPSLPrice} 
-                                                onChangeInputTPSLPrice={setInputTPSLPrice} 
-                                                inputTPSLPercent={inputTPSLPercent} 
-                                                onChangeInputTPSLPercent={setInputTPSLPercent} 
-                                                onClose={() => setShowTPSLModal(false)}
-                                                onConfirm={() => {
-                                                console.log("Confirmed", inputTPSLPrice, inputTPSLPercent);
-                                                setShowTPSLModal(false);
-                                                }}
-                                            />
+                                            <div className="w-full fixed inset-0 z-50 flex items-center justify-center bg-black/60">
+                                                <div
+                                                className="relative w-full h-full md:w-[500px] md:h-auto md:rounded-xl flex flex-col justify-center"
+                                                style={{ maxWidth: "100vw", maxHeight: "100vh" }}
+                                                >
+                                                {/* Modal Content */}
+                                                <PositionsTPSLModal
+                                                    data={modalData} 
+                                                    inputTPSLPrice={inputTPSLPrice} 
+                                                    onChangeInputTPSLPrice={setInputTPSLPrice} 
+                                                    inputTPSLPercent={inputTPSLPercent} 
+                                                    onChangeInputTPSLPercent={setInputTPSLPercent} 
+                                                    onClose={() => setShowTPSLModal(false)}
+                                                    onConfirm={() => {
+                                                    console.log("Confirmed", inputTPSLPrice, inputTPSLPercent);
+                                                    setShowTPSLModal(false);
+                                                    }}
+                                                />
+                                                </div>
                                             </div>
-                                        </div>
-                                        )}
-
+                                            )}
                                         </div>
                                         {/* Close All button */}
                                         <div className="flex justify-end mt-3">
