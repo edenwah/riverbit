@@ -6,6 +6,7 @@ import { SecondaryButton } from "../components/Button/SecondaryButton";
 import Tabs from "../components/Tabs";
 import PositionsTPSLModal from "../components/PositionsTPSLModal";
 import ToggleButton from "../components/ToggleButton";
+import Slider from "../components/Slider";
 export default () => {
     const [input1, onChangeInput1] = useState('');
     const [input2, onChangeInput2] = useState('');
@@ -1499,40 +1500,12 @@ export default () => {
                                                 </div>
                                             </div>
                                             {/* 滑桿與快捷百分比按鈕 */}
-                                            <div className="flex flex-col w-full">
-                                                <input
-                                                    type="range"
-                                                    min={0}
-                                                    max={100}
-                                                    step={1}
-                                                    value={percentValue}
-                                                    onChange={(e) => {
-                                                        const percent = Number(e.target.value);
-                                                        const amount = Math.round((percent / 100) * AMOUNT_TOTAL);
-                                                        onChangeInput2(amount.toString());
-                                                    }}
-                                                    className="w-full accent-fuchsia-800 h-2 rounded-lg appearance-none bg-zinc-700 my-2"
+                                            <Slider
+                                                value={percentValue}
+                                                maxAmount={AMOUNT_TOTAL}
+                                                onChangeAmount={onChangeInput2}
                                                 />
-                                                <div className="flex justify-between gap-2 w-full mt-1">
-                                                    {[0, 25, 50, 75, 100].map((percent) => (
-                                                        <button
-                                                            key={percent}
-                                                            type="button"
-                                                            className={`py-[11px] w-full rounded-sm border ${
-                                                                percentValue === percent
-                                                                    ? "border-2 border-fuchsia-800 font-bold"
-                                                                    : "border border-[#30363D]"
-                                                            } bg-zinc-900 text-white text-sm`}
-                                                            onClick={() => {
-                                                                const amount = Math.round((percent / 100) * AMOUNT_TOTAL);
-                                                                onChangeInput2(amount.toString());
-                                                            }}
-                                                        >
-                                                            {percent}%
-                                                        </button>
-                                                    ))}
-                                                </div>
-                                            </div>
+
                                         </div>
                                     </div>
                                     <ToggleButton
