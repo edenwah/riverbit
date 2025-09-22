@@ -40,6 +40,7 @@ export default () => {
     const walletDropdownRef = useRef<HTMLDivElement>(null);
     const langDropdownRef = useRef<HTMLDivElement>(null);
     const moreDropdownRef = useRef<HTMLDivElement>(null);
+    const assetPopupRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         function handleClickOutside(event: MouseEvent) {
@@ -69,6 +70,36 @@ export default () => {
             document.removeEventListener("mousedown", handleClickOutside);
         };
     }, [showMoreDropdown, showWalletDropdown, showLangDropdown]);
+
+    useEffect(() => {
+        function handleClickOrEsc(event: MouseEvent | KeyboardEvent) {
+            // Click outside
+            if (
+                showAssetPopup &&
+                assetPopupRef.current &&
+                event instanceof MouseEvent &&
+                !assetPopupRef.current.contains(event.target as Node)
+            ) {
+                setShowAssetPopup(false);
+            }
+            // ESC key
+            if (
+                showAssetPopup &&
+                event instanceof KeyboardEvent &&
+                event.key === "Escape"
+            ) {
+                setShowAssetPopup(false);
+            }
+        }
+        if (showAssetPopup) {
+            document.addEventListener("mousedown", handleClickOrEsc);
+            document.addEventListener("keydown", handleClickOrEsc);
+        }
+        return () => {
+            document.removeEventListener("mousedown", handleClickOrEsc);
+            document.removeEventListener("keydown", handleClickOrEsc);
+        };
+    }, [showAssetPopup]);
 
 
     const AMOUNT_TOTAL = 1000;
@@ -354,13 +385,18 @@ export default () => {
                                             <div className="fixed inset-0 z-50 flex items-start md:mt-40 md:ml-4">
                                                 {/* 背景遮罩 */}
                                                 <div
-                                                className="absolute inset-0 bg-black/50 md:bg-transparent"
-                                                onClick={() => setShowAssetPopup(false)}
+                                                    className="absolute inset-0 bg-black/50 md:bg-transparent"
+                                                    // Remove onClick here, handled by effect
                                                 />
-                                                
                                                 {/* Popup 內容 */}
-                                                <div className="relative w-full max-w-[910px] mt-4 ml-auto mr-auto md:mt-0 md:ml-0 md:mr-0 bg-[#272B2F] overflow-auto md:rounded-lg md:border md:border-[#30363D] flex flex-col">
-                                                
+                                                <div
+                                                    ref={assetPopupRef}
+                                                    className="relative w-full max-w-[910px] bg-[#272B2F] overflow-auto flex flex-col
+                                                        md:rounded-lg md:border md:border-[#30363D] md:ml-0 md:mr-0
+                                                        h-[100vh] md:h-auto
+                                                        mt-auto md:mt-0
+                                                        rounded-t-lg"
+                                                >
                                                     {/* Close button for mobile */}
                                                     <div className="md:hidden w-full flex justify-end p-4">
                                                         <button className="text-white text-lg font-bold" onClick={() => setShowAssetPopup(false)}>
@@ -379,7 +415,7 @@ export default () => {
                                                             placeholder="Search"
                                                             value={input10}
                                                             onChange={(event) => onChangeInput10(event.target.value)}
-                                                            className="flex-1 text-[#ADAEBC] text-base border-0"
+                                                            className="w-full flex-1 text-[#ADAEBC] text-base border-0"
                                                         />
                                                         </div>
                                                         <div className="flex items-center gap-2 shrink-0 bg-[#0D1117] p-1 rounded-sm border border-[#30363D]">
@@ -406,47 +442,58 @@ export default () => {
                                                     </div>
 
                                                     {/* Tabs */}
-                                                    <div className="flex whitespace-nowrap gap-x-4 gap-y-2 px-4 mb-2 text-sm">
+                                                    <div className="overflow-auto flex whitespace-nowrap gap-x-4 gap-y-2 px-4 py-4 mb-2 text-sm">
                                                         {["All Coins","Perps","Spot","Trending","DEX Only","Pre-launch","AI","DeFi","Layer 1","Layer 2","Meme"].map(tab => (
                                                         <span key={tab} className={`my-1 ${tab==="All Coins"?"text-white":"text-[#8B949E]"}`}>{tab}</span>
                                                         ))}
                                                     </div>
 
-                                                    {/* Table Header */}
-                                                    <div className="flex whitespace-nowrap gap-4 items-center px-4 text-xs text-[#8B949E] font-bold mb-2">
-                                                        {["Symbol","Leverage","Last Price","24h Change","8h Funding","24h Volume","Open Interest"].map((col, i) => (
-                                                        <span key={i} className={`flex-1 ${i===0?"flex-[2]":""}`}>{col}</span>
-                                                        ))}
+                                                    <div className="w-full overflow-auto text-left">
+                                                        <table className="min-w-[700px] w-full text-sm">
+                                                            <thead>
+                                                                <tr className="text-[#8B949E] font-bold border-b border-[#30363D]">
+                                                                    <th className="px-4 py-3 text-left">Symbol</th>
+                                                                    <th className="px-4 py-3 text-left">Leverage</th>
+                                                                    <th className="px-4 py-3 text-left">Last Price</th>
+                                                                    <th className="px-4 py-3 text-left">24h Change</th>
+                                                                    <th className="px-4 py-3 text-left">8h Funding</th>
+                                                                    <th className="px-4 py-3 text-left">24h Volume</th>
+                                                                    <th className="px-4 py-3 text-left">Open Interest</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                {[
+                                                                    {symbol:"BTC-USD",name:"Bitcoin",bg:"bg-orange-500",leverage:"40x",price:"$113,479",change:"+2,530 / +2.28%",funding:"0.0100%",volume:"$3,294,291,814",oi:"$3,989,216,288"},
+                                                                    {symbol:"ETH-USD",name:"Ethereum",bg:"bg-blue-500",leverage:"25x",price:"$4,350.7",change:"+66.3 / +1.55%",funding:"0.0100%",volume:"$2,603,760,484",oi:"$2,911,409,736"},
+                                                                    {symbol:"SOL-USD",name:"Solana",bg:"bg-purple-500",leverage:"20x",price:"$221.94",change:"+7.47 / +3.48%",funding:"0.0100%",volume:"$1,314,153,194",oi:"$1,516,333,384"},
+                                                                    {symbol:"HYPE-USD",name:"Hyperliquid",bg:"bg-pink-500",leverage:"10x",price:"$54.531",change:"+1.625 / +3.07%",funding:"0.0100%",volume:"$709,614,355",oi:"$1,487,051,890"}
+                                                                ].map((row, idx) => (
+                                                                    <tr key={idx} className="border-b border-[#30363D] text-white">
+                                                                        <td className="px-4 py-2">
+                                                                            <div className="flex items-center gap-3">
+                                                                                <button className={`${row.bg} text-white py-2 px-3 rounded-full border-0`}>{row.symbol.charAt(0)}</button>
+                                                                                <div className="flex flex-col">
+                                                                                    <span className="font-bold">{row.symbol}</span>
+                                                                                    <span className="text-gray-400 text-xs">{row.name}</span>
+                                                                                </div>
+                                                                            </div>
+                                                                        </td>
+                                                                        <td className="px-4 py-2">{row.leverage}</td>
+                                                                        <td className="px-4 py-2 font-bold">{row.price}</td>
+                                                                        <td className="px-4 py-2 text-[#2DA44E]">{row.change}</td>
+                                                                        <td className="px-4 py-2">{row.funding}</td>
+                                                                        <td className="px-4 py-2">{row.volume}</td>
+                                                                        <td className="px-4 py-2">{row.oi}</td>
+                                                                    </tr>
+                                                                ))}
+                                                            </tbody>
+                                                        </table>
                                                     </div>
-
-                                                    {/* Table Rows */}
-                                                    {[
-                                                        {symbol:"BTC-USD",name:"Bitcoin",bg:"bg-orange-500",leverage:"40x",price:"$113,479",change:"+2,530 / +2.28%",funding:"0.0100%",volume:"$3,294,291,814",oi:"$3,989,216,288"},
-                                                        {symbol:"ETH-USD",name:"Ethereum",bg:"bg-blue-500",leverage:"25x",price:"$4,350.7",change:"+66.3 / +1.55%",funding:"0.0100%",volume:"$2,603,760,484",oi:"$2,911,409,736"},
-                                                        {symbol:"SOL-USD",name:"Solana",bg:"bg-purple-500",leverage:"20x",price:"$221.94",change:"+7.47 / +3.48%",funding:"0.0100%",volume:"$1,314,153,194",oi:"$1,516,333,384"},
-                                                        {symbol:"HYPE-USD",name:"Hyperliquid",bg:"bg-pink-500",leverage:"10x",price:"$54.531",change:"+1.625 / +3.07%",funding:"0.0100%",volume:"$709,614,355",oi:"$1,487,051,890"}
-                                                    ].map((row, idx) => (
-                                                        <div key={idx} className="flex gap-2 items-center px-4 py-2 text-sm text-white border-b border-[#30363D]">
-                                                        <div className="flex items-center gap-3 flex-[2]">
-                                                            <button className={`${row.bg} text-white py-2 px-3 rounded-full border-0`}>{row.symbol.charAt(0)}</button>
-                                                            <div className="flex flex-col">
-                                                            <span className="font-bold">{row.symbol}</span>
-                                                            <span className="text-gray-400 text-xs">{row.name}</span>
-                                                            </div>
-                                                        </div>
-                                                        <span className="flex-1">{row.leverage}</span>
-                                                        <span className="flex-1 font-bold">{row.price}</span>
-                                                        <span className="flex-1 text-[#2DA44E]">{row.change}</span>
-                                                        <span className="flex-1">{row.funding}</span>
-                                                        <span className="flex-1">{row.volume}</span>
-                                                        <span className="flex-1">{row.oi}</span>
-                                                        </div>
-                                                    ))}
 
                                                     {/* Footer */}
                                                     <div className="flex items-center justify-between px-4 py-2 text-sm text-[#8B949E] mt-4">
                                                         <span>Showing 4 of 247 markets</span>
-                                                        <span>Press <button className="px-2 py-1 bg-gray-600 rounded text-xs">ESC</button> to close</span>
+                                                        <span className="max-md:hidden">Press <button className="px-2 py-1 bg-gray-600 rounded text-sm">ESC</button> to close</span>
                                                     </div>
 
                                                 </div>

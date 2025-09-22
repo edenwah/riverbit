@@ -12,10 +12,10 @@ const PrimaryButton: React.FC<PrimaryButtonProps> = ({ onClick, children, size =
   let sizeClasses = "";
   switch (size) {
     case "small":
-      sizeClasses = "py-2 px-3 text-sm"; // 小
+      sizeClasses = "py-2 px-3 text-xs"; // 小
       break;
     case "medium":
-      sizeClasses = "py-2.5 px-4 text-sm"; // 中
+      sizeClasses = "py-2.5 px-4 text-xs"; // 中
       break;
     case "large":
       sizeClasses = "py-3.5 px-4 text-base"; // 大

@@ -54,6 +54,11 @@ button:focus-visible {
   box-shadow: none;
 }
 
+input:focus,
+input:focus-visible {
+  outline: none;
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     color: #213547;

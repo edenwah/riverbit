@@ -10,10 +10,10 @@ export const SecondaryButton: React.FC<SecondaryButtonProps> = ({ onClick, child
   let sizeClasses = "";
   switch (size) {
     case "small":
-      sizeClasses = "py-2 px-3 text-sm"; // 小
+      sizeClasses = "py-2 px-3 text-xs"; // 小
       break;
     case "medium":
-      sizeClasses = "py-[11px] px-4 text-sm"; // 中
+      sizeClasses = "py-[11px] px-4 text-xs"; // 中
       break;
     case "large":
       sizeClasses = "py-3.5 px-4 text-base"; // 大
