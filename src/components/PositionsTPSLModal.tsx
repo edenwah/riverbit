@@ -1,11 +1,21 @@
 import React from "react";
 
-const InfoRow = ({ label, value, valueColor = "text-white" }) => (
+const InfoRow: React.FC<InfoRowProps> = ({ label, value, valueColor = "text-white" }) => (
   <div className="flex items-center self-stretch">
     <span className="flex-1 text-[#9D9DAF] text-sm text-left">{label}</span>
     <span className={`${valueColor} text-sm`}>{value}</span>
   </div>
 );
+
+interface ModalData {
+  time: string; 
+  coin: string;
+  position: string | number;
+  entryPrice: string;
+  markPrice: string;
+  takeProfit: string;
+  expectedProfit: string;
+}
 
 const PositionsTPSLModal = ({
   data,            // Object with position info
@@ -14,13 +24,14 @@ const PositionsTPSLModal = ({
   onClose,         // Optional: close modal handler
   onConfirm        // Confirm button handler
 }: { 
-  data: any; 
+  data: ModalData; 
   inputTPSL: string; 
   onChangeInputTPSL: (val: string) => void; 
   onClose: () => void; 
   onConfirm: () => void; 
 }) => {
   const {
+    time: _time,
     coin,
     position,
     entryPrice,
@@ -89,6 +100,7 @@ const PositionsTPSLModal = ({
                 <div className="bg-white w-5 h-5 rounded-[9999px] border border-solid border-white" />
               </div>
             </div>
+            
             <div className="flex flex-1 items-center py-2">
               <span className="flex-1 text-[#C9D1D9] text-sm">Limit Price</span>
               <div className="shrink-0 items-start bg-[#92318D] py-0.5 pl-[22px] pr-0.5 rounded-[9999px]">

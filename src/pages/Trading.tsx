@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import RiverbitLogo from "../components/RiverbitLogo";
 import DesktopNav from "../components/DesktopNav";
 import PrimaryButton from "../components/Button/PrimaryButton";
@@ -38,10 +38,6 @@ export default () => {
     {/* Show and Hide TP/SL modal */}
     const [showTPSLModal, setShowTPSLModal] = useState(false); // 控制 modal 顯示
     const [modalData, setModalData] = useState(null); // 儲存傳遞給 modal 的資料
-    const handleTPSLClick = (row) => { // 點擊 Table cell 彈 modal
-        setModalData(row);
-        setShowTPSLModal(true);
-    };
 
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [language, setLanguage] = useState("EN");
@@ -879,29 +875,29 @@ export default () => {
 
                                                     {/* TP/SL */}
                                                     <td className="py-2 px-2">
-  <div className="flex gap-1 items-center">
-    <span>{row.tpSl}</span>
-    <img
-      src="https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/l0hc3xdh_expires_30_days.png"
-      className="w-4 h-4 object-fill cursor-pointer"
-      onClick={() => {
-        setModalData({
-          time: "9/12/2025 17:30:13",
-          coin: row.coin,
-          position: row.position.value,
-          entryPrice: "55.116",
-          markPrice: "55.252",
-          takeProfit: "Price above 60",
-          stopLoss: "--",
-          orderId: "160687782672",
-          expectedProfit: "39.51 USDC",
-        });
-        setShowTPSLModal(true);
-      }}
-      alt="TP/SL"
-    />
-  </div>
-</td>
+                                                        <div className="flex gap-1 items-center">
+                                                            <span>{row.tpSl}</span>
+                                                            <img
+                                                            src="https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/l0hc3xdh_expires_30_days.png"
+                                                            className="w-4 h-4 object-fill cursor-pointer"
+                                                            onClick={() => {
+                                                                setModalData({
+                                                                    time: "9/12/2025 17:30:13",
+                                                                    coin: row.coin,
+                                                                    position: row.position.value,
+                                                                    entryPrice: "55.116",
+                                                                    markPrice: "55.252",
+                                                                    takeProfit: "Price above 60",
+                                                                    stopLoss: "--",
+                                                                    orderId: "160687782672",
+                                                                    expectedProfit: "39.51 USDC",
+                                                                } as any);
+                                                                setShowTPSLModal(true);
+                                                            }}
+                                                            alt="TP/SL"
+                                                            />
+                                                        </div>
+                                                    </td>
 
                                                     {/* Actions */}
                                                     <td className="py-2 px-2 text-[#92318D] font-bold">{row.action}</td>
