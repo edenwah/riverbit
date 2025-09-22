@@ -30,6 +30,7 @@ export default () => {
     const [crossSelected, setCrossSelected] = useState(false);
     const [aiSelected, setAiSelected] = useState(false);
     const [showAssetPopup, setShowAssetPopup] = useState(false);
+    const [activeMarketTab, setActiveMarketTab] = useState("All Coins");
 
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [language, setLanguage] = useState("EN");
@@ -108,6 +109,22 @@ export default () => {
     const percentValue = input2
       ? Math.max(0, Math.min(100, Math.round((Number(input2) / AMOUNT_TOTAL) * 100)))
       : 0;
+
+    const allMarkets = [
+        {symbol:"BTC-USD",name:"Bitcoin",bg:"bg-orange-500",leverage:"40x",price:"$113,479",change:"+2,530 / +2.28%",funding:"0.0100%",volume:"$3,294,291,814",oi:"$3,989,216,288", type: "Perps"},
+        {symbol:"ETH-USD",name:"Ethereum",bg:"bg-blue-500",leverage:"25x",price:"$4,350.7",change:"+66.3 / +1.55%",funding:"0.0100%",volume:"$2,603,760,484",oi:"$2,911,409,736", type: "Perps"},
+        {symbol:"SOL-USD",name:"Solana",bg:"bg-purple-500",leverage:"20x",price:"$221.94",change:"+7.47 / +3.48%",funding:"0.0100%",volume:"$1,314,153,194",oi:"$1,516,333,384", type: "Perps"},
+        {symbol:"HYPE-USD",name:"Hyperliquid",bg:"bg-pink-500",leverage:"10x",price:"$54.531",change:"+1.625 / +3.07%",funding:"0.0100%",volume:"$709,614,355",oi:"$1,487,051,890", type: "Perps"},
+        {symbol:"HYPE/USDC",name:"SPOT",bg:"bg-pink-500",leverage:"-",price:"$54.511",change:"+1.593 / +3.01%",funding:"-",volume:"$250,910,508",oi:"-", type: "Spot"}
+    ];
+
+    const filteredMarkets = activeMarketTab === "All Coins"
+        ? allMarkets
+        : allMarkets.filter(m => {
+            if (activeMarketTab === "Perps") return m.type === "Perps";
+            if (activeMarketTab === "Spot") return m.type === "Spot";
+            return false;
+        });
 
     return (
         <div className="flex flex-col bg-black ">
@@ -405,7 +422,7 @@ export default () => {
                                                     </div>
 
                                                     {/* Search + Filter */}
-                                                    <div className="flex items-center justify-between w-full gap-4 px-4 mt-6 mb-6">
+                                                    <div className="flex items-center justify-between w-full px-4 py-6 border-b border-[#374151]">
                                                         <div className="flex items-center flex-1 bg-[#0D1117] py-3 px-2 rounded-sm border border-[#30363D]">
                                                         <img
                                                             src="https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/alyycaw7_expires_30_days.png"
@@ -421,7 +438,7 @@ export default () => {
                                                         <div className="flex items-center gap-2 shrink-0 bg-[#0D1117] p-1 rounded-sm border border-[#30363D]">
                                                             <button
                                                                 className={`flex flex-col items-start py-3 px-3 rounded border-0 transition-all ${
-                                                                    input11 === "Strict" ? "bg-[#92318D] text-white" : "bg-transparent text-[#8B949E]"
+                                                                    input11 === "Strict" ? "bg-[#92318D] text-white" : "bg-transparent text-zinc-400"
                                                                 }`}
                                                                 onClick={() => onChangeInput11("Strict")}
                                                                 type="button"
@@ -430,7 +447,7 @@ export default () => {
                                                             </button>
                                                             <button
                                                                 className={`flex flex-col items-start py-3 px-3 rounded border-0 transition-all ${
-                                                                    input11 === "All" ? "bg-[#92318D] text-white" : "bg-transparent text-[#8B949E]"
+                                                                    input11 === "All" ? "bg-[#92318D] text-white" : "bg-transparent text-zinc-400"
                                                                 }`}
                                                                 onClick={() => onChangeInput11("All")}
                                                                 type="button"
@@ -442,16 +459,27 @@ export default () => {
                                                     </div>
 
                                                     {/* Tabs */}
-                                                    <div className="overflow-auto flex whitespace-nowrap gap-x-4 gap-y-2 px-4 py-4 mb-2 text-sm">
+                                                    <div className="overflow-auto flex whitespace-nowrap gap-x-4 gap-y-2 px-4 py-2 mb-2 text-sm">
                                                         {["All Coins","Perps","Spot","Trending","DEX Only","Pre-launch","AI","DeFi","Layer 1","Layer 2","Meme"].map(tab => (
-                                                        <span key={tab} className={`my-1 ${tab==="All Coins"?"text-white":"text-[#8B949E]"}`}>{tab}</span>
+                                                            <button
+                                                                key={tab}
+                                                                className={`my-1 px-3 py-1 rounded transition ${
+                                                                    activeMarketTab === tab
+                                                                        ? "bg-[#92318D] text-white font-bold"
+                                                                        : "bg-transparent text-zinc-400"
+                                                                }`}
+                                                                onClick={() => setActiveMarketTab(tab)}
+                                                                type="button"
+                                                            >
+                                                                {tab}
+                                                            </button>
                                                         ))}
                                                     </div>
 
                                                     <div className="w-full overflow-auto text-left">
                                                         <table className="min-w-[700px] w-full text-sm">
                                                             <thead>
-                                                                <tr className="text-[#8B949E] font-bold border-b border-[#30363D]">
+                                                                <tr className="text-zinc-400 font-bold border-b border-[#30363D]">
                                                                     <th className="px-4 py-3 text-left">Symbol</th>
                                                                     <th className="px-4 py-3 text-left">Leverage</th>
                                                                     <th className="px-4 py-3 text-left">Last Price</th>
@@ -462,19 +490,14 @@ export default () => {
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
-                                                                {[
-                                                                    {symbol:"BTC-USD",name:"Bitcoin",bg:"bg-orange-500",leverage:"40x",price:"$113,479",change:"+2,530 / +2.28%",funding:"0.0100%",volume:"$3,294,291,814",oi:"$3,989,216,288"},
-                                                                    {symbol:"ETH-USD",name:"Ethereum",bg:"bg-blue-500",leverage:"25x",price:"$4,350.7",change:"+66.3 / +1.55%",funding:"0.0100%",volume:"$2,603,760,484",oi:"$2,911,409,736"},
-                                                                    {symbol:"SOL-USD",name:"Solana",bg:"bg-purple-500",leverage:"20x",price:"$221.94",change:"+7.47 / +3.48%",funding:"0.0100%",volume:"$1,314,153,194",oi:"$1,516,333,384"},
-                                                                    {symbol:"HYPE-USD",name:"Hyperliquid",bg:"bg-pink-500",leverage:"10x",price:"$54.531",change:"+1.625 / +3.07%",funding:"0.0100%",volume:"$709,614,355",oi:"$1,487,051,890"}
-                                                                ].map((row, idx) => (
+                                                                {filteredMarkets.map((row, idx) => (
                                                                     <tr key={idx} className="border-b border-[#30363D] text-white">
                                                                         <td className="px-4 py-2">
                                                                             <div className="flex items-center gap-3">
                                                                                 <button className={`${row.bg} text-white py-2 px-3 rounded-full border-0`}>{row.symbol.charAt(0)}</button>
                                                                                 <div className="flex flex-col">
                                                                                     <span className="font-bold">{row.symbol}</span>
-                                                                                    <span className="text-gray-400 text-xs">{row.name}</span>
+                                                                                    <span className="text-gray-400 text-sm">{row.name}</span>
                                                                                 </div>
                                                                             </div>
                                                                         </td>
@@ -491,8 +514,8 @@ export default () => {
                                                     </div>
 
                                                     {/* Footer */}
-                                                    <div className="flex items-center justify-between px-4 py-2 text-sm text-[#8B949E] mt-4">
-                                                        <span>Showing 4 of 247 markets</span>
+                                                    <div className="flex items-center justify-between px-4 py-2 text-sm text-zinc-400 mt-4">
+                                                        <span>Showing 5 of 247 markets</span>
                                                         <span className="max-md:hidden">Press <button className="px-2 py-1 bg-gray-600 rounded text-sm">ESC</button> to close</span>
                                                     </div>
 
@@ -654,12 +677,12 @@ export default () => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="flex flex-col w-full">
+                            <div className="flex flex-col w-full p-4">
                                 {/* Tabs + Filter */}
                                 <div className="overflow-x-auto">
-                                    <div className="flex gap-4 justify-between items-center border-b border-[#30363D] px-4 min-w-[600px] flex-nowrap">
+                                    <div className="flex gap-4 justify-between items-center border-b border-[#30363D] min-w-[600px] flex-nowrap">
                                         <div className="relative w-full">
-                                            <div className="flex border-b border-[#30363D] w-full">
+                                            <div className="flex border-b border-[#30363D] w-full gap-4 items-end">
                                                 {[
                                                 "Balance",
                                                 "Positions",
@@ -682,7 +705,7 @@ export default () => {
 
                                             {/* Sliding underline */}
                                             <span
-                                                className="absolute bottom-0 left-0 h-[2px] bg-[#92318D] transition-transform duration-300 ease-in-out"
+                                                className="absolute bottom-0 left-0 gap-4 h-[2px] bg-[#92318D] transition-transform duration-300 ease-in-out"
                                                 style={{
                                                 width: `calc(100% / 6)`, // 6 個 tabs
                                                 transform:
@@ -726,9 +749,9 @@ export default () => {
 
                                 {/* Tab Content */}
                                 {activeAccountTab === "Balance" && (
-                                    <div className="overflow-x-auto px-4 py-3 text-left">
+                                    <div className="overflow-x-auto py-4 text-left">
                                         {/* Table Header */}
-                                        <div className="flex text-sm text-zinc-400 font-bold mb-2 min-w-[400px]">
+                                        <div className="flex text-sm text-zinc-400 font-bold mb-2 min-w-[400px] gap-2 py-2">
                                             <span className="flex-1">Currency</span>
                                             <span className="flex-1">Available</span>
                                             <span className="flex-1">In Orders</span>
@@ -737,18 +760,260 @@ export default () => {
 
                                         {/* Table Rows */}
                                         <div className="flex flex-col gap-2 text-sm text-white min-w-[400px]">
-                                            <div className="flex">
-                                            <span className="flex-1">USDC</span>
-                                            <span className="flex-1">12,345.67</span>
-                                            <span className="flex-1">1,000.00</span>
-                                            <span className="flex-1">$13,345.67</span>
+                                            {[
+                                            { currency: "USDC", available: "12,345.67", inOrders: "1,000.00", value: "$13,345.67" },
+                                            { currency: "Points", available: "1,250,000", inOrders: "0", value: "Points" },
+                                            ].map((row, idx) => (
+                                            <div key={idx} className="flex">
+                                                <span className="flex-1">{row.currency}</span>
+                                                <span className="flex-1">{row.available}</span>
+                                                <span className="flex-1">{row.inOrders}</span>
+                                                <span className="flex-1">{row.value}</span>
                                             </div>
-                                            <div className="flex">
-                                            <span className="flex-1">Points</span>
-                                            <span className="flex-1">1,250,000</span>
-                                            <span className="flex-1">0</span>
-                                            <span className="flex-1">Points</span>
-                                            </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                )}
+                                {/* Positions */}
+                                {activeAccountTab === "Positions" && (
+                                    <div className="py-4">
+                                        <div className="overflow-x-auto">
+                                            <table className="w-full text-left border-collapse">
+                                                {/* Table Head */}
+                                                <thead>
+                                                <tr className="text-zinc-400 text-sm font-bold gap-2">
+                                                    <th className="py-2 px-2">Coin</th>
+                                                    <th className="py-2 px-2">Position</th>
+                                                    <th className="py-2 px-2">Funding Rate</th>
+                                                    <th className="py-2 px-2">PNL (ROE%)</th>
+                                                    <th className="py-2 px-2">Liq. Price</th>
+                                                    <th className="py-2 px-2">Margin</th>
+                                                    <th className="py-2 px-2">TP/SL</th>
+                                                    <th className="py-2 px-2">Actions</th>
+                                                </tr>
+                                                </thead>
+
+                                                {/* Table Body */}
+                                                <tbody className="text-white text-sm">
+                                                {[
+                                                    {
+                                                    coin: "xAAPL",
+                                                    tags: ["8x", "Cross"],
+                                                    extra: "$12.50/day",
+                                                    position: { value: "$25,000 @227.10", side: "Long" },
+                                                    fundingRate: "+0.0100%",
+                                                    pnl: { value: "+$98.00", roe: "+3.92%" },
+                                                    liqPrice: "198.20",
+                                                    margin: { value: "$3,125", percent: "42%" },
+                                                    tpSl: "--/--",
+                                                    action: "Close",
+                                                    },
+                                                ].map((row, idx) => (
+                                                    <tr key={idx} className="border-b border-[#30363D] gap-2 py-2">
+                                                    {/* Coin */}
+                                                    <td>
+                                                        <div className="flex flex-col items-start">
+                                                        <span>{row.coin}</span>
+                                                        <div className="flex gap-1 mt-1">
+                                                            {row.tags.map((tag, i) => (
+                                                            <div
+                                                                key={i}
+                                                                className="inline-flex bg-[#30363D] py-1 px-2 rounded text-zinc-400 text-[10px] font-bold"
+                                                            >
+                                                                {tag}
+                                                            </div>
+                                                            ))}
+                                                        </div>
+                                                        <div className="inline-flex bg-[#30363D] py-1 px-2 rounded text-zinc-400 text-[10px] font-bold mt-1">
+                                                            {row.extra}
+                                                        </div>
+                                                        </div>
+                                                    </td>
+
+                                                    {/* Position */}
+                                                    <td className="py-2 px-2">
+                                                        <div className="flex flex-col gap-1 items-start">
+                                                        <span>{row.position.value}</span>
+                                                        <div className="inline-flex bg-[#30363D] py-1 px-2 rounded text-zinc-400 text-[10px] font-bold">
+                                                            {row.position.side}
+                                                        </div>
+                                                        </div>
+                                                    </td>
+
+                                                    {/* Funding Rate */}
+                                                    <td className="py-2 px-2">{row.fundingRate}</td>
+
+                                                    {/* PNL */}
+                                                    <td className="py-2 px-2">
+                                                        <div className="flex flex-col gap-1">
+                                                        <span>{row.pnl.value}</span>
+                                                        <div className="inline-flex bg-[#22C55E1A] py-1 px-2 rounded text-[#2DA44E] text-[10px] font-bold">
+                                                            {row.pnl.roe}
+                                                        </div>
+                                                        </div>
+                                                    </td>
+
+                                                    {/* Liq Price */}
+                                                    <td className="py-2 px-2">{row.liqPrice}</td>
+
+                                                    {/* Margin */}
+                                                    <td className="py-2 px-2">
+                                                        <div className="flex flex-col gap-1 items-start">
+                                                        <span>{row.margin.value}</span>
+                                                        <div className="inline-flex bg-[#30363D] py-1 px-2 rounded text-zinc-400 text-[10px] font-bold">
+                                                            {row.margin.percent}
+                                                        </div>
+                                                        </div>
+                                                    </td>
+
+                                                    {/* TP/SL */}
+                                                    <td className="py-2 px-2">
+                                                        <div className="flex gap-1 items-center">
+                                                        <span>{row.tpSl}</span>
+                                                        <img
+                                                            src="https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/l0hc3xdh_expires_30_days.png"
+                                                            className="w-4 h-4 object-fill"
+                                                        />
+                                                        </div>
+                                                    </td>
+
+                                                    {/* Actions */}
+                                                    <td className="py-2 px-2 text-[#92318D] font-bold">{row.action}</td>
+                                                    </tr>
+                                                ))}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        {/* Close All button */}
+                                        <div className="flex justify-end mt-3">
+                                            <button className="bg-[#92318D] w-[100px] py-3.5 rounded-md text-white font-bold">
+                                            Close All
+                                            </button>
+                                        </div>
+                                    </div>
+                                )}
+                                {/* Open Orders */}
+                                {activeAccountTab === "Open Orders" && (
+                                    <div>
+                                        <div className="overflow-x-auto py-4">
+                                            <table className="w-full text-left border-collapse">
+                                                {/* Table Head */}
+                                                <thead>
+                                                <tr className="text-[#8B949E] text-sm font-bold">
+                                                    <th className="py-2 px-2">Time</th>
+                                                    <th className="py-2 px-2">Type</th>
+                                                    <th className="py-2 px-2">Coin</th>
+                                                    <th className="py-2 px-2">Direction</th>
+                                                    <th className="py-2 px-2">Size / Original Size</th>
+                                                    <th className="py-2 px-2">Order Value</th>
+                                                    <th className="py-2 px-2">Price / Trigger</th>
+                                                    <th className="py-2 px-2">Reduce Only</th>
+                                                    <th className="py-2 px-2">TP/SL</th>
+                                                    <th className="py-2 px-2">Actions</th>
+                                                </tr>
+                                                </thead>
+
+                                                {/* Table Body */}
+                                                <tbody className="text-sm text-white">
+                                                {[
+                                                    {
+                                                    time: "9/12/2025 17:30:13",
+                                                    type: "Take Profit Market",
+                                                    coin: "HYPE",
+                                                    direction: { text: "Close Long", color: "text-[#F85149]" },
+                                                    size: "-- / --",
+                                                    orderValue: "--",
+                                                    price: "Market / Price > 60",
+                                                    reduceOnly: "Yes",
+                                                    tpSl: "--",
+                                                    action: { text: "Cancel", color: "text-[#92318D]" },
+                                                    },
+                                                ].map((row, idx) => (
+                                                    <tr key={idx} className="border-b border-[#30363D]">
+                                                    <td className="py-2 px-2 whitespace-pre">{row.time}</td>
+                                                    <td className="py-2 px-2">{row.type}</td>
+                                                    <td className="py-2 px-2">{row.coin}</td>
+                                                    <td className={`py-2 px-2 ${row.direction.color}`}>{row.direction.text}</td>
+                                                    <td className="py-2 px-2">{row.size}</td>
+                                                    <td className="py-2 px-2">{row.orderValue}</td>
+                                                    <td className="py-2 px-2">{row.price}</td>
+                                                    <td className="py-2 px-2">{row.reduceOnly}</td>
+                                                    <td className="py-2 px-2">{row.tpSl}</td>
+                                                    <td className={`py-2 px-2 font-bold ${row.action.color}`}>{row.action.text}</td>
+                                                    </tr>
+                                                ))}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        {/* View All button */}
+                                        <div className="flex justify-end mt-3">
+                                            <button className="bg-[#92318D] w-[100px] py-3.5 rounded-md text-white font-bold">
+                                            View All
+                                            </button>
+                                        </div>
+                                    </div>
+                                )}
+                                {/* Trade History */}
+                                {activeAccountTab === "Trade History" && (
+                                    <div className="py-4">
+                                        <div className="overflow-x-auto">
+                                            <table className="w-full text-left border-collapse">
+                                                {/* Table Head */}
+                                                <thead>
+                                                <tr className="text-[#8B949E] text-sm font-bold">
+                                                    <th className="py-2 px-2">Time</th>
+                                                    <th className="py-2 px-2">Coin</th>
+                                                    <th className="py-2 px-2">Direction</th>
+                                                    <th className="py-2 px-2">Price</th>
+                                                    <th className="py-2 px-2">Size</th>
+                                                    <th className="py-2 px-2">Trade Value</th>
+                                                    <th className="py-2 px-2">Fee</th>
+                                                    <th className="py-2 px-2">Closed PNL</th>
+                                                </tr>
+                                                </thead>
+
+                                                {/* Table Body */}
+                                                <tbody className="text-sm text-white">
+                                                {[
+                                                    {
+                                                    time: "9/12/2025 16:41:34",
+                                                    coin: "HYPE",
+                                                    direction: { text: "Open Long", color: "text-[#2DA44E]" },
+                                                    price: "55.116",
+                                                    size: "8.09 HYPE",
+                                                    tradeValue: "445.89 USDC",
+                                                    fee: "0.20 USDC",
+                                                    pnl: "-0.20 USDC",
+                                                    },
+                                                ].map((row, idx) => (
+                                                    <tr key={idx} className="border-b border-[#30363D]">
+                                                    <td className="py-2 px-2 whitespace-pre">{row.time}</td>
+                                                    <td className="py-2 px-2">{row.coin}</td>
+                                                    <td className={`py-2 px-2 ${row.direction.color}`}>{row.direction.text}</td>
+                                                    <td className="py-2 px-2">{row.price}</td>
+                                                    <td className="py-2 px-2">{row.size}</td>
+                                                    <td className="py-2 px-2">{row.tradeValue}</td>
+                                                    <td className="py-2 px-2">{row.fee}</td>
+                                                    <td className="py-2 px-2">{row.pnl}</td>
+                                                    </tr>
+                                                ))}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        {/* Buttons */}
+                                        <div className="flex justify-end mt-3 gap-4">
+                                            <button
+                                            className="bg-[#92318D] py-3.5 px-[19px] rounded-md text-white font-bold"
+                                            onClick={() => alert("Pressed!")}
+                                            >
+                                            View All
+                                            </button>
+                                            <button
+                                            className="bg-[#92318D] py-3.5 px-4 rounded-md text-white font-bold"
+                                            onClick={() => alert("Pressed!")}
+                                            >
+                                            Export as CSV
+                                            </button>
                                         </div>
                                     </div>
                                 )}
@@ -1445,22 +1710,80 @@ export default () => {
                                     </div>
                                     )}
 
-                                    <div className="flex flex-col items-start w-full gap-2 ">
-                                        <div className="flex flex-col items-center pb-[1px]">
-                                            <span className="text-zinc-400 text-sm" >
-                                                {"Max Slippage %"}
-                                            </span>
+                                    <div className="flex items-center gap-2 w-full">
+                                        <div className="flex flex-col items-start w-full gap-2">
+                                            <div className="flex flex-col items-center pb-[1px] h-6">
+                                                <span className="text-zinc-400 text-sm " >
+                                                    {"Max Slippage %"}
+                                                </span>
+                                            </div>
+                                            <input
+                                                type="number"
+                                                min={0}
+                                                max={100}
+                                                step="0.1"
+                                                placeholder={"0.5"}
+                                                value={input7}
+                                                onChange={(event)=>onChangeInput7(event.target.value)}
+                                                className="w-full text-white bg-zinc-950 text-base p-3 rounded-sm border border-solid border-[#30363D]"
+                                            />
                                         </div>
-                                        <input
-                                            type="number"
-                                            min={0}
-                                            max={100}
-                                            step="0.1"
-                                            placeholder={"0.5"}
-                                            value={input7}
-                                            onChange={(event)=>onChangeInput7(event.target.value)}
-                                            className="w-full text-white bg-zinc-950 text-base p-3 rounded-sm border border-solid border-[#30363D]"
-                                        />
+                                        <div className="flex flex-col items-start w-full gap-2">
+                                            <div className="flex items-center pb-[1px] gap-2 h-6">
+                                                <span className="text-[#9D9DAF] text-sm">
+                                                    {"TIF"}
+                                                </span>
+
+                                                {/* Wrap icon + tooltip in relative */}
+                                                <div className="relative">
+                                                    <button
+                                                    type="button"
+                                                    className="focus:outline-none"
+                                                    onClick={() => setShowTifTooltip((v) => !v)}
+                                                    tabIndex={0}
+                                                    >
+                                                    <img
+                                                        src="https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/32hekqyb_expires_30_days.png"
+                                                        className="w-3 h-3 object-fill"
+                                                        alt="TIF Info"
+                                                    />
+                                                    </button>
+
+                                                    {showTifTooltip && (
+                                                    <div className="absolute left-1/2 -translate-x-1/2 top-full mt-2 z-50 bg-zinc-900 text-sm text-white rounded px-3 py-2 border border-[#30363D] shadow-lg w-56">
+                                                        <span className="font-bold">TIF (Time in Force)</span>
+                                                        <br />
+                                                        <br />
+                                                        <span>
+                                                        TIF determines how long an order remains active.<br />
+                                                        <b>GTC</b>: Good Till Cancelled<br />
+                                                        <b>IOC</b>: Immediate Or Cancel<br />
+                                                        <b>ALO</b>: Add Liquidity Only
+                                                        </span>
+                                                    </div>
+                                                    )}
+                                                </div>
+                                            </div>
+
+                                            <div className="relative w-full">
+                                                <select
+                                                    className="appearance-none w-full flex items-center bg-zinc-950 text-left p-3 pr-8 rounded-sm border border-solid border-[#30363D] text-white text-base"
+                                                    value={tif}
+                                                    onChange={e => setTif(e.target.value)}
+                                                >
+                                                    <option value="GTC">GTC</option>
+                                                    <option value="IOC">IOC</option>
+                                                    <option value="ALO">ALO</option>
+                                                </select>
+                                                <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2">
+                                                    <img
+                                                        src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/w4taczak_expires_30_days.png"}
+                                                        className="w-3 h-[15px] rounded-md object-fill"
+                                                        alt="Dropdown"
+                                                    />
+                                                </span>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div className="flex flex-col items-start bg-zinc-950 py-3 rounded-lg w-full">
                                         <div className="flex items-center mb-2 ml-3 gap-2">
