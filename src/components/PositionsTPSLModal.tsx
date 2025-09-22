@@ -1,4 +1,12 @@
 import React from "react";
+import { useState } from "react";
+import ToggleButton from "./ToggleButton";
+import PrimaryButton from "./Button/PrimaryButton";
+interface InfoRowProps {
+  label: string;
+  value: string | number;
+  valueColor?: string;
+}
 
 const InfoRow: React.FC<InfoRowProps> = ({ label, value, valueColor = "text-white" }) => (
   <div className="flex items-center self-stretch">
@@ -19,14 +27,18 @@ interface ModalData {
 
 const PositionsTPSLModal = ({
   data,            // Object with position info
-  inputTPSL,          // Stop Loss Price input value
-  onChangeInputTPSL,  // Stop Loss Price input handler
+  inputTPSLPrice,          // Stop Loss Price input value
+  onChangeInputTPSLPrice,  // Stop Loss Price input handler
+  inputTPSLPercent,          // Stop Loss % input value
+  onChangeInputTPSLPercent,  // Stop Loss % input handler
   onClose,         // Optional: close modal handler
   onConfirm        // Confirm button handler
 }: { 
   data: ModalData; 
-  inputTPSL: string; 
-  onChangeInputTPSL: (val: string) => void; 
+  inputTPSLPrice: string; 
+  onChangeInputTPSLPrice: (val: string) => void; 
+  inputTPSLPercent: string; 
+  onChangeInputTPSLPercent: (val: string) => void; 
   onClose: () => void; 
   onConfirm: () => void; 
 }) => {
@@ -39,7 +51,8 @@ const PositionsTPSLModal = ({
     takeProfit,
     expectedProfit,
   } = data;
-
+  const [allocatedAmount, setAllocatedAmount] = useState(false);
+  const [limitPrice, setLimitPrice] = useState(false);
   return (
     <div className="flex flex-col items-center self-stretch bg-[#000000B0] py-[197px]">
       <div className="flex flex-col bg-[#272B2F] w-[500px] py-[1px] rounded-lg border border-solid border-gray-700">
@@ -55,8 +68,8 @@ const PositionsTPSLModal = ({
         </div>
 
         {/* Info Rows */}
-        <div className="flex flex-col self-stretch pb-6 mx-[1px] gap-4">
-          <div className="flex flex-col self-stretch pt-4 mx-6 gap-1">
+        <div className="flex flex-col self-stretch pb-6 px-6 mx-[1px] gap-4">
+          <div className="flex flex-col self-stretch pt-4 gap-1">
             <InfoRow label="Coin" value={coin} />
             <InfoRow label="Position" value={position} />
             <InfoRow label="Entry Price" value={entryPrice} />
@@ -70,52 +83,51 @@ const PositionsTPSLModal = ({
           </div>
 
           {/* Stop Loss Inputs */}
-          <div className="flex items-start self-stretch mx-6 gap-3">
-            <div className="flex flex-1 flex-col items-start gap-[9px]">
-              <span className="text-[#9D9DAF] text-sm">Stop Loss Price</span>
-              <input
-                placeholder="Price"
-                value={inputTPSL}
-                onChange={(e) => onChangeInputTPSL(e.target.value)}
-                className="self-stretch text-[#8B949E] bg-[#0D1117] text-base py-3 pl-3 pr-6 rounded-md border border-solid border-[#30363D]"
-              />
-            </div>
-            <div className="flex flex-1 flex-col items-start gap-[9px]">
-              <span className="text-[#9D9DAF] text-sm">Stop Loss %</span>
-              <button
-                className="flex items-center self-stretch bg-[#0D1117] text-left p-3 rounded-md border border-solid border-[#30363D]"
-                onClick={() => alert("Pressed!")}
-              >
-                <span className="flex-1 text-[#8B949E] text-base">Loss</span>
-                <span className="text-[#8B949E] text-sm font-bold">%</span>
-              </button>
-            </div>
+          <div className="grid grid-cols-2 gap-4 w-full max-w-2xl">
+              <div className="flex flex-col gap-2 min-w-0 text-left">
+                  <span className="text-[#9D9DAF] text-sm">Stop Loss Price</span>
+                  <input
+                  type="number"
+                  placeholder="240.00"
+                  value={inputTPSLPrice}
+                  onChange={(e) => onChangeInputTPSLPrice(e.target.value)}
+                  className="w-full text-white bg-zinc-950 text-base p-3 rounded-sm border border-[#30363D] focus:outline-none"
+                  />
+              </div>
+              <div className="flex flex-col gap-2 min-w-0 text-left">
+                  <span className="text-[#9D9DAF] text-sm">Stop Loss %</span>
+                  <div className="flex items-center bg-zinc-950 p-3 rounded-sm border border-[#30363D] w-full">
+                  <input
+                    type="number"
+                    placeholder="%"
+                    value={inputTPSLPercent}
+                    onChange={(e) => onChangeInputTPSLPercent(e.target.value)}
+                    className="flex-1 text-white bg-transparent text-base font-bold border-0 focus:outline-none min-w-0"
+                  />
+                  <span className="text-white text-base ml-2">%</span>
+                  </div>
+              </div>
           </div>
 
           {/* Allocated & Limit */}
-          <div className="flex items-start self-stretch mx-6 gap-3">
-            <div className="flex flex-1 items-center py-2">
-              <span className="flex-1 text-[#C9D1D9] text-sm">Allocated Amount</span>
-              <div className="shrink-0 items-start bg-[#92318D] py-0.5 pl-[22px] pr-0.5 rounded-[9999px]">
-                <div className="bg-white w-5 h-5 rounded-[9999px] border border-solid border-white" />
-              </div>
-            </div>
-            
-            <div className="flex flex-1 items-center py-2">
-              <span className="flex-1 text-[#C9D1D9] text-sm">Limit Price</span>
-              <div className="shrink-0 items-start bg-[#92318D] py-0.5 pl-[22px] pr-0.5 rounded-[9999px]">
-                <div className="bg-white w-5 h-5 rounded-[9999px] border border-solid border-white" />
-              </div>
-            </div>
+          <div className="flex items-start self-stretch gap-3">
+            <ToggleButton
+              label="Allocated Amount"
+              value={allocatedAmount}
+              onChange={setAllocatedAmount}
+            />
+
+            <ToggleButton
+              label="Limit Price"
+              value={limitPrice}
+              onChange={setLimitPrice}
+            />
           </div>
 
           {/* Confirm Button */}
-          <button
-            className="flex flex-col items-center self-stretch bg-[#92318D] text-left py-3.5 mx-6 rounded-md border-0"
-            onClick={onConfirm}
-          >
-            <span className="text-white text-base font-bold">Confirm</span>
-          </button>
+          <PrimaryButton size="large" onClick={() => alert("Pressed!")}>
+            Confirm
+          </PrimaryButton>
         </div>
 
         {/* Info Text */}

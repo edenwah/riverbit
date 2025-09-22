@@ -18,7 +18,8 @@ export default () => {
     const [input9, onChangeInput9] = useState('');
     const [input10, onChangeInput10] = useState('');
     const [input11, onChangeInput11] = useState('Strict');
-    const [inputTPSL, setInputTPSL] = useState('');
+    const [inputTPSLPrice, setInputTPSLPrice] = useState('');
+    const [inputTPSLPercent, setInputTPSLPercent] = useState('');
     const [isOn, setIsOn] = useState(false);
     const [reduceOnly, setReduceOnly] = useState(false);
     const [activeOrderTab, setActiveOrderTab] = useState("Market"); 
@@ -914,12 +915,14 @@ export default () => {
                                             >
                                             {/* Modal Content */}
                                             <PositionsTPSLModal
-                                                data={modalData}
-                                                inputTPSL={inputTPSL} // 例如用 useState 管理
-                                                onChangeInputTPSL={setInputTPSL} // 更新 inputTPSL
+                                                data={modalData} 
+                                                inputTPSLPrice={inputTPSLPrice} 
+                                                onChangeInputTPSLPrice={setInputTPSLPrice} 
+                                                inputTPSLPercent={inputTPSLPercent} 
+                                                onChangeInputTPSLPercent={setInputTPSLPercent} 
                                                 onClose={() => setShowTPSLModal(false)}
                                                 onConfirm={() => {
-                                                console.log("Confirmed", inputTPSL);
+                                                console.log("Confirmed", inputTPSLPrice, inputTPSLPercent);
                                                 setShowTPSLModal(false);
                                                 }}
                                             />
@@ -1854,27 +1857,27 @@ export default () => {
 
                                         {/* Stop Loss */}
                                         <div className="grid grid-cols-2 gap-4 w-full max-w-2xl">
-                                        <div className="flex flex-col gap-2 min-w-0 text-left">
-                                            <span className="text-[#9D9DAF] text-sm">Stop Loss Price</span>
-                                            <input
-                                            placeholder="240.00"
-                                            value={input5}
-                                            onChange={(e) => onChangeInput5(e.target.value)}
-                                            className="w-full text-white bg-zinc-950 text-base p-3 rounded-sm border border-[#30363D] focus:outline-none"
-                                            />
-                                        </div>
-                                        <div className="flex flex-col gap-2 min-w-0 text-left">
-                                            <span className="text-[#9D9DAF] text-sm">Stop Loss %</span>
-                                            <div className="flex items-center bg-zinc-950 p-3 rounded-sm border border-[#30363D] w-full">
-                                            <input
-                                                placeholder="%"
-                                                value={input6}
-                                                onChange={(e) => onChangeInput6(e.target.value)}
-                                                className="flex-1 text-white bg-transparent text-base font-bold border-0 focus:outline-none min-w-0"
-                                            />
-                                            <span className="text-white text-base ml-2">%</span>
+                                            <div className="flex flex-col gap-2 min-w-0 text-left">
+                                                <span className="text-[#9D9DAF] text-sm">Stop Loss Price</span>
+                                                <input
+                                                placeholder="240.00"
+                                                value={input5}
+                                                onChange={(e) => onChangeInput5(e.target.value)}
+                                                className="w-full text-white bg-zinc-950 text-base p-3 rounded-sm border border-[#30363D] focus:outline-none"
+                                                />
                                             </div>
-                                        </div>
+                                            <div className="flex flex-col gap-2 min-w-0 text-left">
+                                                <span className="text-[#9D9DAF] text-sm">Stop Loss %</span>
+                                                <div className="flex items-center bg-zinc-950 p-3 rounded-sm border border-[#30363D] w-full">
+                                                <input
+                                                    placeholder="%"
+                                                    value={input6}
+                                                    onChange={(e) => onChangeInput6(e.target.value)}
+                                                    className="flex-1 text-white bg-transparent text-base font-bold border-0 focus:outline-none min-w-0"
+                                                />
+                                                <span className="text-white text-base ml-2">%</span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     )}
