@@ -3,14 +3,14 @@ import React from "react";
 interface ToggleButtonProps {
   label: string;
   value: boolean;
-  onChange: (newValue: boolean) => void;
+  onChange: (val: boolean) => void;
 }
 
 const ToggleButton: React.FC<ToggleButtonProps> = ({ label, value, onChange }) => {
   return (
     <button
       type="button"
-      className="py-2 w-full flex items-center justify-between focus:outline-none"
+      className="py-2 flex items-center w-full justify-between focus:outline-none"
       onClick={() => onChange(!value)}
     >
       <span className="text-[#C9D1D9] text-sm">{label}</span>
@@ -22,9 +22,7 @@ const ToggleButton: React.FC<ToggleButtonProps> = ({ label, value, onChange }) =
       >
         <div
           className="bg-white w-5 h-5 rounded-full border border-solid border-white shadow transition-transform duration-200"
-          style={{
-            transform: value ? "translateX(16px)" : "translateX(0)",
-          }}
+          style={{ transform: value ? "translateX(16px)" : "translateX(0)" }}
         />
       </div>
     </button>
