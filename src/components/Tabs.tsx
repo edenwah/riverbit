@@ -11,7 +11,7 @@ const Tabs: React.FC<TabsProps> = ({ tabs, activeTab, onTabChange }) => {
 
   return (
     <div className="relative w-full">
-      <div className="flex border-b border-[#30363D] w-full">
+      <div className="flex border-b border-[#30363D] w-full items-end">
         {tabs.map((tab) => (
           <button
             key={tab}

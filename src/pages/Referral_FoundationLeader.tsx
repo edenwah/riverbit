@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import RiverbitLogo from "../components/RiverbitLogo";
 import DesktopNav from "../components/DesktopNav";
+import Footer from "../components/Footer";
 export default (props) => {
 	const [input1, onChangeInput1] = useState('');
 	return (
@@ -527,14 +528,7 @@ export default (props) => {
 							</div>
 						</div>
 					</div>
-					<div className="flex flex-col self-stretch bg-[#0D1117] py-6 gap-2">
-						<span className="text-[#8B949E] text-xs text-center mx-[372px]" >
-							{"Lo‑Fi v1.4 · Based on PRD v1.4 · Points System + Additional Modules + Insurance Pool | Arbitrum One Network | USDC Only"}
-						</span>
-						<span className="text-[#8B949E] text-xs text-center mx-[363px]" >
-							{"Three-column Trading Layout | Liquidity Pools (Foundation / Main Pool / Insurance Pool) | Asset & Points Center | Full Modules"}
-						</span>
-					</div>
+					<Footer />
 				</div>
 			</div>
 		</div>

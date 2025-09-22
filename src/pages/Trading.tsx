@@ -7,6 +7,7 @@ import Tabs from "../components/Tabs";
 import PositionsTPSLModal from "../components/PositionsTPSLModal";
 import ToggleButton from "../components/ToggleButton";
 import PercentSlider from "../components/PercentSlider";
+import Footer from "../components/Footer";
 export default () => {
     const [input1, onChangeInput1] = useState('');
     const [input2, onChangeInput2] = useState('');
@@ -467,7 +468,7 @@ export default () => {
 
                                                     </div>
 
-                                                    {/* Tabs */}
+                                                    {/* Tab Filter */}
                                                     <div className="overflow-auto flex whitespace-nowrap gap-x-4 gap-y-2 px-4 py-2 mb-2 text-sm">
                                                         {["All Coins","Perps","Spot","Trending","DEX Only","Pre-launch","AI","DeFi","Layer 1","Layer 2","Meme"].map(tab => (
                                                             <button
@@ -690,48 +691,19 @@ export default () => {
                                 {/* Tabs + Filter */}
                                 <div className="overflow-x-auto">
                                     <div className="flex gap-4 justify-between items-center border-b border-[#30363D] min-w-[600px] flex-nowrap">
-                                        <div className="relative w-full">
-                                            <div className="flex border-b border-[#30363D] w-full gap-4 items-end">
-                                                {[
+                                        
+                                        <Tabs
+                                            tabs={[
                                                 "Balance",
                                                 "Positions",
                                                 "Open Orders",
                                                 "Trade History",
                                                 "Funding History",
                                                 "Order History",
-                                                ].map(tab => (
-                                                <button
-                                                    key={tab}
-                                                    className={`flex-1 text-sm py-3 text-center focus:outline-none transition-colors duration-300 ${
-                                                    activeAccountTab === tab ? "text-white font-bold" : "text-zinc-400"
-                                                    }`}
-                                                    onClick={() => setActiveAccountTab(tab)}
-                                                >
-                                                    {tab}
-                                                </button>
-                                                ))}
-                                            </div>
-
-                                            {/* Sliding underline */}
-                                            <span
-                                                className="absolute bottom-0 left-0 gap-4 h-[2px] bg-fuchsia-800 transition-transform duration-300 ease-in-out"
-                                                style={{
-                                                width: `calc(100% / 6)`, // 6 個 tabs
-                                                transform:
-                                                    activeAccountTab === "Balance"
-                                                    ? "translateX(0%)"
-                                                    : activeAccountTab === "Positions"
-                                                    ? "translateX(100%)"
-                                                    : activeAccountTab === "Open Orders"
-                                                    ? "translateX(200%)"
-                                                    : activeAccountTab === "Trade History"
-                                                    ? "translateX(300%)"
-                                                    : activeAccountTab === "Funding History"
-                                                    ? "translateX(400%)"
-                                                    : "translateX(500%)",
-                                                }}
+                                            ]}
+                                            activeTab={activeAccountTab}
+                                            onTabChange={setActiveAccountTab}
                                             />
-                                        </div>
 
                                         {/* Filter Selector */}
                                         <div className="relative">
@@ -1214,30 +1186,11 @@ export default () => {
                         {/* Order Book/Trades (col-span-1 on desktop, full width on mobile) */}
                         <div className="flex flex-col gap-2 items-center bg-zinc-900 p-[1px] rounded-sm border border-solid border-[#30363D] w-full">
                             {/* Tabs for Order Book/Trades */}
-                            <div className="relative w-full">
-                                <div className="flex items-center border-b border-[#30363D]">
-                                    {["Order Book", "Trades"].map(tab => (
-                                    <button
-                                        key={tab}
-                                        className={`relative text-sm py-[15px] w-full focus:outline-none transition-colors duration-300 ${
-                                        orderTab === tab ? "text-white font-bold" : "text-zinc-400"
-                                        }`}
-                                        onClick={() => setOrderTab(tab)}
-                                    >
-                                        {tab}
-                                    </button>
-                                    ))}
-                                </div>
-
-                                {/* Sliding underline */}
-                                <span
-                                    className="absolute bottom-0 left-0 h-[2px] bg-fuchsia-800 transition-transform duration-300 ease-in-out"
-                                    style={{
-                                    width: "50%",
-                                    transform: orderTab === "Order Book" ? "translateX(0%)" : "translateX(100%)",
-                                    }}
+                            <Tabs
+                                tabs={["Order Book", "Trades"]}
+                                activeTab={orderTab}
+                                onTabChange={setOrderTab}
                                 />
-                            </div>
 
                             {/* Tab Content */}
                             {orderTab === "Order Book" && (
@@ -2332,14 +2285,7 @@ export default () => {
                         </div>
                     </div>
                 </div>
-                <div className="flex flex-col self-stretch bg-zinc-900 py-6 px-4 gap-2">
-                    <span className="text-zinc-400 text-sm text-center  sm:mx-4 xs:mx-2" >
-                        {"Lo‑Fi v1.4 · Based on PRD v1.4 · Points System + Additional Modules + Insurance Pool | Arbitrum One Network | USDC Only"}
-                    </span>
-                    <span className="text-zinc-400 text-sm text-center sm:mx-4 xs:mx-2" >
-                        {"Three-column Trading Layout | Liquidity Pools (Foundation / Main Pool / Insurance Pool) | Asset & Points Center | Full Modules"}
-                    </span>
-                </div>
+                <Footer />
             </div>
         </div>
     )
