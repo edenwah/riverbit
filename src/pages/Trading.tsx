@@ -8,6 +8,7 @@ import PositionsTPSLModal from "../components/PositionsTPSLModal";
 import ToggleButton from "../components/ToggleButton";
 import PercentSlider from "../components/PercentSlider";
 import Footer from "../components/Footer";
+import Tips from "../components/Tips";
 export default () => {
     const [input1, onChangeInput1] = useState('');
     const [input2, onChangeInput2] = useState('');
@@ -24,9 +25,10 @@ export default () => {
     const [inputTPSLPercent, setInputTPSLPercent] = useState('');
     const [isOn, setIsOn] = useState(false);
     const [reduceOnly, setReduceOnly] = useState(false);
-    const [activeOrderTab, setActiveOrderTab] = useState("Market"); 
-    const [orderTab, setOrderTab] = useState("Order Book"); 
-	const [activeAccountTab, setActiveAccountTab] = useState("Balance"); 
+    const [orderPanelTab, setOrderPanelTab] = useState("Market"); 
+    const [orderBookTab, setOrderBookTab] = useState("Order Book"); 
+	const [accountTab, setAccountTab] = useState("Balance"); 
+    const [searchFilterTab, setSearchFilterTab] = useState("All Coins");
     const [granularity, setGranularity] = useState("")
     const [indicator, setIndicator] = useState("")
     const [filterValue, setFilterValue] = useState("")
@@ -36,7 +38,7 @@ export default () => {
     const [crossSelected, setCrossSelected] = useState(false);
     const [aiSelected, setAiSelected] = useState(false);
     const [showAssetPopup, setShowAssetPopup] = useState(false);
-    const [activeMarketTab, setActiveMarketTab] = useState("All Coins");
+
 
     {/* Show and Hide TP/SL modal */}
     const [showTPSLModal, setShowTPSLModal] = useState(false); // 控制 modal 顯示
@@ -128,11 +130,11 @@ export default () => {
         {symbol:"HYPE/USDC",name:"SPOT",bg:"bg-pink-500",leverage:"-",price:"$54.511",change:"+1.593 / +3.01%",funding:"-",volume:"$250,910,508",oi:"-", type: "Spot"}
     ];
 
-    const filteredMarkets = activeMarketTab === "All Coins"
+    const filteredMarkets = searchFilterTab === "All Coins"
         ? allMarkets
         : allMarkets.filter(m => {
-            if (activeMarketTab === "Perps") return m.type === "Perps";
-            if (activeMarketTab === "Spot") return m.type === "Spot";
+            if (searchFilterTab === "Perps") return m.type === "Perps";
+            if (searchFilterTab === "Spot") return m.type === "Spot";
             return false;
         });
 
@@ -474,11 +476,11 @@ export default () => {
                                                             <button
                                                                 key={tab}
                                                                 className={`my-1 px-3 py-1 rounded transition ${
-                                                                    activeMarketTab === tab
+                                                                    searchFilterTab === tab
                                                                         ? "bg-fuchsia-800 text-white font-bold"
                                                                         : "bg-transparent text-zinc-400"
                                                                 }`}
-                                                                onClick={() => setActiveMarketTab(tab)}
+                                                                onClick={() => setSearchFilterTab(tab)}
                                                                 type="button"
                                                             >
                                                                 {tab}
@@ -701,8 +703,8 @@ export default () => {
                                                 "Funding History",
                                                 "Order History",
                                             ]}
-                                            activeTab={activeAccountTab}
-                                            onTabChange={setActiveAccountTab}
+                                            activeTab={accountTab}
+                                            onTabChange={setAccountTab}
                                             />
 
                                         {/* Filter Selector */}
@@ -729,7 +731,7 @@ export default () => {
                                 </div>
 
                                 {/* Tab Content */}
-                                {activeAccountTab === "Balance" && (
+                                {accountTab === "Balance" && (
                                     <div className="overflow-x-auto py-4 text-left">
                                         {/* Table Header */}
                                         <div className="flex text-sm text-zinc-400 font-bold mb-2 min-w-[400px] gap-2 py-2">
@@ -756,7 +758,7 @@ export default () => {
                                     </div>
                                 )}
                                 {/* Positions */}
-                                {activeAccountTab === "Positions" && (
+                                {accountTab === "Positions" && (
                                     <div className="py-4">
                                         <div className="overflow-x-auto">
                                             <table className="w-full text-left border-collapse">
@@ -912,7 +914,7 @@ export default () => {
                                     </div>
                                 )}
                                 {/* Open Orders */}
-                                {activeAccountTab === "Open Orders" && (
+                                {accountTab === "Open Orders" && (
                                     <div>
                                         <div className="overflow-x-auto py-4">
                                             <table className="w-full text-left border-collapse">
@@ -973,7 +975,7 @@ export default () => {
                                     </div>
                                 )}
                                 {/* Trade History */}
-                                {activeAccountTab === "Trade History" && (
+                                {accountTab === "Trade History" && (
                                     <div className="py-4">
                                         <div className="overflow-x-auto">
                                             <table className="w-full text-left border-collapse">
@@ -1037,7 +1039,7 @@ export default () => {
                                     </div>
                                 )}
                                 {/* Funding History */}
-                                {activeAccountTab === "Funding History" && (
+                                {accountTab === "Funding History" && (
                                     <div className="py-4">
                                         <div className="overflow-x-auto">
                                             <table className="w-full text-left border-collapse">
@@ -1096,7 +1098,7 @@ export default () => {
                                     </div>
                                 )}
                                 {/* Order History */}
-                                {activeAccountTab === "Order History" && (
+                                {accountTab === "Order History" && (
                                     <div className="py-4">
                                         <div className="overflow-x-auto">
                                             <table className="w-full text-left border-collapse">
@@ -1188,12 +1190,12 @@ export default () => {
                             {/* Tabs for Order Book/Trades */}
                             <Tabs
                                 tabs={["Order Book", "Trades"]}
-                                activeTab={orderTab}
-                                onTabChange={setOrderTab}
+                                activeTab={orderBookTab}
+                                onTabChange={setOrderBookTab}
                                 />
 
                             {/* Tab Content */}
-                            {orderTab === "Order Book" && (
+                            {orderBookTab === "Order Book" && (
                                 <div className="flex flex-col items-start w-full">
                                     {/* --- BEGIN Order Book Content (lines 353-640) --- */}
                                     {/* Paste all the JSX from line 353 to 640 here */}
@@ -1292,7 +1294,7 @@ export default () => {
                                     </div>
                                 </div>
                             )}
-                            {orderTab === "Trades" && (
+                            {orderBookTab === "Trades" && (
                                 <div className="flex flex-col items-start w-full">
                                     <div className="flex flex-col items-center py-1 w-full">
                                         <div className="flex items-start pr-[1px] w-full">
@@ -1391,12 +1393,12 @@ export default () => {
                             {/* Tabs */}
                             <Tabs
                                 tabs={["Market", "Limit", "Advanced"]}
-                                activeTab={activeOrderTab}
-                                onTabChange={setActiveOrderTab}
+                                activeTab={orderPanelTab}
+                                onTabChange={setOrderPanelTab}
                             />
 
                             {/* Tab Content */}
-                            {activeOrderTab === "Market" && (
+                            {orderPanelTab === "Market" && (
                                 <div className="w-full flex flex-col items-start px-4 py-4 gap-4">
                                     {/* --- BEGIN Market Tab Content --- */}
                                     <div className="flex items-center bg-zinc-950 py-1 pl-1 pr-[5px] gap-6 rounded-sm w-full">
@@ -1544,23 +1546,16 @@ export default () => {
                                             className="w-full text-white bg-zinc-950 text-base p-3 rounded-sm border border-solid border-[#30363D]"
                                         />
                                     </div>
-                                    <div className="flex flex-col items-start bg-zinc-950 py-3 rounded-lg w-full">
-                                        <div className="flex items-center mb-2 ml-3 gap-2">
-                                            <img
-                                                src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/1uh405kh_expires_30_days.png"} 
-                                                className="w-3 h-6 object-fill"
-                                            />
-                                            <span className="text-white text-s text-left" >
-                                                {"AI Insight"}
-                                            </span>
-                                        </div>
-                                        <span className="text-[#9D9DAF] text-sm mx-3 text-left" >
-                                            {"Bullish trend 78% · Resistance $228.50 ·"}
-                                        </span>
-                                        <span className="text-[#9D9DAF] text-sm ml-3 text-left" >
-                                            {"Suitable for small position entry"}
-                                        </span>
-                                    </div>
+                                    <Tips
+                                        title="AI Insight"
+                                        iconUrl="https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/1uh405kh_expires_30_days.png"
+                                        tips={[
+                                            "Bullish trend 78% · Resistance $228.50 ·",
+                                            "Suitable for small position entry",
+                                        ]}
+                                        />
+
+
                                     <div className="flex flex-col items-start pt-4 gap-2 w-full">
                                         <span className="text-[#9D9DAF] text-sm font-bold" >
                                             {"Estimation"}
@@ -1590,7 +1585,7 @@ export default () => {
                                     {/* --- END Market Tab Content --- */}
                                 </div>
                             )}
-                            {activeOrderTab === "Limit" && (
+                            {orderPanelTab === "Limit" && (
                                 <div className="w-full flex flex-col items-start px-4 py-4 gap-4">
                                     {/* --- BEGIN Limit Tab Content --- */}
                                     <div className="flex items-center bg-zinc-950 py-1 pl-1 pr-[5px] gap-6 rounded-sm w-full">
@@ -1918,7 +1913,7 @@ export default () => {
                                     {/* --- END Limit Tab Content --- */}
                                 </div>
                             )}
-                            {activeOrderTab === "Advanced" && (
+                            {orderPanelTab === "Advanced" && (
                                 <div className="w-full flex flex-col items-start px-4 py-4 gap-4">
                                     {/* --- BEGIN Advanced Tab Content --- */}
                                     <div className="flex items-center bg-zinc-950 py-1 pl-1 pr-[5px] gap-6 rounded-sm w-full">
