@@ -8,7 +8,7 @@ export default (props) => {
 	const [input3, onChangeInput3] = useState('');
 	const [input4, onChangeInput4] = useState('');
 	return (
-		<div className="flex flex-col bg-white">
+		<div className="flex flex-col bg-black min-h-screen">
 			<div className="self-stretch bg-white h-[1898px] rounded-lg border-2 border-solid border-[#CED4DA]">
 				<div className="flex justify-between items-start self-stretch bg-[#161B22] py-3.5 px-4">
 					<div className="flex shrink-0 items-start gap-8">

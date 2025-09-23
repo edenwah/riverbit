@@ -4,7 +4,7 @@ import DesktopNav from "../components/DesktopNav";
 import Footer from "../components/Footer";
 export default (props) => {
 	return (
-		<div className="flex flex-col bg-white">
+		<div className="flex flex-col bg-black min-h-screen">
 			<div className="self-stretch bg-white h-[1099px] rounded-lg border-2 border-solid border-[#CED4DA]">
 				<div className="flex justify-between items-start self-stretch bg-[#161B22] py-3.5 px-4">
 					<div className="flex shrink-0 items-start gap-8">
