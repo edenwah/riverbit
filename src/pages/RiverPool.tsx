@@ -176,12 +176,14 @@ export default () => {
 													<span className="w-full flex-1 text-white text-xl font-bold" >
 														{"Account Value / PNL"}
 													</span>
-													<Select
-														value={timeRange}
-														onChange={setTimeRange}
-														options={["All Time", "1D", "1W", "1M", "1Y"].map((v) => ({ label: v, value: v }))}
-														placeholder="Time Range"
-														/>
+													<div className="relative">
+														<Select
+															value={timeRange}
+															onChange={setTimeRange}
+															options={["All Time", "1D", "1W", "1M", "1Y"].map((v) => ({ label: v, value: v }))}
+															placeholder="Time Range"
+															/>
+													</div>
 												</div>
 												<div className="self-stretch h-[300px] mx-6">
 												</div>
