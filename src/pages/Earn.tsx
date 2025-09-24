@@ -82,219 +82,102 @@ export default () => {
                         />
                 )}
 				{/* Content */}
-				<div className="flex flex-col self-stretch gap-2.5">
-					<div className="flex flex-col items-start self-stretch py-12 px-6 mx-20 gap-6">
+				<div className="flex flex-col self-stretch gap-2 mx-6">
+					<div className="flex flex-col items-start self-stretch py-12 lg:mx-20 gap-8">
 						<span className="text-white text-3xl font-bold" >
 							{"Earn Points"}
 						</span>
 						<div className="flex flex-col self-stretch gap-3">
-							<div className="flex items-center self-stretch">
-								<button className="flex flex-col shrink-0 items-start bg-[#161B22] text-left py-[21px] mr-3 gap-2 rounded-md border border-solid border-[#30363D]"
-									onClick={()=>alert("Pressed!")}>
-									<span className="text-[#8B949E] text-sm ml-[21px]" >
-										{"My Points"}
-									</span>
-									<span className="text-white text-2xl font-bold ml-[21px]" >
-										{"4,176"}
-									</span>
-								</button>
-								<button className="flex flex-col shrink-0 items-start bg-[#161B22] text-left py-[21px] mr-3 gap-2 rounded-md border border-solid border-[#30363D]"
-									onClick={()=>alert("Pressed!")}>
-									<span className="text-[#8B949E] text-sm ml-[21px]" >
-										{"Today's Points"}
-									</span>
-									<span className="text-[#2DA44E] text-2xl font-bold ml-[21px]" >
-										{"+855"}
-									</span>
-								</button>
-								<button className="flex flex-col shrink-0 items-start bg-[#161B22] text-left py-[21px] mr-[13px] gap-2 rounded-md border border-solid border-[#30363D]"
-									onClick={()=>alert("Pressed!")}>
-									<span className="text-[#8B949E] text-sm ml-[21px]" >
-										{"Current Rank"}
-									</span>
-									<span className="text-white text-2xl font-bold ml-[21px]" >
-										{"#1247"}
-									</span>
-								</button>
-								<div className="flex flex-1 flex-col bg-[#161B22] py-[21px] gap-1.5 rounded-md border border-solid border-[#30363D]">
-									<div className="flex items-center self-stretch mx-[21px]">
-										<span className="flex-1 text-[#8B949E] text-sm" >
-											{"Today’s Progress"}
-										</span>
-										<span className="text-[#B65EAF] text-sm" >
-											{"8.55%"}
-										</span>
+							<div className="flex flex-col lg:flex-row w-full items-start self-stretch gap-2">
+								{/* User Stats */}
+								<div className="lg:basis-1/2 flex flex-col lg:flex-row w-full items-center gap-2">
+									<div className="w-full flex flex-1 flex-col shrink-0 items-start bg-[#161B22] text-left py-4 gap-2 rounded-md border border-solid border-[#30363D]">
+										<span className="text-[#8B949E] text-sm ml-[21px]">My Points</span>
+										<span className="text-white text-2xl font-bold ml-[21px]">4,176</span>
 									</div>
-									<div className="items-start self-stretch bg-[#30363D] mx-[21px] rounded-[9999px]">
-										<div className="bg-[#92318D] w-[15px] h-2.5 rounded-[9999px]">
-										</div>
+									<div className="w-full flex flex-1 flex-col shrink-0 items-start bg-[#161B22] text-left py-4 gap-2 rounded-md border border-solid border-[#30363D]">
+										<span className="text-[#8B949E] text-sm ml-[21px]">Today's Points</span>
+										<span className="text-[#2DA44E] text-2xl font-bold ml-[21px]">+855</span>
 									</div>
-									<div className="flex flex-col items-end self-stretch mx-[21px]">
-										<span className="text-[#8B949E] text-xs mr-2" >
-											{"855 / 10,000"}
-										</span>
+									<div className="w-full flex flex-1 flex-col shrink-0 items-start bg-[#161B22] text-left py-4 gap-2 rounded-md border border-solid border-[#30363D]">
+										<span className="text-[#8B949E] text-sm ml-[21px]">Current Rank</span>
+										<span className="text-white text-2xl font-bold ml-[21px]">#1247</span>
 									</div>
 								</div>
+								{/* Progress Bar */}
+								<div className="lg:basis-1/2 w-full flex flex-1 flex-col bg-[#161B22] px-4 py-4 gap-2 rounded-md border border-solid border-[#30363D]">
+									<div className="flex items-center self-stretch">
+										<span className="flex-1 text-[#8B949E] text-sm text-left">Today’s Progress</span>
+										<span className="text-[#B65EAF] text-sm">8.55%</span>
+									</div>
+
+									{/* Bar container */}
+									<div className="w-full bg-[#30363D] rounded-[9999px] h-2.5">
+										{/* Dynamic fill */}
+										<div
+										className="bg-[#92318D] h-2.5 rounded-[9999px]"
+										style={{ width: "8.55%" }} // match percentage dynamically
+										></div>
+									</div>
+
+									<div className="flex flex-col items-end self-stretch">
+										<span className="text-[#8B949E] text-sm">855 / 10,000</span>
+									</div>
+								</div>
+
 							</div>
 							<div className="flex flex-col items-start self-stretch bg-[#161B22] py-[1px] rounded-md border border-solid border-[#30363D]">
 								<span className="text-white text-2xl font-bold my-6 ml-[25px] mr-[1px]" >
 									{"Points Leaderboard"}
 								</span>
-								<div className="self-stretch px-6 mx-[1px]">
-									<div className="flex items-start self-stretch mx-[1px]">
-										<span className="text-[#8B949E] text-xs font-bold w-7 my-4 ml-6" >
-											{"Rank"}
-										</span>
-										<span className="text-[#8B949E] text-xs font-bold w-12 my-4 ml-6" >
-											{"Address"}
-										</span>
-										<div className="flex flex-1 flex-col items-end py-4">
-											<span className="text-[#8B949E] text-xs font-bold text-right w-12 mr-[19px]" >
-												{"Points"}
-											</span>
-										</div>
-										<div className="flex flex-1 flex-col items-end py-4">
-											<span className="text-[#8B949E] text-xs font-bold text-right w-[87px] mr-[18px]" >
-												{"24H Change"}
-											</span>
-										</div>
-									</div>
-									<div className="self-stretch mx-[1px]">
-										<div className="flex items-start self-stretch py-2.5 px-6">
-											<span className="text-white text-sm mr-[292px]" >
-												{"1"}
-											</span>
-											<span className="flex-1 text-[#E0E0E0] text-sm" >
-												{"0x4f8e...2a1d"}
-											</span>
-											<span className="text-white text-sm mr-[231px]" >
-												{"3,521,087"}
-											</span>
-											<span className="text-[#2DA44E] text-sm" >
-												{"+12,847"}
-											</span>
-										</div>
-										<div className="flex items-start self-stretch py-2.5 px-6">
-											<span className="text-white text-sm mr-[289px]" >
-												{"2"}
-											</span>
-											<span className="flex-1 text-[#E0E0E0] text-sm" >
-												{"0x7a2f...9b3c"}
-											</span>
-											<span className="text-white text-sm mr-[231px]" >
-												{"2,847,392"}
-											</span>
-											<span className="text-[#2DA44E] text-sm" >
-												{"+12,847"}
-											</span>
-										</div>
-										<div className="flex items-start self-stretch py-2.5 px-6">
-											<span className="text-white text-sm mr-[289px]" >
-												{"3"}
-											</span>
-											<span className="flex-1 text-[#E0E0E0] text-sm" >
-												{"0x9c6b...7e4f"}
-											</span>
-											<span className="text-white text-sm mr-[231px]" >
-												{"2,193,746"}
-											</span>
-											<span className="text-[#2DA44E] text-sm" >
-												{"+12,847"}
-											</span>
-										</div>
-										<div className="flex items-start self-stretch py-2.5 px-6">
-											<span className="text-white text-sm mr-72" >
-												{"4"}
-											</span>
-											<span className="flex-1 text-[#E0E0E0] text-sm" >
-												{"0x1a3e...8f2b"}
-											</span>
-											<span className="text-white text-sm mr-[231px]" >
-												{"1,872,459"}
-											</span>
-											<span className="text-[#2DA44E] text-sm" >
-												{"+12,847"}
-											</span>
-										</div>
-										<div className="flex items-start self-stretch py-2.5 px-6">
-											<span className="text-white text-sm mr-[289px]" >
-												{"5"}
-											</span>
-											<span className="flex-1 text-[#E0E0E0] text-sm" >
-												{"0x5d7c...4e9a"}
-											</span>
-											<span className="text-white text-sm mr-60" >
-												{"1,634,281"}
-											</span>
-											<span className="text-[#2DA44E] text-sm" >
-												{"+8,392"}
-											</span>
-										</div>
-										<div className="flex items-start self-stretch py-2.5 px-6">
-											<span className="text-white text-sm mr-[289px]" >
-												{"6"}
-											</span>
-											<span className="flex-1 text-[#E0E0E0] text-sm" >
-												{"0x8b4f...1c6d"}
-											</span>
-											<span className="text-white text-sm mr-[231px]" >
-												{"1,401,928"}
-											</span>
-											<span className="text-[#2DA44E] text-sm" >
-												{"+15,739"}
-											</span>
-										</div>
-										<div className="flex items-start self-stretch py-2.5 px-6">
-											<span className="text-white text-sm mr-[289px]" >
-												{"7"}
-											</span>
-											<span className="flex-1 text-[#E0E0E0] text-sm" >
-												{"0x2e9a...7f3b"}
-											</span>
-											<span className="text-white text-sm mr-60" >
-												{"1,287,456"}
-											</span>
-											<span className="text-[#2DA44E] text-sm" >
-												{"+6,284"}
-											</span>
-										</div>
-										<div className="flex items-start self-stretch py-2.5 px-6">
-											<span className="text-white text-sm mr-[289px]" >
-												{"8"}
-											</span>
-											<span className="flex-1 text-[#E0E0E0] text-sm" >
-												{"0x6c1d...9e4a"}
-											</span>
-											<span className="text-white text-sm mr-[231px]" >
-												{"1,158,372"}
-											</span>
-											<span className="text-[#2DA44E] text-sm" >
-												{"+11,947"}
-											</span>
-										</div>
-										<div className="flex flex-col items-center self-stretch py-[7px]">
-											<span className="text-[#8A91A0] text-sm" >
-												{"..."}
-											</span>
-										</div>
-										<div className="flex items-center self-stretch bg-[#92318D1A] px-[25px] border-2 border-solid border-[#92318D]">
-											<span className="text-[#B65EAF] text-sm mr-60" >
-												{"1247"}
-											</span>
-											<span className="text-white text-sm my-2.5 ml-6 mr-3" >
-												{"You"}
-											</span>
-											<span className="text-white text-sm mr-[254px]" >
-												{"4,176"}
-											</span>
-											<span className="text-[#2DA44E] text-sm" >
-												{"+855"}
-											</span>
-										</div>
-									</div>
+								{/* Table */}
+								<div className="overflow-x-auto w-full py-4 px-6">
+									<table className="min-w-full text-left border-collapse">
+										<thead>
+											<tr className="text-[#8B949E] text-sm font-bold border-b border-[#30363D]">
+												<th className="py-3 px-2 w-12">Rank</th>
+												<th className="py-3 px-2">Address</th>
+												<th className="py-3 px-2 text-left lg:w-32">Points</th>
+												<th className="py-3 px-2 text-right lg:w-32">24H Change</th>
+											</tr>
+										</thead>
+										<tbody>
+										{[
+											{ rank: "1", address: "0x4f8e...2a1d", points: "3,521,087", change: "+12,847", changeColor: "#2DA44E" },
+											{ rank: "2", address: "0x7a2f...9b3c", points: "2,847,392", change: "+12,847", changeColor: "#2DA44E" },
+											{ rank: "3", address: "0x9c6b...7e4f", points: "2,193,746", change: "+12,847", changeColor: "#2DA44E" },
+											{ rank: "4", address: "0x1a3e...8f2b", points: "1,872,459", change: "+12,847", changeColor: "#2DA44E" },
+											{ rank: "5", address: "0x5d7c...4e9a", points: "1,634,281", change: "+8,392", changeColor: "#2DA44E" },
+											{ rank: "6", address: "0x8b4f...1c6d", points: "1,401,928", change: "+15,739", changeColor: "#2DA44E" },
+											{ rank: "7", address: "0x2e9a...7f3b", points: "1,287,456", change: "+6,284", changeColor: "#2DA44E" },
+											{ rank: "8", address: "0x6c1d...9e4a", points: "1,158,372", change: "+11,947", changeColor: "#2DA44E" },
+										].map((row, idx) => (
+											<tr key={idx} className="border-b border-[#30363D] text-sm">
+											<td className="py-2 px-2 text-white">{row.rank}</td>
+											<td className="py-2 px-2 text-[#E0E0E0]">{row.address}</td>
+											<td className="py-2 px-2 text-white text-left">{row.points}</td>
+											<td className="py-2 px-2 text-right" style={{ color: row.changeColor }}>{row.change}</td>
+											</tr>
+										))}
+
+										{/* Placeholder row for "..." */}
+										<tr>
+											<td colSpan={4} className="text-center text-[#8A91A0] py-2 text-sm">...</td>
+										</tr>
+
+										{/* Current user row */}
+										<tr className="bg-[#92318D1A] border-2 border-solid border-[#92318D]">
+											<td className="py-2 px-2 text-[#B65EAF]">1247</td>
+											<td className="py-2 px-2 text-white">You</td>
+											<td className="py-2 px-2 text-white text-left">4,176</td>
+											<td className="py-2 px-2 text-[#2DA44E] text-right">+855</td>
+										</tr>
+										</tbody>
+									</table>
 								</div>
-								<div className="flex items-center self-stretch p-4 mx-[1px]">
-									<span className="flex-1 text-[#8B949E] text-sm" >
+
+								<div className="flex items-center self-stretch p-4 justify-between">
+									<span className="flex-1 text-[#8B949E] text-sm text-left" >
 										{"Showing 10 of 24134"}
 									</span>
 									<div className="flex shrink-0 items-start gap-[17px]">
