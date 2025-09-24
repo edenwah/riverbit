@@ -5,11 +5,18 @@ interface SelectProps {
   onChange: (val: string) => void;
   options: { label: string; value: string }[];
   placeholder?: string;
+  minWidth?: string; // optional prop for minimum width
 }
 
-const Select: React.FC<SelectProps> = ({ value, onChange, options, placeholder }) => {
+const Select: React.FC<SelectProps> = ({
+  value,
+  onChange,
+  options,
+  placeholder,
+  minWidth = "", // default value
+}) => {
   return (
-    <div className="relative inline-flex min-w-32 w-full">
+    <div className={`relative inline-flex ${minWidth} w-full`}>
       <select
         className={`appearance-none flex items-center bg-zinc-950 text-left p-3 pr-8 rounded-sm border border-solid border-[#30363D]  text-sm w-full ${
           value ? "text-white" : "text-zinc-400"

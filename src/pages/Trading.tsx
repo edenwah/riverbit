@@ -338,6 +338,7 @@ export default () => {
                                             { label: "1h", value: "1h" },
                                             { label: "1d", value: "1d" },
                                         ]}
+                                        minWidth="min-w-32"
                                         />
 
                                     {/* Indicator */}
@@ -352,6 +353,7 @@ export default () => {
                                             { label: "RSI", value: "RSI" },
                                             { label: "MACD", value: "MACD" },
                                         ]}
+                                        minWidth="min-w-32"
                                         />
 
                                 </div>
@@ -488,6 +490,7 @@ export default () => {
                                                     { label: "Long", value: "Long" },
                                                     { label: "Short", value: "Short" },
                                                 ]}
+                                                minWidth="min-w-32"
                                                 />
                                         </div>
                                     </div>
