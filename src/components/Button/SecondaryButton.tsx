@@ -4,16 +4,22 @@ interface SecondaryButtonProps {
   onClick: () => void;
   children: React.ReactNode;
   size?: "small" | "medium" | "large"; // 控制大小
+  icon?: React.ReactNode; // optional icon
 }
 
-export const SecondaryButton: React.FC<SecondaryButtonProps> = ({ onClick, children, size = "medium" }) => {
+export const SecondaryButton: React.FC<SecondaryButtonProps> = ({
+  onClick,
+  children,
+  size = "medium",
+  icon,
+}) => {
   let sizeClasses = "";
   switch (size) {
     case "small":
       sizeClasses = "py-2 px-3 text-xs"; // 小
       break;
     case "medium":
-      sizeClasses = "py-[11px] px-4 text-xs"; // 中
+      sizeClasses = "py-2.5 px-4 text-xs"; // 中
       break;
     case "large":
       sizeClasses = "py-3.5 px-4 text-base"; // 大
@@ -22,12 +28,11 @@ export const SecondaryButton: React.FC<SecondaryButtonProps> = ({ onClick, child
 
   return (
     <button
-      className={`flex flex-col shrink-0 items-start bg-zinc-900 text-left rounded-sm border border-solid border-[#30363D] ${sizeClasses}`}
+      className={`w-full flex flex-1 justify-center items-center gap-2 bg-zinc-900 rounded-sm border border-solid border-[#30363D] ${sizeClasses}`}
       onClick={onClick}
     >
-      <span className="text-white font-bold text-center">
-        {children}
-      </span>
+      {icon && <span className="flex items-center">{icon}</span>}
+      <span className="text-white font-bold text-center">{children}</span>
     </button>
   );
 };

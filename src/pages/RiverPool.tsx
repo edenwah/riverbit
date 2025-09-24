@@ -1,12 +1,15 @@
 import { useState, useRef, useEffect } from "react";
 import RiverbitLogo from "../components/RiverbitLogo";
 import DesktopNav from "../components/DesktopNav";
+import DesktopNavRight from "../components/DesktopNavRight";
 import PrimaryButton from "../components/Button/PrimaryButton";
 import { SecondaryButton } from "../components/Button/SecondaryButton";
 import LeverageSlider from "../components/LeverageSlider";
 import Tabs from "../components/Tabs";
 import Footer from "../components/Footer";
 import Tips from "../components/Tips";
+import MobileMenu from "../components/MobileMenu";
+import MobileHeader from "../components/MobileHeader";
 
 export default () => {
 	const [input1, onChangeInput1] = useState('');
@@ -64,239 +67,32 @@ export default () => {
                         <RiverbitLogo />
                         <DesktopNav />
                     </div>
-                    {/* Right: Balance, Points, and buttons */}
-                    <div className="flex items-center gap-4">
-                        <div className="flex flex-col shrink-0 items-start">
-                            <span className="text-zinc-400 text-sm" >
-                                {"Balance"}
-                            </span>
-                            <span className="text-white text-sm" >
-                                {"$27,345.12"}
-                            </span>
-                        </div>
-                        <div className="w-[1px] h-8 hidden xl:block" />
-                        <div className="flex flex-col shrink-0 items-start">
-                            <span className="text-zinc-400 text-sm" >
-                                {"Points"}
-                            </span>
-                            <span className="text-white text-sm" >
-                                {"1,250,000"}
-                            </span>
-                        </div>
-                        <div className="flex items-center gap-4">
-                            {/* Wallet Icon */}
-                            <div className="relative" ref={walletDropdownRef}>
-                                <button
-                                    className="flex shrink-0 items-center bg-zinc-900 py-2.5 px-3 gap-2 rounded-sm border border-solid border-[#30363D] focus:outline-none"
-                                    onClick={() => setShowWalletDropdown((v) => !v)}
-                                >
-                                    <img
-                                        src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/7ru13dyc_expires_30_days.png"} 
-                                        className="w-5 h-5 rounded-sm object-fill"
-                                    />
-                                    <img
-                                        src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/wbxxcfe7_expires_30_days.png"} 
-                                        className="w-3 h-[15px] rounded-sm object-fill"
-                                    />
-                                </button>
-                                {showWalletDropdown && (
-                                    <div className="absolute right-0 mt-2 z-50 min-w-48 bg-zinc-900 border border-[#30363D] rounded shadow-lg">
-                                        <button
-                                            className="w-full text-left px-4 py-2 hover:bg-zinc-800 text-sm text-red-400"
-                                            onClick={() => {
-                                                // Add your disconnect wallet logic here
-                                                setShowWalletDropdown(false);
-                                            }}
-                                        >
-                                            Disconnect Wallet
-                                        </button>
-                                    </div>
-                                )}
-                            </div>
-                            {/* Language Dropdown */}
-                            <div className="relative" ref={langDropdownRef}>
-                                <button
-                                    className="flex shrink-0 items-center bg-zinc-900 text-left py-2.5 px-4 gap-2.5 rounded-sm border border-solid border-[#30363D]"
-                                    onClick={() => setShowLangDropdown((v) => !v)}
-                                >
-                                    <img
-                                        src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/oyc1zap7_expires_30_days.png"}
-                                        className="w-3.5 h-[19px] rounded-sm object-fill"
-                                    />
-                                    <span className="text-[#C9D1D9] text-sm">{language}</span>
-                                    <img
-                                        src="https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/qdm0wdb6_expires_30_days.png"
-                                        className="w-3 h-[15px] object-fill"
-                                        alt="Dropdown"
-                                    />
-                                </button>
-                                {showLangDropdown && (
-                                    <div className="absolute right-0 mt-2 z-50 min-w-[100px] bg-zinc-900 border border-[#30363D] rounded shadow-lg">
-                                        {["EN", "中文"].map((lang) => (
-                                            <button
-                                                key={lang}
-                                                className={`w-full text-left px-4 py-2 hover:bg-zinc-800 text-sm ${
-                                                    language === lang ? "text-fuchsia-400 font-bold" : "text-white"
-                                                }`}
-                                                onClick={() => {
-                                                    setLanguage(lang);
-                                                    setShowLangDropdown(false);
-                                                }}
-                                            >
-                                                {lang}
-                                            </button>
-                                        ))}
-                                    </div>
-                                )}
-                            </div>
-                            {/* Withdraw & Deposit Buttons */}
-                            <div className="flex gap-2">
-                                <SecondaryButton size="medium" onClick={() => alert("Pressed!")}>Withdraw</SecondaryButton>
-                                <PrimaryButton size="medium" onClick={() => alert("Pressed!")}>Deposit</PrimaryButton>
-                            </div>
-                        </div>
-                    </div>
+                    {/* Right side (Balance, Points, Wallet, Language, Buttons) */}
+					<DesktopNavRight
+						balance="$27,345.12"
+						points="1,250,000"
+						language={language}
+						setLanguage={setLanguage}
+					/>
                 </div>
                 {/* Mobile header: show below xl */}
-                <div className="flex xl:hidden justify-between items-center self-stretch bg-zinc-900 py-3.5 px-4">
-                    {/* Left: Logo */}
-                    <div className="flex items-center gap-3">
-                        <img
-                            src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/tsg0s0tv_expires_30_days.png"} 
-                            className="w-[100px] h-8 object-fill"
-                        />
-                    </div>
-                    {/* Right: Balance, Points, Deposit, Hamburger */}
-                    <div className="flex items-center gap-3">
-                        <div className="flex flex-col shrink-0 items-start">
-                            <span className="text-zinc-400 text-sm" >
-                                {"Balance"}
-                            </span>
-                            <span className="text-white text-sm" >
-                                {"$27,345.12"}
-                            </span>
-                        </div>
-                        <PrimaryButton size="medium" onClick={() => alert("Pressed!")}>Deposit</PrimaryButton>
-                        {/* Hamburger menu */}
-                        <button
-                            className="flex items-center justify-center p-2 rounded-sm focus:outline-none"
-                            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                            aria-label="Open menu"
-                        >
-                            <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
-                            </svg>
-                        </button>
-                    </div>
-                </div>
+                <MobileHeader
+                    balance="$27,345.12"
+                    onDeposit={() => alert("Deposit pressed!")}
+                    onMenuToggle={() => setMobileMenuOpen(!mobileMenuOpen)}
+                    />
                 {/* Mobile Menu Drawer */}
                 {mobileMenuOpen && (
-                    <div className="fixed inset-0 z-50 bg-black bg-opacity-70 flex flex-col xl:hidden">
-                        <div className="flex flex-col justify-between bg-zinc-900 w-4/5 max-w-xs h-full shadow-lg p-6">
-                            {/* Top: Pages */}
-                            <div>
-                                <button
-                                    className="self-end mb-6"
-                                    onClick={() => setMobileMenuOpen(false)}
-                                    aria-label="Close menu"
-                                >
-                                    <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-                                    </svg>
-                                </button>
-                                <button className="flex flex-col items-start bg-zinc-700 text-left py-3 px-3 mb-2 rounded-sm border-0"
-                                    onClick={()=>alert("Pressed!")}>
-                                    <span className="text-white text-sm" >
-                                        {"Trading"}
-                                    </span>
-                                </button>
-                                <div className="flex flex-col items-start py-3 mb-2 rounded-sm">
-                                    <span className="text-zinc-400 text-sm" >
-                                        {"RiverPool"}
-                                    </span>
-                                </div>
-                                <div className="flex flex-col items-start py-3 mb-2 rounded-sm">
-                                    <span className="text-zinc-400 text-sm" >
-                                        {"Earn"}
-                                    </span>
-                                </div>
-                                <div className="flex flex-col items-start py-3 mb-2 rounded-sm">
-                                    <span className="text-zinc-400 text-sm" >
-                                        {"Referral"}
-                                    </span>
-                                </div>
-                                <div className="flex flex-col items-start py-3 mb-2 rounded-sm">
-                                    <span className="text-zinc-400 text-sm" >
-                                        {"Assets"}
-                                    </span>
-                                </div>
-                                <div className="flex items-center py-3 gap-3 mb-2 rounded-sm">
-                                    <span className="text-zinc-400 text-sm" >
-                                        {"More"}
-                                    </span>
-                                    <img
-                                        src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/wo9zz3y5_expires_30_days.png"} 
-                                        className="w-3 h-[15px] rounded-sm object-fill"
-                                    />
-                                </div>
-                            </div>
-                            {/* Bottom: Settings */}
-                            <div className="flex flex-col gap-2 pt-4 border-t border-[#30363D]">
-                                <div className="flex items-center bg-zinc-900 py-2.5 px-3 gap-2 rounded-sm border border-solid border-[#30363D]">
-                                    {/* Wallet icon */}
-                                    <img
-                                        src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/7ru13dyc_expires_30_days.png"} 
-                                        className="w-5 h-5 rounded-sm object-fill"
-                                    />
-                                    <img
-                                        src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/wbxxcfe7_expires_30_days.png"} 
-                                        className="w-3 h-[15px] rounded-sm object-fill"
-                                    />
-                                </div>
-                                <div className="flex flex-col shrink-0 items-start">
-                                    <span className="text-zinc-400 text-sm" >
-                                        {"Balance"}
-                                    </span>
-                                    <span className="text-white text-sm" >
-                                        {"$27,345.12"}
-                                    </span>
-                                </div>
-                                <div className="flex flex-col shrink-0 items-start">
-                                    <span className="text-zinc-400 text-sm" >
-                                        {"Points"}
-                                    </span>
-                                    <span className="text-white text-sm" >
-                                        {"1,250,000"}
-                                    </span>
-                                </div>
-                                <button className="flex items-center bg-zinc-900 text-left py-2.5 px-4 gap-2.5 rounded-sm border border-solid border-[#30363D]"
-                                    onClick={()=>alert("Pressed!")}>
-                                    <img
-                                        src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/oyc1zap7_expires_30_days.png"} 
-                                        className="w-3.5 h-[19px] rounded-sm object-fill"
-                                    />
-                                    <span className="text-[#C9D1D9] text-sm" >
-                                        {"EN"}
-                                    </span>
-                                </button>
-                                <button className="flex flex-col items-start bg-zinc-900 text-left py-3 px-4 rounded-sm border border-solid border-[#30363D]"
-                                    onClick={()=>alert("Pressed!")}>
-                                    <span className="text-white text-sm font-bold" >
-                                        {"Withdraw"}
-                                    </span>
-                                </button>
-                                <button className="flex flex-col items-start bg-fuchsia-800 text-left py-3 px-4 rounded-sm border-0"
-                                    onClick={()=>alert("Pressed!")}>
-                                    <span className="text-white text-sm font-bold" >
-                                        {"Deposit"}
-                                    </span>
-                                </button>
-                            </div>
-                        </div>
-                        {/* Click outside to close */}
-                        <div className="flex-1" onClick={() => setMobileMenuOpen(false)} />
-                    </div>
+                    <MobileMenu
+                        isOpen={mobileMenuOpen}
+                        onClose={() => setMobileMenuOpen(false)}
+                        balance="$27,345.12"
+                        points="1,250,000"
+                        language={language}
+						setLanguage={setLanguage}
+                        />
                 )}
+				{/* Content */}
 				<div className="flex flex-col self-stretch gap-2 mx-6">
 					<div className="flex flex-col self-stretch py-12 lg:mx-20 gap-8">
 						<div className="flex items-start self-stretch border-b border-[#30363D] w-full">
