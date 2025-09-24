@@ -13,6 +13,7 @@ import Footer from "../components/Footer";
 import Tips from "../components/Tips";
 import MobileHeader from "../components/MobileHeader";
 import ToggleWithText from "../components/ToggleWithText";
+import Select from "../components/Select";
 
 export default () => {
     const [input1, onChangeInput1] = useState('');
@@ -120,7 +121,7 @@ export default () => {
             document.removeEventListener("keydown", handleClickOrEsc);
         };
     }, [showAssetPopup]);
-    
+
     // Assume a total amount for percent calculation
     const AMOUNT_TOTAL = 1000;
 
@@ -326,51 +327,33 @@ export default () => {
                                 {/* Row 2: Granularity + Indicator */}
                                 <div className="flex gap-2  md:ml-auto">
                                     {/* Granularity */}
-                                    <div className="relative inline-flex min-w-32">
-                                        <select
-                                            className="appearance-none flex items-center bg-zinc-950 text-left p-3 pr-8 rounded-sm border border-solid border-[#30363D] text-zinc-400 text-sm w-full"
-                                            value={granularity}
-                                            onChange={e => setGranularity(e.target.value)}
-                                        >
-                                            <option value="" disabled hidden>
-                                                Granularity
-                                            </option>
-                                            <option value="1m">1m</option>
-                                            <option value="5m">5m</option>
-                                            <option value="15m">15m</option>
-                                            <option value="1h">1h</option>
-                                            <option value="1d">1d</option>
-                                        </select>
-                                        <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-zinc-400">
-                                            <img
-                                                src="https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/bvauf8h6_expires_30_days.png"
-                                                className="w-3 h-[15px] rounded-sm object-fill"
-                                            />
-                                        </span>
-                                    </div>
+                                    <Select
+                                        value={granularity}
+                                        onChange={setGranularity}
+                                        placeholder="Granularity"
+                                        options={[
+                                            { label: "1m", value: "1m" },
+                                            { label: "5m", value: "5m" },
+                                            { label: "15m", value: "15m" },
+                                            { label: "1h", value: "1h" },
+                                            { label: "1d", value: "1d" },
+                                        ]}
+                                        />
+
                                     {/* Indicator */}
-                                    <div className="relative inline-flex min-w-32">
-                                        <select
-                                            className="appearance-none flex items-center bg-zinc-950 text-left p-3 pr-8 rounded-sm border border-solid border-[#30363D] text-zinc-400 text-sm w-full"
-                                            value={indicator}
-                                            onChange={e => setIndicator(e.target.value)}
-                                        >
-                                            <option value="" disabled hidden>
-                                                Indicator
-                                            </option>
-                                            <option value="None">None</option>
-                                            <option value="EMA">EMA</option>
-                                            <option value="SMA">SMA</option>
-                                            <option value="RSI">RSI</option>
-                                            <option value="MACD">MACD</option>
-                                        </select>
-                                        <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-zinc-400">
-                                            <img
-                                                src="https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/bvauf8h6_expires_30_days.png"
-                                                className="w-3 h-[15px] rounded-sm object-fill"
-                                            />
-                                        </span>
-                                    </div>
+                                    <Select
+                                        value={indicator}
+                                        onChange={setIndicator}
+                                        placeholder="Indicator"
+                                        options={[
+                                            { label: "None", value: "None" },
+                                            { label: "EMA", value: "EMA" },
+                                            { label: "SMA", value: "SMA" },
+                                            { label: "RSI", value: "RSI" },
+                                            { label: "MACD", value: "MACD" },
+                                        ]}
+                                        />
+
                                 </div>
                             </div>
 
@@ -495,23 +478,17 @@ export default () => {
 
                                         {/* Filter Selector */}
                                         <div className="relative">
-                                            <select
-                                                className="appearance-none bg-zinc-900 text-zinc-400 text-sm py-2 pl-3 pr-8 rounded-sm border border-solid border-[#30363D] focus:outline-none"
+                                            <Select
                                                 value={filterValue}
-                                                onChange={e => setFilterValue(e.target.value)}
-                                            >
-                                                <option value="" disabled hidden>Filter</option>
-                                                <option value="All">All</option>
-                                                <option value="Active">Active</option>
-                                                <option value="Long">Long</option>
-                                                <option value="Short">Short</option>
-                                            </select>
-                                            <span className="pointer-events-none absolute right-2 top-1/2 -translate-y-1/2">
-                                                <img
-                                                    src="https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/qdm0wdb6_expires_30_days.png"
-                                                    className="w-3 h-[15px] object-fill"
+                                                onChange={setFilterValue}
+                                                placeholder="Filter"
+                                                options={[
+                                                    { label: "All", value: "All" },
+                                                    { label: "Active", value: "Active" },
+                                                    { label: "Long", value: "Long" },
+                                                    { label: "Short", value: "Short" },
+                                                ]}
                                                 />
-                                            </span>
                                         </div>
                                     </div>
                                 </div>
@@ -1142,28 +1119,20 @@ export default () => {
                                         {"Cross Margin"}
                                     </span>
                                 </button>
-                                {/* Replace the button with this selector */}
-                                <div className="relative flex-1">
-                                    <select
-                                        className={`appearance-none w-full bg-zinc-950 text-white text-sm py-3 px-2 rounded-sm border border-solid border-[#30363D] "} focus:outline-none`}
-                                        value={leverage}
-                                        onChange={e => {
-                                            setLeverage(e.target.value);
-                                        }}
-                                    >
-                                        <option value="5x">5x</option>
-                                        <option value="10x">10x</option>
-                                        <option value="20x">20x</option>
-                                        <option value="50x">50x</option>
-                                        <option value="100x">100x</option>
-                                    </select>
-                                    <span className="pointer-events-none absolute right-2 top-1/2 -translate-y-1/2">
-                                        <img
-                                            src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/jw98n908_expires_30_days.png"} 
-                                            className="w-3 h-[15px] rounded-sm object-fill"
-                                        />
-                                    </span>
-                                </div>
+                                {/* Leverage Dropdown */}
+                                <Select
+                                    value={leverage}
+                                    onChange={setLeverage}
+                                    placeholder="Leverage"
+                                    options={[
+                                        { label: "5x", value: "5x" },
+                                        { label: "10x", value: "10x" },
+                                        { label: "20x", value: "20x" },
+                                        { label: "50x", value: "50x" },
+                                        { label: "100x", value: "100x" },
+                                    ]}
+                                    />
+
                                 <button
                                     className={`flex-1 flex flex-col shrink-0 items-start text-nowrap bg-zinc-950 text-left py-3 px-2 rounded-sm border ${
                                         aiSelected ? "border-fuchsia-800" : "border-[#30363D]"

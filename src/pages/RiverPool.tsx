@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import RiverbitLogo from "../components/RiverbitLogo";
 import DesktopNav from "../components/DesktopNav";
 import DesktopNavRight from "../components/DesktopNavRight";
@@ -10,6 +10,7 @@ import Footer from "../components/Footer";
 import Tips from "../components/Tips";
 import MobileMenu from "../components/MobileMenu";
 import MobileHeader from "../components/MobileHeader";
+import Select from "../components/Select";
 
 export default () => {
 	const [input1, onChangeInput1] = useState('');
@@ -17,6 +18,7 @@ export default () => {
 	const [riverPoolTab, setRiverPoolTab] = useState("Foundation");
 	const [depositWithdrawTab, setdepositWithdrawTab] = useState("Deposit");
 	const [recordsTab, setRecordsTab] = useState("Records");
+	const [timeRange, setTimeRange] = React.useState("All Time"); 
 
 	const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 	const [language, setLanguage] = useState("EN");
@@ -171,19 +173,15 @@ export default () => {
 										<div className="w-full flex flex-col lg:flex-row items-start self-stretch gap-3">
 											<div className="w-full flex lg:basis-2/3 flex-col bg-[#161B22] py-6 gap-[21px] rounded-md border border-solid border-[#30363D]">
 												<div className="flex items-center self-stretch mx-6 justify-between text-left">
-													<span className="flex-1 text-white text-xl font-bold" >
+													<span className="w-full flex-1 text-white text-xl font-bold" >
 														{"Account Value / PNL"}
 													</span>
-													<button className="flex shrink-0 items-start bg-[#0D1117] text-left p-3 gap-2.5 rounded-md border border-solid border-[#30363D]"
-														onClick={()=>alert("Pressed!")}>
-														<span className="text-[#A6A6B5] text-sm" >
-															{"All Time"}
-														</span>
-														<img
-															src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/4oqcx3n6_expires_30_days.png"} 
-															className="w-3 h-[15px] rounded-md object-fill"
+													<Select
+														value={timeRange}
+														onChange={setTimeRange}
+														options={["All Time", "1D", "1W", "1M", "1Y"].map((v) => ({ label: v, value: v }))}
+														placeholder="Time Range"
 														/>
-													</button>
 												</div>
 												<div className="self-stretch h-[300px] mx-6">
 												</div>
@@ -365,7 +363,7 @@ export default () => {
 								</div>
 								<div className="w-full self-stretch bg-[#161B22] rounded-md ">
 
-									<div className="w-full border-b border-[#30363D]">
+									<div className="w-full border-b border-[#30363D] overflow-auto">
 										<div className="xl:max-w-1/2 w-full">
 											<Tabs
 												tabs={[
@@ -427,8 +425,8 @@ export default () => {
 						
 						
 					</div>
-					<Footer />
 				</div>
+				<Footer />
 			</div>
 		</div>
 	)
