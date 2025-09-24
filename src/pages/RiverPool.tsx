@@ -18,6 +18,7 @@ export default () => {
 	const [depositWithdrawTab, setdepositWithdrawTab] = useState("Deposit");
 	const [recordsTab, setRecordsTab] = useState("Records");
 
+	const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 	const [language, setLanguage] = useState("EN");
 	const [showLangDropdown, setShowLangDropdown] = useState(false);
 	const [showWalletDropdown, setShowWalletDropdown] = useState(false);
@@ -25,8 +26,8 @@ export default () => {
 	const walletDropdownRef = useRef<HTMLDivElement>(null);
 	const langDropdownRef = useRef<HTMLDivElement>(null);
 	const moreDropdownRef = useRef<HTMLDivElement>(null);
-	const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+	{/* Close dropdowns when clicking outside */}
 	useEffect(() => {
         function handleClickOutside(event: MouseEvent) {
             if (

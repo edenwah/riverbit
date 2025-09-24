@@ -54,12 +54,13 @@ export default () => {
     const [showLangDropdown, setShowLangDropdown] = useState(false);
     const [showWalletDropdown, setShowWalletDropdown] = useState(false);
     const [showMoreDropdown, setShowMoreDropdown] = useState(false);
-
     const walletDropdownRef = useRef<HTMLDivElement>(null);
     const langDropdownRef = useRef<HTMLDivElement>(null);
     const moreDropdownRef = useRef<HTMLDivElement>(null);
+    
     const assetPopupRef = useRef<HTMLDivElement>(null);
 
+    {/* Close dropdowns when clicking outside */}
     useEffect(() => {
         function handleClickOutside(event: MouseEvent) {
             if (
@@ -89,6 +90,7 @@ export default () => {
         };
     }, [showMoreDropdown, showWalletDropdown, showLangDropdown]);
 
+    {/* Close asset popup when clicking outside or pressing ESC */}
     useEffect(() => {
         function handleClickOrEsc(event: MouseEvent | KeyboardEvent) {
             // Click outside
@@ -118,8 +120,8 @@ export default () => {
             document.removeEventListener("keydown", handleClickOrEsc);
         };
     }, [showAssetPopup]);
-
-
+    
+    // Assume a total amount for percent calculation
     const AMOUNT_TOTAL = 1000;
 
     // Calculate percent from input2 (amount)
