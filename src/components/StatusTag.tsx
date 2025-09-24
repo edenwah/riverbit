@@ -8,6 +8,7 @@ const StatusTag: React.FC<StatusTagProps> = ({ status }) => {
   // Define colors for each status
   const statusColors: Record<string, string> = {
     Confirmed: "bg-[#2DA44E] text-white",
+    Active: "bg-[#2DA44E] text-white",
     "In Queue (T+4)": "bg-[#DFA42F] text-black",
     Failed: "bg-[#E55353] text-white",
     Pending: "bg-[#8B949E] text-white",

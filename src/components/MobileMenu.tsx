@@ -23,7 +23,7 @@ const navItems: NavItem[] = [
   { label: "Trading", to: "/trading" },
   { label: "RiverPool", to: "/riverpool" },
   { label: "Earn", to: "/earn" },
-  { label: "Referral", to: "/referral/candidate" },
+  { label: "Referral", to: "/referral/foundation" },
   { label: "Assets", to: "/assets" },
 ];
 

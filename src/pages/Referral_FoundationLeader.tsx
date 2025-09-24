@@ -5,6 +5,12 @@ import DesktopNavRight from "../components/DesktopNavRight";
 import MobileHeader from "../components/MobileHeader";
 import MobileMenu from "../components/MobileMenu";
 import Footer from "../components/Footer";
+import ToggleWithText from "../components/ToggleWithText";
+import Tabs from "../components/Tabs";
+import { SecondaryButton } from "../components/Button/SecondaryButton";
+import PrimaryButton from "../components/Button/PrimaryButton";
+import StatusTag from "../components/StatusTag";
+import Tips from "../components/Tips";
 export default () => {
 	const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 	const [language, setLanguage] = useState("EN");
@@ -46,6 +52,8 @@ export default () => {
 	}, [showMoreDropdown, showWalletDropdown, showLangDropdown]);
 	
 	const [input1, onChangeInput1] = useState('');
+	const [role, setRole] = useState("Foundation Team Leader");
+	const [referralTab, setReferralTab] = useState("Direct Referrals");
 	return (
 		<div className="flex flex-col bg-black min-h-screen">
 			<div className="self-stretch">
@@ -83,10 +91,10 @@ export default () => {
                         />
                 )}
 				{/* Content */}
-				<div className="flex flex-col self-stretch bg-[#0D0F13] gap-2.5">
-					<div className="flex flex-col self-stretch py-12 mx-20 gap-8">
-						<div className="flex items-start self-stretch mx-6">
-							<div className="flex flex-1 flex-col items-start gap-2">
+				<div className="flex flex-col self-stretch gap-2 mx-6">
+					<div className="flex flex-col self-stretch py-12 lg:mx-20 gap-8">
+						<div className="flex flex-col xl:flex-row justify-between self-stretch gap-8">
+							<div className="flex flex-1 flex-col items-start gap-2 w-full text-left">
 								<span className="text-white text-2xl font-bold" >
 									{"Referral Program"}
 								</span>
@@ -94,33 +102,30 @@ export default () => {
 									{"Earn commissions and points by referring new users to RiverBit"}
 								</span>
 							</div>
-							<div className="flex flex-1 items-start bg-[#161B22] py-1 mt-[25px] rounded-lg">
-								<span className="text-[#8B949E] text-sm my-[7px] ml-[15px] mr-[11px]" >
-									{"Candidate User"}
-								</span>
-								<span className="text-[#8B949E] text-sm my-[7px] mx-2.5" >
-									{"C2C User"}
-								</span>
-								<span className="text-[#8B949E] text-sm my-[7px] mx-2.5" >
-									{"Sub-Account"}
-								</span>
-								<span className="text-[#8B949E] text-sm my-[7px] mx-2.5" >
-									{"Team Leader"}
-								</span>
-								<div className="flex flex-1 flex-col bg-[#92318D] py-[7px] rounded-md">
-									<span className="text-white text-sm font-bold text-center mx-2.5" >
-										{"Foundation Team Leader"}
-									</span>
-								</div>
+							{/* Role Toggle */}
+							<div className="flex text-nowrap xl:items-end items-start overflow-auto">
+								<ToggleWithText
+									options={[
+									"Candidate User",
+									"C2C User",
+									"Sub-Account",
+									"Team Leader",
+									"Foundation Team Leader",
+									]}
+									value={role}
+									onChange={setRole}
+								/>
 							</div>
 						</div>
-						<div className="flex flex-col self-stretch mx-6 gap-6">
-							<div className="flex flex-col items-start self-stretch bg-[#161B22] py-[25px] gap-[17px] rounded-lg border border-solid border-[#30363D]">
-								<span className="text-white text-lg font-bold mx-[25px]" >
+						<div className="flex flex-col self-stretch gap-6">
+							<div className="flex flex-col items-start self-stretch bg-[#161B22] p-4 gap-[17px] rounded-lg border border-solid border-[#30363D]">
+								<span className="text-white text-lg font-bold" >
 									{"Level Info / Dashboard"}
 								</span>
-								<div className="flex flex-col self-stretch mx-[25px] gap-4">
-									<div className="flex items-center self-stretch gap-3">
+								<div className="flex flex-col self-stretch gap-4">
+									{/* Level Info */}
+									{/* Four columns: Role, Commission Rate, Max Difference, Current Seat */}
+									<div className="flex flex-col lg:flex-row items-start self-stretch gap-4">
 										<div className="flex flex-1 flex-col items-start">
 											<span className="text-[#8B949E] text-sm" >
 												{"Role"}
@@ -154,14 +159,16 @@ export default () => {
 											</span>
 										</div>
 									</div>
-									<div className="flex items-start self-stretch gap-4">
-										<div className="flex flex-1 flex-col items-start bg-[#0D1117] py-4 gap-2 rounded-lg">
-											<div className="flex flex-col items-center pb-[1px] ml-4">
+									{/* Privileges and Withdraw */}
+									<div className="flex flex-col lg:flex-row items-start self-stretch gap-4">
+										{/* Privileges */}
+										<div className="w-full flex flex-1 flex-col items-start bg-[#0D1117] p-4 gap-2 rounded-lg">
+											<div className="flex flex-col items-center pb-[1px]">
 												<span className="text-white text-sm font-bold" >
 													{"Privileges:"}
 												</span>
 											</div>
-											<div className="flex flex-col items-start self-stretch mx-4 gap-1">
+											<div className="flex flex-col items-start self-stretch gap-1">
 												<span className="text-[#8B949E] text-sm" >
 													{"• Earn up to 40% commission"}
 												</span>
@@ -173,8 +180,9 @@ export default () => {
 												</span>
 											</div>
 										</div>
-										<div className="flex flex-1 justify-between items-center bg-[#0D1117] py-3 rounded-lg">
-											<div className="flex flex-col shrink-0 items-start ml-3">
+										{/* Withdraw */}
+										<div className="w-full flex flex-1 justify-between items-center bg-[#0D1117] p-4 rounded-lg">
+											<div className="w-full flex flex-col items-start">
 												<span className="text-[#8B949E] text-sm" >
 													{"Net Commission Withdrawn"}
 												</span>
@@ -182,23 +190,21 @@ export default () => {
 													{"$11,200"}
 												</span>
 											</div>
-											<button className="flex flex-col shrink-0 items-start bg-transparent text-left py-[15px] px-2.5 mr-3 rounded-md border border-solid border-[#30363D]"
-												onClick={()=>alert("Pressed!")}>
-												<span className="text-white text-sm" >
-													{"Withdraw"}
-												</span>
-											</button>
+											<SecondaryButton size="small" onClick={() => alert("Withdraw pressed")}>
+												Withdraw
+											</SecondaryButton>
 										</div>
 									</div>
 								</div>
 							</div>
 							<div className="flex flex-col self-stretch gap-3">
-								<div className="flex flex-col items-start self-stretch gap-3">
+								{/* My Commission Summary */}
+								<div className="flex flex-col items-start self-stretch gap-4">
 									<span className="text-white text-lg font-bold" >
 										{"My Commission Summary"}
 									</span>
-									<div className="flex items-start self-stretch">
-										<div className="flex flex-1 flex-col items-start bg-[#161B22] py-6 mr-[13px] rounded-md border border-solid border-[#30363D]">
+									<div className="flex flex-col xl:flex-row items-start self-stretch gap-4 text-left">
+										<div className="w-full flex flex-1 flex-col items-start bg-[#161B22] py-6 rounded-md border border-solid border-[#30363D]">
 											<span className="text-[#8B949E] text-sm mb-[7px] mx-6" >
 												{"Rate"}
 											</span>
@@ -206,7 +212,7 @@ export default () => {
 												{"40%"}
 											</span>
 										</div>
-										<div className="flex flex-1 flex-col items-start bg-[#161B22] py-6 mr-[11px] rounded-md border border-solid border-[#30363D]">
+										<div className="w-full flex flex-1 flex-col items-start bg-[#161B22] py-6 rounded-md border border-solid border-[#30363D]">
 											<span className="text-[#8B949E] text-sm mb-[7px] mx-[23px]" >
 												{"Direct Referrals"}
 											</span>
@@ -214,7 +220,7 @@ export default () => {
 												{"2"}
 											</span>
 										</div>
-										<div className="flex flex-1 flex-col items-start bg-[#161B22] py-6 mr-[13px] rounded-md border border-solid border-[#30363D]">
+										<div className="w-full flex flex-1 flex-col items-start bg-[#161B22] py-6 rounded-md border border-solid border-[#30363D]">
 											<span className="text-[#8B949E] text-sm mb-[7px] mx-6" >
 												{"Sub-Accounts"}
 											</span>
@@ -222,7 +228,7 @@ export default () => {
 												{"2"}
 											</span>
 										</div>
-										<div className="flex flex-1 flex-col items-start bg-[#161B22] py-6 mr-3 rounded-md border border-solid border-[#30363D]">
+										<div className="w-full flex flex-1 flex-col items-start bg-[#161B22] py-6 rounded-md border border-solid border-[#30363D]">
 											<span className="text-[#8B949E] text-sm mb-[7px] mx-6" >
 												{"Total Net Profit"}
 											</span>
@@ -230,7 +236,7 @@ export default () => {
 												{"$15,600"}
 											</span>
 										</div>
-										<div className="flex flex-1 flex-col items-start bg-[#161B22] py-6 mr-3 rounded-md border border-solid border-[#30363D]">
+										<div className="w-full flex flex-1 flex-col items-start bg-[#161B22] py-6 rounded-md border border-solid border-[#30363D]">
 											<span className="text-[#8B949E] text-sm mb-[7px] mx-6" >
 												{"Total Earned Points"}
 											</span>
@@ -238,7 +244,7 @@ export default () => {
 												{"296.8K"}
 											</span>
 										</div>
-										<div className="flex flex-1 flex-col items-start bg-[#161B22] py-6 rounded-md border border-solid border-[#30363D]">
+										<div className="w-full flex flex-1 flex-col items-start bg-[#161B22] py-6 rounded-md border border-solid border-[#30363D]">
 											<span className="text-[#8B949E] text-sm mb-[7px] mx-6" >
 												{"Today Earned Points"}
 											</span>
@@ -248,24 +254,25 @@ export default () => {
 										</div>
 									</div>
 								</div>
-								<div className="flex items-start self-stretch gap-3">
-									<div className="flex-1 bg-[#161B22] py-[25px] rounded-lg border border-solid border-[#30363D]">
-										<div className="flex flex-col items-start self-stretch mb-4 mx-[25px] gap-2">
+								{/* My Points and Rules */}
+								<div className="w-full flex flex-col lg:flex-row items-start gap-4 text-left">
+									<div className="flex flex-col flex-1 p-4 gap-4 bg-[#161B22] rounded-lg border border-[#30363D] w-full">
+										<div className="flex flex-col items-start self-stretch gap-2">
 											<span className="text-white text-lg font-bold" >
 												{"My Points"}
 											</span>
 											<div className="flex flex-col self-stretch gap-4">
 												<div className="flex items-start self-stretch gap-3">
 													<div className="flex flex-1 items-center">
-														<span className="text-[#8B949E] text-sm mr-[13px]" >
+														<span className="text-[#8B949E] text-sm" >
 															{"Total Earned:"}
 														</span>
-														<span className="text-white text-sm mr-[85px]" >
+														<span className="text-white text-sm" >
 															{"296.8K points"}
 														</span>
 													</div>
 													<div className="flex flex-1 items-center">
-														<span className="text-[#8B949E] text-sm mr-3.5" >
+														<span className="text-[#8B949E] text-sm" >
 															{"Today:"}
 														</span>
 														<span className="text-[#2DA44E] text-sm mr-[75px]" >
@@ -275,10 +282,10 @@ export default () => {
 												</div>
 												<div className="flex items-start self-stretch gap-3">
 													<div className="flex flex-1 items-center">
-														<span className="text-[#8B949E] text-sm mr-3.5" >
+														<span className="text-[#8B949E] text-sm" >
 															{"Last 7 Days:"}
 														</span>
-														<span className="text-white text-sm mr-[39px]" >
+														<span className="text-white text-sm" >
 															{"30.5K (avg. 4.4K/day)"}
 														</span>
 													</div>
@@ -293,49 +300,49 @@ export default () => {
 												</div>
 											</div>
 										</div>
-										<div className="flex flex-col items-start self-stretch bg-[#0D1117] py-3.5 mb-3 mx-[25px] rounded">
-											<span className="text-white text-sm font-bold mb-1 ml-3" >
+										<div className="flex flex-col items-start self-stretch bg-[#0D1117] p-4 gap-2 rounded">
+											<span className="text-white text-sm font-bold" >
 												{"Active Address Share (20%)"}
 											</span>
-											<span className="text-[#8B949E] text-xs mb-[3px] ml-3" >
+											<span className="text-[#8B949E] text-sm" >
 												{"My Active Addresses: 45 / Total: 2,250 (2.0%)"}
 											</span>
-											<span className="text-[#2DA44E] text-xs ml-3" >
+											<span className="text-[#2DA44E] text-sm" >
 												{"Earned Today: 871 points"}
 											</span>
 										</div>
-										<div className="flex flex-col items-start self-stretch bg-[#0D1117] py-3.5 mx-[25px] rounded">
-											<span className="text-white text-sm font-bold mb-1 ml-3" >
+										<div className="flex flex-col items-start self-stretch bg-[#0D1117] p-4 gap-2 rounded">
+											<span className="text-white text-sm font-bold" >
 												{"Trading Volume Share (80%)"}
 											</span>
-											<span className="text-[#8B949E] text-xs mb-[3px] ml-3" >
+											<span className="text-[#8B949E] text-sm" >
 												{"My Volume: $850K / Total: $12.8M (6.67%)"}
 											</span>
-											<span className="text-[#2DA44E] text-xs ml-3" >
+											<span className="text-[#2DA44E] text-sm" >
 												{"Earned Today: 3485 points"}
 											</span>
 										</div>
 									</div>
-									<div className="flex flex-1 flex-col items-start bg-[#161B22] py-[25px] rounded-lg border border-solid border-[#30363D]">
-										<span className="text-white text-lg font-bold mb-[17px] mx-[25px]" >
+									<div className="flex flex-col flex-1 p-4 gap-4 bg-[#161B22] rounded-lg border border-[#30363D] w-full">
+										<span className="text-white text-lg font-bold w-full" >
 											{"Points Rewards Rules"}
 										</span>
-										<div className="flex flex-col items-start self-stretch bg-[#0D1117] py-3 mb-4 mx-[25px] gap-1 rounded-lg">
-											<span className="text-[#8B949E] text-sm ml-3" >
+										<div className="flex flex-col items-start self-stretch bg-[#0D1117] p-4 gap-2 rounded-lg">
+											<span className="text-[#8B949E] text-sm w-full" >
 												{"Instant Reward"}
 											</span>
-											<span className="text-white text-base font-bold ml-3" >
+											<span className="text-white text-base font-bold w-full" >
 												{"100,000 points ($10K)"}
 											</span>
 										</div>
-										<div className="flex flex-col items-start self-stretch bg-[#0D1117] py-4 mb-4 mx-[25px] gap-2 rounded-lg">
-											<span className="text-[#8B949E] text-sm ml-4" >
+										<div className="flex flex-col items-start self-stretch bg-[#0D1117] p-4 gap-2 rounded-lg">
+											<span className="text-[#8B949E] text-sm" >
 												{"Daily Pool"}
 											</span>
-											<span className="text-white text-base font-bold ml-4" >
+											<span className="text-white text-base font-bold" >
 												{"4% shared"}
 											</span>
-											<div className="flex flex-col items-start self-stretch mx-4 gap-1">
+											<div className="flex flex-col items-start self-stretch gap-1">
 												<div className="flex flex-col items-center pb-[1px]">
 													<span className="text-white text-sm" >
 														{"• 20% based on active addresses"}
@@ -353,7 +360,7 @@ export default () => {
 												</div>
 											</div>
 										</div>
-										<div className="flex flex-col items-start self-stretch mx-[25px] gap-2">
+										<div className="flex flex-col items-start self-stretch gap-2">
 											<span className="text-[#8B949E] text-sm" >
 												{"Point Value:"}
 											</span>
@@ -367,11 +374,12 @@ export default () => {
 									</div>
 								</div>
 							</div>
-							<div className="flex flex-col items-start self-stretch bg-[#161B22] py-[17px] gap-[17px] rounded-md border border-solid border-[#30363D]">
-								<span className="text-white text-lg font-bold mx-[17px]" >
+							{/* Invitation Tools */}
+							<div className="flex flex-col items-start self-stretch bg-[#161B22] p-4 gap-4 rounded-md border border-solid border-[#30363D]">
+								<span className="text-white text-lg font-bold" >
 									{"Invitation Tools"}
 								</span>
-								<div className="flex flex-col self-stretch mx-[17px] gap-4">
+								<div className="flex flex-col self-stretch gap-4">
 									<div className="flex items-center self-stretch gap-2">
 										<div className="bg-[#2DA44E] w-3 h-3 rounded-[9999px]">
 										</div>
@@ -385,169 +393,221 @@ export default () => {
 												{"Your Referral Link:"}
 											</span>
 										</div>
-										<div className="flex items-start self-stretch gap-2">
-											<input
-												placeholder={"https://riverbit.com/ref/sub_0xdef456"}
-												value={input1}
-												onChange={(event)=>onChangeInput1(event.target.value)}
-												className="flex-1 self-stretch text-white bg-[#0D1117] text-sm py-3.5 pl-3 pr-6 rounded-md border border-solid border-[#30363D]"
-											/>
-											<button className="flex flex-col shrink-0 items-start bg-[#92318D] text-left py-[15px] px-2.5 rounded-md border-0"
-												onClick={()=>alert("Pressed!")}>
-												<span className="text-white text-sm" >
-													{"Copy"}
-												</span>
-											</button>
-											<button className="flex flex-col shrink-0 items-start bg-transparent text-left py-[15px] px-2.5 rounded-md border border-solid border-[#30363D]"
-												onClick={()=>alert("Pressed!")}>
-												<span className="text-white text-sm" >
-													{"Generate QR"}
-												</span>
-											</button>
-											<button className="flex flex-col shrink-0 items-start bg-[#92318D] text-left py-[15px] px-[11px] rounded-md border-0"
-												onClick={()=>alert("Pressed!")}>
-												<span className="text-white text-sm" >
-													{"Share on Social"}
-												</span>
-											</button>
+										{/* Input and Buttons */}
+										<div className="flex flex-col md:flex-row items-start self-stretch gap-2 w-full">
+											{/* Input */}
+											<div className="flex flex-row w-full gap-4">
+												<input
+													placeholder="https://riverbit.com/ref/sub_0xdef456"
+													value={input1}
+													onChange={(event) => onChangeInput1(event.target.value)}
+													className="w-full text-white bg-[#0D1117] text-sm py-4 px-4 rounded-md border border-solid border-[#30363D]"
+												/>
+												<PrimaryButton size="small" onClick={() => alert("Pressed")}>
+												Copy
+												</PrimaryButton>
+											</div>
+											
+											{/* Buttons container */}
+											<div className="flex flex-col md:flex-row w-full md:w-auto gap-2 text-nowrap">
+												<SecondaryButton size="large" onClick={() => alert("Pressed")}>
+												Generate QR
+												</SecondaryButton>
+												<PrimaryButton size="large" onClick={() => alert("Pressed")}>
+												Share on Social
+												</PrimaryButton>
+												
+											</div>
 										</div>
+
 									</div>
 								</div>
 							</div>
-							<div className="flex items-center self-stretch gap-3">
-								<div className="flex flex-col shrink-0 items-start bg-[#161B22] py-[17px] rounded-md border border-solid border-[#30363D]">
-									<span className="text-white text-lg font-bold mt-[3px] mb-[19px] ml-[17px] mr-[289px]" >
+							{/* Team Stats and Team Management */}
+							<div className="flex flex-col xl:flex-row items-start self-stretch gap-6">
+								<div className="w-full flex flex-col lg:basis-1/3 items-start bg-[#161B22] p-4 gap-4 rounded-md border border-solid border-[#30363D]">
+									<span className="text-white text-lg font-bold" >
 										{"Team Stats"}
 									</span>
-									<div className="flex flex-col items-start mx-[17px] gap-3">
-										<div className="flex items-center pr-[3px]">
-											<span className="text-[#8B949E] text-base mr-[267px]" >
-												{"Members:"}
-											</span>
-											<span className="text-white text-base font-bold" >
-												{"120"}
-											</span>
+									<div className="flex flex-col gap-2 w-full">
+										<div className="flex items-center justify-between w-full">
+											<span className="text-[#8B949E] text-base">Members:</span>
+											<span className="text-white text-base font-bold">120</span>
 										</div>
-										<div className="flex items-center pr-[3px]">
-											<span className="text-[#8B949E] text-base mr-[153px]" >
-												{"Team Trading Volume:"}
-											</span>
-											<span className="text-white text-base font-bold" >
-												{"$6.8M"}
-											</span>
+
+										<div className="flex items-center justify-between w-full">
+											<span className="text-[#8B949E] text-base">Team Trading Volume:</span>
+											<span className="text-white text-base font-bold">$6.8M</span>
 										</div>
-										<div className="flex items-center pr-[3px]">
-											<span className="text-[#8B949E] text-base mr-36" >
-												{"Active Users (Last 3 Days):"}
-											</span>
-											<span className="text-white text-base font-bold" >
-												{"25"}
-											</span>
+
+										<div className="flex items-center justify-between w-full">
+											<span className="text-[#8B949E] text-base">Active Users (Last 3 Days):</span>
+											<span className="text-white text-base font-bold">25</span>
 										</div>
-										<div className="flex items-center pr-0.5">
-											<span className="text-[#8B949E] text-base mr-[111px]" >
-												{"Total Commission Earned:"}
-											</span>
-											<span className="text-[#2DA44E] text-base font-bold" >
-												{"$15,600"}
-											</span>
+
+										<div className="flex items-center justify-between w-full">
+											<span className="text-[#8B949E] text-base">Total Commission Earned:</span>
+											<span className="text-[#2DA44E] text-base font-bold">$15,600</span>
 										</div>
-										<div className="flex items-center pr-0.5">
-											<span className="text-[#8B949E] text-base mr-[219px]" >
-												{"Points Value:"}
-											</span>
-											<span className="text-[#2DA44E] text-base font-bold" >
-												{"$29.7K"}
-											</span>
+
+										<div className="flex items-center justify-between w-full">
+											<span className="text-[#8B949E] text-base">Points Value:</span>
+											<span className="text-[#2DA44E] text-base font-bold">$29.7K</span>
 										</div>
 									</div>
+
 								</div>
-								<div className="flex flex-1 flex-col bg-[#161B22] py-[17px] gap-4 rounded-md border border-solid border-[#30363D]">
-									<div className="flex items-center self-stretch mx-[17px]">
-										<span className="flex-1 text-white text-lg font-bold" >
+								{/* Team Management */}
+								<div className="w-full flex flex-col lg:basis-2/3 bg-[#161B22] py-4 px-4 gap-4 rounded-md border border-solid border-[#30363D]">
+									<div className="flex flex-col lg:flex-row gap-4 items-start justify-between self-stretch">
+										<span className="flex text-white text-lg font-bold text-left" >
 											{"Team Management"}
 										</span>
-										<div className="flex shrink-0 items-start gap-[18px]">
-											<button className="flex flex-col shrink-0 items-start bg-transparent text-left p-[11px] rounded-md border border-solid border-[#30363D]"
-												onClick={()=>alert("Pressed!")}>
-												<span className="text-white text-sm" >
-													{"Export CSV"}
-												</span>
-											</button>
-											<button className="flex flex-col shrink-0 items-start bg-[#92318D] text-left py-[11px] px-2.5 rounded-md border-0"
-												onClick={()=>alert("Pressed!")}>
-												<span className="text-white text-sm" >
-													{"Set Commission Rates"}
-												</span>
-											</button>
+										<div className="flex flex-col md:flex-row w-full md:w-auto gap-4 text-nowrap">
+											<SecondaryButton onClick={() => alert("Export CSV pressed")}>
+												Export CSV
+											</SecondaryButton>
+											<PrimaryButton onClick={() => alert("Set Commission Rates pressed")}>
+												Set Commission Rates
+											</PrimaryButton>
 										</div>
 									</div>
-									<div className="self-stretch mx-[17px]">
-										<div className="flex items-start self-stretch">
-											<span className="text-white text-sm my-[15px] mx-2" >
-												{"Direct Referrals"}
-											</span>
-											<span className="text-[#8B949E] text-sm my-[15px] mx-2" >
-												{"Sub-Accounts"}
-											</span>
-											<span className="text-[#8B949E] text-sm my-[15px] mx-2" >
-												{"All Members"}
-											</span>
-										</div>
-										<div className="self-stretch">
-											<div className="flex items-start self-stretch">
-												<span className="text-[#8B949E] text-sm font-bold my-3 ml-4 mr-[69px]" >
-													{"Address"}
-												</span>
-												<span className="text-[#8B949E] text-sm font-bold my-3 ml-4 mr-[75px]" >
-													{"Volume"}
-												</span>
-												<span className="text-[#8B949E] text-sm font-bold my-3 mx-4" >
-													{"Commission Rate"}
-												</span>
-												<span className="text-[#8B949E] text-sm font-bold my-3 ml-4 mr-8" >
-													{"Your Earnings"}
-												</span>
-												<span className="text-[#8B949E] text-sm font-bold my-3 ml-4" >
-													{"Action"}
-												</span>
-											</div>
-											<div className="flex items-center self-stretch">
-												<span className="text-white text-sm my-[15px] ml-4 mr-[45px]" >
-													{"0x555...666"}
-												</span>
-												<span className="text-white text-sm my-[15px] ml-4 mr-[70px]" >
-													{"$85,000"}
-												</span>
-												<span className="text-white text-sm my-[15px] ml-4 mr-24" >
-													{"40%"}
-												</span>
-												<span className="text-[#2DA44E] text-sm font-bold my-[15px] ml-4 mr-[75px]" >
-													{"$3,400"}
-												</span>
-												<div className="flex shrink-0 items-start py-[13px] px-4 gap-2.5">
-													<button className="flex flex-col shrink-0 items-start bg-[#92318D] text-left py-[11px] px-2.5 rounded-md border-0"
-														onClick={()=>alert("Pressed!")}>
-														<span className="text-white text-sm" >
-															{"Set Rates"}
-														</span>
-													</button>
-													<button className="flex flex-col shrink-0 items-start bg-transparent text-left py-[11px] px-2.5 rounded-md border border-solid border-[#30363D]"
-														onClick={()=>alert("Pressed!")}>
-														<span className="text-white text-sm" >
-															{"Set Sub-acc"}
-														</span>
-													</button>
-												</div>
-											</div>
+									<div className="flex items-start self-stretch border-b border-[#30363D] w-full">
+										{/* Tabs */}
+										<div className="lg:max-w-2/3 w-full ">
+										<Tabs
+                                            tabs={[
+                                                "Direct Referrals",
+                                                "Sub-Accounts",
+                                                "All Members",
+                                            ]}
+                                            activeTab={referralTab}
+                                            onTabChange={setReferralTab}
+                                            />
 										</div>
 									</div>
+									{/* Tab Content */}
+									{referralTab === "Direct Referrals" && (
+										<div className="overflow-x-auto text-nowrap">
+											{/* Team Table */}
+											<table className="min-w-full text-sm text-left border-collapse ">
+												<thead>
+												<tr className="border-b border-[#30363D]">
+													<th className="px-4 py-3 text-[#8B949E] font-bold">Address</th>
+													<th className="px-4 py-3 text-[#8B949E] font-bold">Volume</th>
+													<th className="px-4 py-3 text-[#8B949E] font-bold">Commission Rate</th>
+													<th className="px-4 py-3 text-[#8B949E] font-bold">Your Earnings</th>
+													<th className="px-4 py-3 text-[#8B949E] font-bold">Action</th>
+												</tr>
+												</thead>
+												<tbody>
+												{[
+													{ address: "0x555...666", volume: "$85,000", rate: "40%", earnings: "$3,400" },
+													{ address: "0x777...888", volume: "$50,000", rate: "30%", earnings: "$1,500" },
+													{ address: "0x999...aaa", volume: "$25,000", rate: "20%", earnings: "$500" },
+												].map((row, i) => (
+													<tr key={i} className="border-b border-[#30363D]">
+													<td className="px-4 py-3 text-white">{row.address}</td>
+													<td className="px-4 py-3 text-white">{row.volume}</td>
+													<td className="px-4 py-3 text-white">{row.rate}</td>
+													<td className="px-4 py-3 text-[#2DA44E] font-bold">{row.earnings}</td>
+													<td className="px-4 py-3 flex gap-2 text-nowrap">
+														<PrimaryButton size="small" onClick={() => alert("Set Rates pressed")}>
+														Set Rates
+														</PrimaryButton>
+														<SecondaryButton size="small" onClick={() => alert("Set Sub-acc pressed")}>
+														Set Sub-acc
+														</SecondaryButton>
+													</td>
+													</tr>
+												))}
+												</tbody>
+											</table>
+										</div>
+									)}
+									{referralTab === "Sub-Accounts" && (
+										<div>
+											<div className="overflow-x-auto flex flex-col gap-4">
+												{/* Team Table */}
+												<table className="text-nowrap min-w-full text-sm text-left border-collapse">
+												<thead>
+													<tr className="border-b border-[#30363D]">
+													<th className="px-4 py-3 text-[#8B949E] font-bold">Address</th>
+													<th className="px-4 py-3 text-[#8B949E] font-bold">Volume</th>
+													<th className="px-4 py-3 text-[#8B949E] font-bold">Commission Rate</th>
+													<th className="px-4 py-3 text-[#8B949E] font-bold">Your Earnings</th>
+													<th className="px-4 py-3 text-[#8B949E] font-bold">Action</th>
+													</tr>
+												</thead>
+												<tbody>
+													{[
+													{ address: "0x111...222", volume: "$180,000", rate: "35%", earnings: "5.0% ($900)" },
+													{ address: "0x333...444", volume: "$120,000", rate: "30%", earnings: "10.0% ($1,200)" },
+													].map((row, i) => (
+													<tr key={i} className="border-b border-[#30363D]">
+														<td className="px-4 py-3 text-white">{row.address}</td>
+														<td className="px-4 py-3 text-white">{row.volume}</td>
+														<td className="px-4 py-3 text-white">{row.rate}</td>
+														<td className="px-4 py-3 text-[#2DA44E] font-bold">{row.earnings}</td>
+														<td className="px-4 py-3 flex gap-2 text-nowrap">
+														<PrimaryButton size="small" onClick={() => alert("Adjust pressed")}>
+															Adjust
+														</PrimaryButton>
+														</td>
+													</tr>
+													))}
+												</tbody>
+												</table>
+											</div>
+											<div className="w-full">
+												<Tips
+												iconUrl="https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/1uh405kh_expires_30_days.png"
+												tips={[
+													"You can set a commission rate of up to 40% for sub-accounts, and the difference will be your earnings.",
+												]}
+												/>
+											</div>
+										</div>
+									)}
+									{referralTab === "All Members" && (
+										<div className="overflow-x-auto text-nowrap">
+											{/* Team Table */}
+											<table className="min-w-full text-sm text-left border-collapse">
+											<thead>
+												<tr className="border-b border-[#30363D]">
+												<th className="px-4 py-3 text-[#8B949E] font-bold">Address</th>
+												<th className="px-4 py-3 text-[#8B949E] font-bold">Type</th>
+												<th className="px-4 py-3 text-[#8B949E] font-bold">Volume</th>
+												<th className="px-4 py-3 text-[#8B949E] font-bold">Commission Rate</th>
+												<th className="px-4 py-3 text-[#8B949E] font-bold">Status</th>
+												</tr>
+											</thead>
+											<tbody>
+												{[
+												{ address: "0xabc...123", type: "Direct User", volume: "$45,000", rate: "35%", status: "Active" },
+												{ address: "0xdef...456", type: "Sub-Account", volume: "$125,000", rate: "30%", status: "Active" },
+												{ address: "0x789...abc", type: "Sub-Account", volume: "$89,000", rate: "25%", status: "Active" },
+												{ address: "0x456...def", type: "Direct User", volume: "$32,000", rate: "35%", status: "Active" },
+												].map((row, i) => (
+												<tr key={i} className="border-b border-[#30363D]">
+													<td className="px-4 py-3 text-white">{row.address}</td>
+													<td className="px-4 py-3 text-white">{row.type}</td>
+													<td className="px-4 py-3 text-white">{row.volume}</td>
+													<td className="px-4 py-3 text-white">{row.rate}</td>
+													<td className="px-4 py-3 font-bold"><StatusTag status={row.status} /></td>
+												</tr>
+												))}
+											</tbody>
+											</table>
+										</div>
+									)}
+
 								</div>
 							</div>
 						</div>
 					</div>
-					<Footer />
 				</div>
+				<Footer />
 			</div>
 		</div>
 	)
