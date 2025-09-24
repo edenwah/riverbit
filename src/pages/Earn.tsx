@@ -48,19 +48,22 @@ export default () => {
 	return (
 		<div className="flex flex-col bg-black min-h-screen">
 			<div className="self-stretch">
-				<div className="flex justify-between items-start self-stretch bg-[#161B22] py-3.5 px-4">
-					<div className="flex shrink-0 items-start gap-8">
-						<RiverbitLogo />
+				{/* Header */}
+                {/* Desktop header: show on xl and up */}
+                <div className="hidden xl:flex justify-between items-start self-stretch bg-zinc-900 py-3.5 px-4">
+                    {/* Left: Logo and nav */}
+                    <div className="flex shrink-0 items-start gap-8">
+                        <RiverbitLogo />
                         <DesktopNav />
-					</div>
-					{/* Right side (Balance, Points, Wallet, Language, Buttons) */}
+                    </div>
+                    {/* Right side (Balance, Points, Wallet, Language, Buttons) */}
 					<DesktopNavRight
 						balance="$27,345.12"
 						points="1,250,000"
 						language={language}
 						setLanguage={setLanguage}
 					/>
-				</div>
+                </div>
 				{/* Mobile header: show below xl */}
                 <MobileHeader
                     balance="$27,345.12"
