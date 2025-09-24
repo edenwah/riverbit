@@ -2,7 +2,7 @@ import React from "react";
 import RiverbitLogo from "../components/RiverbitLogo";
 import DesktopNav from "../components/DesktopNav";
 import Footer from "../components/Footer";
-export default (props) => {
+export default () => {
 	return (
 		<div className="flex flex-col bg-black min-h-screen">
 			<div className="self-stretch bg-white h-[1099px] rounded-lg border-2 border-solid border-[#CED4DA]">

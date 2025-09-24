@@ -1,8 +1,47 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import RiverbitLogo from "../components/RiverbitLogo";
 import DesktopNav from "../components/DesktopNav";
 import Footer from "../components/Footer";
-export default (props) => {
+export default () => {
+	const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+	const [language, setLanguage] = useState("EN");
+	const [showLangDropdown, setShowLangDropdown] = useState(false);
+	const [showWalletDropdown, setShowWalletDropdown] = useState(false);
+	const [showMoreDropdown, setShowMoreDropdown] = useState(false);
+	const walletDropdownRef = useRef<HTMLDivElement>(null);
+	const langDropdownRef = useRef<HTMLDivElement>(null);
+	const moreDropdownRef = useRef<HTMLDivElement>(null);
+
+	{/* Close dropdowns when clicking outside */}
+	useEffect(() => {
+		function handleClickOutside(event: MouseEvent) {
+			if (
+				moreDropdownRef.current &&
+				!moreDropdownRef.current.contains(event.target as Node)
+			) {
+				setShowMoreDropdown(false);
+			}
+			if (
+				walletDropdownRef.current &&
+				!walletDropdownRef.current.contains(event.target as Node)
+			) {
+				setShowWalletDropdown(false);
+			}
+			if (
+				langDropdownRef.current &&
+				!langDropdownRef.current.contains(event.target as Node)
+			) {
+				setShowLangDropdown(false);
+			}
+		}
+		if (showMoreDropdown || showWalletDropdown || showLangDropdown) {
+			document.addEventListener("mousedown", handleClickOutside);
+		}
+		return () => {
+			document.removeEventListener("mousedown", handleClickOutside);
+		};
+	}, [showMoreDropdown, showWalletDropdown, showLangDropdown]);
+
 	return (
 		<div className="flex flex-col bg-black min-h-screen">
 			<div className="self-stretch bg-white h-[1246px] rounded-lg border-2 border-solid border-[#CED4DA]">

@@ -1,70 +1,88 @@
-import React, {useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import RiverbitLogo from "../components/RiverbitLogo";
 import DesktopNav from "../components/DesktopNav";
+import DesktopNavRight from "../components/DesktopNavRight";
+import MobileHeader from "../components/MobileHeader";
+import MobileMenu from "../components/MobileMenu";
 import Footer from "../components/Footer";
-export default (props) => {
+export default () => {
+	const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+	const [language, setLanguage] = useState("EN");
+	const [showLangDropdown, setShowLangDropdown] = useState(false);
+	const [showWalletDropdown, setShowWalletDropdown] = useState(false);
+	const [showMoreDropdown, setShowMoreDropdown] = useState(false);
+	const walletDropdownRef = useRef<HTMLDivElement>(null);
+	const langDropdownRef = useRef<HTMLDivElement>(null);
+	const moreDropdownRef = useRef<HTMLDivElement>(null);
+
+	{/* Close dropdowns when clicking outside */}
+	useEffect(() => {
+		function handleClickOutside(event: MouseEvent) {
+			if (
+				moreDropdownRef.current &&
+				!moreDropdownRef.current.contains(event.target as Node)
+			) {
+				setShowMoreDropdown(false);
+			}
+			if (
+				walletDropdownRef.current &&
+				!walletDropdownRef.current.contains(event.target as Node)
+			) {
+				setShowWalletDropdown(false);
+			}
+			if (
+				langDropdownRef.current &&
+				!langDropdownRef.current.contains(event.target as Node)
+			) {
+				setShowLangDropdown(false);
+			}
+		}
+		if (showMoreDropdown || showWalletDropdown || showLangDropdown) {
+			document.addEventListener("mousedown", handleClickOutside);
+		}
+		return () => {
+			document.removeEventListener("mousedown", handleClickOutside);
+		};
+	}, [showMoreDropdown, showWalletDropdown, showLangDropdown]);
+	
 	const [input1, onChangeInput1] = useState('');
 	return (
 		<div className="flex flex-col bg-black min-h-screen">
-			<div className="self-stretch bg-white h-[1709px] rounded-lg border-2 border-solid border-[#CED4DA]">
-				<div className="flex justify-between items-start self-stretch bg-[#161B22] py-3.5 px-4">
-					<div className="flex shrink-0 items-start gap-8">
-						<RiverbitLogo />
+			<div className="self-stretch">
+				{/* Header */}
+                {/* Desktop header: show on xl and up */}
+                <div className="hidden xl:flex justify-between items-start self-stretch bg-zinc-900 py-3.5 px-4">
+                    {/* Left: Logo and nav */}
+                    <div className="flex shrink-0 items-start gap-8">
+                        <RiverbitLogo />
                         <DesktopNav />
-					</div>
-					<div className="flex shrink-0 items-center gap-4">
-						<div className="flex flex-col shrink-0 items-start">
-							<span className="text-[#8B949E] text-xs" >
-								{"Balance"}
-							</span>
-							<span className="text-white text-sm" >
-								{"$27,345.12"}
-							</span>
-						</div>
-						<div className="w-[1px] h-8">
-						</div>
-						<div className="flex flex-col shrink-0 items-start">
-							<span className="text-[#8B949E] text-xs" >
-								{"Points"}
-							</span>
-							<span className="text-white text-sm" >
-								{"1,250,000"}
-							</span>
-						</div>
-						<div className="flex shrink-0 items-center bg-[#161B22] py-2.5 px-3 gap-2 rounded-md border border-solid border-[#30363D]">
-							<img
-								src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/eb48i18d_expires_30_days.png"} 
-								className="w-5 h-5 rounded-md object-fill"
-							/>
-							<img
-								src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/zf53akqs_expires_30_days.png"} 
-								className="w-3 h-[15px] rounded-md object-fill"
-							/>
-						</div>
-						<button className="flex shrink-0 items-center bg-[#161B22] text-left py-2.5 px-4 gap-2.5 rounded-md border border-solid border-[#30363D]"
-							onClick={()=>alert("Pressed!")}>
-							<img
-								src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/1n1ybans_expires_30_days.png"} 
-								className="w-3.5 h-[19px] rounded-md object-fill"
-							/>
-							<span className="text-[#C9D1D9] text-sm" >
-								{"EN"}
-							</span>
-						</button>
-						<button className="flex flex-col shrink-0 items-start bg-[#161B22] text-left py-[11px] px-4 rounded-md border border-solid border-[#30363D]"
-							onClick={()=>alert("Pressed!")}>
-							<span className="text-white text-sm font-bold" >
-								{"Withdraw"}
-							</span>
-						</button>
-						<button className="flex flex-col shrink-0 items-start bg-[#92318D] text-left py-[11px] px-4 rounded-md border-0"
-							onClick={()=>alert("Pressed!")}>
-							<span className="text-white text-sm font-bold" >
-								{"Deposit"}
-							</span>
-						</button>
-					</div>
-				</div>
+                    </div>
+                    {/* Right side (Balance, Points, Wallet, Language, Buttons) */}
+					<DesktopNavRight
+						balance="$27,345.12"
+						points="1,250,000"
+						language={language}
+						setLanguage={setLanguage}
+					/>
+                </div>
+				{/* Mobile header: show below xl */}
+                <MobileHeader
+                    balance="$27,345.12"
+                    onDeposit={() => alert("Deposit pressed!")}
+                    onMenuToggle={() => setMobileMenuOpen(!mobileMenuOpen)}
+                    />
+                {/* Mobile Menu Drawer */}
+                {mobileMenuOpen && (
+                    <MobileMenu
+                        isOpen={mobileMenuOpen}
+                        onClose={() => setMobileMenuOpen(false)}
+                        balance="$27,345.12"
+                        points="1,250,000"
+                        language={language}
+						setLanguage={setLanguage}
+                        />
+                )}
+				{/* Content */}
 				<div className="flex flex-col self-stretch bg-[#0D0F13] gap-2.5">
 					<div className="flex flex-col self-stretch py-12 mx-20 gap-8">
 						<div className="flex items-start self-stretch mx-6">
