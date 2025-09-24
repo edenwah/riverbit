@@ -31,12 +31,12 @@ const DesktopNav: React.FC = () => {
   };
 
   return (
-    <div className="flex shrink-0 items-start">
+    <div className="flex shrink-0 items-center">
       {navItems.map((item) => (
         <Link
           key={item.to}
           to={item.to}
-          className={`flex flex-col shrink-0 items-center py-[11px] mr-[30px] rounded-sm px-3 ${
+          className={`flex flex-col shrink-0 py-3 mr-4 rounded-sm px-3 ${
             isActive(item.to) ? "bg-zinc-700 text-white" : "text-zinc-400"
           }`}
         >
@@ -64,7 +64,7 @@ const DesktopNav: React.FC = () => {
               <Link
                 key={item.to}
                 to={item.to}
-                className="block px-4 py-2 text-sm text-white hover:bg-zinc-800"
+                className="block px-4 py-3 text-sm text-white hover:bg-zinc-800"
                 onClick={() => setShowMoreDropdown(false)}
               >
                 {item.label}
