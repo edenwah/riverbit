@@ -35,7 +35,7 @@ const LeverageSlider: React.FC<LeverageSliderProps> = ({ value, onChange }) => {
           <button
             key={lev}
             type="button"
-            className={`w-full flex flex-col items-center py-[11px] px-4 rounded ${
+            className={`w-full flex flex-col items-center py-[11px] px-2 rounded ${
               value === lev
                 ? "border-2 border-fuchsia-800 font-bold text-white bg-[#0D1117]"
                 : "border border-[#30363D] text-white bg-[#0D1117]"

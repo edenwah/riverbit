@@ -236,15 +236,15 @@ export default () => {
 																{"Amount"}
 															</span>
 														</div>
-														<div className="w-full flex items-center justify-between bg-[#0D1117] py-4 px-4 rounded-md border border-solid border-[#30363D]">
+														<div className="w-full flex max-md:flex-col max-md:items-end items-center justify-between bg-[#0D1117] py-4 px-4 rounded-md border border-solid border-[#30363D]">
 															<input
 																placeholder={"5,000"}
 																value={input1}
 																onChange={(event)=>onChangeInput1(event.target.value)}
-																className="text-white bg-transparent text-base py-2 border-0"
+																className="text-white bg-transparent text-base py-2 border-0 w-full"
 															/>
-															<div className="flex items-start bg-[#30363D] py-[7px] px-2 gap-4 rounded">
-																<span className="text-[#8B949E] text-sm font-bold" >
+															<div className="flex items-start shrink-0 bg-[#30363D] py-[7px] px-2 gap-4 rounded">
+																<span className="text-[#8B949E] text-xs font-bold w-full" >
 																	{"USDC (Arbitrum)"}
 																</span>
 																<img
