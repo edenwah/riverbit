@@ -30,7 +30,7 @@ const PrimaryButton: React.FC<PrimaryButtonProps> = ({
 
   return (
     <button
-      className={`w-full flex flex-1 justify-center items-center bg-fuchsia-800 rounded-sm border-0 ${sizeClasses}`}
+      className={`w-full flex flex-1 justify-center items-center gap-2 bg-fuchsia-800 rounded-sm border-0 ${sizeClasses}`}
       onClick={onClick}
     >
       {icon && <span className="flex items-center">{icon}</span>}
