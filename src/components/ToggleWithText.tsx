@@ -12,7 +12,7 @@ const ToggleWithText: React.FC<ToggleWithTextProps> = ({ options, value, onChang
       {options.map((option) => (
         <button
           key={option}
-          className={`flex flex-col items-start py-3 px-3 rounded border-0 transition-all ${
+          className={`flex-1 flex flex-col items-start py-3 px-3 rounded border-0 transition-all ${
             value === option ? "bg-fuchsia-800 text-white" : "bg-transparent text-zinc-400"
           }`}
           onClick={() => onChange(option)}

@@ -64,7 +64,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
           </svg>
         </button>
         {/* Menu items */}
-        <div className="flex flex-col h-full justify-between">
+        <div className="overflow-auto flex flex-col h-full justify-between">
           {/* Upper: Nav items */}
           <div className="flex flex-col">
             {/* Main nav items */}
@@ -116,16 +116,8 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
           </div>
 
           {/* Lower: Settings */}
-          <div className="flex flex-col gap-2 pt-4 border-t border-[#30363D]">
-            {/* Actions */}
-            <div className="flex flex-row gap-2 text-center w-full">
-              <SecondaryButton size="large" onClick={() => alert("Withdraw clicked!")}>
-                Withdraw
-              </SecondaryButton>
-              <PrimaryButton size="large" onClick={() => alert("Deposit clicked!")}>
-                Deposit
-              </PrimaryButton>
-            </div>
+          <div className="flex flex-col gap-4 pt-4 border-t border-[#30363D]">
+            
             {/* Balance and Points */}
             <div className="flex flex-row justify-between mt-4 mb-2">
               <div className="flex flex-col flex-1 items-start">
@@ -136,6 +128,16 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
                 <span className="text-zinc-400 text-md">Points</span>
                 <span className="text-white text-md">{points}</span>
               </div>
+            </div>
+
+            {/* Actions */}
+            <div className="flex flex-row gap-2 text-center w-full">
+              <PrimaryButton size="large" onClick={() => alert("Deposit clicked!")}>
+                Deposit
+              </PrimaryButton>
+              <SecondaryButton size="large" onClick={() => alert("Withdraw clicked!")}>
+                Withdraw
+              </SecondaryButton>
             </div>
             
             {/* Language and Disconnect */}

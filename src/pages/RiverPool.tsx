@@ -942,8 +942,9 @@ export default () => {
 								</div>
 							</div>
 						)}
-
-						
+						{riverPoolTab === "Insurance" && (
+							<div>Coming Soon...</div>
+						)}
 					</div>
 				</div>
 				<Footer />
