@@ -86,19 +86,20 @@ export default (props) => {
                         />
                 )}
 				{/* Content */}
-				<div className="flex flex-col self-stretch bg-[#0D0F13] gap-2.5">
-					<div className="flex flex-col self-stretch py-12 mx-20 gap-8">
-						<div className="flex flex-col items-start self-stretch mx-6 gap-[17px]">
+				<div className="flex flex-col self-stretch gap-2 mx-6">
+					<div className="flex flex-col self-stretch py-12 lg:mx-20 gap-8">
+						<div className="flex flex-col text-left items-start self-stretch gap-4">
 							<span className="text-white text-3xl font-bold" >
 								{"Announcements"}
 							</span>
-							<div className="flex justify-between items-center self-stretch">
+							{/* Description and System Status */}
+							<div className="flex flex-col lg:flex-row gap-2 justify-between items-start self-stretch">
 								<div className="flex flex-col shrink-0 items-center">
 									<span className="text-[#8B949E] text-base" >
 										{"System notifications and product updates"}
 									</span>
 								</div>
-								<div className="flex shrink-0 items-start gap-4">
+								<div className="flex max-md:flex-col shrink-0 items-start gap-2">
 									<div className="flex shrink-0 items-center pr-1 gap-[11px]">
 										<span className="text-[#8B949E] text-sm" >
 											{"System Status:"}
@@ -107,7 +108,7 @@ export default (props) => {
 											{"Normal"}
 										</span>
 									</div>
-									<div className="flex shrink-0 items-center pr-[3px] gap-[11px]">
+									<div className="flex shrink-0 items-center gap-2">
 										<span className="text-[#8B949E] text-sm" >
 											{"Last Updated:"}
 										</span>
@@ -118,12 +119,13 @@ export default (props) => {
 								</div>
 							</div>
 						</div>
-						<div className="flex items-start self-stretch mx-6 gap-3">
-							<div className="flex flex-col shrink-0 items-center gap-2.5">
-								<div className="flex flex-col items-start bg-[#161B22] py-[25px] gap-4 rounded-lg border border-solid border-[#30363D]">
-									<button className="flex items-start bg-[#0D1117] text-left py-3 px-4 mx-[25px] rounded-md border border-solid border-[#30363D]"
+						<div className="flex items-start self-stretch gap-3 flex-col xl:flex-row">
+							<div className="flex flex-col basis-1/3 items-center gap-2.5 w-full">
+								<div className="flex flex-col items-start bg-[#161B22] p-6 gap-4 rounded-lg border border-solid border-[#30363D] w-full">
+									{/* Search bar */}
+									<button className="w-full justify-between flex items-start bg-[#0D1117] text-left py-3 px-4 rounded-md border border-solid border-[#30363D]"
 										onClick={()=>alert("Pressed!")}>
-										<span className="text-[#ADAEBC] text-base mr-[159px]" >
+										<span className="text-[#ADAEBC] text-base" >
 											{"Search..."}
 										</span>
 										<img
@@ -131,10 +133,10 @@ export default (props) => {
 											className="w-4 h-6 rounded-md object-fill"
 										/>
 									</button>
-									<span className="text-white text-lg font-bold ml-[25px]" >
+									<span className="text-white text-lg font-bold" >
 										{"Announcements"}
 									</span>
-									<div className="flex flex-col items-start ml-[25px] gap-3">
+									<div className="flex flex-col items-start gap-3">
 										<span className="text-[#92318D] text-sm font-bold" >
 											{"All"}
 										</span>
@@ -149,14 +151,14 @@ export default (props) => {
 										</span>
 									</div>
 								</div>
-								<div className="flex flex-col items-start bg-[#161B22] py-[25px] gap-4 rounded-lg border border-solid border-[#30363D]">
-									<div className="flex flex-col items-center pb-[1px] ml-[25px]">
+								<div className="w-full flex flex-col items-start bg-[#161B22] p-6 gap-4 rounded-lg border border-solid border-[#30363D]">
+									<div className="flex flex-col items-center">
 										<span className="text-white text-lg font-bold" >
 											{"Contact Us"}
 										</span>
 									</div>
-									<div className="flex flex-col items-start mx-[25px] gap-3">
-										<div className="flex items-center bg-[#0D1117] p-3 gap-3 rounded-lg">
+									<div className="w-full flex flex-col items-start gap-3">
+										<div className="w-full flex items-center bg-[#0D1117] p-3 gap-3 rounded-lg">
 											<img
 												src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/46x3x7zg_expires_30_days.png"} 
 												className="w-6 h-6 rounded-lg object-fill"
@@ -168,7 +170,7 @@ export default (props) => {
 												className="text-white bg-transparent text-sm w-12 py-[3px] border-0"
 											/>
 										</div>
-										<div className="flex items-center bg-[#0D1117] p-3 gap-3 rounded-lg">
+										<div className="w-full flex items-center bg-[#0D1117] p-3 gap-3 rounded-lg">
 											<img
 												src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/9fr0ws12_expires_30_days.png"} 
 												className="w-6 h-6 rounded-lg object-fill"
@@ -180,7 +182,7 @@ export default (props) => {
 												className="text-white bg-transparent text-sm w-2 py-[3px] border-0"
 											/>
 										</div>
-										<div className="flex items-center bg-[#0D1117] p-3 gap-3 rounded-lg">
+										<div className="w-full flex items-center bg-[#0D1117] p-3 gap-3 rounded-lg">
 											<img
 												src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/5prdw6in_expires_30_days.png"} 
 												className="w-6 h-6 rounded-lg object-fill"
@@ -192,7 +194,7 @@ export default (props) => {
 												className="text-white bg-transparent text-sm w-[59px] py-[3px] border-0"
 											/>
 										</div>
-										<div className="flex items-center bg-[#0D1117] p-3 gap-3 rounded-lg">
+										<div className="w-full flex items-center bg-[#0D1117] p-3 gap-3 rounded-lg">
 											<img
 												src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/mjaepjda_expires_30_days.png"} 
 												className="w-6 h-6 rounded-lg object-fill"
@@ -207,276 +209,100 @@ export default (props) => {
 									</div>
 								</div>
 							</div>
-							<div className="flex flex-1 flex-col items-start bg-[#161B22] py-[1px] rounded-lg border border-solid border-[#30363D]">
-								<span className="text-white text-xl font-bold my-6 ml-[25px] mr-[1px]" >
+							<div className="flex flex-col basis-2/3 w-full items-start bg-[#161B22] p-6 gap-4 rounded-lg border border-solid border-[#30363D]">
+								<span className="text-white text-xl font-bold py-4 border-b border-solid border-[#30363D] w-full text-left" >
 									{"Announcements List"}
 								</span>
-								<div className="self-stretch mx-[1px]">
-									<div className="flex items-start self-stretch p-6 gap-3">
-										<div className="flex flex-1 flex-col items-start">
-											<span className="text-white text-lg font-bold mb-2" >
-												{"RiverBit V2.0 Official Launch – Brand New Trading Engine Live"}
-											</span>
-											<div className="flex items-center self-stretch mb-2 gap-4">
-												<button className="flex flex-col shrink-0 items-start bg-[#30363D] text-left py-1 px-2 rounded border-0"
-													onClick={()=>alert("Pressed!")}>
-													<span className="text-[#8B949E] text-xs font-bold" >
-														{"Major Update"}
-													</span>
-												</button>
-												<span className="text-[#8B949E] text-sm" >
-													{"Date: 2025-09-06"}
-												</span>
-											</div>
-											<span className="text-[#8B949E] text-sm my-0.5" >
-												{"Enhanced performance and new features for better trading experience"}
-											</span>
+								{/* Announcement items */}
+								<div className="w-full flex flex-col gap-8 text-left">
+								{[
+									{
+									title: "RiverBit V2.0 Official Launch – Brand New Trading Engine Live",
+									tag: "Major Update",
+									date: "2025-09-06",
+									description: "Enhanced performance and new features for better trading experience",
+									},
+									{
+									title: "Foundation LP Pool Officially Open – Limited to 100 Seats",
+									tag: "New Feature",
+									date: "2025-09-05",
+									description: "Exclusive access to high-yield liquidity provision opportunities",
+									},
+									{
+									title: "System Maintenance Completed – Significant Performance Boost",
+									tag: "Maintenance",
+									date: "2025-09-04",
+									description: "System optimization completed with improved speed and reliability",
+									},
+									{
+									title: "Mid-Autumn Double Points Event – 7 Days Only",
+									tag: "Event",
+									date: "2025-09-03",
+									description: "Limited time event offering double points on all trading activities",
+									},
+									{
+									title: "Security Upgrade – Mandatory 2FA Enabled",
+									tag: "Security",
+									date: "2025-09-01",
+									description: "Enhanced security measures now require two-factor authentication",
+									},
+									{
+									title: "Major Referral System Update – 3-Level Structure Live",
+									tag: "Feature Update",
+									date: "2025-08-30",
+									description: "New multi-tier referral system with increased rewards",
+									},
+									{
+									title: "New Data Dashboard Launched – Real-Time Trading Monitoring",
+									tag: "New Feature",
+									date: "2025-08-28",
+									description: "Advanced analytics dashboard for comprehensive trading insights",
+									},
+									{
+									title: "New Data Dashboard Launched – Real-Time Trading Monitoring",
+									tag: "New Feature",
+									date: "2025-08-28",
+									description: "Advanced analytics dashboard for comprehensive trading insights",
+									},
+									{
+									title: "New Data Dashboard Launched – Real-Time Trading Monitoring",
+									tag: "New Feature",
+									date: "2025-08-28",
+									description: "Advanced analytics dashboard for comprehensive trading insights",
+									},
+									{
+									title: "New Data Dashboard Launched – Real-Time Trading Monitoring",
+									tag: "New Feature",
+									date: "2025-08-28",
+									description: "Advanced analytics dashboard for comprehensive trading insights",
+									},
+								].map((item, idx) => (
+									<div
+									key={idx}
+									className="flex flex-1 flex-col xl:flex-row justify-between bg-[#0D1117] p-4 rounded-lg border border-[#30363D] min-w-[250px]"
+									>
+									<div className="flex flex-col">
+										<span className="text-white text-lg font-bold mb-2">{item.title}</span>
+										<div className="flex items-center gap-4 mb-2">
+										<button
+											className="flex flex-col shrink-0 items-start bg-[#30363D] text-left py-1 px-2 rounded border-0"
+											onClick={() => alert("Pressed!")}
+										>
+											<span className="text-[#8B949E] text-xs font-bold">{item.tag}</span>
+										</button>
+										<span className="text-[#8B949E] text-sm">{`Date: ${item.date}`}</span>
 										</div>
-										<div className="flex flex-col shrink-0 items-center pb-[1px]">
-											<span className="text-[#92318D] text-sm font-bold" >
-												{"View Details"}
-											</span>
-										</div>
+										<span className="text-[#8B949E] text-sm">{item.description}</span>
 									</div>
-									<div className="flex items-start self-stretch p-6 gap-3">
-										<div className="flex flex-1 flex-col items-start">
-											<span className="text-white text-lg font-bold mb-2" >
-												{"Foundation LP Pool Officially Open – Limited to 100 Seats"}
-											</span>
-											<div className="flex items-center self-stretch mb-2 gap-4">
-												<button className="flex flex-col shrink-0 items-start bg-[#30363D] text-left py-1 px-2 rounded border-0"
-													onClick={()=>alert("Pressed!")}>
-													<span className="text-[#8B949E] text-xs font-bold" >
-														{"New Feature"}
-													</span>
-												</button>
-												<span className="text-[#8B949E] text-sm" >
-													{"Date: 2025-09-05"}
-												</span>
-											</div>
-											<span className="text-[#8B949E] text-sm my-0.5" >
-												{"Exclusive access to high-yield liquidity provision opportunities"}
-											</span>
-										</div>
-										<div className="flex flex-col shrink-0 items-center pb-[1px]">
-											<span className="text-[#92318D] text-sm font-bold" >
-												{"View Details"}
-											</span>
-										</div>
+									<div className="flex flex-col items-start mt-2">
+										<span className="text-[#92318D] text-sm font-bold cursor-pointer">{"View Details"}</span>
 									</div>
-									<div className="flex items-start self-stretch p-6 gap-3">
-										<div className="flex flex-1 flex-col items-start">
-											<span className="text-white text-lg font-bold mb-2" >
-												{"System Maintenance Completed – Significant Performance Boost"}
-											</span>
-											<div className="flex items-center self-stretch mb-2 gap-[17px]">
-												<button className="flex flex-col shrink-0 items-start bg-[#30363D] text-left py-1 px-2 rounded border-0"
-													onClick={()=>alert("Pressed!")}>
-													<span className="text-[#8B949E] text-xs font-bold" >
-														{"Maintenance"}
-													</span>
-												</button>
-												<span className="text-[#8B949E] text-sm" >
-													{"Date: 2025-09-04"}
-												</span>
-											</div>
-											<span className="text-[#8B949E] text-sm my-0.5" >
-												{"System optimization completed with improved speed and reliability"}
-											</span>
-										</div>
-										<div className="flex flex-col shrink-0 items-center pb-[1px]">
-											<span className="text-[#92318D] text-sm font-bold" >
-												{"View Details"}
-											</span>
-										</div>
 									</div>
-									<div className="flex items-start self-stretch p-6 gap-3">
-										<div className="flex flex-1 flex-col">
-											<span className="text-white text-lg font-bold mb-2" >
-												{"Mid-Autumn Double Points Event – 7 Days Only"}
-											</span>
-											<div className="flex items-center self-stretch mb-2 gap-4">
-												<button className="flex flex-col shrink-0 items-start bg-[#30363D] text-left py-1 px-2 rounded border-0"
-													onClick={()=>alert("Pressed!")}>
-													<span className="text-[#8B949E] text-xs font-bold" >
-														{"Event"}
-													</span>
-												</button>
-												<span className="text-[#8B949E] text-sm" >
-													{"Date: 2025-09-03"}
-												</span>
-											</div>
-											<span className="text-[#8B949E] text-sm my-0.5" >
-												{"Limited time event offering double points on all trading activities"}
-											</span>
-										</div>
-										<div className="flex flex-col shrink-0 items-center pb-[1px]">
-											<span className="text-[#92318D] text-sm font-bold" >
-												{"View Details"}
-											</span>
-										</div>
-									</div>
-									<div className="flex justify-between items-start self-stretch p-6">
-										<div className="flex flex-col shrink-0 items-start gap-2">
-											<span className="text-white text-lg font-bold" >
-												{"Security Upgrade – Mandatory 2FA Enabled"}
-											</span>
-											<div className="flex items-center gap-4">
-												<button className="flex flex-col shrink-0 items-start bg-[#30363D] text-left py-1 px-2 rounded border-0"
-													onClick={()=>alert("Pressed!")}>
-													<span className="text-[#8B949E] text-xs font-bold" >
-														{"Security"}
-													</span>
-												</button>
-												<span className="text-[#8B949E] text-sm" >
-													{"Date: 2025-09-01"}
-												</span>
-											</div>
-											<div className="flex flex-col items-center py-0.5">
-												<span className="text-[#8B949E] text-sm" >
-													{"Enhanced security measures now require two-factor authentication"}
-												</span>
-											</div>
-										</div>
-										<div className="flex flex-col shrink-0 items-center pb-[1px]">
-											<span className="text-[#92318D] text-sm font-bold" >
-												{"View Details"}
-											</span>
-										</div>
-									</div>
-									<div className="flex items-start self-stretch p-6 gap-3">
-										<div className="flex flex-1 flex-col items-start">
-											<span className="text-white text-lg font-bold mb-2" >
-												{"Major Referral System Update – 3-Level Structure Live"}
-											</span>
-											<div className="flex items-center self-stretch mb-2 gap-4">
-												<button className="flex flex-col shrink-0 items-start bg-[#30363D] text-left py-1 px-2 rounded border-0"
-													onClick={()=>alert("Pressed!")}>
-													<span className="text-[#8B949E] text-xs font-bold" >
-														{"Feature Update"}
-													</span>
-												</button>
-												<span className="text-[#8B949E] text-sm" >
-													{"Date: 2025-08-30"}
-												</span>
-											</div>
-											<span className="text-[#8B949E] text-sm my-0.5" >
-												{"New multi-tier referral system with increased rewards"}
-											</span>
-										</div>
-										<div className="flex flex-col shrink-0 items-center pb-[1px]">
-											<span className="text-[#92318D] text-sm font-bold" >
-												{"View Details"}
-											</span>
-										</div>
-									</div>
-									<div className="flex items-start self-stretch p-6 gap-3">
-										<div className="flex flex-1 flex-col items-start">
-											<span className="text-white text-lg font-bold mb-2" >
-												{"New Data Dashboard Launched – Real-Time Trading Monitoring"}
-											</span>
-											<div className="flex items-center self-stretch mb-2 gap-4">
-												<button className="flex flex-col shrink-0 items-start bg-[#30363D] text-left py-1 px-2 rounded border-0"
-													onClick={()=>alert("Pressed!")}>
-													<span className="text-[#8B949E] text-xs font-bold" >
-														{"New Feature"}
-													</span>
-												</button>
-												<span className="text-[#8B949E] text-sm" >
-													{"Date: 2025-08-28"}
-												</span>
-											</div>
-											<span className="text-[#8B949E] text-sm my-0.5" >
-												{"Advanced analytics dashboard for comprehensive trading insights"}
-											</span>
-										</div>
-										<div className="flex flex-col shrink-0 items-center pb-[1px]">
-											<span className="text-[#92318D] text-sm font-bold" >
-												{"View Details"}
-											</span>
-										</div>
-									</div>
-									<div className="flex items-start self-stretch p-6 gap-3">
-										<div className="flex flex-1 flex-col items-start">
-											<span className="text-white text-lg font-bold mb-2" >
-												{"New Data Dashboard Launched – Real-Time Trading Monitoring"}
-											</span>
-											<div className="flex items-center self-stretch mb-2 gap-4">
-												<button className="flex flex-col shrink-0 items-start bg-[#30363D] text-left py-1 px-2 rounded border-0"
-													onClick={()=>alert("Pressed!")}>
-													<span className="text-[#8B949E] text-xs font-bold" >
-														{"New Feature"}
-													</span>
-												</button>
-												<span className="text-[#8B949E] text-sm" >
-													{"Date: 2025-08-28"}
-												</span>
-											</div>
-											<span className="text-[#8B949E] text-sm my-0.5" >
-												{"Advanced analytics dashboard for comprehensive trading insights"}
-											</span>
-										</div>
-										<div className="flex flex-col shrink-0 items-center pb-[1px]">
-											<span className="text-[#92318D] text-sm font-bold" >
-												{"View Details"}
-											</span>
-										</div>
-									</div>
-									<div className="flex items-start self-stretch p-6 gap-3">
-										<div className="flex flex-1 flex-col items-start">
-											<span className="text-white text-lg font-bold mb-2" >
-												{"New Data Dashboard Launched – Real-Time Trading Monitoring"}
-											</span>
-											<div className="flex items-center self-stretch mb-2 gap-4">
-												<button className="flex flex-col shrink-0 items-start bg-[#30363D] text-left py-1 px-2 rounded border-0"
-													onClick={()=>alert("Pressed!")}>
-													<span className="text-[#8B949E] text-xs font-bold" >
-														{"New Feature"}
-													</span>
-												</button>
-												<span className="text-[#8B949E] text-sm" >
-													{"Date: 2025-08-28"}
-												</span>
-											</div>
-											<span className="text-[#8B949E] text-sm my-0.5" >
-												{"Advanced analytics dashboard for comprehensive trading insights"}
-											</span>
-										</div>
-										<div className="flex flex-col shrink-0 items-center pb-[1px]">
-											<span className="text-[#92318D] text-sm font-bold" >
-												{"View Details"}
-											</span>
-										</div>
-									</div>
-									<div className="flex items-start self-stretch p-6 gap-3">
-										<div className="flex flex-1 flex-col items-start">
-											<span className="text-white text-lg font-bold mb-2" >
-												{"New Data Dashboard Launched – Real-Time Trading Monitoring"}
-											</span>
-											<div className="flex items-center self-stretch mb-2 gap-4">
-												<button className="flex flex-col shrink-0 items-start bg-[#30363D] text-left py-1 px-2 rounded border-0"
-													onClick={()=>alert("Pressed!")}>
-													<span className="text-[#8B949E] text-xs font-bold" >
-														{"New Feature"}
-													</span>
-												</button>
-												<span className="text-[#8B949E] text-sm" >
-													{"Date: 2025-08-28"}
-												</span>
-											</div>
-											<span className="text-[#8B949E] text-sm my-0.5" >
-												{"Advanced analytics dashboard for comprehensive trading insights"}
-											</span>
-										</div>
-										<div className="flex flex-col shrink-0 items-center pb-[1px]">
-											<span className="text-[#92318D] text-sm font-bold" >
-												{"View Details"}
-											</span>
-										</div>
-									</div>
+								))}
 								</div>
-								<div className="flex justify-between items-start self-stretch p-6 mx-[1px]">
-									<div className="flex flex-col shrink-0 items-center pb-[1px]">
+
+								<div className="flex justify-between items-start self-stretch flex-col lg:flex-row gap-4 mt-4	">
+									<div className="flex flex-col shrink-0 items-center">
 										<span className="text-[#8B949E] text-sm" >
 											{"Showing 10 of 23 announcements"}
 										</span>
@@ -499,8 +325,8 @@ export default (props) => {
 							</div>
 						</div>
 					</div>
-					<Footer />
 				</div>
+				<Footer />
 			</div>
 		</div>
 	)

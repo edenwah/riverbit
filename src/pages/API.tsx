@@ -94,6 +94,7 @@ export default () => {
 									{"API Tools"}
 								</span>
 							</div>
+							{/* Description and System Status */}
 							<div className="flex flex-col lg:flex-row gap-2 justify-between items-start self-stretch">
 								<div className="flex flex-col shrink-0 items-center">
 									<span className="text-[#8B949E] text-base" >
@@ -272,8 +273,8 @@ export default () => {
 										</div>
 									</div>
 								</div>
-								<div className="w-full flex flex-col basis-2/3 bg-[#161B22] p-6 gap-4 text-left rounded-lg border border-solid border-[#30363D]">
-									<div className="flex flex-col items-center self-stretch">
+								<div className=" w-full flex flex-col basis-2/3 bg-[#161B22] p-6 gap-4 text-left rounded-lg border border-solid border-[#30363D]">
+									<div className="text-left flex flex-col items-start self-stretch">
 										<span className="text-white text-xl font-bold" >
 											{"API Key Management"}
 										</span>
