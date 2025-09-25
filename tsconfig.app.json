@@ -13,7 +13,7 @@
     "allowImportingTsExtensions": true,
     "verbatimModuleSyntax": true,
     "moduleDetection": "force",
-    "noEmit": true, 
+    "noEmit": false, // default true
     //"outDir": "./.tsbuild",  // 用一個專用資料夾存 TS build output
     "jsx": "react-jsx",
 

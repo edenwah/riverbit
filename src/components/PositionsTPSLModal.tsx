@@ -40,7 +40,7 @@ const PositionsTPSLModal = ({
   inputTPSLPercent: string; 
   onChangeInputTPSLPercent: (val: string) => void; 
   onClose: () => void; 
-  onConfirm: () => void; 
+  onConfirm?: () => void; 
 }) => {
   const {
     time: _time,
@@ -125,7 +125,7 @@ const PositionsTPSLModal = ({
           </div>
 
           {/* Confirm Button */}
-          <PrimaryButton size="large" onClick={() => alert("Pressed!")}>
+          <PrimaryButton size="large" onClick={onConfirm}>
             Confirm
           </PrimaryButton>
         </div>
