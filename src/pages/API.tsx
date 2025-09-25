@@ -86,21 +86,21 @@ export default () => {
                         />
                 )}
 				{/* Content */}
-				<div className="flex flex-col self-stretch bg-[#0D0F13] gap-2.5">
-					<div className="flex flex-col self-stretch bg-[#0D0F13] py-12 px-20 gap-8">
-						<div className="flex flex-col items-start self-stretch mx-6 gap-4">
+				<div className="flex flex-col self-stretch gap-2 mx-6">
+					<div className="flex flex-col self-stretch py-12 lg:mx-20 gap-8">
+						<div className="flex flex-col text-left items-start self-stretch gap-4">
 							<div className="flex flex-col items-center pb-[1px]">
 								<span className="text-white text-3xl font-bold" >
 									{"API Tools"}
 								</span>
 							</div>
-							<div className="flex justify-between items-center self-stretch">
+							<div className="flex flex-col lg:flex-row gap-2 justify-between items-start self-stretch">
 								<div className="flex flex-col shrink-0 items-center">
 									<span className="text-[#8B949E] text-base" >
 										{"Developer tools and API management"}
 									</span>
 								</div>
-								<div className="flex shrink-0 items-start gap-4">
+								<div className="flex max-md:flex-col shrink-0 items-start gap-2">
 									<div className="flex shrink-0 items-center pr-1 gap-[11px]">
 										<span className="text-[#8B949E] text-sm" >
 											{"System Status:"}
@@ -109,7 +109,7 @@ export default () => {
 											{"Normal"}
 										</span>
 									</div>
-									<div className="flex shrink-0 items-center pr-[3px] gap-[11px]">
+									<div className="flex shrink-0 items-center gap-2">
 										<span className="text-[#8B949E] text-sm" >
 											{"Last Updated:"}
 										</span>
@@ -120,57 +120,51 @@ export default () => {
 								</div>
 							</div>
 						</div>
-						<div className="flex flex-col self-stretch mx-6 gap-3">
-							<div className="flex flex-col items-start self-stretch bg-[#161B22] py-[25px] gap-[17px] rounded-lg border border-solid border-[#30363D]">
-								<span className="text-white text-lg font-bold mx-[25px]" >
+						<div className="flex flex-col self-stretch gap-3">
+							<div className="flex flex-col items-start self-stretch bg-[#161B22] p-6 gap-4 rounded-lg border border-solid border-[#30363D]">
+								<span className="text-white text-lg font-bold" >
 									{"Actions"}
 								</span>
-								<div className="flex items-start self-stretch mx-[25px]">
-									<div className="flex flex-1 flex-col bg-[#92318D] py-[15px] mr-4 gap-2.5 rounded-lg">
+								<div className="flex flex-col lg:flex-row gap-4 w-full">
+									<div className="w-full lg:w-1/4 flex flex-col p-8 gap-4 rounded-lg" style={{ backgroundColor: "#92318D" }}>
 										<img
-											src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/n9sykxhy_expires_30_days.png"} 
-											className="self-stretch h-7 mx-4 rounded-lg object-fill"
+										src="https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/n9sykxhy_expires_30_days.png"
+										className="h-7 rounded-lg object-fill mx-auto"
 										/>
-										<span className="text-white text-sm font-bold text-center mx-[91px]" >
-											{"Create API Key"}
-										</span>
+										<span className="text-white text-sm font-bold text-center">Create API Key</span>
 									</div>
-									<div className="flex flex-1 flex-col bg-[#0D1117] py-[15px] mr-[17px] gap-2.5 rounded-lg border border-solid border-[#30363D]">
+
+									<div className="w-full lg:w-1/4 flex flex-col p-8 gap-4 rounded-lg border border-[#30363D]" style={{ backgroundColor: "#0D1117" }}>
 										<img
-											src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/s5g8qhzh_expires_30_days.png"} 
-											className="self-stretch h-7 mx-[17px] rounded-lg object-fill"
+										src="https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/s5g8qhzh_expires_30_days.png"
+										className="h-7 rounded-lg object-fill mx-auto"
 										/>
-										<span className="text-white text-sm font-bold text-center mx-[59px]" >
-											{"View API Documentation"}
-										</span>
+										<span className="text-white text-sm font-bold text-center">View API Documentation</span>
 									</div>
-									<div className="flex flex-1 flex-col bg-[#0D1117] py-[15px] mr-4 gap-2.5 rounded-lg border border-solid border-[#30363D]">
+
+									<div className="w-full lg:w-1/4 flex flex-col p-8 gap-4 rounded-lg border border-[#30363D]" style={{ backgroundColor: "#0D1117" }}>
 										<img
-											src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/ayoovr7s_expires_30_days.png"} 
-											className="self-stretch h-7 mx-[17px] rounded-lg object-fill"
+										src="https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/ayoovr7s_expires_30_days.png"
+										className="h-7 rounded-lg object-fill mx-auto"
 										/>
-										<span className="text-white text-sm font-bold text-center mx-[92px]" >
-											{"Download SDK"}
-										</span>
+										<span className="text-white text-sm font-bold text-center">Download SDK</span>
 									</div>
-									<button className="flex flex-1 flex-col items-center bg-[#0D1117] text-left py-[15px] px-[17px] gap-2.5 rounded-lg border border-solid border-[#30363D]"
-										onClick={()=>alert("Pressed!")}>
+
+									<div className="w-full lg:w-1/4 flex flex-col p-8 gap-4 rounded-lg border border-[#30363D]" style={{ backgroundColor: "#0D1117" }}>
 										<img
-											src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/6m5u7q1n_expires_30_days.png"} 
-											className="self-stretch h-7 rounded-lg object-fill"
+										src="https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/6m5u7q1n_expires_30_days.png"
+										className="h-7 rounded-lg object-fill mx-auto"
 										/>
-										<span className="text-white text-sm font-bold" >
-											{"Test Tools"}
-										</span>
-									</button>
+										<span className="text-white text-sm font-bold text-center">Test Tools</span>
+									</div>
 								</div>
 							</div>
-							<div className="flex items-start self-stretch gap-3">
-								<div className="flex flex-col shrink-0 items-center gap-2.5">
-									<div className="flex flex-col items-start bg-[#161B22] py-6 gap-4 rounded-lg border border-solid border-[#30363D]">
-										<button className="flex items-start bg-[#0D1117] text-left py-3 px-4 mx-[26px] rounded-md border border-solid border-[#30363D]"
+							<div className="flex items-start self-stretch gap-3 xl:flex-row flex-col">
+								<div className="flex basis-1/3 flex-col shrink-0 items-center gap-4 w-full">
+									<div className="w-full flex flex-col items-start bg-[#161B22] p-6 gap-4 rounded-lg border border-solid border-[#30363D]">
+										<button className="w-full justify-between flex items-start bg-[#0D1117] text-left py-3 px-4 rounded-md border border-solid border-[#30363D]"
 											onClick={()=>alert("Pressed!")}>
-											<span className="text-[#ADAEBC] text-base mr-[157px]" >
+											<span className="text-[#ADAEBC] text-base " >
 												{"Search..."}
 											</span>
 											<img
@@ -178,10 +172,10 @@ export default () => {
 												className="w-4 h-6 rounded-md object-fill"
 											/>
 										</button>
-										<span className="text-white text-lg font-bold ml-[26px]" >
+										<span className="text-white text-lg font-bold " >
 											{"API Key Management"}
 										</span>
-										<div className="flex flex-col items-start ml-[26px] gap-3">
+										<div className="flex flex-col items-start gap-3">
 											<span className="text-[#92318D] text-sm font-bold" >
 												{"All"}
 											</span>
@@ -196,21 +190,21 @@ export default () => {
 											</span>
 										</div>
 									</div>
-									<div className="flex flex-col items-start bg-[#161B22] py-[26px] gap-4 rounded-lg border border-solid border-[#30363D]">
-										<span className="text-white text-lg font-bold ml-[26px]" >
+									<div className="w-full flex flex-col items-start bg-[#161B22] p-6 gap-4 rounded-lg border border-solid border-[#30363D]">
+										<span className="text-white text-lg font-bold " >
 											{"Usage Statistics"}
 										</span>
-										<div className="flex flex-col items-start mx-[26px] gap-2">
-											<div className="flex items-center pr-[3px]">
-												<span className="text-[#8B949E] text-sm mr-[125px]" >
+										<div className="flex flex-col items-start gap-2 w-full">
+											<div className="flex items-center w-full justify-between">
+												<span className="text-[#8B949E] text-sm " >
 													{"Requests Today:"}
 												</span>
 												<span className="text-white text-sm" >
 													{"1,250"}
 												</span>
 											</div>
-											<div className="flex items-center pr-[3px]">
-												<span className="text-[#8B949E] text-sm mr-20" >
+											<div className="flex items-center w-full justify-between">
+												<span className="text-[#8B949E] text-sm " >
 													{"Requests This Month:"}
 												</span>
 												<span className="text-white text-sm" >
@@ -219,14 +213,15 @@ export default () => {
 											</div>
 										</div>
 									</div>
-									<div className="flex flex-col items-start bg-[#161B22] py-[25px] gap-4 rounded-lg border border-solid border-[#30363D]">
-										<div className="flex flex-col items-center pb-[1px] ml-[25px]">
+									<div className="w-full flex flex-col items-start bg-[#161B22] p-6 gap-4 rounded-lg border border-solid border-[#30363D]">
+										<div className="flex flex-col items-center ">
 											<span className="text-white text-lg font-bold" >
 												{"Contact Us"}
 											</span>
 										</div>
-										<div className="flex flex-col items-start mx-[25px] gap-3">
-											<div className="flex items-center bg-[#0D1117] p-3 gap-3 rounded-lg">
+										{/* Social Media Inputs */}
+										<div className="flex flex-col items-start gap-3 w-full">
+											<div className="flex items-center bg-[#0D1117] p-3 gap-3 rounded-lg w-full">
 												<img
 													src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/mmuf8gre_expires_30_days.png"} 
 													className="w-6 h-6 rounded-lg object-fill"
@@ -238,7 +233,7 @@ export default () => {
 													className="text-white bg-transparent text-sm w-12 py-[3px] border-0"
 												/>
 											</div>
-											<div className="flex items-center bg-[#0D1117] p-3 gap-3 rounded-lg">
+											<div className="flex items-center bg-[#0D1117] p-3 gap-3 rounded-lg w-full">
 												<img
 													src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/yqwbptrv_expires_30_days.png"} 
 													className="w-6 h-6 rounded-lg object-fill"
@@ -250,7 +245,7 @@ export default () => {
 													className="text-white bg-transparent text-sm w-2 py-[3px] border-0"
 												/>
 											</div>
-											<div className="flex items-center bg-[#0D1117] p-3 gap-3 rounded-lg">
+											<div className="flex items-center bg-[#0D1117] p-3 gap-3 rounded-lg w-full">
 												<img
 													src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/je4r14de_expires_30_days.png"} 
 													className="w-6 h-6 rounded-lg object-fill"
@@ -262,7 +257,7 @@ export default () => {
 													className="text-white bg-transparent text-sm w-[59px] py-[3px] border-0"
 												/>
 											</div>
-											<div className="flex items-center bg-[#0D1117] p-3 gap-3 rounded-lg">
+											<div className="flex items-center bg-[#0D1117] p-3 gap-3 rounded-lg w-full">
 												<img
 													src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/bj7y10zi_expires_30_days.png"} 
 													className="w-6 h-6 rounded-lg object-fill"
@@ -277,213 +272,112 @@ export default () => {
 										</div>
 									</div>
 								</div>
-								<div className="flex-1 bg-[#161B22] py-0.5 rounded-lg border border-solid border-[#30363D]">
-									<div className="flex flex-col items-center self-stretch py-[26px] pl-6 mx-0.5">
+								<div className="w-full flex flex-col basis-2/3 bg-[#161B22] p-6 gap-4 text-left rounded-lg border border-solid border-[#30363D]">
+									<div className="flex flex-col items-center self-stretch">
 										<span className="text-white text-xl font-bold" >
 											{"API Key Management"}
 										</span>
 									</div>
-									<div className="self-stretch mx-0.5">
-										<div className="flex items-start self-stretch p-4 mx-6">
-											<span className="text-[#8B949E] text-xs font-bold mb-[1px] mr-[88px]" >
-												{"Key ID"}
-											</span>
-											<span className="text-[#8B949E] text-xs font-bold mb-[1px] mr-[90px]" >
-												{"Name"}
-											</span>
-											<span className="text-[#8B949E] text-xs font-bold mb-[1px]" >
-												{"Permissions"}
-											</span>
-											<span className="text-[#8B949E] text-xs font-bold mb-[1px] mr-[85px]" >
-												{"Status"}
-											</span>
-											<span className="text-[#8B949E] text-xs font-bold mb-[1px] mr-[57px]" >
-												{"Created On"}
-											</span>
-											<span className="text-[#8B949E] text-xs font-bold mb-[1px] mr-[66px]" >
-												{"Last Used"}
-											</span>
-										</div>
-										<div className="flex items-center self-stretch p-4 mx-6">
-											<span className="text-white text-sm my-0.5 mr-[79px]" >
-												{"RB_001"}
-											</span>
-											<span className="text-white text-sm my-0.5 mr-[47px]" >
-												{"Trading Bot"}
-											</span>
-											<span className="text-[#8B949E] text-sm mb-[1px]" >
-												{"Read, Trade, Withdraw"}
-											</span>
-											<button className="flex flex-col shrink-0 items-start bg-[#2DA44E] text-left py-1 px-2 mb-[3px] mr-[70px] rounded border-0"
-												onClick={()=>alert("Pressed!")}>
-												<span className="text-white text-xs font-bold" >
-													{"Active"}
-												</span>
-											</button>
-											<span className="text-[#8B949E] text-sm my-0.5 mr-[45px]" >
-												{"2025-08-15"}
-											</span>
-											<div className="flex flex-col shrink-0 items-center py-0.5">
-												<span className="text-[#8B949E] text-sm" >
-													{"2025-09-06 16:23"}
-												</span>
-											</div>
-										</div>
-										<div className="flex items-center self-stretch p-4 mx-6">
-											<span className="text-white text-sm my-0.5 mr-[76px]" >
-												{"RB_002"}
-											</span>
-											<span className="text-white text-sm my-0.5 mr-3.5" >
-												{"Portfolio Tracker"}
-											</span>
-											<span className="text-[#8B949E] text-sm my-0.5" >
-												{"Read"}
-											</span>
-											<button className="flex flex-col shrink-0 items-start bg-[#2DA44E] text-left py-1 px-2 mb-[3px] mr-[70px] rounded border-0"
-												onClick={()=>alert("Pressed!")}>
-												<span className="text-white text-xs font-bold" >
-													{"Active"}
-												</span>
-											</button>
-											<span className="text-[#8B949E] text-sm my-0.5 mr-[45px]" >
-												{"2025-08-10"}
-											</span>
-											<div className="flex flex-col shrink-0 items-center py-0.5">
-												<span className="text-[#8B949E] text-sm" >
-													{"2025-09-06 15:45"}
-												</span>
-											</div>
-										</div>
-										<div className="flex items-center self-stretch p-4 mx-6">
-											<span className="text-white text-sm my-0.5 mr-[76px]" >
-												{"RB_003"}
-											</span>
-											<div className="flex flex-col shrink-0 items-center py-0.5">
-												<span className="text-white text-sm" >
-													{"Risk Management"}
-												</span>
-											</div>
-											<span className="text-[#8B949E] text-sm my-0.5" >
-												{"Read, Trade"}
-											</span>
-											<button className="flex flex-col shrink-0 items-start bg-[#2DA44E] text-left py-1 px-2 mb-[3px] mr-[70px] rounded border-0"
-												onClick={()=>alert("Pressed!")}>
-												<span className="text-white text-xs font-bold" >
-													{"Active"}
-												</span>
-											</button>
-											<span className="text-[#8B949E] text-sm my-0.5 mr-[45px]" >
-												{"2025-07-22"}
-											</span>
-											<div className="flex flex-col shrink-0 items-center py-0.5">
-												<span className="text-[#8B949E] text-sm" >
-													{"2025-09-06 14:20"}
-												</span>
-											</div>
-										</div>
-										<div className="flex items-center self-stretch p-4 mx-6">
-											<span className="text-white text-sm my-0.5 mr-[75px]" >
-												{"RB_004"}
-											</span>
-											<span className="text-white text-sm my-0.5 mr-[35px]" >
-												{"Data Analysis"}
-											</span>
-											<span className="text-[#8B949E] text-sm my-0.5" >
-												{"Read"}
-											</span>
-											<button className="flex flex-col shrink-0 items-start bg-[#30363D] text-left py-1 px-2 mb-[3px] mr-[63px] rounded border-0"
-												onClick={()=>alert("Pressed!")}>
-												<span className="text-[#8B949E] text-xs font-bold" >
-													{"Paused"}
-												</span>
-											</button>
-											<span className="text-[#8B949E] text-sm my-0.5 mr-11" >
-												{"2025-07-05"}
-											</span>
-											<div className="flex flex-col shrink-0 items-center py-0.5">
-												<span className="text-[#8B949E] text-sm" >
-													{"2025-08-28 11:30"}
-												</span>
-											</div>
-										</div>
-										<div className="flex items-center self-stretch p-4 mx-6">
-											<span className="text-white text-sm my-0.5 mr-[76px]" >
-												{"RB_005"}
-											</span>
-											<span className="text-white text-sm my-0.5 mr-[35px]" >
-												{"Arbitrage Bot"}
-											</span>
-											<span className="text-[#8B949E] text-sm my-0.5" >
-												{"Read, Trade"}
-											</span>
-											<button className="flex flex-col shrink-0 items-start bg-[#2DA44E] text-left py-1 px-2 mb-[3px] mr-[70px] rounded border-0"
-												onClick={()=>alert("Pressed!")}>
-												<span className="text-white text-xs font-bold" >
-													{"Active"}
-												</span>
-											</button>
-											<span className="text-[#8B949E] text-sm my-0.5 mr-[45px]" >
-												{"2025-06-18"}
-											</span>
-											<div className="flex flex-col shrink-0 items-center py-0.5">
-												<span className="text-[#8B949E] text-sm" >
-													{"2025-09-06 16:18"}
-												</span>
-											</div>
-										</div>
-										<div className="flex items-center self-stretch p-4 mx-6">
-											<span className="text-white text-sm my-0.5 mr-[76px]" >
-												{"RB_006"}
-											</span>
-											<span className="text-white text-sm my-0.5 mr-[33px]" >
-												{"Market Maker"}
-											</span>
-											<span className="text-[#8B949E] text-sm my-0.5" >
-												{"Read, Trade"}
-											</span>
-											<button className="flex flex-col shrink-0 items-start bg-[#2DA44E] text-left py-1 px-2 mb-[3px] mr-[70px] rounded border-0"
-												onClick={()=>alert("Pressed!")}>
-												<span className="text-white text-xs font-bold" >
-													{"Active"}
-												</span>
-											</button>
-											<span className="text-[#8B949E] text-sm my-0.5 mr-[46px]" >
-												{"2025-06-01"}
-											</span>
-											<div className="flex flex-col shrink-0 items-center py-0.5">
-												<span className="text-[#8B949E] text-sm" >
-													{"2025-09-06 16:25"}
-												</span>
-											</div>
-										</div>
-										<div className="flex items-center self-stretch p-4 mx-6">
-											<span className="text-white text-sm my-0.5 mr-[77px]" >
-												{"RB_007"}
-											</span>
-											<div className="flex flex-1 flex-col items-start">
-												<span className="text-[#8B949E] text-sm my-0.5 ml-[122px]" >
-													{"Read, Trade"}
-												</span>
-												<span className="text-white text-sm" >
-													{"Order Management"}
-												</span>
-											</div>
-											<button className="flex flex-col shrink-0 items-start bg-[#30363D] text-left py-1 px-2 mb-[3px] mr-14 rounded border-0"
-												onClick={()=>alert("Pressed!")}>
-												<span className="text-[#8B949E] text-xs font-bold" >
-													{"Disabled"}
-												</span>
-											</button>
-											<span className="text-[#8B949E] text-sm my-0.5 mr-[45px]" >
-												{"2025-05-10"}
-											</span>
-											<div className="flex flex-col shrink-0 items-center py-0.5">
-												<span className="text-[#8B949E] text-sm" >
-													{"2025-08-15 09:45"}
-												</span>
-											</div>
-										</div>
+									<div className="overflow-x-auto w-full">
+										<table className="min-w-full divide-y divide-zinc-700">
+											<thead >
+											<tr>
+												{["Key ID", "Name", "Permissions", "Status", "Created On", "Last Used"].map((header) => (
+												<th
+													key={header}
+													className="px-4 py-2 text-left text-sm font-bold text-[#8B949E]"
+												>
+													{header}
+												</th>
+												))}
+											</tr>
+											</thead>
+											<tbody className="divide-y divide-zinc-700">
+											{[
+												{
+												key: "RB_001",
+												name: "Trading Bot",
+												permissions: "Read, Trade, Withdraw",
+												status: "Active",
+												statusColor: "bg-[#2DA44E]",
+												created: "2025-08-15",
+												lastUsed: "2025-09-06 16:23",
+												},
+												{
+												key: "RB_002",
+												name: "Portfolio Tracker",
+												permissions: "Read",
+												status: "Active",
+												statusColor: "bg-[#2DA44E]",
+												created: "2025-08-10",
+												lastUsed: "2025-09-06 15:45",
+												},
+												{
+												key: "RB_003",
+												name: "Risk Management",
+												permissions: "Read, Trade",
+												status: "Active",
+												statusColor: "bg-[#2DA44E]",
+												created: "2025-07-22",
+												lastUsed: "2025-09-06 14:20",
+												},
+												{
+												key: "RB_004",
+												name: "Data Analysis",
+												permissions: "Read",
+												status: "Paused",
+												statusColor: "bg-[#30363D]",
+												created: "2025-07-05",
+												lastUsed: "2025-08-28 11:30",
+												},
+												{
+												key: "RB_005",
+												name: "Arbitrage Bot",
+												permissions: "Read, Trade",
+												status: "Active",
+												statusColor: "bg-[#2DA44E]",
+												created: "2025-06-18",
+												lastUsed: "2025-09-06 16:18",
+												},
+												{
+												key: "RB_006",
+												name: "Market Maker",
+												permissions: "Read, Trade",
+												status: "Active",
+												statusColor: "bg-[#2DA44E]",
+												created: "2025-06-01",
+												lastUsed: "2025-09-06 16:25",
+												},
+												{
+												key: "RB_007",
+												name: "Order Management",
+												permissions: "Read, Trade",
+												status: "Disabled",
+												statusColor: "bg-[#30363D]",
+												created: "2025-05-10",
+												lastUsed: "2025-08-15 09:45",
+												},
+											].map((item) => (
+												<tr key={item.key}>
+												<td className="px-4 py-2 text-white text-sm">{item.key}</td>
+												<td className="px-4 py-2 text-white text-sm">{item.name}</td>
+												<td className="px-4 py-2 text-[#8B949E] text-sm">{item.permissions}</td>
+												<td className="px-4 py-2">
+													<button
+													className={`px-2 py-1 rounded text-white text-sm font-bold ${item.statusColor}`}
+													onClick={() => alert("Pressed!")}
+													>
+													{item.status}
+													</button>
+												</td>
+												<td className="px-4 py-2 text-[#8B949E] text-sm">{item.created}</td>
+												<td className="px-4 py-2 text-[#8B949E] text-sm">{item.lastUsed}</td>
+												</tr>
+											))}
+											</tbody>
+										</table>
 									</div>
+
 									<div className="flex flex-col items-center self-stretch pt-6 pb-[25px] pl-6 mx-0.5">
 										<span className="text-[#8B949E] text-sm" >
 											{"Showing 7 of 7 API keys"}
@@ -493,8 +387,8 @@ export default () => {
 							</div>
 						</div>
 					</div>
-					<Footer />
 				</div>
+				<Footer />
 			</div>
 		</div>
 	)
