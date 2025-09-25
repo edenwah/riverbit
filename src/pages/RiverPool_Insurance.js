@@ -1,4 +1,3 @@
-import React from "react";
 export default (props) => {
 	return (
 		<div className="flex flex-col bg-white">

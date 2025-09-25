@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import {useState} from "react";
 export default (props) => {
 	const [input1, onChangeInput1] = useState('');
 	const [input2, onChangeInput2] = useState('');

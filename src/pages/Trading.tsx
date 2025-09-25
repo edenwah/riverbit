@@ -4,7 +4,6 @@ import DesktopNav from "../components/DesktopNav";
 import DesktopNavRight from "../components/DesktopNavRight";
 import MobileMenu from "../components/MobileMenu";
 import PrimaryButton from "../components/Button/PrimaryButton";
-import { SecondaryButton } from "../components/Button/SecondaryButton";
 import Tabs from "../components/Tabs";
 import PositionsTPSLModal from "../components/PositionsTPSLModal";
 import ToggleButton from "../components/ToggleButton";

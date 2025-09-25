@@ -1,7 +1,7 @@
 import React from "react";
 
 interface SecondaryButtonProps {
-  onClick: () => void;
+  onClick?: () => void;
   children: React.ReactNode;
   size?: "small" | "medium" | "large"; // 控制大小
   icon?: React.ReactNode; // optional icon
