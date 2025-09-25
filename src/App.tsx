@@ -1,6 +1,6 @@
 import './App.css'
 
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import Announcement from "./pages/Announcement";
 import API from "./pages/API";
 import Assets from "./pages/Assets";
@@ -9,7 +9,6 @@ import Trading from "./pages/Trading";
 import RiverPool from "./pages/RiverPool";
 import ReferralFoundationLeader from "./pages/Referral_FoundationLeader";
 import ReferralCandidateUser from "./pages/Referral_CandidateUser";
-
 
 function App() {
   return (
