@@ -255,7 +255,7 @@ export default () => {
 																		const value = Number(e.target.value.replace(/,/g, ""));
 																		onChangeInput1(isNaN(value) ? "" : value.toString());
 																	}}
-																	className="text-white bg-transparent text-base w-40 py-[3px] border-0"
+																	className="w-full text-white bg-transparent text-base py-[3px] border-0"
 																/>
 																<div className="flex shrink-0 items-center bg-zinc-700 py-[7px] pl-2 pr-[7px] gap-1.5 rounded">
 																	<span className="text-zinc-400 text-sm font-bold">USDC (Arbitrum)</span>
@@ -658,7 +658,7 @@ export default () => {
 																		const value = Number(e.target.value.replace(/,/g, ""));
 																		onChangeInput1(isNaN(value) ? "" : value.toString());
 																	}}
-																	className="text-white bg-transparent text-base w-40 py-[3px] border-0"
+																	className="w-full text-white bg-transparent text-base py-[3px] border-0"
 																/>
 																<div className="flex shrink-0 items-center bg-zinc-700 py-[7px] pl-2 pr-[7px] gap-1.5 rounded">
 																	<span className="text-zinc-400 text-sm font-bold">USDC (Arbitrum)</span>
