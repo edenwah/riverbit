@@ -52,7 +52,7 @@ export default () => {
 	}, [showMoreDropdown, showWalletDropdown, showLangDropdown]);
 	
 	const [input1, onChangeInput1] = useState('');
-	const [role, setRole] = useState("Foundation Team Leader");
+	const [role, setRole] = useState("Candidate User");
 	const [referralTab, setReferralTab] = useState("Direct Referrals");
 	return (
 		<div className="flex flex-col bg-black min-h-screen">
