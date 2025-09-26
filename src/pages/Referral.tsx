@@ -11,6 +11,7 @@ import { SecondaryButton } from "../components/Button/SecondaryButton";
 import PrimaryButton from "../components/Button/PrimaryButton";
 import StatusTag from "../components/StatusTag";
 import Tips from "../components/Tips";
+import AdjustCommissionRateModal from "../components/AdjustCommissionRateModal";
 export default () => {
 	const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 	const [language, setLanguage] = useState("EN");
@@ -54,6 +55,7 @@ export default () => {
 	const [input1, onChangeInput1] = useState('');
 	const [role, setRole] = useState("Candidate User");
 	const [referralTab, setReferralTab] = useState("Direct Referrals");
+	const [showAdjustCommissionRateModal, setShowAdjustCommissionRateModal] = useState(false); // 控制 modal 顯示
 	return (
 		<div className="flex flex-col bg-black min-h-screen">
 			<div className="self-stretch">
@@ -515,8 +517,8 @@ export default () => {
 													<td className="px-4 py-3 text-white">{row.rate}</td>
 													<td className="px-4 py-3 text-[#2DA44E] font-bold">{row.earnings}</td>
 													<td className="px-4 py-3 flex gap-2 text-nowrap">
-														<PrimaryButton size="small" onClick={() => alert("Set Rates pressed")}>
-														Set Rates
+														<PrimaryButton size="small" onClick={() => setShowAdjustCommissionRateModal(true)}>
+														Set Rate
 														</PrimaryButton>
 														<SecondaryButton size="small" onClick={() => alert("Set Sub-acc pressed")}>
 														Set Sub-acc
@@ -553,8 +555,8 @@ export default () => {
 														<td className="px-4 py-3 text-white">{row.rate}</td>
 														<td className="px-4 py-3 text-[#2DA44E] font-bold">{row.earnings}</td>
 														<td className="px-4 py-3 flex gap-2 text-nowrap">
-														<PrimaryButton size="small" onClick={() => alert("Adjust pressed")}>
-															Adjust
+														<PrimaryButton size="small"  onClick={() => setShowAdjustCommissionRateModal(true)}>
+															Set Rate
 														</PrimaryButton>
 														</td>
 													</tr>
@@ -1083,8 +1085,8 @@ export default () => {
 											</thead>
 											<tbody>
 											{[
-												{ address: "0x123…456", volume: "$125,000", rate: "30%", earnings: "Net: 5.0%", action: "Adjust Rate" },
-												{ address: "0x789…abc", volume: "$89,000", rate: "25%", earnings: "Net: 10.0%", action: "Adjust Rate" },
+												{ address: "0x123…456", volume: "$125,000", rate: "30%", earnings: "Net: 5.0%", action: "Set Rate" },
+												{ address: "0x789…abc", volume: "$89,000", rate: "25%", earnings: "Net: 10.0%", action: "Set Rate" },
 											].map((row, i) => (
 												<tr key={i} className="border-b border-[#30363D]">
 												<td className="px-4 py-3 text-white">{row.address}</td>
@@ -1092,7 +1094,7 @@ export default () => {
 												<td className="px-4 py-3 text-white">{row.rate}</td>
 												<td className="px-4 py-3 text-[#2DA44E] font-bold">{row.earnings}</td>
 												<td className="px-4 py-3 flex gap-2 text-nowrap">
-													<PrimaryButton size="small" onClick={() => alert(row.action)}>
+													<PrimaryButton size="small"  onClick={() => setShowAdjustCommissionRateModal(true)}>
 													{row.action}
 													</PrimaryButton>
 												</td>
@@ -1449,7 +1451,7 @@ export default () => {
 												<td className="px-4 py-3 text-white">{row.rate}</td>
 												<td className="px-4 py-3 text-[#2DA44E] font-bold">{row.earnings}</td>
 												<td className="px-4 py-3 flex gap-2 text-nowrap">
-													<PrimaryButton size="small" onClick={() => alert(row.action)}>
+													<PrimaryButton size="small" onClick={() => setShowAdjustCommissionRateModal(true)}>
 													{row.action}
 													</PrimaryButton>
 												</td>
@@ -1780,6 +1782,20 @@ export default () => {
 						{/* End of Tab Content */}
 					</div>
 				</div>
+				{showAdjustCommissionRateModal && (
+					<div className="w-full fixed inset-0 z-50 flex items-center justify-center bg-black/60">
+						<div
+						className="relative w-full h-full md:w-[500px] md:h-auto md:rounded-xl flex flex-col justify-center"
+						style={{ maxWidth: "100vw", maxHeight: "100vh" }}
+						>
+						{/* Modal Content */}
+						<AdjustCommissionRateModal 
+							commissionRate={30}
+							userAddress="0x555…666"
+							onClose={() => setShowAdjustCommissionRateModal(false)} />
+						</div>
+					</div>
+				)}
 				<Footer />
 			</div>
 		</div>
