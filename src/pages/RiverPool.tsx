@@ -4,7 +4,7 @@ import DesktopNav from "../components/DesktopNav";
 import DesktopNavRight from "../components/DesktopNavRight";
 import PrimaryButton from "../components/Button/PrimaryButton";
 import { SecondaryButton } from "../components/Button/SecondaryButton";
-import LeverageSlider from "../components/LeverageSlider";
+import PercentSlider from "../components/PercentSlider";
 import Tabs from "../components/Tabs";
 import Footer from "../components/Footer";
 import Tips from "../components/Tips";
@@ -15,11 +15,18 @@ import StatusTag from "../components/StatusTag";
 
 export default () => {
 	const [input1, onChangeInput1] = useState('');
-	const [leverage, setLeverage] = useState(10);
 	const [riverPoolTab, setRiverPoolTab] = useState("Foundation");
 	const [depositWithdrawTab, setdepositWithdrawTab] = useState("Deposit");
 	const [recordsTab, setRecordsTab] = useState("Records");
 	const [timeRange, setTimeRange] = React.useState("All Time"); 
+
+	// Assume a total amount for percent calculation
+	const AMOUNT_TOTAL = 1000;
+
+	// Calculate percent from input1 (amount)
+	const percentValue = input1
+		? Math.max(0, Math.min(100, Math.round((Number(input1) / AMOUNT_TOTAL) * 100)))
+		: 0;
 
 	const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 	const [language, setLanguage] = useState("EN");
@@ -232,29 +239,38 @@ export default () => {
 															{"$10,000"}
 														</span>
 													</div>
+													{/* 價格輸入框 */}
 													<div className="flex flex-col items-start gap-2 w-full">
 														<div className="flex flex-col items-center pb-[1px]">
 															<span className="text-[#9D9DAF] text-sm" >
 																{"Amount"}
 															</span>
 														</div>
-														<div className="w-full flex max-md:flex-col max-md:items-end items-center justify-between bg-[#0D1117] py-4 px-4 rounded-md border border-solid border-[#30363D]">
-															<input
-																placeholder={"5,000"}
-																value={input1}
-																onChange={(event)=>onChangeInput1(event.target.value)}
-																className="text-white bg-transparent text-base py-2 border-0 w-full"
-															/>
-															<div className="flex items-start shrink-0 bg-[#30363D] py-[7px] px-2 gap-4 rounded">
-																<span className="text-[#8B949E] text-xs font-bold w-full" >
-																	{"USDC (Arbitrum)"}
-																</span>
-																<img
-																	src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/l0l6tfkv_expires_30_days.png"} 
-																	className="w-3 h-[15px] rounded object-fill"
+														{/* 金額輸入框與貨幣標籤 */}
+														<div className="flex justify-between bg-zinc-950 py-[9px] px-3 rounded-sm border border-solid border-[#30363D] w-full ">
+																<input
+																	placeholder="0"
+																	value={input1}
+																	onChange={(e) => {
+																		const value = Number(e.target.value.replace(/,/g, ""));
+																		onChangeInput1(isNaN(value) ? "" : value.toString());
+																	}}
+																	className="text-white bg-transparent text-base w-40 py-[3px] border-0"
 																/>
+																<div className="flex shrink-0 items-center bg-zinc-700 py-[7px] pl-2 pr-[7px] gap-1.5 rounded">
+																	<span className="text-zinc-400 text-sm font-bold">USDC (Arbitrum)</span>
+																	<img
+																		src="https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/bvauf8h6_expires_30_days.png"
+																		className="w-3 h-[15px] rounded-sm object-fill"
+																	/>
+																</div>
 															</div>
-														</div>
+																													{/* 滑桿與快捷百分比按鈕 */}
+																													<PercentSlider
+																value={percentValue}
+																maxAmount={AMOUNT_TOTAL}
+																onChangeAmount={onChangeInput1}
+																/>
 													</div>
 
 													<Tips
@@ -626,29 +642,38 @@ export default () => {
 															{"$10,000"}
 														</span>
 													</div>
+													{/* 價格輸入框 */}
 													<div className="flex flex-col items-start gap-2 w-full">
 														<div className="flex flex-col items-center pb-[1px]">
 															<span className="text-[#9D9DAF] text-sm" >
 																{"Amount"}
 															</span>
 														</div>
-														<div className="w-full flex max-md:flex-col max-md:items-end items-center justify-between bg-[#0D1117] py-4 px-4 rounded-md border border-solid border-[#30363D]">
-															<input
-																placeholder={"5,000"}
-																value={input1}
-																onChange={(event)=>onChangeInput1(event.target.value)}
-																className="text-white bg-transparent text-base py-2 border-0 w-full"
-															/>
-															<div className="flex items-start shrink-0 bg-[#30363D] py-[7px] px-2 gap-4 rounded">
-																<span className="text-[#8B949E] text-xs font-bold w-full" >
-																	{"USDC (Arbitrum)"}
-																</span>
-																<img
-																	src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/l0l6tfkv_expires_30_days.png"} 
-																	className="w-3 h-[15px] rounded object-fill"
+														{/* 金額輸入框與貨幣標籤 */}
+														<div className="flex justify-between bg-zinc-950 py-[9px] px-3 rounded-sm border border-solid border-[#30363D] w-full ">
+																<input
+																	placeholder="0"
+																	value={input1}
+																	onChange={(e) => {
+																		const value = Number(e.target.value.replace(/,/g, ""));
+																		onChangeInput1(isNaN(value) ? "" : value.toString());
+																	}}
+																	className="text-white bg-transparent text-base w-40 py-[3px] border-0"
 																/>
+																<div className="flex shrink-0 items-center bg-zinc-700 py-[7px] pl-2 pr-[7px] gap-1.5 rounded">
+																	<span className="text-zinc-400 text-sm font-bold">USDC (Arbitrum)</span>
+																	<img
+																		src="https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/bvauf8h6_expires_30_days.png"
+																		className="w-3 h-[15px] rounded-sm object-fill"
+																	/>
+																</div>
 															</div>
-														</div>
+																													{/* 滑桿與快捷百分比按鈕 */}
+																													<PercentSlider
+																value={percentValue}
+																maxAmount={AMOUNT_TOTAL}
+																onChangeAmount={onChangeInput1}
+																/>
 													</div>
 
 
