@@ -13,11 +13,11 @@ const Tips: React.FC<TipsProps> = ({ title, iconUrl, tips }) => {
     <div className="flex flex-col items-start bg-zinc-950 py-3 rounded-lg w-full">
       {/* title + icon */}
       {(title || (iconUrl && !onlyIcon)) && (
-        <div className="flex items-center mb-2 ml-3 gap-2">
+        <div className="flex items-start mb-2 ml-3 gap-2">
           {iconUrl && (
             <img
               src={iconUrl}
-              className="w-3 h-6 object-fill"
+              className="w-3 h-6 object-fill items-start top-0"
               alt="icon"
             />
           )}
@@ -29,7 +29,7 @@ const Tips: React.FC<TipsProps> = ({ title, iconUrl, tips }) => {
       {tips.map((tip, i) => (
         <div
           key={i}
-          className={`flex items-center mx-3 text-sm text-left ${
+          className={`flex items-start mx-3 text-sm text-left ${
             onlyIcon ? "gap-2" : ""
           }`}
         >
