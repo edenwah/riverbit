@@ -8,7 +8,7 @@ const navItems = [
     { label: "Trading", to: "/trading" },
     { label: "RiverPool", to: "/riverpool" },
     { label: "Earn", to: "/earn" },
-    { label: "Referral", to: "/referral/foundation" },
+    { label: "Referral", to: "/referral" },
     { label: "Assets", to: "/assets" },
 ];
 const moreItems = [
