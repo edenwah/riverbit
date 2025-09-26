@@ -7,8 +7,7 @@ import Assets from "./pages/Assets";
 import Earn from "./pages/Earn";
 import Trading from "./pages/Trading";
 import RiverPool from "./pages/RiverPool";
-import ReferralFoundationLeader from "./pages/Referral_FoundationLeader";
-import ReferralCandidateUser from "./pages/Referral_CandidateUser";
+import Referral from "./pages/Referral";
 
 function App() {
   return (
@@ -21,8 +20,7 @@ function App() {
         <Route path="/earn" element={<Earn />} />
         <Route path="/trading" element={<Trading />} />
         <Route path="/riverpool" element={<RiverPool />} />
-        <Route path="/referral/candidate" element={<ReferralCandidateUser />} />
-        <Route path="/referral/foundation" element={<ReferralFoundationLeader />} />
+        <Route path="/referral" element={<Referral />} />
       </Routes>
     </Router>
   )
