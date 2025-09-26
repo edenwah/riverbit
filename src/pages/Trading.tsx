@@ -40,7 +40,7 @@ export default () => {
     const [tif, setTif] = useState("GTC");
     const [showTifTooltip, setShowTifTooltip] = useState(false);
     const [leverage, setLeverage] = useState("20x"); // Add this state
-    const [crossSelected, setCrossSelected] = useState(false);
+    const [crossSelected, setCrossSelected] = useState("Cross");
     const [aiSelected, setAiSelected] = useState(false);
     const [showAssetPopup, setShowAssetPopup] = useState(false);
 
@@ -1110,34 +1110,39 @@ export default () => {
                         {/* Trading Form (col-span-1 on desktop, full width on mobile) */}
                         <div className="flex flex-col gap-2 items-center bg-zinc-900 rounded-sm border border-solid border-[#30363D] w-full ">
                             {/* Cross Margin, Leverage and AI Trading */}
-                            <div className="flex items-start p-3 w-full gap-2">
+                            <div className="flex items-center justify-between p-3 w-full gap-2">
+                                {/* Cross Margin Toggle */}
                                 <button
-                                    className={`flex-1 flex flex-col shrink-0 text-nowrap items-start bg-zinc-950 text-left py-3 px-2 rounded-sm border ${
-                                        crossSelected ? "border-fuchsia-800" : "border-[#30363D]"
+                                    className={`flex-1 flex flex-col items-center justify-center text-center bg-zinc-950 py-3 px-2 rounded-sm border"
                                     } border-solid`}
                                     onClick={() => setCrossSelected((v) => !v)}
                                 >
                                     <span className="text-[#A6A6B5] text-sm">
-                                        {"Cross Margin"}
+                                        {crossSelected ? "Cross" : "Isolated"}
                                     </span>
                                 </button>
-                                {/* Leverage Dropdown */}
-                                <Select
-                                    value={leverage}
-                                    onChange={setLeverage}
-                                    placeholder="Leverage"
-                                    options={[
-                                        { label: "5x", value: "5x" },
-                                        { label: "10x", value: "10x" },
-                                        { label: "20x", value: "20x" },
-                                        { label: "50x", value: "50x" },
-                                        { label: "100x", value: "100x" },
-                                    ]}
-                                    />
 
+                                {/* Leverage Dropdown */}
+                                <div className="flex-1 flex items-center justify-center">
+                                    <Select
+                                        value={leverage}
+                                        onChange={setLeverage}
+                                        placeholder="Leverage"
+                                        options={[
+                                            { label: "5x", value: "5x" },
+                                            { label: "10x", value: "10x" },
+                                            { label: "20x", value: "20x" },
+                                            { label: "50x", value: "50x" },
+                                            { label: "100x", value: "100x" },
+                                        ]}
+                                        className="w-full"
+                                    />
+                                </div>
+
+                                {/* AI Trading Toggle */}
                                 <button
-                                    className={`flex-1 flex flex-col shrink-0 items-start text-nowrap bg-zinc-950 text-left py-3 px-2 rounded-sm border ${
-                                        aiSelected ? "border-fuchsia-800" : "border-[#30363D]"
+                                    className={`flex-1 flex flex-col items-center justify-center text-center bg-zinc-950 py-3 px-2 rounded-sm border ${
+                                        aiSelected ? "border-fuchsia-800 border-2" : "border-[#30363D]"
                                     } border-solid`}
                                     onClick={() => setAiSelected((v) => !v)}
                                 >
@@ -1146,6 +1151,7 @@ export default () => {
                                     </span>
                                 </button>
                             </div>
+
 
                             {/* Tabs */}
                             <Tabs
