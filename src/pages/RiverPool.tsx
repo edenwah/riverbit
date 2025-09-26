@@ -256,21 +256,7 @@ export default () => {
 															</div>
 														</div>
 													</div>
-													<div className="flex flex-col items-start w-full gap-4">
-														<div className="flex items-center w-full self-stretch justify-between">
-															<span className="text-[#8B949E] text-sm" >
-																{"Leverage"}
-															</span>
-															<span className="text-white text-base" >
-																{leverage}x
-															</span>
-														</div>
-														
-														<LeverageSlider
-															value={leverage}
-															onChange={setLeverage}
-														/>
-													</div>
+
 
 													<Tips
 														tips={[
@@ -665,21 +651,29 @@ export default () => {
 															</div>
 														</div>
 													</div>
+													{/* Leverage Slider */}
 													<div className="flex flex-col items-start w-full gap-4">
-														<div className="flex items-center w-full self-stretch justify-between">
-															<span className="text-[#8B949E] text-sm" >
-																{"Leverage"}
-															</span>
-															<span className="text-white text-base" >
-																{leverage}x
-															</span>
+														<div className="flex items-center w-full justify-between">
+															<span className="text-[#8B949E] text-sm">Leverage</span>
+															<div className="flex items-center gap-2">
+															<input
+																type="number"
+																min={1}
+																max={100} // 可根據需求調整最大杠杆
+																value={leverage}
+																onChange={(e) => setLeverage(Number(e.target.value))}
+																className="w-full text-white bg-zinc-950 text-base p-3 rounded-sm border border-solid border-[#30363D]"
+															/>
+															<span className="text-white text-base">x</span>
+															</div>
 														</div>
-														
+
 														<LeverageSlider
 															value={leverage}
 															onChange={setLeverage}
 														/>
 													</div>
+
 
 													<Tips
 														tips={[
