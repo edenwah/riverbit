@@ -24,6 +24,3 @@ dist-ssr
 *.sw?
 .vercel
 .serena
-
-!.env.local 
-# only include .env.local this is a test demo project, never put .env in the repo
