@@ -65,12 +65,6 @@ export default () => {
         setToast({ title, type, message, subMessage });
     };
 
-    // Balance Table data state
-    const [balanceTableData, setBalanceTableData] = useState([
-        { currency: "USDC", available: "12,345.67", inOrders: "1,000.00", value: "$13,345.67" },
-        { currency: "Points", available: "1,250,000", inOrders: "0", value: "Points" },
-    ]);
-
     // 模擬不同模式Cross / Isolated 下的資料
     const estimation = crossSelected
     ? {
@@ -537,28 +531,29 @@ export default () => {
                                 {/* Tab Content */}
                                 {accountTab === "Balance" && (
                                     <div className="overflow-x-auto py-4 text-left">
-                                        <table className="w-full text-left border-collapse min-w-[400px]">
-                                            <thead className="text-sm text-zinc-400 font-bold">
-                                            <tr>
-                                                <th className="py-2 px-2">Currency</th>
-                                                <th className="py-2 px-2">Available</th>
-                                                <th className="py-2 px-2">In Orders</th>
-                                                <th className="py-2 px-2">Value($)</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody className="text-white text-sm">
-                                            {balanceTableData.map((row, idx) => (
-                                                <tr key={idx} className="border-b border-[#30363D]">
-                                                    <td className="py-2 px-2">{row.currency}</td>
-                                                    <td className="py-2 px-2">{row.available}</td>
-                                                    <td className="py-2 px-2">{row.inOrders}</td>
-                                                    <td className="py-2 px-2">{row.value}</td>
-                                                </tr>
+                                        {/* Table Header */}
+                                        <div className="flex text-sm text-zinc-400 font-bold mb-2 min-w-[400px] gap-2 py-2">
+                                            <span className="flex-1">Currency</span>
+                                            <span className="flex-1">Available</span>
+                                            <span className="flex-1">In Orders</span>
+                                            <span className="flex-1">Value($)</span>
+                                        </div>
+
+                                        {/* Table Rows */}
+                                        <div className="flex flex-col gap-2 text-sm text-white min-w-[400px]">
+                                            {[
+                                            { currency: "USDC", available: "12,345.67", inOrders: "1,000.00", value: "$13,345.67" },
+                                            { currency: "Points", available: "1,250,000", inOrders: "0", value: "Points" },
+                                            ].map((row, idx) => (
+                                            <div key={idx} className="flex">
+                                                <span className="flex-1">{row.currency}</span>
+                                                <span className="flex-1">{row.available}</span>
+                                                <span className="flex-1">{row.inOrders}</span>
+                                                <span className="flex-1">{row.value}</span>
+                                            </div>
                                             ))}
-                                            </tbody>
-                                        </table>
+                                        </div>
                                     </div>
-                                  
                                 )}
                                 {/* Positions */}
                                 {accountTab === "Positions" && (
@@ -1379,37 +1374,17 @@ export default () => {
                                             {/* Submit Button */}
                                             <PrimaryButton
                                                 size="large"
-                                                onClick={() => {
-                                                    // Show toast
-                                                    showToast(
+                                                onClick={() =>
+                                                showToast(
                                                     "Order Placed",
                                                     "success",
                                                     "Amount: 500 USDT",
                                                     "Processing time: ~15s"
-                                                    );
-
-                                                    // Update table data inline
-                                                    setBalanceTableData(prev =>
-                                                        prev.map((row, idx) => {
-                                                        if (idx === 0) { // 假設落單在第一行 USDC
-                                                            const available = parseFloat(row.available.replace(/,/g, "")) - 500;
-                                                            const inOrders = parseFloat(row.inOrders.replace(/,/g, "")) + 500;
-                                                            const value = `$${(available + inOrders).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
-                                                            return {
-                                                            ...row,
-                                                            available: available.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }),
-                                                            inOrders: inOrders.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }),
-                                                            value,
-                                                            };
-                                                        }
-                                                        return row;
-                                                        })
-                                                    );
-                                                    }}
-                                                >
+                                                )
+                                                }
+                                            >
                                                 {input1 === "Sell / Short" ? "Sell / Short" : "Buy / Long"}
                                             </PrimaryButton>
-
 
                                             {toast && (
                                                 <Toast
@@ -1738,34 +1713,15 @@ export default () => {
                                             {/* Submit Button */}
                                             <PrimaryButton
                                                 size="large"
-                                                onClick={() => {
-                                                    // Show toast
-                                                    showToast(
+                                                onClick={() =>
+                                                showToast(
                                                     "Order Placed",
                                                     "success",
                                                     "Amount: 500 USDT",
                                                     "Processing time: ~15s"
-                                                    );
-
-                                                    // Update table data inline
-                                                    setBalanceTableData(prev =>
-                                                        prev.map((row, idx) => {
-                                                        if (idx === 0) { // 假設落單在第一行 USDC
-                                                            const available = parseFloat(row.available.replace(/,/g, "")) - 500;
-                                                            const inOrders = parseFloat(row.inOrders.replace(/,/g, "")) + 500;
-                                                            const value = `$${(available + inOrders).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
-                                                            return {
-                                                            ...row,
-                                                            available: available.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }),
-                                                            inOrders: inOrders.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }),
-                                                            value,
-                                                            };
-                                                        }
-                                                        return row;
-                                                        })
-                                                    );
-                                                    }}
-                                                >
+                                                )
+                                                }
+                                            >
                                                 {input1 === "Sell / Short" ? "Sell / Short" : "Buy / Long"}
                                             </PrimaryButton>
 
@@ -2132,34 +2088,15 @@ export default () => {
                                             {/* Submit Button */}
                                             <PrimaryButton
                                                 size="large"
-                                                onClick={() => {
-                                                    // Show toast
-                                                    showToast(
+                                                onClick={() =>
+                                                showToast(
                                                     "Order Placed",
                                                     "success",
                                                     "Amount: 500 USDT",
                                                     "Processing time: ~15s"
-                                                    );
-
-                                                    // Update table data inline
-                                                    setBalanceTableData(prev =>
-                                                        prev.map((row, idx) => {
-                                                        if (idx === 0) { // 假設落單在第一行 USDC
-                                                            const available = parseFloat(row.available.replace(/,/g, "")) - 500;
-                                                            const inOrders = parseFloat(row.inOrders.replace(/,/g, "")) + 500;
-                                                            const value = `$${(available + inOrders).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
-                                                            return {
-                                                            ...row,
-                                                            available: available.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }),
-                                                            inOrders: inOrders.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }),
-                                                            value,
-                                                            };
-                                                        }
-                                                        return row;
-                                                        })
-                                                    );
-                                                    }}
-                                                >
+                                                )
+                                                }
+                                            >
                                                 {input1 === "Sell / Short" ? "Sell / Short" : "Buy / Long"}
                                             </PrimaryButton>
 
