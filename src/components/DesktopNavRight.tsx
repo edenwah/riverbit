@@ -1,7 +1,7 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import PrimaryButton from "../components/Button/PrimaryButton";
 import { SecondaryButton } from "../components/Button/SecondaryButton";
-import { translatePage, revertPage } from "../utils/translatePage";
+import { preloadTranslate, translatePage, revertPage } from "../utils/translatePage";
 
 interface DesktopNavRightProps {
   balance: string;
@@ -34,6 +34,11 @@ export default function DesktopNavRight({
     alert("Wallet disconnected!");
     setShowWalletDropdown(false);
   };
+
+  // ✅ 頁面載入時 preload 翻譯 cache
+  useEffect(() => {
+    preloadTranslate("en", "zh-CN");
+  }, []);
 
   return (
     <div className="flex items-center gap-4">
@@ -102,14 +107,14 @@ export default function DesktopNavRight({
                 className={`w-full text-left px-4 py-2 hover:bg-zinc-800 text-sm ${
                   language === lang ? "text-fuchsia-400 font-bold" : "text-white"
                 }`}
-                onClick={async () => {
+                onClick={() => {
                   setLanguage(lang);
                   setShowLangDropdown(false);
           
                   if (lang === "中文") {
-                    await translatePage("en", "zh-CN");
+                    translatePage(); // 用 cache，幾乎即時
                   } else {
-                    revertPage(); // 揀返 EN 就還原原文
+                    revertPage(); // 還原
                   }
                 }}
               >
@@ -117,6 +122,7 @@ export default function DesktopNavRight({
               </button>
             ))}
           </div>
+          
           )}
         </div>
 
