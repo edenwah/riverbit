@@ -65,6 +65,19 @@ export default () => {
         setToast({ title, type, message, subMessage });
     };
 
+    // 模擬不同模式Cross / Isolated 下的資料
+    const estimation = crossSelected
+    ? {
+        liquidationPrice: "$39,130.00",
+        estFee: "$2.50",
+        mode: "Cross",
+    }
+    : {
+        liquidationPrice: "$39,500.00",
+        estFee: "$1.80",
+        mode: "Isolated",
+    };
+
     {/* Show and Hide TP/SL modal */}
     const [showTPSLModal, setShowTPSLModal] = useState(false); // 控制 modal 顯示
     const [modalData, setModalData] = useState(null); // 儲存傳遞給 modal 的資料
@@ -1339,30 +1352,25 @@ export default () => {
                                                 ]}
                                                 />
 
-
+                                            {/* Estimation */}
                                             <div className="flex flex-col items-start pt-4 gap-2 w-full">
-                                                <span className="text-[#9D9DAF] text-sm font-bold" >
-                                                    {"Estimation"}
-                                                </span>
+                                                <span className="text-[#9D9DAF] text-sm font-bold">Estimation</span>
                                                 <div className="flex flex-col items-start gap-1 w-full">
-                                                    <div className="flex justify-between items-center w-full">
-                                                        <span className="text-[#9D9DAF] text-sm " >
-                                                            {"Liquidation Price"}
-                                                        </span>
-                                                        <span className="text-white text-sm" >
-                                                            {"$39,130.00"}
-                                                        </span>
-                                                    </div>
-                                                    <div className="flex justify-between items-center w-full">
-                                                        <span className="text-[#9D9DAF] text-sm " >
-                                                            {"Est. Fee"}
-                                                        </span>
-                                                        <span className="text-white text-sm" >
-                                                            {"$2.50"}
-                                                        </span>
-                                                    </div>
+                                                <div className="flex justify-between items-center w-full">
+                                                    <span className="text-[#9D9DAF] text-sm">Mode</span>
+                                                    <span className="text-white text-sm">{estimation.mode}</span>
+                                                </div>
+                                                <div className="flex justify-between items-center w-full">
+                                                    <span className="text-[#9D9DAF] text-sm">Liquidation Price</span>
+                                                    <span className="text-white text-sm">{estimation.liquidationPrice}</span>
+                                                </div>
+                                                <div className="flex justify-between items-center w-full">
+                                                    <span className="text-[#9D9DAF] text-sm">Est. Fee</span>
+                                                    <span className="text-white text-sm">{estimation.estFee}</span>
+                                                </div>
                                                 </div>
                                             </div>
+                                            
                                             {/* Submit Button */}
                                             <PrimaryButton
                                                 size="large"
@@ -1684,27 +1692,22 @@ export default () => {
                                                     {"Suitable for small position entry"}
                                                 </span>
                                             </div>
+                                            {/* Estimation */}
                                             <div className="flex flex-col items-start pt-4 gap-2 w-full">
-                                                <span className="text-[#9D9DAF] text-sm font-bold" >
-                                                    {"Estimation"}
-                                                </span>
+                                                <span className="text-[#9D9DAF] text-sm font-bold">Estimation</span>
                                                 <div className="flex flex-col items-start gap-1 w-full">
-                                                    <div className="flex justify-between items-center w-full">
-                                                        <span className="text-[#9D9DAF] text-sm " >
-                                                            {"Liquidation Price"}
-                                                        </span>
-                                                        <span className="text-white text-sm" >
-                                                            {"$39,130.00"}
-                                                        </span>
-                                                    </div>
-                                                    <div className="flex justify-between items-center w-full">
-                                                        <span className="text-[#9D9DAF] text-sm " >
-                                                            {"Est. Fee"}
-                                                        </span>
-                                                        <span className="text-white text-sm" >
-                                                            {"$2.50"}
-                                                        </span>
-                                                    </div>
+                                                <div className="flex justify-between items-center w-full">
+                                                    <span className="text-[#9D9DAF] text-sm">Mode</span>
+                                                    <span className="text-white text-sm">{estimation.mode}</span>
+                                                </div>
+                                                <div className="flex justify-between items-center w-full">
+                                                    <span className="text-[#9D9DAF] text-sm">Liquidation Price</span>
+                                                    <span className="text-white text-sm">{estimation.liquidationPrice}</span>
+                                                </div>
+                                                <div className="flex justify-between items-center w-full">
+                                                    <span className="text-[#9D9DAF] text-sm">Est. Fee</span>
+                                                    <span className="text-white text-sm">{estimation.estFee}</span>
+                                                </div>
                                                 </div>
                                             </div>
                                             {/* Submit Button */}
@@ -2064,27 +2067,22 @@ export default () => {
                                                     {"Suitable for small position entry"}
                                                 </span>
                                             </div>
+                                            {/* Estimation */}
                                             <div className="flex flex-col items-start pt-4 gap-2 w-full">
-                                                <span className="text-[#9D9DAF] text-sm font-bold" >
-                                                    {"Estimation"}
-                                                </span>
+                                                <span className="text-[#9D9DAF] text-sm font-bold">Estimation</span>
                                                 <div className="flex flex-col items-start gap-1 w-full">
-                                                    <div className="flex justify-between items-center w-full">
-                                                        <span className="text-[#9D9DAF] text-sm " >
-                                                            {"Liquidation Price"}
-                                                        </span>
-                                                        <span className="text-white text-sm" >
-                                                            {"$39,130.00"}
-                                                        </span>
-                                                    </div>
-                                                    <div className="flex justify-between items-center w-full">
-                                                        <span className="text-[#9D9DAF] text-sm " >
-                                                            {"Est. Fee"}
-                                                        </span>
-                                                        <span className="text-white text-sm" >
-                                                            {"$2.50"}
-                                                        </span>
-                                                    </div>
+                                                <div className="flex justify-between items-center w-full">
+                                                    <span className="text-[#9D9DAF] text-sm">Mode</span>
+                                                    <span className="text-white text-sm">{estimation.mode}</span>
+                                                </div>
+                                                <div className="flex justify-between items-center w-full">
+                                                    <span className="text-[#9D9DAF] text-sm">Liquidation Price</span>
+                                                    <span className="text-white text-sm">{estimation.liquidationPrice}</span>
+                                                </div>
+                                                <div className="flex justify-between items-center w-full">
+                                                    <span className="text-[#9D9DAF] text-sm">Est. Fee</span>
+                                                    <span className="text-white text-sm">{estimation.estFee}</span>
+                                                </div>
                                                 </div>
                                             </div>
                                             {/* Submit Button */}
