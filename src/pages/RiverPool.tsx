@@ -107,12 +107,11 @@ export default () => {
 				<div className="flex flex-col self-stretch gap-2 mx-6">
 					<div className="flex flex-col self-stretch py-12 lg:mx-20 gap-8">
 						<div className="flex items-start self-stretch border-b border-[#30363D] w-full">
-							<div className="lg:max-w-1/3 w-full">
+							<div className="xl:max-w-1/4 w-full">
 								<Tabs
                                             tabs={[
                                                 "Foundation",
                                                 "Main",
-                                                "Insurance",
                                             ]}
                                             activeTab={riverPoolTab}
                                             onTabChange={setRiverPoolTab}
@@ -224,11 +223,13 @@ export default () => {
 												</div>
 											</div>
 											<div className="w-full flex lg:basis-1/3 flex-col items-center bg-[#161B22] rounded-md border border-solid border-[#30363D]">
-												<Tabs
-													tabs={["Deposit", "Withdraw"]}
-													activeTab={depositWithdrawTab}
-													onTabChange={setdepositWithdrawTab}
-												/>
+												<div className="relative w-full">
+													<Tabs
+														tabs={["Deposit", "Withdraw"]}
+														activeTab={depositWithdrawTab}
+														onTabChange={setdepositWithdrawTab}
+													/>
+												</div>
 												
 												<div className="flex flex-col items-start p-6 gap-[17px] w-full">
 													<div className="flex items-center w-full justify-between">
@@ -627,11 +628,13 @@ export default () => {
 												</div>
 											</div>
 											<div className="w-full flex lg:basis-1/3 flex-col items-center bg-[#161B22] rounded-md border border-solid border-[#30363D]">
-												<Tabs
-													tabs={["Deposit", "Withdraw"]}
-													activeTab={depositWithdrawTab}
-													onTabChange={setdepositWithdrawTab}
-												/>
+												<div className="relative w-full">
+													<Tabs
+														tabs={["Deposit", "Withdraw"]}
+														activeTab={depositWithdrawTab}
+														onTabChange={setdepositWithdrawTab}
+													/>
+												</div>
 												
 												<div className="flex flex-col items-start p-6 gap-[17px] w-full">
 													<div className="flex items-center w-full justify-between">
@@ -937,9 +940,6 @@ export default () => {
 									)}
 								</div>
 							</div>
-						)}
-						{riverPoolTab === "Insurance" && (
-							<div>Coming Soon...</div>
 						)}
 					</div>
 				</div>
