@@ -10,10 +10,7 @@ import {
   getTokenConfig,
 } from '../../config/contracts';
 import { useWallet } from '../../context/WalletContext';
-import {
-  fetchUSDCAllowance,
-  fetchWalletSnapshot,
-} from '../../utils/balances';
+import { fetchUSDCAllowance } from '../../utils/balances';
 import {
   formatTokenAmount,
   isPositiveNumber,
@@ -45,6 +42,9 @@ const DepositModal = ({ isOpen, onClose }: DepositModalProps) => {
     getSigner,
     isConnecting,
     openWithdrawModal,
+    balances,
+    balancesLoading,
+    refreshBalances: refreshWalletBalances,
   } = useWallet();
 
   const [selectedToken, setSelectedToken] = useState<SupportedTokenSymbol>('ETH');
@@ -53,18 +53,7 @@ const DepositModal = ({ isOpen, onClose }: DepositModalProps) => {
   const [error, setError] = useState<string | null>(null);
   const [txHash, setTxHash] = useState<string | null>(null);
   const [allowance, setAllowance] = useState<bigint>(0n);
-  const [snapshotLoading, setSnapshotLoading] = useState(false);
   const [allowanceLoading, setAllowanceLoading] = useState(false);
-  const [balances, setBalances] = useState({
-    wallet: {
-      ETH: 0n,
-      USDC: 0n,
-    },
-    dex: {
-      ETH: 0n,
-      USDC: 0n,
-    },
-  });
 
   const tokenMeta = useMemo(() => getTokenConfig(selectedToken), [selectedToken]);
 
@@ -97,20 +86,6 @@ const DepositModal = ({ isOpen, onClose }: DepositModalProps) => {
     setSelectedToken('ETH');
   }, []);
 
-  const refreshBalances = useCallback(async () => {
-    if (!account) return;
-    try {
-      setSnapshotLoading(true);
-      const provider = await getProvider();
-      const snapshot = await fetchWalletSnapshot(provider, account);
-      setBalances(snapshot);
-    } catch (err) {
-      console.warn('Failed to fetch balances', err);
-    } finally {
-      setSnapshotLoading(false);
-    }
-  }, [account, getProvider]);
-
   const refreshAllowance = useCallback(async () => {
     if (!account || selectedToken !== 'USDC') return;
     try {
@@ -128,10 +103,10 @@ const DepositModal = ({ isOpen, onClose }: DepositModalProps) => {
   useEffect(() => {
     if (!isOpen) return;
     if (account) {
-      refreshBalances();
-      refreshAllowance();
+      void refreshWalletBalances();
+      void refreshAllowance();
     }
-  }, [isOpen, account, selectedToken, refreshBalances, refreshAllowance]);
+  }, [isOpen, account, selectedToken, refreshWalletBalances, refreshAllowance]);
 
   useEffect(() => {
     if (!isOpen) {
@@ -143,12 +118,12 @@ const DepositModal = ({ isOpen, onClose }: DepositModalProps) => {
     try {
       await connectWallet();
       await ensureCorrectNetwork();
-      await refreshBalances();
+      await refreshWalletBalances();
       await refreshAllowance();
     } catch (err) {
       setError(extractErrorMessage(err));
     }
-  }, [connectWallet, ensureCorrectNetwork, refreshAllowance, refreshBalances]);
+  }, [connectWallet, ensureCorrectNetwork, refreshAllowance, refreshWalletBalances]);
 
   const handleApprove = useCallback(async () => {
     if (!account) {
@@ -220,7 +195,7 @@ const DepositModal = ({ isOpen, onClose }: DepositModalProps) => {
       setTxHash(tx.hash);
       await tx.wait();
 
-      await refreshBalances();
+      await refreshWalletBalances();
       if (selectedToken === 'USDC') {
         await refreshAllowance();
       }
@@ -239,7 +214,7 @@ const DepositModal = ({ isOpen, onClose }: DepositModalProps) => {
     needsApproval,
     parsedAmount,
     refreshAllowance,
-    refreshBalances,
+    refreshWalletBalances,
     selectedToken,
     handleConnect,
   ]);
@@ -345,7 +320,7 @@ const DepositModal = ({ isOpen, onClose }: DepositModalProps) => {
                 <div className="rounded-lg border border-[#30363D] bg-zinc-900/50 p-3">
                   <div className="text-zinc-500">DEX 钱包余额</div>
                   <div className="mt-1 font-medium text-white">
-                    {snapshotLoading
+                    {balancesLoading
                       ? '加载中…'
                       : `${formatTokenAmount(balances.dex[selectedToken], tokenMeta?.decimals ?? 18)} ${selectedToken}`}
                   </div>
@@ -353,7 +328,7 @@ const DepositModal = ({ isOpen, onClose }: DepositModalProps) => {
                 <div className="rounded-lg border border-[#30363D] bg-zinc-900/50 p-3">
                   <div className="text-zinc-500">钱包余额</div>
                   <div className="mt-1 font-medium text-white">
-                    {snapshotLoading
+                    {balancesLoading
                       ? '加载中…'
                       : `${formatTokenAmount(balances.wallet[selectedToken], tokenMeta?.decimals ?? 18)} ${selectedToken}`}
                   </div>

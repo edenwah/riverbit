@@ -1,8 +1,11 @@
 const env = import.meta.env;
 
+const ARBITRUM_SEPOLIA_CHAIN_ID = 421614;
+const ARBITRUM_SEPOLIA_CHAIN_HEX = `0x${ARBITRUM_SEPOLIA_CHAIN_ID.toString(16)}` as const;
+
 export const NETWORK_CONFIG = {
-  chainId: 421614,
-  chainHex: '0x66eed',
+  chainId: ARBITRUM_SEPOLIA_CHAIN_ID,
+  chainHex: ARBITRUM_SEPOLIA_CHAIN_HEX,
   name: 'Arbitrum Sepolia',
   rpcUrl:
     env?.VITE_ARBITRUM_SEPOLIA_RPC_URL?.trim() ||

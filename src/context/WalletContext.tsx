@@ -11,6 +11,21 @@ import {
 import { NETWORK_CONFIG } from '../config/contracts';
 import DepositModal from '../components/wallet/DepositModal';
 import WithdrawModal from '../components/wallet/WithdrawModal';
+import {
+  fetchWalletSnapshot,
+  type WalletBalanceSnapshot,
+} from '../utils/balances';
+
+const EMPTY_BALANCES: WalletBalanceSnapshot = {
+  wallet: {
+    ETH: 0n,
+    USDC: 0n,
+  },
+  dex: {
+    ETH: 0n,
+    USDC: 0n,
+  },
+};
 
 const AUTO_CONNECT_STORAGE_KEY = 'riverbit:autoConnect';
 
@@ -40,6 +55,9 @@ interface WalletContextValue {
   openWithdrawModal: () => void;
   closeDepositModal: () => void;
   closeWithdrawModal: () => void;
+  balances: WalletBalanceSnapshot;
+  balancesLoading: boolean;
+  refreshBalances: () => Promise<WalletBalanceSnapshot | null>;
 }
 
 const WalletContext = createContext<WalletContextValue | undefined>(undefined);
@@ -64,6 +82,8 @@ export const WalletProvider = ({ children }: PropsWithChildren) => {
   const [showDeposit, setShowDeposit] = useState(false);
   const [showWithdraw, setShowWithdraw] = useState(false);
   const [autoConnectEnabled, setAutoConnectEnabled] = useState<boolean>(readAutoConnectPreference);
+  const [balances, setBalances] = useState<WalletBalanceSnapshot>(EMPTY_BALANCES);
+  const [balancesLoading, setBalancesLoading] = useState(false);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -134,6 +154,17 @@ export const WalletProvider = ({ children }: PropsWithChildren) => {
 
       const finalChainHex = (await browserProvider.send('eth_chainId', [])) as string;
       setChainId(parseInt(finalChainHex, 16));
+      if (primaryAccount) {
+        try {
+          const snapshot = await fetchWalletSnapshot(browserProvider, primaryAccount);
+          setBalances(snapshot);
+        } catch (balanceError) {
+          console.warn('Failed to fetch balances after connect', balanceError);
+          setBalances(EMPTY_BALANCES);
+        }
+      } else {
+        setBalances(EMPTY_BALANCES);
+      }
       setAutoConnectEnabled(true);
     } finally {
       setIsConnecting(false);
@@ -146,6 +177,7 @@ export const WalletProvider = ({ children }: PropsWithChildren) => {
     setAutoConnectEnabled(false);
     setShowDeposit(false);
     setShowWithdraw(false);
+    setBalances(EMPTY_BALANCES);
   }, []);
 
   const getSigner = useCallback(async () => {
@@ -156,6 +188,26 @@ export const WalletProvider = ({ children }: PropsWithChildren) => {
   const getProvider = useCallback(async () => {
     return getOrCreateProvider();
   }, [getOrCreateProvider]);
+
+  const refreshBalances = useCallback(async (): Promise<WalletBalanceSnapshot | null> => {
+    if (!account) {
+      setBalances(EMPTY_BALANCES);
+      return null;
+    }
+
+    try {
+      setBalancesLoading(true);
+      const providerInstance = await getOrCreateProvider();
+      const snapshot = await fetchWalletSnapshot(providerInstance, account);
+      setBalances(snapshot);
+      return snapshot;
+    } catch (error) {
+      console.warn('Failed to refresh balances', error);
+      return null;
+    } finally {
+      setBalancesLoading(false);
+    }
+  }, [account, getOrCreateProvider]);
 
   // Auto connect (if enabled) and hydrate initial state
   useEffect(() => {
@@ -178,6 +230,21 @@ export const WalletProvider = ({ children }: PropsWithChildren) => {
 
         setAccount(accounts?.[0] ?? null);
         setChainId(parseInt(chainHex, 16));
+        if (accounts?.[0]) {
+          try {
+            const snapshot = await fetchWalletSnapshot(browserProvider, accounts[0]);
+            if (isMounted) {
+              setBalances(snapshot);
+            }
+          } catch (error) {
+            console.warn('Failed to load initial balances', error);
+            if (isMounted) {
+              setBalances(EMPTY_BALANCES);
+            }
+          }
+        } else {
+          setBalances(EMPTY_BALANCES);
+        }
       } catch (error) {
         console.warn('Failed to initialise provider', error);
       }
@@ -192,6 +259,7 @@ export const WalletProvider = ({ children }: PropsWithChildren) => {
       setAutoConnectEnabled(accounts.length > 0);
       if (accounts.length === 0) {
         setChainId(null);
+        setBalances(EMPTY_BALANCES);
       }
     };
 
@@ -210,6 +278,14 @@ export const WalletProvider = ({ children }: PropsWithChildren) => {
     };
   }, [autoConnectEnabled, getOrCreateProvider]);
 
+  useEffect(() => {
+    if (!account) {
+      setBalances(EMPTY_BALANCES);
+      return;
+    }
+    void refreshBalances();
+  }, [account, chainId, refreshBalances]);
+
   const contextValue = useMemo<WalletContextValue>(() => ({
     account,
     chainId,
@@ -225,6 +301,9 @@ export const WalletProvider = ({ children }: PropsWithChildren) => {
     openWithdrawModal: () => setShowWithdraw(true),
     closeDepositModal: () => setShowDeposit(false),
     closeWithdrawModal: () => setShowWithdraw(false),
+    balances,
+    balancesLoading,
+    refreshBalances,
   }), [
     account,
     chainId,
@@ -234,6 +313,9 @@ export const WalletProvider = ({ children }: PropsWithChildren) => {
     getSigner,
     getProvider,
     isConnecting,
+    balances,
+    balancesLoading,
+    refreshBalances,
   ]);
 
   return (

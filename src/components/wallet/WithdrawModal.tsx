@@ -9,7 +9,6 @@ import {
   getTokenConfig,
 } from '../../config/contracts';
 import { useWallet } from '../../context/WalletContext';
-import { fetchWalletSnapshot } from '../../utils/balances';
 import { formatTokenAmount, isPositiveNumber, shortenAddress } from '../../utils/format';
 
 interface WithdrawModalProps {
@@ -33,10 +32,12 @@ const WithdrawModal = ({ isOpen, onClose }: WithdrawModalProps) => {
     isCorrectNetwork,
     connectWallet,
     ensureCorrectNetwork,
-    getProvider,
     getSigner,
     isConnecting,
     openDepositModal,
+    balances,
+    balancesLoading,
+    refreshBalances: refreshWalletBalances,
   } = useWallet();
 
   const [selectedToken, setSelectedToken] = useState<SupportedTokenSymbol>('ETH');
@@ -44,17 +45,6 @@ const WithdrawModal = ({ isOpen, onClose }: WithdrawModalProps) => {
   const [status, setStatus] = useState<WithdrawStatus>('idle');
   const [error, setError] = useState<string | null>(null);
   const [txHash, setTxHash] = useState<string | null>(null);
-  const [snapshotLoading, setSnapshotLoading] = useState(false);
-  const [balances, setBalances] = useState({
-    wallet: {
-      ETH: 0n,
-      USDC: 0n,
-    },
-    dex: {
-      ETH: 0n,
-      USDC: 0n,
-    },
-  });
 
   const tokenMeta = useMemo(() => getTokenConfig(selectedToken), [selectedToken]);
 
@@ -84,26 +74,12 @@ const WithdrawModal = ({ isOpen, onClose }: WithdrawModalProps) => {
     setSelectedToken('ETH');
   }, []);
 
-  const refreshBalances = useCallback(async () => {
-    if (!account) return;
-    try {
-      setSnapshotLoading(true);
-      const provider = await getProvider();
-      const snapshot = await fetchWalletSnapshot(provider, account);
-      setBalances(snapshot);
-    } catch (err) {
-      console.warn('Failed to fetch balances', err);
-    } finally {
-      setSnapshotLoading(false);
-    }
-  }, [account, getProvider]);
-
   useEffect(() => {
     if (!isOpen) return;
     if (account) {
-      refreshBalances();
+      void refreshWalletBalances();
     }
-  }, [isOpen, account, selectedToken, refreshBalances]);
+  }, [isOpen, account, selectedToken, refreshWalletBalances]);
 
   useEffect(() => {
     if (!isOpen) {
@@ -115,11 +91,11 @@ const WithdrawModal = ({ isOpen, onClose }: WithdrawModalProps) => {
     try {
       await connectWallet();
       await ensureCorrectNetwork();
-      await refreshBalances();
+      await refreshWalletBalances();
     } catch (err) {
       setError(extractErrorMessage(err));
     }
-  }, [connectWallet, ensureCorrectNetwork, refreshBalances]);
+  }, [connectWallet, ensureCorrectNetwork, refreshWalletBalances]);
 
   const handleWithdraw = useCallback(async () => {
     if (!account) {
@@ -153,7 +129,7 @@ const WithdrawModal = ({ isOpen, onClose }: WithdrawModalProps) => {
       setTxHash(tx.hash);
       await tx.wait();
 
-      await refreshBalances();
+      await refreshWalletBalances();
       setStatus('success');
       setAmount('');
     } catch (err) {
@@ -167,7 +143,7 @@ const WithdrawModal = ({ isOpen, onClose }: WithdrawModalProps) => {
     ensureCorrectNetwork,
     getSigner,
     parsedAmount,
-    refreshBalances,
+    refreshWalletBalances,
     selectedToken,
     handleConnect,
   ]);
@@ -261,7 +237,7 @@ const WithdrawModal = ({ isOpen, onClose }: WithdrawModalProps) => {
                 <p className="mt-1 text-xs text-zinc-500">
                   DEX 可用余额：
                   <span className="text-zinc-200">
-                    {snapshotLoading
+                    {balancesLoading
                       ? '加载中…'
                       : `${formatTokenAmount(balances.dex[selectedToken], tokenMeta?.decimals ?? 18)} ${selectedToken}`}
                   </span>
@@ -272,15 +248,15 @@ const WithdrawModal = ({ isOpen, onClose }: WithdrawModalProps) => {
                 <div className="rounded-lg border border-[#30363D] bg-zinc-900/50 p-3">
                   <div className="text-zinc-500">DEX 钱包余额</div>
                   <div className="mt-1 font-medium text-white">
-                    {snapshotLoading
+                    {balancesLoading
                       ? '加载中…'
                       : `${formatTokenAmount(balances.dex[selectedToken], tokenMeta?.decimals ?? 18)} ${selectedToken}`}
-                  </div>
-                </div>
+                 </div>
+               </div>
                 <div className="rounded-lg border border-[#30363D] bg-zinc-900/50 p-3">
                   <div className="text-zinc-500">钱包余额</div>
                   <div className="mt-1 font-medium text-white">
-                    {snapshotLoading
+                    {balancesLoading
                       ? '加载中…'
                       : `${formatTokenAmount(balances.wallet[selectedToken], tokenMeta?.decimals ?? 18)} ${selectedToken}`}
                   </div>

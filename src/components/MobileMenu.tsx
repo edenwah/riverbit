@@ -4,7 +4,7 @@ import PrimaryButton from "./Button/PrimaryButton";
 import { SecondaryButton } from "./Button/SecondaryButton";
 import ToggleWithText from "./ToggleWithText";
 import { useWallet } from "../context/WalletContext";
-import { shortenAddress } from "../utils/format";
+import { formatTokenAmount, shortenAddress } from "../utils/format";
 
 interface NavItem {
   label: string;
@@ -50,12 +50,28 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
     isConnected,
     isConnecting,
     isCorrectNetwork,
+    balances,
+    balancesLoading,
     connectWallet,
     disconnectWallet,
     ensureCorrectNetwork,
     openDepositModal,
     openWithdrawModal,
   } = useWallet();
+
+  const displayBalance = (() => {
+    if (!isConnected || !isCorrectNetwork) {
+      return balance;
+    }
+    if (balancesLoading) {
+      return '加载中…';
+    }
+    const usdcDex = balances.dex.USDC;
+    const ethDex = balances.dex.ETH;
+    const usdcText = `${formatTokenAmount(usdcDex, 6)} USDC`;
+    const ethText = ethDex > 0n ? ` / ${formatTokenAmount(ethDex, 18)} ETH` : '';
+    return `${usdcText}${ethText}`;
+  })();
   if (!isOpen) return null;
 
   const isActive = (to: string) => {
@@ -136,7 +152,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
               <div className="flex flex-row justify-between">
                 <div className="flex flex-col flex-1 items-start">
                   <span className="text-zinc-400 text-md">Balance</span>
-                  <span className="text-white text-md">{balance}</span>
+                  <span className="text-white text-md">{displayBalance}</span>
                 </div>
                 <div className="flex flex-col flex-1 items-start">
                   <span className="text-zinc-400 text-md">Points</span>
@@ -148,6 +164,11 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
                   <>
                     <div className="text-zinc-500">Connected Wallet</div>
                     <div className="mt-1 font-mono text-sm text-white">{shortenAddress(account)}</div>
+                    <div className="mt-1 text-xs text-zinc-400">
+                      {balancesLoading
+                        ? '余额加载中…'
+                        : `DEX：${formatTokenAmount(balances.dex.USDC, 6)} USDC${balances.dex.ETH > 0n ? ` / ${formatTokenAmount(balances.dex.ETH, 18)} ETH` : ''}`}
+                    </div>
                     {isConnected && !isCorrectNetwork && (
                       <button
                         className="mt-2 w-full rounded-sm border border-amber-500/70 bg-amber-500/10 py-1 text-xs text-amber-300"

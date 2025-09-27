@@ -3,7 +3,7 @@ import PrimaryButton from "../components/Button/PrimaryButton";
 import { SecondaryButton } from "../components/Button/SecondaryButton";
 import { preloadTranslate, translatePage, revertPage } from "../utils/translatePage";
 import { useWallet } from "../context/WalletContext";
-import { shortenAddress } from "../utils/format";
+import { formatTokenAmount, shortenAddress } from "../utils/format";
 
 interface DesktopNavRightProps {
   balance: string;
@@ -34,7 +34,23 @@ export default function DesktopNavRight({
     ensureCorrectNetwork,
     openDepositModal,
     openWithdrawModal,
+    balances,
+    balancesLoading,
   } = useWallet();
+
+  const displayBalance = (() => {
+    if (!isConnected || !isCorrectNetwork) {
+      return balance;
+    }
+    if (balancesLoading) {
+      return '加载中…';
+    }
+    const usdcDex = balances.dex.USDC;
+    const ethDex = balances.dex.ETH;
+    const usdcText = `${formatTokenAmount(usdcDex, 6)} USDC`;
+    const ethText = ethDex > 0n ? ` / ${formatTokenAmount(ethDex, 18)} ETH` : '';
+    return `${usdcText}${ethText}`;
+  })();
 
   const handleWithdraw = () => {
     openWithdrawModal();
@@ -59,7 +75,7 @@ export default function DesktopNavRight({
       {/* Balance */}
       <div className="flex flex-col shrink-0 items-start">
         <span className="text-zinc-400 text-sm">Balance</span>
-        <span className="text-white text-sm">{balance}</span>
+        <span className="text-white text-sm">{displayBalance}</span>
       </div>
       <div className="w-[1px] h-8 hidden xl:block" />
       {/* Points */}

@@ -21,8 +21,8 @@ export const fetchWalletSnapshot = async (
   const [walletEth, walletUsdc, dexEth, dexUsdc] = await Promise.all([
     provider.getBalance(account),
     usdc.balanceOf(account),
-    dexWallet.balanceOf(CONTRACT_ADDRESSES.ETH, account),
-    dexWallet.balanceOf(CONTRACT_ADDRESSES.USDC, account),
+    dexWallet.balanceOf(account, CONTRACT_ADDRESSES.ETH),
+    dexWallet.balanceOf(account, CONTRACT_ADDRESSES.USDC),
   ]);
 
   return {
