@@ -364,7 +364,7 @@ export default () => {
 								<div className="w-full self-stretch bg-[#161B22] rounded-md ">
 
 									<div className="w-full border-b border-[#30363D] overflow-auto">
-										<div className="xl:max-w-1/2 w-full">
+										<div className="xl:max-w-1/3 w-full">
 											<Tabs
 												tabs={[
 													"Records",
@@ -770,7 +770,7 @@ export default () => {
 								<div className="w-full self-stretch bg-[#161B22] rounded-md ">
 
 									<div className="w-full border-b border-[#30363D] overflow-auto">
-										<div className="">
+										<div className="xl:max-w-1/3 w-full">
 											<Tabs
 												tabs={[
 													"Records",
