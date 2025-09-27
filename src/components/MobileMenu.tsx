@@ -3,6 +3,8 @@ import { Link, useLocation } from "react-router-dom";
 import PrimaryButton from "./Button/PrimaryButton";
 import { SecondaryButton } from "./Button/SecondaryButton";
 import ToggleWithText from "./ToggleWithText";
+import { useWallet } from "../context/WalletContext";
+import { shortenAddress } from "../utils/format";
 
 interface NavItem {
   label: string;
@@ -43,6 +45,17 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
 }) => {
   const [showMore, setShowMore] = useState(false);
   const location = useLocation();
+  const {
+    account,
+    isConnected,
+    isConnecting,
+    isCorrectNetwork,
+    connectWallet,
+    disconnectWallet,
+    ensureCorrectNetwork,
+    openDepositModal,
+    openWithdrawModal,
+  } = useWallet();
   if (!isOpen) return null;
 
   const isActive = (to: string) => {
@@ -119,23 +132,58 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
           <div className="flex flex-col gap-4 pt-4 border-t border-[#30363D]">
             
             {/* Balance and Points */}
-            <div className="flex flex-row justify-between mt-4 mb-2">
-              <div className="flex flex-col flex-1 items-start">
-                <span className="text-zinc-400 text-md">Balance</span>
-                <span className="text-white text-md">{balance}</span>
+            <div className="flex flex-col gap-2 mt-4 mb-2">
+              <div className="flex flex-row justify-between">
+                <div className="flex flex-col flex-1 items-start">
+                  <span className="text-zinc-400 text-md">Balance</span>
+                  <span className="text-white text-md">{balance}</span>
+                </div>
+                <div className="flex flex-col flex-1 items-start">
+                  <span className="text-zinc-400 text-md">Points</span>
+                  <span className="text-white text-md">{points}</span>
+                </div>
               </div>
-              <div className="flex flex-col flex-1 items-start">
-                <span className="text-zinc-400 text-md">Points</span>
-                <span className="text-white text-md">{points}</span>
+              <div className="rounded-md border border-[#30363D] bg-zinc-900/60 px-3 py-2 text-xs text-zinc-400">
+                {isConnected && account ? (
+                  <>
+                    <div className="text-zinc-500">Connected Wallet</div>
+                    <div className="mt-1 font-mono text-sm text-white">{shortenAddress(account)}</div>
+                    {isConnected && !isCorrectNetwork && (
+                      <button
+                        className="mt-2 w-full rounded-sm border border-amber-500/70 bg-amber-500/10 py-1 text-xs text-amber-300"
+                        onClick={ensureCorrectNetwork}
+                      >
+                        切换到 Arbitrum Sepolia
+                      </button>
+                    )}
+                  </>
+                ) : (
+                  <div className="text-sm">
+                    钱包未连接
+                    <button
+                      className="mt-2 w-full rounded-sm bg-fuchsia-700 py-2 text-xs font-semibold text-white"
+                      onClick={() => void connectWallet()}
+                      disabled={isConnecting}
+                    >
+                      {isConnecting ? "连接中…" : "连接 MetaMask"}
+                    </button>
+                  </div>
+                )}
               </div>
             </div>
 
             {/* Actions */}
             <div className="flex flex-row gap-2 text-center w-full">
-              <PrimaryButton size="large" onClick={() => alert("Deposit clicked!")}>
+              <PrimaryButton size="large" onClick={() => {
+                openDepositModal();
+                onClose();
+              }}>
                 Deposit
               </PrimaryButton>
-              <SecondaryButton size="large" onClick={() => alert("Withdraw clicked!")}>
+              <SecondaryButton size="large" onClick={() => {
+                openWithdrawModal();
+                onClose();
+              }}>
                 Withdraw
               </SecondaryButton>
             </div>
@@ -147,19 +195,24 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
               onChange={setLanguage} // 直接用 props
             />
 
-            <SecondaryButton
-              onClick={() => alert("Disconnect Wallet")}
-              size="medium"
-              icon={
-                <img
-                  src="https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/7ru13dyc_expires_30_days.png"
-                  className="w-5 h-5 object-fill"
-                />
-              }
-            >
-              Disconnect Wallet
-            </SecondaryButton>
-            
+            {isConnected && (
+              <SecondaryButton
+                onClick={() => {
+                  disconnectWallet();
+                  onClose();
+                }}
+                size="medium"
+                icon={
+                  <img
+                    src="https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/7ru13dyc_expires_30_days.png"
+                    className="w-5 h-5 object-fill"
+                  />
+                }
+              >
+                Disconnect Wallet
+              </SecondaryButton>
+            )}
+
           </div>
         </div>
       </div>

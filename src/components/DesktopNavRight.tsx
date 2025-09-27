@@ -2,6 +2,8 @@ import { useRef, useState, useEffect } from "react";
 import PrimaryButton from "../components/Button/PrimaryButton";
 import { SecondaryButton } from "../components/Button/SecondaryButton";
 import { preloadTranslate, translatePage, revertPage } from "../utils/translatePage";
+import { useWallet } from "../context/WalletContext";
+import { shortenAddress } from "../utils/format";
 
 interface DesktopNavRightProps {
   balance: string;
@@ -22,16 +24,28 @@ export default function DesktopNavRight({
   const walletDropdownRef = useRef<HTMLDivElement | null>(null);
   const langDropdownRef = useRef<HTMLDivElement | null>(null);
 
+  const {
+    account,
+    isConnected,
+    isCorrectNetwork,
+    isConnecting,
+    connectWallet,
+    disconnectWallet,
+    ensureCorrectNetwork,
+    openDepositModal,
+    openWithdrawModal,
+  } = useWallet();
+
   const handleWithdraw = () => {
-    alert("Withdraw clicked!");
+    openWithdrawModal();
   };
 
   const handleDeposit = () => {
-    alert("Deposit clicked!");
+    openDepositModal();
   };
 
   const handleDisconnectWallet = () => {
-    alert("Wallet disconnected!");
+    disconnectWallet();
     setShowWalletDropdown(false);
   };
 
@@ -59,13 +73,32 @@ export default function DesktopNavRight({
         {/* Wallet */}
         <div className="relative" ref={walletDropdownRef}>
           <button
-            className="flex shrink-0 items-center bg-zinc-900 py-2.5 px-3 gap-2 rounded-sm border border-solid border-[#30363D]"
-            onClick={() => setShowWalletDropdown((v) => !v)}
+            className="flex shrink-0 items-center bg-zinc-900 py-2.5 px-3 gap-2 rounded-sm border border-solid border-[#30363D] text-sm text-white hover:border-zinc-600"
+            onClick={async () => {
+              if (!isConnected) {
+                try {
+                  await connectWallet();
+                  setShowWalletDropdown(true);
+                } catch (err) {
+                  console.error('Failed to connect wallet', err);
+                }
+              } else {
+                setShowWalletDropdown((v) => !v);
+              }
+            }}
+            disabled={isConnecting}
           >
             <img
               src="https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/7ru13dyc_expires_30_days.png"
               className="w-5 h-5 rounded-sm object-fill"
             />
+            <span className="hidden md:inline font-semibold">
+              {isConnecting
+                ? "连接中…"
+                : isConnected && account
+                ? shortenAddress(account)
+                : "Connect"}
+            </span>
             <img
               src="https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/wbxxcfe7_expires_30_days.png"
               className="w-3 h-[15px] rounded-sm object-fill"
@@ -73,11 +106,43 @@ export default function DesktopNavRight({
           </button>
           {showWalletDropdown && (
             <div className="absolute right-0 mt-2 z-50 min-w-48 bg-zinc-900 border border-[#30363D] rounded shadow-lg">
+              <div className="px-4 py-3 text-sm text-zinc-300 border-b border-[#30363D]">
+                <div className="font-semibold text-white">{account ? shortenAddress(account) : "未连接"}</div>
+                {isConnected && !isCorrectNetwork && (
+                  <div className="mt-1 text-xs text-amber-400">网络未切换到 Arbitrum Sepolia</div>
+                )}
+              </div>
               <button
-                className="w-full text-left px-4 py-2 hover:bg-zinc-800 text-sm text-red-400"
+                className="w-full text-left px-4 py-2 text-sm text-white hover:bg-zinc-800 disabled:text-zinc-600"
+                onClick={async () => {
+                  if (!isCorrectNetwork) {
+                    await ensureCorrectNetwork();
+                  }
+                  setShowWalletDropdown(false);
+                }}
+                disabled={isCorrectNetwork}
+              >
+                切换到 Arbitrum Sepolia
+              </button>
+              <button
+                className="w-full text-left px-4 py-2 text-sm text-white hover:bg-zinc-800 disabled:text-zinc-600"
+                onClick={() => {
+                  if (account && navigator?.clipboard) {
+                    navigator.clipboard.writeText(account).catch((err) =>
+                      console.warn('复制地址失败', err),
+                    );
+                  }
+                  setShowWalletDropdown(false);
+                }}
+                disabled={!account}
+              >
+                复制地址
+              </button>
+              <button
+                className="w-full text-left px-4 py-2 text-sm text-red-400 hover:bg-zinc-800"
                 onClick={handleDisconnectWallet}
               >
-                Disconnect Wallet
+                断开连接
               </button>
             </div>
           )}

@@ -1,6 +1,7 @@
 // MobileHeader.tsx
 import React from "react";
 import PrimaryButton from "../components/Button/PrimaryButton";
+import { useWallet } from "../context/WalletContext";
 
 interface MobileHeaderProps {
   balance?: string;
@@ -13,6 +14,7 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({
   onDeposit,
   onMenuToggle,
 }) => {
+  const { openDepositModal } = useWallet();
   return (
     <div className="flex xl:hidden justify-between items-center self-stretch bg-zinc-900 py-3.5 px-4">
       {/* Left: Logo */}
@@ -30,8 +32,7 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({
           <span className="text-zinc-400 text-sm">{"Balance"}</span>
           <span className="text-white text-sm">{balance}</span>
         </div>
-
-        <PrimaryButton size="medium" onClick={onDeposit}>Deposit</PrimaryButton>
+        <PrimaryButton size="medium" onClick={onDeposit ?? openDepositModal}>Deposit</PrimaryButton>
 
         {/* Hamburger menu */}
         <button
