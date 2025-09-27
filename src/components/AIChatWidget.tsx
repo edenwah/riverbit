@@ -7,7 +7,7 @@ const AIChatWidget = () => {
   const [tab, setTab] = useState("Chat");
 
   return (
-    <div className="mx-4 bg-[#1F2226] border border-gray-700 rounded-lg shadow-lg flex flex-col overflow-hidden text-white text-sm">
+    <div className="h-full mx-4 bg-[#1F2226] border border-gray-700 rounded-lg shadow-lg flex flex-col overflow-hidden text-white text-sm">
       {/* Header */}
       <div className="flex items-center justify-between p-2 border-b border-gray-600">
         <span className="flex items-center gap-1">
@@ -20,7 +20,7 @@ const AIChatWidget = () => {
       </div>
 
       {/* Body */}
-      <div className="flex flex-col p-2 gap-2 h-40 overflow-y-auto bg-[#181A1D]">
+      <div className="h-full flex flex-col p-2 gap-2 h-40 overflow-y-auto bg-[#181A1D]">
         <div className="font-bold">AI Trading Assistant</div>
         <div className="text-gray-400 text-xs">
           Enter trading commands to start intelligent conversation
