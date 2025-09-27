@@ -1,6 +1,8 @@
 // MobileHeader.tsx
 import React from "react";
 import PrimaryButton from "../components/Button/PrimaryButton";
+import { useWallet } from "../context/WalletContext";
+import { formatTokenAmount } from "../utils/format";
 
 interface MobileHeaderProps {
   balance?: string;
@@ -13,6 +15,21 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({
   onDeposit,
   onMenuToggle,
 }) => {
+  const { openDepositModal, isConnected, isCorrectNetwork, balances, balancesLoading } = useWallet();
+
+  const displayBalance = (() => {
+    if (!isConnected || !isCorrectNetwork) {
+      return balance;
+    }
+    if (balancesLoading) {
+      return '加载中…';
+    }
+    const usdcDex = balances.dex.USDC;
+    const ethDex = balances.dex.ETH;
+    const usdcText = `${formatTokenAmount(usdcDex, 6)} USDC`;
+    const ethText = ethDex > 0n ? ` / ${formatTokenAmount(ethDex, 18)} ETH` : '';
+    return `${usdcText}${ethText}`;
+  })();
   return (
     <div className="flex xl:hidden justify-between items-center self-stretch bg-zinc-900 py-3.5 px-4">
       {/* Left: Logo */}
@@ -28,10 +45,9 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({
       <div className="flex items-center gap-3">
         <div className="flex flex-col shrink-0 items-start">
           <span className="text-zinc-400 text-sm">{"Balance"}</span>
-          <span className="text-white text-sm">{balance}</span>
+          <span className="text-white text-sm">{displayBalance}</span>
         </div>
-
-        <PrimaryButton size="medium" onClick={onDeposit}>Deposit</PrimaryButton>
+        <PrimaryButton size="medium" onClick={onDeposit ?? openDepositModal}>Deposit</PrimaryButton>
 
         {/* Hamburger menu */}
         <button
