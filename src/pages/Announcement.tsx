@@ -123,16 +123,17 @@ export default () => {
 							<div className="flex flex-col basis-1/3 items-center gap-2.5 w-full">
 								<div className="flex flex-col items-start bg-[#161B22] p-6 gap-4 rounded-lg border border-solid border-[#30363D] w-full">
 									{/* Search bar */}
-									<button className="w-full justify-between flex items-start bg-[#0D1117] text-left py-3 px-4 rounded-md border border-solid border-[#30363D]"
-										onClick={()=>alert("Pressed!")}>
-										<span className="text-[#ADAEBC] text-base" >
-											{"Search..."}
-										</span>
-										<img
-											src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/rijdwqwb_expires_30_days.png"} 
-											className="w-4 h-6 rounded-md object-fill"
+									<div className="w-full flex items-center bg-[#0D1117] rounded-md border border-solid border-[#30363D] px-4 py-3">
+										<input
+											type="text"
+											placeholder="Search..."
+											className="flex-1 bg-transparent text-[#ADAEBC] text-base outline-none"
 										/>
-									</button>
+										<img
+											src="https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/ve4zl4a6_expires_30_days.png"
+											className="w-4 h-6 rounded-md object-fill ml-2"
+										/>
+									</div>
 									<span className="text-white text-lg font-bold" >
 										{"Announcements"}
 									</span>
