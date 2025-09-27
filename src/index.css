@@ -23,6 +23,14 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+@media (prefers-color-scheme: light) {
+  :root {
+    color-scheme: light;
+    color: #213547;
+    background-color: #ffffff;
+  }
+}
+
 a {
   font-weight: 500;
   text-decoration: inherit;
@@ -57,14 +65,4 @@ button:focus-visible {
 input:focus,
 input:focus-visible {
   outline: none;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
 }
