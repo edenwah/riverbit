@@ -188,7 +188,7 @@ export default () => {
 					</div>
 					<div className="basis-1/4 w-full flex flex-col items-start gap-4">
 						<div className="w-full flex flex-col items-start bg-zinc-900 p-4 gap-[17px] rounded-md border border-solid border-[#30363D]">
-							<span className="text-white text-lg font-bold">Portfolio Breakdown</span>
+							<span className="text-white text-lg font-bold">Portfolio </span>
 							
 							<div className="w-full flex flex-col text-left gap-4">
 								{/* Bitcoin */}
