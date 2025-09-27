@@ -6,7 +6,7 @@ let originalTextNodes: TextNodeWithOriginal[] = [];
 // cache: key = 原文, value = 翻譯
 let cachedTranslations: Record<string, string> = {};
 
-// batch 翻譯並儲存到 cache
+// 逐個 node 翻譯並儲存到 cache
 export async function preloadTranslate(sl: string = "en", tl: string = "zh-CN"): Promise<void> {
   const elements = document.querySelectorAll("body *:not(script):not(style)");
 
@@ -22,24 +22,19 @@ export async function preloadTranslate(sl: string = "en", tl: string = "zh-CN"):
     });
   });
 
-  const originalTexts = textNodes.map((node) => node.nodeValue);
-  const joinedText = originalTexts.join("\n");
-
   try {
-    const res = await fetch(
-      `https://translate.googleapis.com/translate_a/single?client=gtx&sl=${sl}&tl=${tl}&dt=t&q=${encodeURIComponent(
-        joinedText
-      )}`
-    );
-    const data = await res.json();
-    const translatedText = data[0].map((item: any) => item[0]).join("\n");
-    const translatedArray = translatedText.split("\n");
-
-    // 儲存到 cache
-    textNodes.forEach((node, idx) => {
-      cachedTranslations[node.nodeValue!] = translatedArray[idx] || node.nodeValue!;
+    // 逐個 node 翻譯
+    const promises = textNodes.map(async (node) => {
+      const text = node.nodeValue!;
+      if (cachedTranslations[text]) return; // 已經有 cache 就跳過
+      const res = await fetch(
+        `https://translate.googleapis.com/translate_a/single?client=gtx&sl=${sl}&tl=${tl}&dt=t&q=${encodeURIComponent(text)}`
+      );
+      const data = await res.json();
+      cachedTranslations[text] = data[0][0][0];
     });
 
+    await Promise.all(promises);
     console.log("Cache loaded:", cachedTranslations);
   } catch (err) {
     console.error("Translation preload failed:", err);

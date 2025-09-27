@@ -1122,8 +1122,8 @@ export default () => {
                                     className={`flex-1 flex flex-col items-center justify-center text-center bg-zinc-950 py-3 px-2 rounded-sm border border-[#30363D]`}
                                     onClick={() => setCrossSelected((v) => !v)}
                                 >
-                                    <span className="text-[#A6A6B5] text-sm">
-                                        {crossSelected ? "Cross" : "Isolated"}
+                                    <span className="text-[#A6A6B5] text-sm text-nowrap">
+                                        {crossSelected ? "Cross Margin" : "Isolated"}
                                     </span>
                                 </button>
 
