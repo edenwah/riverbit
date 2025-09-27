@@ -20,7 +20,7 @@ const AIChatWidget = () => {
       </div>
 
       {/* Body */}
-      <div className="h-full flex flex-col p-2 gap-2 h-40 overflow-y-auto bg-[#181A1D]">
+      <div className="h-full flex flex-col p-2 gap-2 overflow-y-auto bg-[#181A1D]">
         <div className="font-bold">AI Trading Assistant</div>
         <div className="text-gray-400 text-xs">
           Enter trading commands to start intelligent conversation
