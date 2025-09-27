@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import PrimaryButton from "../components/Button/PrimaryButton";
 import { SecondaryButton } from "../components/Button/SecondaryButton";
+import { translatePage, revertPage } from "../utils/translatePage";
 
 interface DesktopNavRightProps {
   balance: string;
@@ -95,21 +96,27 @@ export default function DesktopNavRight({
           </button>
           {showLangDropdown && (
             <div className="absolute right-0 mt-2 z-50 min-w-[100px] bg-zinc-900 border border-[#30363D] rounded shadow-lg">
-              {["EN", "中文"].map((lang) => (
-                <button
-                  key={lang}
-                  className={`w-full text-left px-4 py-2 hover:bg-zinc-800 text-sm ${
-                    language === lang ? "text-fuchsia-400 font-bold" : "text-white"
-                  }`}
-                  onClick={() => {
-                    setLanguage(lang);
-                    setShowLangDropdown(false);
-                  }}
-                >
-                  {lang}
-                </button>
-              ))}
-            </div>
+            {["EN", "中文"].map((lang) => (
+              <button
+                key={lang}
+                className={`w-full text-left px-4 py-2 hover:bg-zinc-800 text-sm ${
+                  language === lang ? "text-fuchsia-400 font-bold" : "text-white"
+                }`}
+                onClick={async () => {
+                  setLanguage(lang);
+                  setShowLangDropdown(false);
+          
+                  if (lang === "中文") {
+                    await translatePage("en", "zh-CN");
+                  } else {
+                    revertPage(); // 揀返 EN 就還原原文
+                  }
+                }}
+              >
+                {lang}
+              </button>
+            ))}
+          </div>
           )}
         </div>
 
