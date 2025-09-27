@@ -956,11 +956,14 @@ export default () => {
                         {/* Order Book/Trades (col-span-1 on desktop, full width on mobile) */}
                         <div className="flex flex-col gap-2 items-center bg-zinc-900 p-[1px] rounded-sm border border-solid border-[#30363D] w-full">
                             {/* Tabs for Order Book/Trades */}
-                            <Tabs
-                                tabs={["Order Book", "Trades"]}
-                                activeTab={orderBookTab}
-                                onTabChange={setOrderBookTab}
-                                />
+                            <div className="w-full">
+                                <Tabs
+                                    tabs={["Order Book", "Trades"]}
+                                    activeTab={orderBookTab}
+                                    onTabChange={setOrderBookTab}
+                                    />
+                            </div>
+                            
 
                             {/* Tab Content */}
                             {orderBookTab === "Order Book" && (

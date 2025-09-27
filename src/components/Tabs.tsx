@@ -7,46 +7,44 @@ interface TabsProps {
 }
 
 const Tabs: React.FC<TabsProps> = ({ tabs, activeTab, onTabChange }) => {
-  const [underlineStyle, setUnderlineStyle] = useState({ width: 0, left: 0 });
-  const tabsRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [underlineStyle, setUnderlineStyle] = useState({ left: 0, width: 0 });
 
   useEffect(() => {
-    if (tabsRef.current) {
-      const activeTabElement = tabsRef.current.querySelector<HTMLButtonElement>(
-        `button[data-tab="${activeTab}"]`
-      );
-      if (activeTabElement) {
-        const { offsetWidth, offsetLeft } = activeTabElement;
-        setUnderlineStyle({ width: offsetWidth, left: offsetLeft });
-      }
+    if (!containerRef.current) return;
+
+    const activeBtn = Array.from(containerRef.current.children).find(
+      (child) => (child as HTMLElement).dataset.tab === activeTab
+    ) as HTMLElement;
+
+    if (activeBtn) {
+      setUnderlineStyle({
+        left: activeBtn.offsetLeft,
+        width: activeBtn.offsetWidth,
+      });
     }
-  }, [activeTab]);
+  }, [activeTab, tabs]);
 
   return (
-    <div className="relative w-full" ref={tabsRef}>
-      <div className="flex border-b border-[#30363D] w-full items-end">
-        {tabs.map((tab) => (
-          <button
-            key={tab}
-            data-tab={tab}
-            className={`flex-1 text-sm py-[15px] px-4 text-center focus:outline-none transition-colors duration-300 ${
-              activeTab === tab ? "text-white font-bold" : "text-zinc-400"
-            }`}
-            onClick={() => onTabChange(tab)}
-          >
-            {tab}
-          </button>
-        ))}
-      </div>
-
+    <div className="text-nowrap relative flex border-b border-[#30363D]" ref={containerRef}>
       {/* Sliding underline */}
-      <span
+      <div
         className="absolute bottom-0 h-[2px] bg-[#92318D] transition-all duration-300 ease-in-out"
-        style={{
-          width: underlineStyle.width,
-          left: underlineStyle.left,
-        }}
+        style={{ left: underlineStyle.left, width: underlineStyle.width }}
       />
+
+      {tabs.map((tab) => (
+        <button
+          key={tab}
+          data-tab={tab}
+          className={`flex-1 text-sm py-4 px-2 text-center transition-colors duration-300 ${
+            activeTab === tab ? "text-white font-bold" : "text-zinc-400"
+          }`}
+          onClick={() => onTabChange(tab)}
+        >
+          {tab}
+        </button>
+      ))}
     </div>
   );
 };
