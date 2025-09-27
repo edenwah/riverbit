@@ -15,6 +15,7 @@ import ToggleWithText from "../components/ToggleWithText";
 import Select from "../components/Select";
 import AdjustLeverageModal from "../components/AdjustLeverageModal";
 import AIChatWidget from "../components/AIChatWidget";
+import Toast from "../components/Toast";
 
 export default () => {
     const [input1, onChangeInput1] = useState('');
@@ -47,6 +48,22 @@ export default () => {
     const [showAssetPopup, setShowAssetPopup] = useState(false);
     const [showAdjustLeverageModal, setShowAdjustLeverageModal] = useState(false);
 
+    {/* Toast Notification */}
+    const [toast, setToast] = useState<{
+        title: string;
+        message?: string;
+        subMessage?: string;
+        type?: "success" | "loading" | "error";
+      } | null>(null);
+    
+    const showToast = (
+        title: string,
+        type: "success" | "loading" | "error",
+        message?: string,
+        subMessage?: string
+    ) => {
+        setToast({ title, type, message, subMessage });
+    };
 
     {/* Show and Hide TP/SL modal */}
     const [showTPSLModal, setShowTPSLModal] = useState(false); // 控制 modal 顯示
@@ -1346,9 +1363,30 @@ export default () => {
                                                     </div>
                                                 </div>
                                             </div>
-                                            <PrimaryButton size="large" onClick={() => alert("Pressed!")}>
+
+                                            <PrimaryButton
+                                                size="large"
+                                                onClick={() =>
+                                                showToast(
+                                                    "Order Placed",
+                                                    "success",
+                                                    "Amount: 500 USDT",
+                                                    "Processing time: ~15s"
+                                                )
+                                                }
+                                            >
                                                 {input1 === "Sell / Short" ? "Sell / Short" : "Buy / Long"}
                                             </PrimaryButton>
+
+                                            {toast && (
+                                                <Toast
+                                                title={toast.title}
+                                                message={toast.message}
+                                                subMessage={toast.subMessage}
+                                                type={toast.type}
+                                                onClose={() => setToast(null)}
+                                                />
+                                            )}
                                             {/* --- END Market Tab Content --- */}
                                         </div>
                                     )}
