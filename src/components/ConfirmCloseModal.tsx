@@ -24,8 +24,8 @@ const ConfirmCloseModal = ({ coinName, onClose, onConfirm }: ConfirmCloseModalPr
         </div>
 
         {/* Body */}
-        <div className="flex flex-col items-center justify-center flex-1 p-6">
-          <span className="text-white text-base text-center">
+        <div className="flex flex-col items-center flex-1 p-6">
+          <span className="text-white text-base max-md:text-lg text-center">
             Are you sure you want to close position <strong>{coinName}</strong>?
           </span>
         </div>
