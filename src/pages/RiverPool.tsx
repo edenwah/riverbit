@@ -12,6 +12,7 @@ import MobileMenu from "../components/MobileMenu";
 import MobileHeader from "../components/MobileHeader";
 import Select from "../components/Select";
 import StatusTag from "../components/StatusTag";
+import Toast from "../components/Toast";
 
 const RiverPool = () => {
 	const [input1, onChangeInput1] = useState('');
@@ -27,6 +28,23 @@ const RiverPool = () => {
 	const percentValue = input1
 		? Math.max(0, Math.min(100, Math.round((Number(input1) / AMOUNT_TOTAL) * 100)))
 		: 0;
+
+	{/* Toast Notification */}
+	const [toast, setToast] = useState<{
+		title: string;
+		message?: string;
+		subMessage?: string;
+		type?: "success" | "loading" | "error";
+	} | null>(null);
+
+	const showToast = (
+		title: string,
+		type: "success" | "loading" | "error",
+		message?: string,
+		subMessage?: string
+	) => {
+		setToast({ title, type, message, subMessage });
+	};
 
 	const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 	const [language, setLanguage] = useState("EN");
@@ -281,9 +299,28 @@ const RiverPool = () => {
 														]}
 														/>
 
-													<PrimaryButton size="large" onClick={() => alert("Pressed!")}>
-														Deposit
+													{/* Confirm Button */}
+													<PrimaryButton
+														size="large"
+														onClick={() => {
+															// 顯示 toast
+															showToast(
+															`${depositWithdrawTab} Successful`,
+															"success",
+															`Amount: ${input1} USDT`,
+															`Processing time: ~15s`
+															);
+														}}>
+														{depositWithdrawTab}
 													</PrimaryButton>
+													{/* Toast Message */}
+													<Toast
+														title={toast?.title ?? ""}
+														message={toast?.message}
+														subMessage={toast?.subMessage}
+														type={toast?.type}
+														onClose={() => setToast(null)}
+														/>
 												</div>
 											</div>
 										</div>
@@ -688,10 +725,29 @@ const RiverPool = () => {
 															"Optional Cooling Period: 24–72h",
 														]}
 														/>
-
-													<PrimaryButton size="large" onClick={() => alert("Pressed!")}>
-														Deposit
+													{/* Confirm Button */}
+													<PrimaryButton
+														size="large"
+														onClick={() => {
+															// 顯示 toast
+															showToast(
+															`${depositWithdrawTab} Successful`,
+															"success",
+															`Amount: ${input1} USDT`,
+															`Processing time: ~15s`
+															);
+														}}>
+														{depositWithdrawTab}
 													</PrimaryButton>
+													{/* Toast Message */}
+													<Toast
+														title={toast?.title ?? ""}
+														message={toast?.message}
+														subMessage={toast?.subMessage}
+														type={toast?.type}
+														onClose={() => setToast(null)}
+														/>
+
 												</div>
 											</div>
 										</div>
