@@ -1,6 +1,7 @@
 import { useState } from "react";
 import ToggleWithText from "./ToggleWithText";
 import PrimaryButton from "./Button/PrimaryButton";
+import { MicrophoneIcon } from "@heroicons/react/24/solid";
 
 type AIChatWidgetProps = {
   onClose: () => void; // 父層傳入 close callback
@@ -53,14 +54,53 @@ const AIChatWidget = ({ onClose }: AIChatWidgetProps) => {
           className="w-full px-2 py-3 rounded bg-[#0D1117] text-white text-xs outline-none border border-solid border-[#30363D]"
         />
 
-        <PrimaryButton size="large" 
+        {/* Send Button */}
+        <PrimaryButton
+          size="large"
           onClick={() => {
             console.log("Send:", input);
-            setInput("");}}
-          >
-            Send
+            setInput("");
+          }}
+        >
+          Send
         </PrimaryButton>
+
+        {/* Voice Input Button */}
+        <button
+          className="p-3 rounded-full bg-zinc-950 text-white hover:bg-fuchsia-700 focus:bg-fuchsia-700 transition"
+          onClick={() => {
+            // 確保瀏覽器支持
+            const SpeechRecognition =
+              (window as any).SpeechRecognition ||
+              (window as any).webkitSpeechRecognition;
+
+            if (!SpeechRecognition) {
+              alert("Your browser does not support voice recognition.");
+              return;
+            }
+
+            const recognition = new SpeechRecognition();
+            recognition.lang = "en-US"; // 可以改成 zh-HK, zh-CN, etc
+            recognition.interimResults = false;
+            recognition.maxAlternatives = 1;
+
+            recognition.start();
+
+            recognition.onresult = (event: any) => {
+              const transcript = event.results[0][0].transcript;
+              console.log("Voice input:", transcript);
+              setInput(transcript); // 將語音輸入填入 input
+            };
+
+            recognition.onerror = (event: any) => {
+              console.error("Speech recognition error:", event.error);
+            };
+          }}
+        >
+          <MicrophoneIcon className="h-5 w-5 text-white" />
+        </button>
       </div>
+
 
       {/* Footer Tabs */}
       <div className="p-2">
