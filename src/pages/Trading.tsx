@@ -64,22 +64,6 @@ const Trading = () => {
     setShowCloseAllModal(false);
     };
 
-    {/* Show and Hide Close Position modal */}
-    const [showCloseModal, setShowCloseModal] = useState(false);
-    const [showCloseAllModal, setShowCloseAllModal] = useState(false);
-    const [modalCoin, setModalCoin] = useState<string>("");
-
-    const handleClosePosition = (coinName: string) => {
-        // TODO: 實際平倉邏輯，例如更新 table data
-        console.log("Closing position for", coinName);
-    };
-
-    const handleCloseAllConfirm = () => {
-        console.log("Confirmed: close all positions");
-        // 這裡放真正平倉邏輯
-        setShowCloseAllModal(false);
-      };
-
     {/* Toast Notification */}
     const [toast, setToast] = useState<{
         title: string;
