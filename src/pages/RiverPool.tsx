@@ -20,6 +20,7 @@ const RiverPool = () => {
 	const [depositWithdrawTab, setdepositWithdrawTab] = useState("Deposit");
 	const [recordsTab, setRecordsTab] = useState("Records");
 	const [timeRange, setTimeRange] = React.useState("All Time"); 
+	const [error, setError] = useState<string | null>(null);
 
 	// Assume a total amount for percent calculation
 	const AMOUNT_TOTAL = 1000;
@@ -303,6 +304,14 @@ const RiverPool = () => {
 													<PrimaryButton
 														size="large"
 														onClick={() => {
+															if (!input1 || Number(input1) <= 0) {
+															setError("Please enter a valid amount");
+															return;
+															}
+
+															// 清除錯誤
+															setError(null);
+
 															// 顯示 toast
 															showToast(
 															`${depositWithdrawTab} Successful`,
@@ -310,9 +319,16 @@ const RiverPool = () => {
 															`Amount: ${input1} USDT`,
 															`Processing time: ~15s`
 															);
-														}}>
+														}}
+														>
 														{depositWithdrawTab}
 													</PrimaryButton>
+
+													{/* Error message */}
+													{error && (
+													<div className="text-red-500 text-xs mt-2">{error}</div>
+													)}
+													
 													{/* Toast Message */}
 													<Toast
 														title={toast?.title ?? ""}
@@ -729,6 +745,14 @@ const RiverPool = () => {
 													<PrimaryButton
 														size="large"
 														onClick={() => {
+															if (!input1 || Number(input1) <= 0) {
+															setError("Please enter a valid amount");
+															return;
+															}
+
+															// 清除錯誤
+															setError(null);
+
 															// 顯示 toast
 															showToast(
 															`${depositWithdrawTab} Successful`,
@@ -736,9 +760,16 @@ const RiverPool = () => {
 															`Amount: ${input1} USDT`,
 															`Processing time: ~15s`
 															);
-														}}>
+														}}
+														>
 														{depositWithdrawTab}
 													</PrimaryButton>
+
+													{/* Error message */}
+													{error && (
+													<div className="text-red-500 text-xs mt-2">{error}</div>
+													)}
+
 													{/* Toast Message */}
 													<Toast
 														title={toast?.title ?? ""}
