@@ -8,7 +8,7 @@ import MobileMenu from "../components/MobileMenu";
 import PrimaryButton from "../components/Button/PrimaryButton";
 import { SecondaryButton } from "../components/Button/SecondaryButton";
 import Tabs from "../components/Tabs";
-export default () => {
+const Assets = () => {
 	const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 	const [language, setLanguage] = useState("EN");
 	const [showLangDropdown, setShowLangDropdown] = useState(false);
@@ -314,3 +314,5 @@ export default () => {
 		</div>
 	)
 }
+
+export default Assets

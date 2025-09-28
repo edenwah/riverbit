@@ -12,7 +12,7 @@ import PrimaryButton from "../components/Button/PrimaryButton";
 import StatusTag from "../components/StatusTag";
 import Tips from "../components/Tips";
 import AdjustCommissionRateModal from "../components/AdjustCommissionRateModal";
-export default () => {
+const Referral = () => {
 	const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 	const [language, setLanguage] = useState("EN");
 	const [showLangDropdown, setShowLangDropdown] = useState(false);
@@ -1801,3 +1801,5 @@ export default () => {
 		</div>
 	)
 }
+
+export default Referral

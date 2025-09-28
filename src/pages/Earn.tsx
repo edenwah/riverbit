@@ -5,7 +5,7 @@ import DesktopNavRight from "../components/DesktopNavRight";
 import MobileHeader from "../components/MobileHeader";
 import MobileMenu from "../components/MobileMenu";
 import Footer from "../components/Footer";
-export default () => {
+const Earn = () => {
 	const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 	const [language, setLanguage] = useState("EN");
 	const [showLangDropdown, setShowLangDropdown] = useState(false);
@@ -204,3 +204,5 @@ export default () => {
 		</div>
 	)
 }
+
+export default Earn
