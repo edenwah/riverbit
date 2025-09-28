@@ -1275,7 +1275,7 @@ const Trading = () => {
                     
 
                     {/* Trading Form (col-span-1 on desktop, full width on mobile) */}
-                    <div className="xl:col-span-1 flex flex-col bg-zinc-900 p-4 rounded-lg border border-[#30363D]">
+                    <div className="xl:col-span-1 flex flex-col bg-zinc-900 p-4 rounded-lg border border-[#30363D] gap-2 h-full">
                         {/* Cross Margin, Leverage and AI Trading */}
                         <div className="flex items-center justify-between w-full gap-2">
                             {/* Cross Margin Toggle */}
@@ -1314,7 +1314,7 @@ const Trading = () => {
 
                         <div className="flex flex-col w-full h-full">
                             {showAIWidget ? (
-                                <AIChatWidget />
+                                <AIChatWidget onClose={() => setShowAIWidget(false)} />
                             ) : (
                                 <div>
                                     <Tabs

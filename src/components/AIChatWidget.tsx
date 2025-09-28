@@ -2,25 +2,34 @@ import { useState } from "react";
 import ToggleWithText from "./ToggleWithText";
 import PrimaryButton from "./Button/PrimaryButton";
 
-const AIChatWidget = () => {
+type AIChatWidgetProps = {
+  onClose: () => void; // 父層傳入 close callback
+};
+
+const AIChatWidget = ({ onClose }: AIChatWidgetProps) => {
   const [input, setInput] = useState("");
   const [tab, setTab] = useState("Chat");
 
   return (
-    <div className="h-full mx-4 bg-[#1F2226] border border-gray-700 rounded-lg shadow-lg flex flex-col overflow-hidden text-white text-sm">
+    <div className="w-full h-full bg-[#1F2226] border border-gray-700 rounded-lg shadow-lg flex flex-col overflow-hidden text-white text-sm">
       {/* Header */}
-      <div className="flex items-center justify-between p-2 border-b border-gray-600">
+      <div className="flex items-center justify-between p-4 border-b border-gray-600">
         <span className="flex items-center gap-1">
           🤖 AI Assistant Connected
         </span>
         <div className="flex gap-2">
-          <button>🎤</button>
-          <button>⚙️</button>
+          {/* Close Button */}
+          <img
+            src="https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/73d3cc65_expires_30_days.png"
+            className="w-11 h-11 object-fill cursor-pointer"
+            onClick={onClose}
+            alt="Close"
+          />
         </div>
       </div>
 
       {/* Body */}
-      <div className="h-full flex flex-col p-2 gap-2 overflow-y-auto bg-[#181A1D]">
+      <div className="h-full flex flex-col p-4 gap-2 overflow-y-auto bg-[#181A1D]">
         <div className="font-bold">AI Trading Assistant</div>
         <div className="text-gray-400 text-xs">
           Enter trading commands to start intelligent conversation
