@@ -607,9 +607,7 @@ const Trading = () => {
                                 
                                 {/* Tab Content */}
                                 {orderBookTab === "Order Book" && (
-                                    <div className="min-h-screen">
-                                        <OrderBook />
-                                    </div>
+                                    <OrderBook />
                                 )}
                                 {orderBookTab === "Trades" && (
                                     <div className="flex flex-col items-start w-full">
