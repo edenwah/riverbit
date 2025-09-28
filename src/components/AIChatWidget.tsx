@@ -4,22 +4,43 @@ import PrimaryButton from "./Button/PrimaryButton";
 import { MicrophoneIcon } from "@heroicons/react/24/solid";
 
 type AIChatWidgetProps = {
-  onClose: () => void; // 父層傳入 close callback
+  onClose: () => void;
+};
+
+type Message = {
+  role: "user" | "assistant";
+  text: string;
 };
 
 const AIChatWidget = ({ onClose }: AIChatWidgetProps) => {
   const [input, setInput] = useState("");
   const [tab, setTab] = useState("Chat");
+  const [messages, setMessages] = useState<Message[]>([]);
+
+  const handleSend = (text: string) => {
+    if (!text.trim()) return;
+
+    // 將用戶輸入 push 落 messages
+    setMessages((prev) => [...prev, { role: "user", text }]);
+
+    // 清空輸入框
+    setInput("");
+
+    // 模擬 AI 回覆（之後你可以換 API call）
+    setTimeout(() => {
+      setMessages((prev) => [
+        ...prev,
+        { role: "assistant", text: `Echo: ${text}` },
+      ]);
+    }, 500);
+  };
 
   return (
     <div className="w-full h-full bg-[#1F2226] border border-gray-700 rounded-lg shadow-lg flex flex-col overflow-hidden text-white text-sm">
       {/* Header */}
       <div className="flex items-center justify-between p-4 border-b border-gray-600">
-        <span className="flex items-center gap-1">
-          🤖 AI Assistant Connected
-        </span>
+        <span className="flex items-center gap-1">🤖 AI Assistant Connected</span>
         <div className="flex gap-2">
-          {/* Close Button */}
           <img
             src="https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/73d3cc65_expires_30_days.png"
             className="w-11 h-11 object-fill cursor-pointer"
@@ -31,20 +52,41 @@ const AIChatWidget = ({ onClose }: AIChatWidgetProps) => {
 
       {/* Body */}
       <div className="h-full flex flex-col p-4 gap-2 overflow-y-auto bg-[#181A1D]">
-        <div className="font-bold">AI Trading Assistant</div>
-        <div className="text-gray-400 text-xs">
-          Enter trading commands to start intelligent conversation
-        </div>
-        <div className="text-gray-500 text-xs">
-          Supports both voice and text input
-        </div>
-        <div className="text-gray-500 text-xs italic">
-          For example: Buy $100 ETH, set 5% stop-loss...
-        </div>
-        {/* Chat content left empty */}
+        {messages.length === 0 ? (
+          // --- 初始顯示 Instruction ---
+          <>
+            <div className="font-bold">AI Trading Assistant</div>
+            <div className="text-gray-400 text-xs">
+              Enter trading commands to start intelligent conversation
+            </div>
+            <div className="text-gray-500 text-xs">
+              Supports both voice and text input
+            </div>
+            <div className="text-gray-500 text-xs italic">
+              For example: Buy $100 ETH, set 5% stop-loss...
+            </div>
+          </>
+        ) : (
+          // --- 有 message 之後顯示對話 ---
+          <div className="flex flex-col gap-2">
+            {messages.map((m, i) => (
+              <div
+                key={i}
+                className={`px-3 py-2 rounded-lg max-w-[80%] ${
+                  m.role === "user"
+                    ? "bg-fuchsia-700 self-end text-white"
+                    : "bg-gray-700 self-start text-gray-200"
+                }`}
+              >
+                {m.text}
+              </div>
+            ))}
+          </div>
+        )}
       </div>
 
-      {/* Input + Buttons */}
+
+      {/* Input */}
       <div className="flex items-center border-t border-gray-600 p-2 gap-2">
         <input
           type="text"
@@ -54,22 +96,14 @@ const AIChatWidget = ({ onClose }: AIChatWidgetProps) => {
           className="w-full px-2 py-3 rounded bg-[#0D1117] text-white text-xs outline-none border border-solid border-[#30363D]"
         />
 
-        {/* Send Button */}
-        <PrimaryButton
-          size="large"
-          onClick={() => {
-            console.log("Send:", input);
-            setInput("");
-          }}
-        >
+        <PrimaryButton size="large" onClick={() => handleSend(input)}>
           Send
         </PrimaryButton>
 
-        {/* Voice Input Button */}
+        {/* Voice Button */}
         <button
           className="p-3 rounded-full bg-zinc-950 text-white hover:bg-fuchsia-700 focus:bg-fuchsia-700 transition"
           onClick={() => {
-            // 確保瀏覽器支持
             const SpeechRecognition =
               (window as any).SpeechRecognition ||
               (window as any).webkitSpeechRecognition;
@@ -80,7 +114,7 @@ const AIChatWidget = ({ onClose }: AIChatWidgetProps) => {
             }
 
             const recognition = new SpeechRecognition();
-            recognition.lang = "en-US"; // 可以改成 zh-HK, zh-CN, etc
+            recognition.lang = "en-US";
             recognition.interimResults = false;
             recognition.maxAlternatives = 1;
 
@@ -88,8 +122,7 @@ const AIChatWidget = ({ onClose }: AIChatWidgetProps) => {
 
             recognition.onresult = (event: any) => {
               const transcript = event.results[0][0].transcript;
-              console.log("Voice input:", transcript);
-              setInput(transcript); // 將語音輸入填入 input
+              handleSend(transcript);
             };
 
             recognition.onerror = (event: any) => {
@@ -100,7 +133,6 @@ const AIChatWidget = ({ onClose }: AIChatWidgetProps) => {
           <MicrophoneIcon className="h-5 w-5 text-white" />
         </button>
       </div>
-
 
       {/* Footer Tabs */}
       <div className="p-2">
