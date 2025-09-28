@@ -39,6 +39,7 @@ export default () => {
 	const [accountTab, setAccountTab] = useState("Balance"); 
     const [searchFilterTab, setSearchFilterTab] = useState("All Coins");
     const [granularity, setGranularity] = useState("")
+    const [stoplossType, setStoplossType] = useState("Stop Market")
     const [indicator, setIndicator] = useState("")
     const [filterValue, setFilterValue] = useState("")
     const [tif, setTif] = useState("GTC");
@@ -1867,16 +1868,17 @@ export default () => {
                                                         {"Stop-Loss Type"}
                                                     </span>
                                                 </div>
-                                                <button className="flex w-full items-center bg-[#0D1117] text-left p-3 rounded-md border border-solid border-[#30363D]"
-                                                    onClick={()=>alert("Pressed!")}>
-                                                    <span className="text-white text-base mr-[123px]" >
-                                                        {"Stop Market"}
-                                                    </span>
-                                                    <img
-                                                        src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/lwwwj2o4_expires_30_days.png"} 
-                                                        className="w-3 h-[15px] rounded-md object-fill"
+                                                {/* Stop-Loss Type Dropdown */}
+                                                <Select
+                                                    value={stoplossType}
+                                                    onChange={setStoplossType}
+                                                    placeholder="Stop-Loss Type"
+                                                    options={[
+                                                        { label: "Stop Market", value: "Stop Market" },
+                                                        { label: "Stop Limit", value: "Stop Limit" },
+                                                    ]}
+                                                    minWidth="min-w-32"
                                                     />
-                                                </button>
                                             </div>
                                             <div className="flex flex-col items-start gap-2 w-full">
                                                 <div className="flex flex-col items-center pb-[1px]">
