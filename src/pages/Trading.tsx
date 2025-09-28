@@ -1216,12 +1216,10 @@ export default () => {
                                 {/* Leverage Dropdown */}
                                 <div className="flex-1 flex items-center justify-center">
                                     <button
-                                        className={`flex-1 flex flex-col items-center justify-center text-center bg-zinc-950 py-3 px-2 rounded-sm border-[#30363D] border`}
+                                        className="flex-1 flex flex-col items-center justify-center text-center bg-zinc-950 py-3 px-2 rounded-sm border-[#30363D] border"
                                         onClick={() => setShowAdjustLeverageModal(true)}
                                     >
-                                        <span className="text-[#A6A6B5] text-sm">
-                                            {"20x"}
-                                        </span>
+                                        <span className="text-[#A6A6B5] text-sm">{leverage}x</span>
                                     </button>
                                 </div>
                                 
@@ -1880,6 +1878,7 @@ export default () => {
                                                     minWidth="min-w-32"
                                                     />
                                             </div>
+                                            {/* Input fields */}
                                             <div className="flex flex-col items-start gap-2 w-full">
                                                 <div className="flex flex-col items-center pb-[1px]">
                                                     <span className="text-[#9D9DAF] text-sm" >
@@ -2235,18 +2234,15 @@ export default () => {
                     </div>
                 </div>
                 {showAdjustLeverageModal && (
-					<div className="w-full fixed inset-0 z-50 flex items-center justify-center bg-black/60">
-						<div
-						className="relative w-full h-full md:w-[500px] md:h-auto md:rounded-xl flex flex-col justify-center"
-						style={{ maxWidth: "100vw", maxHeight: "100vh" }}
-						>
-						{/* Modal Content */}
-						<AdjustLeverageModal 
-							leverage={leverage}
-                            setLeverage={setLeverage}
-							onClose={() => setShowAdjustLeverageModal(false)} />
-						</div>
-					</div>
+                    <AdjustLeverageModal
+                        leverage={leverage}
+                        setLeverage={setLeverage}
+                        onClose={() => setShowAdjustLeverageModal(false)}
+                        onConfirm={() => {
+                        console.log("Confirmed leverage:", leverage);
+                        setShowAdjustLeverageModal(false);
+                        }}
+                    />
 				)}
                 <Footer />
             </div>
