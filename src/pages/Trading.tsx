@@ -16,6 +16,7 @@ import Select from "../components/Select";
 import AdjustLeverageModal from "../components/AdjustLeverageModal";
 import AIChatWidget from "../components/AIChatWidget";
 import Toast from "../components/Toast";
+import ConfirmCloseModal from "../components/ConfirmCloseModal";
 
 export default () => {
     const [input1, onChangeInput1] = useState('');
@@ -47,6 +48,15 @@ export default () => {
     const [showAIWidget, setShowAIWidget] = useState(false);
     const [showAssetPopup, setShowAssetPopup] = useState(false);
     const [showAdjustLeverageModal, setShowAdjustLeverageModal] = useState(false);
+
+    {/* Show and Hide Close Position modal */}
+    const [showCloseModal, setShowCloseModal] = useState(false);
+    const [modalCoin, setModalCoin] = useState<string>("");
+
+    const handleClosePosition = (coinName: string) => {
+        // TODO: 實際平倉邏輯，例如更新 table data
+        console.log("Closing position for", coinName);
+    };
 
     {/* Toast Notification */}
     const [toast, setToast] = useState<{
@@ -677,13 +687,42 @@ export default () => {
                                                             />
                                                         </div>
                                                     </td>
-
+                                                    
                                                     {/* Actions */}
-                                                    <td className="py-2 px-2 text-fuchsia-800 font-bold">{row.action}</td>
-                                                    </tr>
+                                                    <td className="py-2 px-2 font-bold text-fuchsia-800">
+                                                        <button
+                                                            onClick={() => {
+                                                            setModalCoin(row.coin); // state 存住要關閉嘅 coin 名稱
+                                                            setShowCloseModal(true); // state 控制 modal 顯示
+                                                            }}
+                                                        >
+                                                            {row.action}
+                                                        </button>
+                                                    </td>
+                                                </tr>
                                                 ))}
                                                 </tbody>
                                             </table>
+
+                                            {showCloseModal && (
+                                                <div className="w-full fixed inset-0 z-50 flex items-center justify-center bg-black/60">
+                                                    <div
+                                                    className="relative w-full h-full md:w-[500px] md:h-auto md:rounded-xl flex flex-col justify-center"
+                                                    style={{ maxWidth: "100vw", maxHeight: "100vh" }}
+                                                    >
+                                                    {/* Modal Content */}
+                                                    <ConfirmCloseModal
+                                                        coinName={modalCoin}
+                                                        onClose={() => setShowCloseModal(false)}
+                                                        onConfirm={() => {
+                                                        handleClosePosition(modalCoin);
+                                                        setShowCloseModal(false);
+                                                        }}
+                                                    />
+                                                    </div>
+                                                </div>
+                                            )}
+
 
                                             {showTPSLModal && modalData && (
                                             <div className="w-full fixed inset-0 z-50 flex items-center justify-center bg-black/60">

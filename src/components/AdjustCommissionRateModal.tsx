@@ -1,6 +1,6 @@
 import PrimaryButton from "./Button/PrimaryButton";
 import { SecondaryButton } from "./Button/SecondaryButton";
-import Tips from "./Tips"; // 確保有呢個 component
+import Tips from "./Tips"; // Assuming you have a Tips component
 
 type AdjustCommissionRateModalProps = {
   userAddress: string;
