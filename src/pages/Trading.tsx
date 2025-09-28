@@ -17,6 +17,7 @@ import AdjustLeverageModal from "../components/AdjustLeverageModal";
 import AIChatWidget from "../components/AIChatWidget";
 import Toast from "../components/Toast";
 import ConfirmCloseModal from "../components/ConfirmCloseModal";
+import OrderBook from "../components/OrderBook";
 
 const Trading = () => {
     const [input1, onChangeInput1] = useState('');
@@ -606,102 +607,8 @@ const Trading = () => {
                                 
                                 {/* Tab Content */}
                                 {orderBookTab === "Order Book" && (
-                                    <div className="flex flex-col items-start w-full">
-                                        {/* --- BEGIN Order Book Content (lines 353-640) --- */}
-                                        {/* Paste all the JSX from line 353 to 640 here */}
-                                        <div className="flex flex-col items-start w-full">
-                                            <div className="flex flex-col items-center py-1 w-full">
-                                                <div className="flex items-start pr-[1px] w-full">
-                                                    <span className="text-zinc-400 text-sm my-1 w-full" >
-                                                        {"Price"}
-                                                    </span>
-                                                    <span className="text-zinc-400 text-sm my-1 w-full" >
-                                                        {"Size"}
-                                                    </span>
-                                                    <span className="text-zinc-400 text-sm my-1 w-full" >
-                                                        {"Total"}
-                                                    </span>
-                                                </div>
-                                            </div>
-                                            <div className="flex flex-col w-full">
-                                                {[
-                                                    { price: "110,595.00", size: "2.376", total: "16.500", barWidth: "80%" },
-                                                    { price: "110,594.00", size: "1.359", total: "15.200", barWidth: "70%" },
-                                                    { price: "110,593.00", size: "0.990", total: "13.900", barWidth: "60%" },
-                                                    { price: "110,592.00", size: "3.025", total: "12.600", barWidth: "50%" },
-                                                    { price: "110,591.00", size: "1.146", total: "11.300", barWidth: "45%" },
-                                                    { price: "110,590.00", size: "2.852", total: "10.000", barWidth: "37%" },
-                                                    { price: "110,589.00", size: "2.852", total: "10.000", barWidth: "33%" },
-                                                    { price: "110,588.00", size: "2.852", total: "10.000", barWidth: "25%" },
-                                                    { price: "110,587.00", size: "2.852", total: "0.190",  barWidth: "20%" },
-                                                ].map((row, idx) => (
-                                                    <div
-                                                    key={idx}
-                                                    className="relative flex w-full items-center text-sm text-white"
-                                                    >
-                                                    {/* 背景色 box */}
-                                                    <div
-                                                        className="absolute left-0 top-0 h-full bg-[#EF44441A]"
-                                                        style={{ width: row.barWidth }}
-                                                    />
-
-                                                    {/* 三欄內容 */}
-                                                    <div className="grid grid-cols-3 w-full relative z-10 py-2">
-                                                        <span className="text-[#F85149]">{row.price}</span>
-                                                        <span>{row.size}</span>
-                                                        <span className="text-zinc-400">{row.total}</span>
-                                                    </div>
-                                                    </div>
-                                                ))}
-                                            </div>
-
-                                            <div className="flex w-full flex-col items-center p-3">
-                                                <span className="text-zinc-400 text-sm " >
-                                                    {"Spread: 1 (0.001%)"}
-                                                </span>
-                                            </div>
-                                            <div className="flex flex-col w-full">
-                                                {(() => {
-                                                    const bids = [
-                                                    { price: "110,589.00", size: 1.799, total: 0.270 },
-                                                    { price: "110,589.00", size: 1.799, total: 8.000 },
-                                                    { price: "110,589.00", size: 1.799, total: 8.000 },
-                                                    { price: "110,588.00", size: 1.755, total: 9.100 },
-                                                    { price: "110,587.00", size: 0.351, total: 10.200 },
-                                                    { price: "110,586.00", size: 2.952, total: 11.300 },
-                                                    { price: "110,585.00", size: 0.172, total: 12.400 },
-                                                    { price: "110,584.00", size: 2.474, total: 13.500 },
-                                                    ];
-
-                                                    const maxTotal = Math.max(...bids.map(b => b.total));
-
-                                                    return bids.map((row, idx) => {
-                                                    const barWidth = `${(row.total / maxTotal) * 100}%`;
-
-                                                    return (
-                                                        <div
-                                                        key={idx}
-                                                        className="relative flex w-full items-center text-sm text-white"
-                                                        >
-                                                        {/* 背景色 bar */}
-                                                        <div
-                                                            className="absolute left-0 top-0 h-full bg-[#22C55E1A]"
-                                                            style={{ width: barWidth }}
-                                                        />
-
-                                                        {/* 三欄內容 */}
-                                                        <div className="grid grid-cols-3 w-full relative z-10 py-2">
-                                                            <span className="text-[#2DA44E]">{row.price}</span>
-                                                            <span>{row.size}</span>
-                                                            <span className="text-zinc-400">{row.total}</span>
-                                                        </div>
-                                                        </div>
-                                                    );
-                                                    });
-                                                })()}
-                                            </div>
-
-                                        </div>
+                                    <div className="min-h-screen">
+                                        <OrderBook />
                                     </div>
                                 )}
                                 {orderBookTab === "Trades" && (
