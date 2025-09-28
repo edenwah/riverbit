@@ -1247,7 +1247,7 @@ const Trading = () => {
 
                             {/* AI Trading Toggle */}
                             <button
-                                className={`flex-1 flex flex-col items-center justify-center text-center bg-zinc-950 py-3 px-2 rounded-sm border ${
+                                className={`text-nowrap flex-1 flex flex-col items-center justify-center text-center bg-zinc-950 py-3 px-2 rounded-sm border ${
                                     showAIWidget ? "border-fuchsia-800 border-2" : "border-[#30363D]"
                                 } border-solid`}
                                 onClick={() => setShowAIWidget((prev) => !prev)}
