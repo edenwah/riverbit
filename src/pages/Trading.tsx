@@ -288,840 +288,423 @@ const Trading = () => {
                         />
                 )}
                 
-                <div className="grid grid-cols-1 xl:grid-cols-5 items-start self-stretch p-2 gap-2">
-                    {/* Main Chart & Account Overview (col-span-3 on desktop, full width on mobile) */}
-                    <div className="md:col-span-3 flex flex-col gap-2 w-full">
-                        <div className="flex flex-col self-stretch bg-zinc-900 py-4 gap-3 rounded-lg border border-solid border-[#30363D]">
-                            <div className="flex flex-col md:flex-row md:items-center self-stretch mx-3 gap-2">
-                                {/* Row 1: Asset Name + Select Asset */}
-                                <div className="flex w-full items-center gap-2 mb-1 md:mb-0 md:mr-7">
-                                    <img
-                                        src="https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/11z6u7t1_expires_30_days.png"
-                                        className="w-3 h-7 object-fill"
-                                    />
-                                    <span className="text-gray-200 text-lg font-bold">
-                                        {selectedAssetSymbol}
-                                    </span>
-                                    {/* Select Asset */}
-                                    <div className="relative">
-                                        <button
-                                            type="button"
-                                            className="flex items-center gap-1 ml-4 px-3 py-2 bg-zinc-900 rounded-sm  text-zinc-400 text-sm font-bold focus:outline-none"
-                                            onClick={() => setShowAssetPopup((v) => !v)}
-                                        >
-                                            <span>Select Asset</span>
+                <div className="grid grid-cols-1 xl:grid-cols-5 items-start p-2 gap-2">
+                    {/* Left side: Chart + Order Book + Account Overview (span 4 cols on xl) */}
+                    <div className="xl:col-span-4 flex flex-col gap-2 w-full">
+                        {/* Top row: Asset Info + Main Chart + Order Book */}
+                        <div className="grid grid-cols-1 xl:grid-cols-4 gap-2">
+                            {/* Main Chart (3 cols) */}
+                            <div className="xl:col-span-3 flex flex-col gap-2">
+                                {/* Asset Info */}
+                                <div className="flex flex-col self-stretch bg-zinc-900 py-4 gap-3 rounded-lg border border-solid border-[#30363D]">
+                                    <div className="flex flex-col md:flex-row md:items-center self-stretch mx-3 gap-2">
+                                        {/* Row 1: Asset Name + Select Asset */}
+                                        <div className="flex w-full items-center gap-2 mb-1 md:mb-0 md:mr-7">
                                             <img
-                                                src="https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/rnvmw36i_expires_30_days.png"
-                                                className="w-3 h-[15px] rounded-sm object-fill"
-                                                alt="Select Asset"
+                                                src="https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/11z6u7t1_expires_30_days.png"
+                                                className="w-3 h-7 object-fill"
                                             />
-                                        </button>
-                                        {showAssetPopup && (
-                                            <div className="fixed inset-0 z-50 flex items-start md:mt-40 md:ml-4">
-                                                {/* 背景遮罩 */}
-                                                <div
-                                                    className="absolute inset-0 bg-black/50 md:bg-transparent"
-                                                    // Remove onClick here, handled by effect
-                                                />
-                                                {/* Popup 內容 */}
-                                                <div
-                                                    ref={assetPopupRef}
-                                                    className="relative w-full max-w-[910px] bg-[#272B2F] overflow-auto flex flex-col
-                                                        md:rounded-lg md:border md:border-[#30363D] md:ml-0 md:mr-0
-                                                        h-[100vh] md:h-auto
-                                                        mt-auto md:mt-0
-                                                        rounded-t-lg"
+                                            <span className="text-gray-200 text-lg font-bold">
+                                                {selectedAssetSymbol}
+                                            </span>
+                                            {/* Select Asset */}
+                                            <div className="relative">
+                                                <button
+                                                    type="button"
+                                                    className="flex items-center gap-1 ml-4 px-3 py-2 bg-zinc-900 rounded-sm  text-zinc-400 text-sm font-bold focus:outline-none"
+                                                    onClick={() => setShowAssetPopup((v) => !v)}
                                                 >
-                                                    {/* Close button for mobile */}
-                                                    <div className="md:hidden w-full flex justify-end p-4">
-                                                        <button className="text-white text-lg font-bold" onClick={() => setShowAssetPopup(false)}>
-                                                        ✕
-                                                        </button>
-                                                    </div>
+                                                    <span>Select Asset</span>
+                                                    <img
+                                                        src="https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/rnvmw36i_expires_30_days.png"
+                                                        className="w-3 h-[15px] rounded-sm object-fill"
+                                                        alt="Select Asset"
+                                                    />
+                                                </button>
+                                                {showAssetPopup && (
+                                                    <div className="fixed inset-0 z-50 flex items-start md:mt-40 md:ml-4">
+                                                        {/* 背景遮罩 */}
+                                                        <div
+                                                            className="absolute inset-0 bg-black/50 md:bg-transparent"
+                                                            // Remove onClick here, handled by effect
+                                                        />
+                                                        {/* Popup 內容 */}
+                                                        <div
+                                                            ref={assetPopupRef}
+                                                            className="relative w-full max-w-[910px] bg-[#272B2F] overflow-auto flex flex-col
+                                                                md:rounded-lg md:border md:border-[#30363D] md:ml-0 md:mr-0
+                                                                h-[100vh] md:h-auto
+                                                                mt-auto md:mt-0
+                                                                rounded-t-lg"
+                                                        >
+                                                            {/* Close button for mobile */}
+                                                            <div className="md:hidden w-full flex justify-end p-4">
+                                                                <button className="text-white text-lg font-bold" onClick={() => setShowAssetPopup(false)}>
+                                                                ✕
+                                                                </button>
+                                                            </div>
 
-                                                    {/* Search + Filter */}
-                                                    <div className="flex items-center justify-between w-full px-4 py-6 gap-2 border-b border-[#374151]">
-                                                        <div className="flex items-center flex-1 bg-[#0D1117] py-3 px-2 rounded-sm border border-[#30363D]">
-                                                            <img
-                                                                src="https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/alyycaw7_expires_30_days.png"
-                                                                className="w-4 h-6 mx-4 object-fill"
-                                                            />
-                                                            <input
-                                                                placeholder="Search"
-                                                                value={input10}
-                                                                onChange={(event) => onChangeInput10(event.target.value)}
-                                                                className="w-full flex-1 text-[#ADAEBC] text-base border-0"
-                                                            />
-                                                        </div>
-                                                        <ToggleWithText
-                                                            options={["Strict", "All"]}
-                                                            value={input11}
-                                                            onChange={onChangeInput11}
-                                                            />
+                                                            {/* Search + Filter */}
+                                                            <div className="flex items-center justify-between w-full px-4 py-6 gap-2 border-b border-[#374151]">
+                                                                <div className="flex items-center flex-1 bg-[#0D1117] py-3 px-2 rounded-sm border border-[#30363D]">
+                                                                    <img
+                                                                        src="https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/alyycaw7_expires_30_days.png"
+                                                                        className="w-4 h-6 mx-4 object-fill"
+                                                                    />
+                                                                    <input
+                                                                        placeholder="Search"
+                                                                        value={input10}
+                                                                        onChange={(event) => onChangeInput10(event.target.value)}
+                                                                        className="w-full flex-1 text-[#ADAEBC] text-base border-0"
+                                                                    />
+                                                                </div>
+                                                                <ToggleWithText
+                                                                    options={["Strict", "All"]}
+                                                                    value={input11}
+                                                                    onChange={onChangeInput11}
+                                                                    />
 
 
-                                                    </div>
+                                                            </div>
 
-                                                    {/* Tab Filter */}
-                                                    <div className="overflow-auto flex whitespace-nowrap gap-x-4 gap-y-2 px-4 py-2 mb-2 text-sm">
-                                                        {["All Coins","xStocks","Perps","Spot","Trending","DEX Only","Pre-launch","AI","DeFi","Layer 1","Layer 2","Meme"].map(tab => (
-                                                            <button
-                                                                key={tab}
-                                                                className={`my-1 px-3 py-1 rounded transition ${
-                                                                    searchFilterTab === tab
-                                                                        ? "bg-fuchsia-800 text-white font-bold"
-                                                                        : "bg-transparent text-zinc-400"
-                                                                }`}
-                                                                onClick={() => setSearchFilterTab(tab)}
-                                                                type="button"
-                                                            >
-                                                                {tab}
-                                                            </button>
-                                                        ))}
-                                                    </div>
-
-                                                    <div className="w-full overflow-auto text-left">
-                                                        <table className="min-w-[700px] w-full text-sm">
-                                                            <thead>
-                                                                <tr className="text-zinc-400 font-bold border-b border-[#30363D]">
-                                                                    <th className="px-4 py-3 text-left">Symbol</th>
-                                                                    <th className="px-4 py-3 text-left">Leverage</th>
-                                                                    <th className="px-4 py-3 text-left">Last Price</th>
-                                                                    <th className="px-4 py-3 text-left">24h Change</th>
-                                                                    <th className="px-4 py-3 text-left">8h Funding</th>
-                                                                    <th className="px-4 py-3 text-left">24h Volume</th>
-                                                                    <th className="px-4 py-3 text-left">Open Interest</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                {filteredMarkets.map((row, idx) => (
-                                                                    <tr
-                                                                        key={idx}
-                                                                        className="border-b border-[#30363D] text-white hover:bg-[#1f2326] cursor-pointer"
-                                                                        onClick={() => {
-                                                                            setSelectedAssetSymbol(row.symbol);
-                                                                            setShowAssetPopup(false);
-                                                                        }}
+                                                            {/* Tab Filter */}
+                                                            <div className="overflow-auto flex whitespace-nowrap gap-x-4 gap-y-2 px-4 py-2 mb-2 text-sm">
+                                                                {["All Coins","xStocks","Perps","Spot","Trending","DEX Only","Pre-launch","AI","DeFi","Layer 1","Layer 2","Meme"].map(tab => (
+                                                                    <button
+                                                                        key={tab}
+                                                                        className={`my-1 px-3 py-1 rounded transition ${
+                                                                            searchFilterTab === tab
+                                                                                ? "bg-fuchsia-800 text-white font-bold"
+                                                                                : "bg-transparent text-zinc-400"
+                                                                        }`}
+                                                                        onClick={() => setSearchFilterTab(tab)}
+                                                                        type="button"
                                                                     >
-                                                                        <td className="px-4 py-2">
-                                                                            <div className="flex items-center gap-3">
-                                                                                <button className={`${row.bg} text-white py-2 px-3 rounded-full border-0`}>{row.symbol.charAt(0)}</button>
-                                                                                <div className="flex flex-col">
-                                                                                    <span className="font-bold">{row.symbol}</span>
-                                                                                    <span className="text-gray-400 text-sm">{row.name}</span>
-                                                                                </div>
-                                                                            </div>
-                                                                        </td>
-                                                                        <td className="px-4 py-2">{row.leverage}</td>
-                                                                        <td className="px-4 py-2 font-bold">{row.price}</td>
-                                                                        <td className="px-4 py-2 text-[#2DA44E]">{row.change}</td>
-                                                                        <td className="px-4 py-2">{row.funding}</td>
-                                                                        <td className="px-4 py-2">{row.volume}</td>
-                                                                        <td className="px-4 py-2">{row.oi}</td>
-                                                                    </tr>
+                                                                        {tab}
+                                                                    </button>
                                                                 ))}
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
+                                                            </div>
 
-                                                    {/* Footer */}
-                                                    <div className="flex items-center justify-between px-4 py-2 text-sm text-zinc-400 mt-4">
-                                                        <span>Showing 5 of 247 markets</span>
-                                                        <span className="max-md:hidden">Press <button className="px-2 py-1 bg-gray-600 rounded text-sm">ESC</button> to close</span>
-                                                    </div>
+                                                            <div className="w-full overflow-auto text-left">
+                                                                <table className="min-w-[700px] w-full text-sm">
+                                                                    <thead>
+                                                                        <tr className="text-zinc-400 font-bold border-b border-[#30363D]">
+                                                                            <th className="px-4 py-3 text-left">Symbol</th>
+                                                                            <th className="px-4 py-3 text-left">Leverage</th>
+                                                                            <th className="px-4 py-3 text-left">Last Price</th>
+                                                                            <th className="px-4 py-3 text-left">24h Change</th>
+                                                                            <th className="px-4 py-3 text-left">8h Funding</th>
+                                                                            <th className="px-4 py-3 text-left">24h Volume</th>
+                                                                            <th className="px-4 py-3 text-left">Open Interest</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        {filteredMarkets.map((row, idx) => (
+                                                                            <tr
+                                                                                key={idx}
+                                                                                className="border-b border-[#30363D] text-white hover:bg-[#1f2326] cursor-pointer"
+                                                                                onClick={() => {
+                                                                                    setSelectedAssetSymbol(row.symbol);
+                                                                                    setShowAssetPopup(false);
+                                                                                }}
+                                                                            >
+                                                                                <td className="px-4 py-2">
+                                                                                    <div className="flex items-center gap-3">
+                                                                                        <button className={`${row.bg} text-white py-2 px-3 rounded-full border-0`}>{row.symbol.charAt(0)}</button>
+                                                                                        <div className="flex flex-col">
+                                                                                            <span className="font-bold">{row.symbol}</span>
+                                                                                            <span className="text-gray-400 text-sm">{row.name}</span>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </td>
+                                                                                <td className="px-4 py-2">{row.leverage}</td>
+                                                                                <td className="px-4 py-2 font-bold">{row.price}</td>
+                                                                                <td className="px-4 py-2 text-[#2DA44E]">{row.change}</td>
+                                                                                <td className="px-4 py-2">{row.funding}</td>
+                                                                                <td className="px-4 py-2">{row.volume}</td>
+                                                                                <td className="px-4 py-2">{row.oi}</td>
+                                                                            </tr>
+                                                                        ))}
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
 
-                                                </div>
+                                                            {/* Footer */}
+                                                            <div className="flex items-center justify-between px-4 py-2 text-sm text-zinc-400 mt-4">
+                                                                <span>Showing 5 of 247 markets</span>
+                                                                <span className="max-md:hidden">Press <button className="px-2 py-1 bg-gray-600 rounded text-sm">ESC</button> to close</span>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                )}
+
                                             </div>
-                                        )}
-
-                                    </div>
-                                </div>
-                                {/* Row 2: Granularity + Indicator */}
-                                <div className="flex gap-2  md:ml-auto">
-                                    {/* Granularity */}
-                                    <Select
-                                        value={granularity}
-                                        onChange={setGranularity}
-                                        placeholder="Granularity"
-                                        options={[
-                                            { label: "1m", value: "1m" },
-                                            { label: "5m", value: "5m" },
-                                            { label: "15m", value: "15m" },
-                                            { label: "1h", value: "1h" },
-                                            { label: "1d", value: "1d" },
-                                        ]}
-                                        minWidth="min-w-32"
-                                        />
-
-                                    {/* Indicator */}
-                                    <Select
-                                        value={indicator}
-                                        onChange={setIndicator}
-                                        placeholder="Indicator"
-                                        options={[
-                                            { label: "None", value: "None" },
-                                            { label: "EMA", value: "EMA" },
-                                            { label: "SMA", value: "SMA" },
-                                            { label: "RSI", value: "RSI" },
-                                            { label: "MACD", value: "MACD" },
-                                        ]}
-                                        minWidth="min-w-32"
-                                        />
-
-                                </div>
-                            </div>
-
-                            <div className="flex flex-wrap items-start self-stretch mx-3 gap-3 text-left">
-                                <div className="flex flex-1 flex-col items-start min-w-24">
-                                    <span className="text-zinc-400 text-sm " >
-                                        {"Mark Price"}
-                                    </span>
-                                    <span className="text-gray-200 text-sm font-bold  " >
-                                        {"227.34"}
-                                    </span>
-                                </div>
-                                <div className="flex flex-1 flex-col items-start min-w-24">
-                                    <span className="text-zinc-400 text-sm " >
-                                        {"Index Price"}
-                                    </span>
-                                    <span className="text-gray-200 text-sm font-bold " >
-                                        {"227.30"}
-                                    </span>
-                                </div>
-                                <div className="flex flex-1 flex-col items-start min-w-24">
-                                    <span className="text-zinc-400 text-sm " >
-                                        {"24h Change"}
-                                    </span>
-                                    <span className="text-[#F85149] text-sm font-bold  " >
-                                        {"-0.97%"}
-                                    </span>
-                                </div>
-                                <div className="flex flex-1 flex-col items-start min-w-24">
-                                    <span className="text-zinc-400 text-sm " >
-                                        {"24h Volume"}
-                                    </span>
-                                    <span className="text-gray-200 text-sm font-bold  " >
-                                        {"3.2B"}
-                                    </span>
-                                </div>
-                                <div className="flex flex-1 flex-col items-start min-w-24">
-                                    <span className="text-zinc-400 text-sm " >
-                                        {"Open Interest"}
-                                    </span>
-                                    <span className="text-gray-200 text-sm font-bold " >
-                                        {"3.5B"}
-                                    </span>
-                                </div>
-                                <div className="flex flex-1 flex-col items-start min-w-24">
-                                    <span className="text-zinc-400 text-sm " >
-                                        {"Funding Rate"}
-                                    </span>
-                                    <span className="text-[#2DA44E] text-sm font-bold " >
-                                        {"0.1300%"}
-                                    </span>
-                                </div>
-                                <div className="flex flex-1 flex-col items-start min-w-24">
-                                    <span className="text-zinc-400 text-sm " >
-                                        {"Next Settlement"}
-                                    </span>
-                                    <span className="text-gray-200 text-sm font-bold " >
-                                        {"00:52:54"}
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="self-stretch bg-zinc-900 h-[500px] p-[1px] rounded-sm border border-solid border-[#30363D]">
-                            <iframe
-                                title="TradingView Chart"
-                                id="tradingview_widget"
-                                src={tvSrc}
-                                className="w-full h-full rounded-sm"
-                                frameBorder="0"
-                                allowTransparency={true}
-                                scrolling="no"
-                                allowFullScreen
-                            />
-                        </div>
-                        <div className="self-stretch bg-zinc-900 py-[1px] rounded-sm border border-solid border-[#30363D]">
-                            <div className="flex flex-col items-start self-stretch py-4 mx-[1px] gap-2">
-                                <span className="text-white text-lg ml-3" >
-                                    {"Account Overview"}
-                                </span>
-                                <div className="flex flex-wrap justify-between items-start self-stretch mx-3 text-left gap-3">
-                                    <div className="flex flex-1 flex-col items-start min-w-32">
-                                        <span className="text-zinc-400 text-sm" >
-                                            {"Total Account Value"}
-                                        </span>
-                                        <span className="text-white text-base" >
-                                            {"$42,845.67"}
-                                        </span>
-                                    </div>
-                                    <div className="flex flex-1 flex-col items-start min-w-32">
-                                        <span className="text-zinc-400 text-sm" >
-                                            {"Total Margin Used"}
-                                        </span>
-                                        <span className="text-white text-base" >
-                                            {"$5,525.00"}
-                                        </span>
-                                    </div>
-                                    <div className="flex flex-1 flex-col items-start min-w-32">
-                                        <span className="text-zinc-400 text-sm" >
-                                            {"Total Notional Position"}
-                                        </span>
-                                        <span className="text-white text-base" >
-                                            {"$37,000.00"}
-                                        </span>
-                                    </div>
-                                    <div className="flex flex-1 flex-col items-start min-w-32">
-                                        <span className="text-zinc-400 text-sm" >
-                                            {"Withdrawable Amount"}
-                                        </span>
-                                        <span className="text-white text-base" >
-                                            {"$37,320.67"}
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="flex flex-col w-full p-4">
-                                {/* Tabs + Filter */}
-                                <div className="overflow-x-auto">
-                                    <div className="flex gap-4 justify-between items-center border-b border-[#30363D] min-w-[600px] flex-nowrap">
-                                        
-                                        <Tabs
-                                            tabs={[
-                                                "Balance",
-                                                "Positions",
-                                                "Open Orders",
-                                                "Trade History",
-                                                "Funding History",
-                                                "Order History",
-                                            ]}
-                                            activeTab={accountTab}
-                                            onTabChange={setAccountTab}
-                                            />
-
-                                        {/* Filter Selector */}
-                                        <div className="relative">
+                                        </div>
+                                        {/* Row 2: Granularity + Indicator */}
+                                        <div className="flex gap-2  md:ml-auto">
+                                            {/* Granularity */}
                                             <Select
-                                                value={filterValue}
-                                                onChange={setFilterValue}
-                                                placeholder="Filter"
+                                                value={granularity}
+                                                onChange={setGranularity}
+                                                placeholder="Granularity"
                                                 options={[
-                                                    { label: "All", value: "All" },
-                                                    { label: "Active", value: "Active" },
-                                                    { label: "Long", value: "Long" },
-                                                    { label: "Short", value: "Short" },
+                                                    { label: "1m", value: "1m" },
+                                                    { label: "5m", value: "5m" },
+                                                    { label: "15m", value: "15m" },
+                                                    { label: "1h", value: "1h" },
+                                                    { label: "1d", value: "1d" },
                                                 ]}
                                                 minWidth="min-w-32"
                                                 />
+
+                                            {/* Indicator */}
+                                            <Select
+                                                value={indicator}
+                                                onChange={setIndicator}
+                                                placeholder="Indicator"
+                                                options={[
+                                                    { label: "None", value: "None" },
+                                                    { label: "EMA", value: "EMA" },
+                                                    { label: "SMA", value: "SMA" },
+                                                    { label: "RSI", value: "RSI" },
+                                                    { label: "MACD", value: "MACD" },
+                                                ]}
+                                                minWidth="min-w-32"
+                                                />
+
+                                        </div>
+                                    </div>
+
+                                    <div className="flex flex-wrap items-start self-stretch mx-3 gap-3 text-left">
+                                        <div className="flex flex-1 flex-col items-start min-w-24">
+                                            <span className="text-zinc-400 text-sm " >
+                                                {"Mark Price"}
+                                            </span>
+                                            <span className="text-gray-200 text-sm font-bold  " >
+                                                {"227.34"}
+                                            </span>
+                                        </div>
+                                        <div className="flex flex-1 flex-col items-start min-w-24">
+                                            <span className="text-zinc-400 text-sm " >
+                                                {"Index Price"}
+                                            </span>
+                                            <span className="text-gray-200 text-sm font-bold " >
+                                                {"227.30"}
+                                            </span>
+                                        </div>
+                                        <div className="flex flex-1 flex-col items-start min-w-24">
+                                            <span className="text-zinc-400 text-sm " >
+                                                {"24h Change"}
+                                            </span>
+                                            <span className="text-[#F85149] text-sm font-bold  " >
+                                                {"-0.97%"}
+                                            </span>
+                                        </div>
+                                        <div className="flex flex-1 flex-col items-start min-w-24">
+                                            <span className="text-zinc-400 text-sm " >
+                                                {"24h Volume"}
+                                            </span>
+                                            <span className="text-gray-200 text-sm font-bold  " >
+                                                {"3.2B"}
+                                            </span>
+                                        </div>
+                                        <div className="flex flex-1 flex-col items-start min-w-24">
+                                            <span className="text-zinc-400 text-sm " >
+                                                {"Open Interest"}
+                                            </span>
+                                            <span className="text-gray-200 text-sm font-bold " >
+                                                {"3.5B"}
+                                            </span>
+                                        </div>
+                                        <div className="flex flex-1 flex-col items-start min-w-24">
+                                            <span className="text-zinc-400 text-sm " >
+                                                {"Funding Rate"}
+                                            </span>
+                                            <span className="text-[#2DA44E] text-sm font-bold " >
+                                                {"0.1300%"}
+                                            </span>
+                                        </div>
+                                        <div className="flex flex-1 flex-col items-start min-w-24">
+                                            <span className="text-zinc-400 text-sm " >
+                                                {"Next Settlement"}
+                                            </span>
+                                            <span className="text-gray-200 text-sm font-bold " >
+                                                {"00:52:54"}
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
-
-                                {/* Tab Content */}
-                                {accountTab === "Balance" && (
-                                    <div className="overflow-x-auto py-4 text-left">
-                                        <table className="w-full text-left border-collapse min-w-[400px]">
-                                            <thead className="text-sm text-zinc-400 font-bold">
-                                            <tr>
-                                                <th className="py-2 px-2">Currency</th>
-                                                <th className="py-2 px-2">Available</th>
-                                                <th className="py-2 px-2">In Orders</th>
-                                                <th className="py-2 px-2">Value($)</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody className="text-white text-sm">
-                                            {balanceTableData.map((row, idx) => (
-                                                <tr key={idx} className="border-b border-[#30363D]">
-                                                    <td className="py-2 px-2">{row.currency}</td>
-                                                    <td className="py-2 px-2">{row.available}</td>
-                                                    <td className="py-2 px-2">{row.inOrders}</td>
-                                                    <td className="py-2 px-2">{row.value}</td>
-                                                </tr>
-                                            ))}
-                                            </tbody>
-                                        </table>
+                                {/* TradingView Chart + Account Overview */}
+                                <div className="flex flex-col self-stretch bg-zinc-900 h-full p-0 rounded-lg border border-solid border-[#30363D]">
+                                    {/* TradingView Widget */}
+                                    <div className="h-full min-h-[400px]">
+                                        <iframe
+                                            title="TradingView Chart"
+                                            id="tradingview_widget"
+                                            src={tvSrc}
+                                            className="w-full h-full rounded-sm"
+                                            frameBorder="0"
+                                            allowTransparency={true}
+                                            scrolling="no"
+                                            allowFullScreen
+                                        />
                                     </div>
-                                  
-                                )}
-                                {/* Positions */}
-                                {accountTab === "Positions" && (
-                                    <div className="py-4">
-                                        <div className="overflow-x-auto">
-                                            <table className="w-full text-left border-collapse">
-                                                {/* Table Head */}
-                                                <thead>
-                                                <tr className="text-zinc-400 text-sm font-bold gap-2">
-                                                    <th className="py-2 px-2">Coin</th>
-                                                    <th className="py-2 px-2">Position</th>
-                                                    <th className="py-2 px-2">Funding Rate</th>
-                                                    <th className="py-2 px-2">PNL (ROE%)</th>
-                                                    <th className="py-2 px-2">Liq. Price</th>
-                                                    <th className="py-2 px-2">Margin</th>
-                                                    <th className="py-2 px-2">TP/SL</th>
-                                                    <th className="py-2 px-2">Actions</th>
-                                                </tr>
-                                                </thead>
-
-                                                {/* Table Body */}
-                                                <tbody className="text-white text-sm">
-                                                {[
-                                                    {
-                                                    coin: "xAAPL",
-                                                    tags: ["8x", "Cross"],
-                                                    extra: "$12.50/day",
-                                                    position: { value: "$25,000 @227.10", side: "Long" },
-                                                    fundingRate: "+0.0100%",
-                                                    pnl: { value: "+$98.00", roe: "+3.92%" },
-                                                    liqPrice: "198.20",
-                                                    margin: { value: "$3,125", percent: "42%" },
-                                                    tpSl: "--/--",
-                                                    action: "Close",
-                                                    },
-                                                ].map((row, idx) => (
-                                                    <tr key={idx} className="border-b border-[#30363D] gap-2 py-2">
-                                                    {/* Coin */}
-                                                    <td>
-                                                        <div className="flex flex-col items-start">
-                                                        <span>{row.coin}</span>
-                                                        <div className="flex gap-1 mt-1">
-                                                            {row.tags.map((tag, i) => (
-                                                            <div
-                                                                key={i}
-                                                                className="inline-flex bg-[#30363D] py-1 px-2 rounded text-zinc-400 text-[10px] font-bold"
-                                                            >
-                                                                {tag}
-                                                            </div>
-                                                            ))}
-                                                        </div>
-                                                        <div className="inline-flex bg-[#30363D] py-1 px-2 rounded text-zinc-400 text-[10px] font-bold mt-1">
-                                                            {row.extra}
-                                                        </div>
-                                                        </div>
-                                                    </td>
-
-                                                    {/* Position */}
-                                                    <td className="py-2 px-2">
-                                                        <div className="flex flex-col gap-1 items-start">
-                                                        <span>{row.position.value}</span>
-                                                        <div className="inline-flex bg-[#30363D] py-1 px-2 rounded text-zinc-400 text-[10px] font-bold">
-                                                            {row.position.side}
-                                                        </div>
-                                                        </div>
-                                                    </td>
-
-                                                    {/* Funding Rate */}
-                                                    <td className="py-2 px-2">{row.fundingRate}</td>
-
-                                                    {/* PNL */}
-                                                    <td className="py-2 px-2">
-                                                        <div className="flex flex-col gap-1">
-                                                        <span>{row.pnl.value}</span>
-                                                        <div className="inline-flex bg-[#22C55E1A] py-1 px-2 rounded text-[#2DA44E] text-[10px] font-bold">
-                                                            {row.pnl.roe}
-                                                        </div>
-                                                        </div>
-                                                    </td>
-
-                                                    {/* Liq Price */}
-                                                    <td className="py-2 px-2">{row.liqPrice}</td>
-
-                                                    {/* Margin */}
-                                                    <td className="py-2 px-2">
-                                                        <div className="flex flex-col gap-1 items-start">
-                                                        <span>{row.margin.value}</span>
-                                                        <div className="inline-flex bg-[#30363D] py-1 px-2 rounded text-zinc-400 text-[10px] font-bold">
-                                                            {row.margin.percent}
-                                                        </div>
-                                                        </div>
-                                                    </td>
-
-                                                    {/* TP/SL */}
-                                                    <td className="py-2 px-2">
-                                                        <div className="flex gap-1 items-center">
-                                                            <span>{row.tpSl}</span>
-                                                            <img
-                                                            src="https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/l0hc3xdh_expires_30_days.png"
-                                                            className="w-4 h-4 object-fill cursor-pointer"
-                                                            onClick={() => {
-                                                                setModalData({
-                                                                    time: "9/12/2025 17:30:13",
-                                                                    coin: row.coin,
-                                                                    position: row.position.value,
-                                                                    entryPrice: "55.116",
-                                                                    markPrice: "55.252",
-                                                                    takeProfit: "Price above 60",
-                                                                    stopLoss: "--",
-                                                                    orderId: "160687782672",
-                                                                    expectedProfit: "39.51 USDC",
-                                                                } as TpslModalData);
-                                                                setShowTPSLModal(true);
-                                                            }}
-                                                            alt="TP/SL"
-                                                            />
-                                                        </div>
-                                                    </td>
-                                                    
-                                                    {/* Actions */}
-                                                    <td className="py-2 px-2 font-bold text-fuchsia-800">
-                                                        <button
-                                                            onClick={() => {
-                                                            setModalCoin(row.coin); // state 存住要關閉嘅 coin 名稱
-                                                            setShowCloseModal(true); // state 控制 modal 顯示
-                                                            }}
-                                                        >
-                                                            {row.action}
-                                                        </button>
-                                                    </td>
-                                                </tr>
-                                                ))}
-                                                </tbody>
-                                            </table>
-
-                                            {showCloseModal && (
-                                                <ConfirmCloseModal
-                                                    coinName={modalCoin}
-                                                    onClose={() => setShowCloseModal(false)}
-                                                    onConfirm={() => {
-                                                    handleClosePosition(modalCoin);
-                                                    setShowCloseModal(false);
-                                                    }}
-                                                />
-                                            )}
-
-
-                                            {showTPSLModal && modalData && (
-                                            <div className="w-full fixed inset-0 z-50 flex items-center justify-center bg-black/60">
-                                                <div
-                                                className="relative w-full h-full md:w-[500px] md:h-auto md:rounded-xl flex flex-col justify-center"
-                                                style={{ maxWidth: "100vw", maxHeight: "100vh" }}
-                                                >
-                                                {/* Modal Content */}
-                                                <PositionsTPSLModal
-                                                    data={modalData} 
-                                                    inputTPSLPrice={inputTPSLPrice} 
-                                                    onChangeInputTPSLPrice={setInputTPSLPrice} 
-                                                    inputTPSLPercent={inputTPSLPercent} 
-                                                    onChangeInputTPSLPercent={setInputTPSLPercent} 
-                                                    onClose={() => setShowTPSLModal(false)}
-                                                    onConfirm={() => {
-                                                    console.log("Confirmed", inputTPSLPrice, inputTPSLPercent);
-                                                    setShowTPSLModal(false);
-                                                    }}
-                                                />
+                                    
+                                    {/* Account Overview */}
+                                    <div className="flex flex-col items-start self-stretch p-4 gap-2">
+                                        <span className="text-white text-lg" >
+                                            {"Account Overview"}
+                                        </span>
+                                        <div className="flex flex-wrap justify-between items-start self-stretch text-left gap-3">
+                                            <div className="flex flex-1 flex-col items-start min-w-32">
+                                                <span className="text-zinc-400 text-sm" >
+                                                    {"Total Account Value"}
+                                                </span>
+                                                <span className="text-white text-base" >
+                                                    {"$42,845.67"}
+                                                </span>
+                                            </div>
+                                            <div className="flex flex-1 flex-col items-start min-w-32">
+                                                <span className="text-zinc-400 text-sm" >
+                                                    {"Total Margin Used"}
+                                                </span>
+                                                <span className="text-white text-base" >
+                                                    {"$5,525.00"}
+                                                </span>
+                                            </div>
+                                            <div className="flex flex-1 flex-col items-start min-w-32">
+                                                <span className="text-zinc-400 text-sm" >
+                                                    {"Total Notional Position"}
+                                                </span>
+                                                <span className="text-white text-base" >
+                                                    {"$37,000.00"}
+                                                </span>
+                                            </div>
+                                            <div className="flex flex-1 flex-col items-start min-w-32">
+                                                <span className="text-zinc-400 text-sm" >
+                                                    {"Withdrawable Amount"}
+                                                </span>
+                                                <span className="text-white text-base" >
+                                                    {"$37,320.67"}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {/* Order Book (1 col) */}
+                            <div className="xl:col-span-1 flex flex-col bg-zinc-900 rounded-lg border border-[#30363D]">
+                                {/* Tabs for Order Book/Trades */}
+                                <div className="w-full">
+                                    <Tabs
+                                        tabs={["Order Book", "Trades"]}
+                                        activeTab={orderBookTab}
+                                        onTabChange={setOrderBookTab}
+                                        />
+                                </div>
+                                
+                                {/* Tab Content */}
+                                {orderBookTab === "Order Book" && (
+                                    <div className="flex flex-col items-start w-full">
+                                        {/* --- BEGIN Order Book Content (lines 353-640) --- */}
+                                        {/* Paste all the JSX from line 353 to 640 here */}
+                                        <div className="flex flex-col items-start w-full">
+                                            <div className="flex flex-col items-center py-1 w-full">
+                                                <div className="flex items-start pr-[1px] w-full">
+                                                    <span className="text-zinc-400 text-sm my-1 w-full" >
+                                                        {"Price"}
+                                                    </span>
+                                                    <span className="text-zinc-400 text-sm my-1 w-full" >
+                                                        {"Size"}
+                                                    </span>
+                                                    <span className="text-zinc-400 text-sm my-1 w-full" >
+                                                        {"Total"}
+                                                    </span>
                                                 </div>
                                             </div>
-                                            )}
-                                        </div>
-                                        {/* Close All button */}
-                                        <div className="flex justify-end mt-3">
-                                            <button
-                                            className="bg-fuchsia-800 w-[100px] py-3.5 rounded-md text-white font-bold"
-                                            onClick={() => setShowCloseAllModal(true)}
-                                            >
-                                            Close All
-                                            </button>
-                                        </div>
-
-                                        {/* Confirm Close Modal */}
-                                        {showCloseAllModal && (
-                                            <ConfirmCloseModal
-                                            coinName="all positions"
-                                            onClose={() => setShowCloseAllModal(false)}
-                                            onConfirm={handleCloseAllConfirm}
-                                            />
-                                        )}
-                                    </div>
-                                )}
-                                {/* Open Orders */}
-                                {accountTab === "Open Orders" && (
-                                    <div>
-                                        <div className="overflow-x-auto py-4">
-                                            <table className="w-full text-left border-collapse">
-                                                {/* Table Head */}
-                                                <thead>
-                                                <tr className="text-zinc-400 text-sm font-bold">
-                                                    <th className="py-2 px-2">Time</th>
-                                                    <th className="py-2 px-2">Type</th>
-                                                    <th className="py-2 px-2">Coin</th>
-                                                    <th className="py-2 px-2">Direction</th>
-                                                    <th className="py-2 px-2">Size / Original Size</th>
-                                                    <th className="py-2 px-2">Order Value</th>
-                                                    <th className="py-2 px-2">Price / Trigger</th>
-                                                    <th className="py-2 px-2">Reduce Only</th>
-                                                    <th className="py-2 px-2">TP/SL</th>
-                                                    <th className="py-2 px-2">Actions</th>
-                                                </tr>
-                                                </thead>
-
-                                                {/* Table Body */}
-                                                <tbody className="text-sm text-white">
+                                            <div className="flex flex-col w-full">
                                                 {[
-                                                    {
-                                                    time: "9/12/2025 17:30:13",
-                                                    type: "Take Profit Market",
-                                                    coin: "HYPE",
-                                                    direction: { text: "Close Long", color: "text-[#F85149]" },
-                                                    size: "-- / --",
-                                                    orderValue: "--",
-                                                    price: "Market / Price > 60",
-                                                    reduceOnly: "Yes",
-                                                    tpSl: "--",
-                                                    action: { text: "Cancel", color: "text-fuchsia-800" },
-                                                    },
+                                                    { price: "110,595.00", size: "2.376", total: "16.500", barWidth: "80%" },
+                                                    { price: "110,594.00", size: "1.359", total: "15.200", barWidth: "70%" },
+                                                    { price: "110,593.00", size: "0.990", total: "13.900", barWidth: "60%" },
+                                                    { price: "110,592.00", size: "3.025", total: "12.600", barWidth: "50%" },
+                                                    { price: "110,591.00", size: "1.146", total: "11.300", barWidth: "45%" },
+                                                    { price: "110,590.00", size: "2.852", total: "10.000", barWidth: "37%" },
+                                                    { price: "110,589.00", size: "2.852", total: "10.000", barWidth: "33%" },
+                                                    { price: "110,588.00", size: "2.852", total: "10.000", barWidth: "25%" },
+                                                    { price: "110,587.00", size: "2.852", total: "0.190",  barWidth: "20%" },
                                                 ].map((row, idx) => (
-                                                    <tr key={idx} className="border-b border-[#30363D]">
-                                                    <td className="py-2 px-2 whitespace-pre">{row.time}</td>
-                                                    <td className="py-2 px-2">{row.type}</td>
-                                                    <td className="py-2 px-2">{row.coin}</td>
-                                                    <td className={`py-2 px-2 ${row.direction.color}`}>{row.direction.text}</td>
-                                                    <td className="py-2 px-2">{row.size}</td>
-                                                    <td className="py-2 px-2">{row.orderValue}</td>
-                                                    <td className="py-2 px-2">{row.price}</td>
-                                                    <td className="py-2 px-2">{row.reduceOnly}</td>
-                                                    <td className="py-2 px-2">{row.tpSl}</td>
-                                                    <td className={`py-2 px-2 font-bold ${row.action.color}`}>{row.action.text}</td>
-                                                    </tr>
+                                                    <div
+                                                    key={idx}
+                                                    className="relative flex w-full items-center text-sm text-white"
+                                                    >
+                                                    {/* 背景色 box */}
+                                                    <div
+                                                        className="absolute left-0 top-0 h-full bg-[#EF44441A]"
+                                                        style={{ width: row.barWidth }}
+                                                    />
+
+                                                    {/* 三欄內容 */}
+                                                    <div className="grid grid-cols-3 w-full relative z-10 py-2">
+                                                        <span className="text-[#F85149]">{row.price}</span>
+                                                        <span>{row.size}</span>
+                                                        <span className="text-zinc-400">{row.total}</span>
+                                                    </div>
+                                                    </div>
                                                 ))}
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                        {/* View All button */}
-                                        <div className="flex justify-end mt-3">
-                                            <button className="bg-fuchsia-800 w-[100px] py-3.5 rounded-md text-white font-bold">
-                                            View All
-                                            </button>
+                                            </div>
+
+                                            <div className="flex w-full flex-col items-center p-3">
+                                                <span className="text-zinc-400 text-sm " >
+                                                    {"Spread: 1 (0.001%)"}
+                                                </span>
+                                            </div>
+                                            <div className="flex flex-col w-full">
+                                                {(() => {
+                                                    const bids = [
+                                                    { price: "110,589.00", size: 1.799, total: 0.270 },
+                                                    { price: "110,589.00", size: 1.799, total: 8.000 },
+                                                    { price: "110,589.00", size: 1.799, total: 8.000 },
+                                                    { price: "110,588.00", size: 1.755, total: 9.100 },
+                                                    { price: "110,587.00", size: 0.351, total: 10.200 },
+                                                    { price: "110,586.00", size: 2.952, total: 11.300 },
+                                                    { price: "110,585.00", size: 0.172, total: 12.400 },
+                                                    { price: "110,584.00", size: 2.474, total: 13.500 },
+                                                    ];
+
+                                                    const maxTotal = Math.max(...bids.map(b => b.total));
+
+                                                    return bids.map((row, idx) => {
+                                                    const barWidth = `${(row.total / maxTotal) * 100}%`;
+
+                                                    return (
+                                                        <div
+                                                        key={idx}
+                                                        className="relative flex w-full items-center text-sm text-white"
+                                                        >
+                                                        {/* 背景色 bar */}
+                                                        <div
+                                                            className="absolute left-0 top-0 h-full bg-[#22C55E1A]"
+                                                            style={{ width: barWidth }}
+                                                        />
+
+                                                        {/* 三欄內容 */}
+                                                        <div className="grid grid-cols-3 w-full relative z-10 py-2">
+                                                            <span className="text-[#2DA44E]">{row.price}</span>
+                                                            <span>{row.size}</span>
+                                                            <span className="text-zinc-400">{row.total}</span>
+                                                        </div>
+                                                        </div>
+                                                    );
+                                                    });
+                                                })()}
+                                            </div>
+
                                         </div>
                                     </div>
                                 )}
-                                {/* Trade History */}
-                                {accountTab === "Trade History" && (
-                                    <div className="py-4">
-                                        <div className="overflow-x-auto">
-                                            <table className="w-full text-left border-collapse">
-                                                {/* Table Head */}
-                                                <thead>
-                                                <tr className="text-zinc-400 text-sm font-bold">
-                                                    <th className="py-2 px-2">Time</th>
-                                                    <th className="py-2 px-2">Coin</th>
-                                                    <th className="py-2 px-2">Direction</th>
-                                                    <th className="py-2 px-2">Price</th>
-                                                    <th className="py-2 px-2">Size</th>
-                                                    <th className="py-2 px-2">Trade Value</th>
-                                                    <th className="py-2 px-2">Fee</th>
-                                                    <th className="py-2 px-2">Closed PNL</th>
-                                                </tr>
-                                                </thead>
-
-                                                {/* Table Body */}
-                                                <tbody className="text-sm text-white">
-                                                {[
-                                                    {
-                                                    time: "9/12/2025 16:41:34",
-                                                    coin: "HYPE",
-                                                    direction: { text: "Open Long", color: "text-[#2DA44E]" },
-                                                    price: "55.116",
-                                                    size: "8.09 HYPE",
-                                                    tradeValue: "445.89 USDC",
-                                                    fee: "0.20 USDC",
-                                                    pnl: "-0.20 USDC",
-                                                    },
-                                                ].map((row, idx) => (
-                                                    <tr key={idx} className="border-b border-[#30363D]">
-                                                    <td className="py-2 px-2 whitespace-pre">{row.time}</td>
-                                                    <td className="py-2 px-2">{row.coin}</td>
-                                                    <td className={`py-2 px-2 ${row.direction.color}`}>{row.direction.text}</td>
-                                                    <td className="py-2 px-2">{row.price}</td>
-                                                    <td className="py-2 px-2">{row.size}</td>
-                                                    <td className="py-2 px-2">{row.tradeValue}</td>
-                                                    <td className="py-2 px-2">{row.fee}</td>
-                                                    <td className="py-2 px-2">{row.pnl}</td>
-                                                    </tr>
-                                                ))}
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                        {/* Buttons */}
-                                        <div className="flex justify-end mt-3 gap-4">
-                                            <button
-                                            className="bg-fuchsia-800 py-3.5 px-[19px] rounded-md text-white font-bold"
-                                            onClick={() => alert("Pressed!")}
-                                            >
-                                            View All
-                                            </button>
-                                            <button
-                                            className="bg-fuchsia-800 py-3.5 px-4 rounded-md text-white font-bold"
-                                            onClick={() => alert("Pressed!")}
-                                            >
-                                            Export as CSV
-                                            </button>
-                                        </div>
-                                    </div>
-                                )}
-                                {/* Funding History */}
-                                {accountTab === "Funding History" && (
-                                    <div className="py-4">
-                                        <div className="overflow-x-auto">
-                                            <table className="w-full text-left border-collapse">
-                                            {/* Table Head */}
-                                            <thead>
-                                                <tr className="text-zinc-400 text-sm font-bold">
-                                                <th className="py-2 px-2">Time</th>
-                                                <th className="py-2 px-2">Coin</th>
-                                                <th className="py-2 px-2">Size</th>
-                                                <th className="py-2 px-2">Position Side</th>
-                                                <th className="py-2 px-2">Payment</th>
-                                                <th className="py-2 px-2">Rate</th>
-                                                </tr>
-                                            </thead>
-
-                                            {/* Table Body */}
-                                            <tbody className="text-sm text-white">
-                                                {[
-                                                {
-                                                    time: "9/12/2025 17:00:00",
-                                                    coin: "HYPE",
-                                                    size: "8.09 HYPE",
-                                                    side: { text: "Long", color: "text-[#2DA44E]" },
-                                                    payment: { text: "$0.0012", color: "text-[#2DA44E]" },
-                                                    rate: "-0.0003%",
-                                                },
-                                                ].map((row, idx) => (
-                                                <tr key={idx} className="border-b border-[#30363D]">
-                                                    <td className="py-2 px-2 whitespace-pre">{row.time}</td>
-                                                    <td className="py-2 px-2">{row.coin}</td>
-                                                    <td className="py-2 px-2">{row.size}</td>
-                                                    <td className={`py-2 px-2 ${row.side.color}`}>{row.side.text}</td>
-                                                    <td className={`py-2 px-2 ${row.payment.color}`}>{row.payment.text}</td>
-                                                    <td className="py-2 px-2">{row.rate}</td>
-                                                </tr>
-                                                ))}
-                                            </tbody>
-                                            </table>
-                                        </div>
-
-                                        {/* Buttons */}
-                                        <div className="flex justify-end mt-3 gap-4">
-                                            <button
-                                            className="bg-fuchsia-800 py-3.5 px-[19px] rounded-md text-white font-bold"
-                                            onClick={() => alert("Pressed!")}
-                                            >
-                                            View All
-                                            </button>
-                                            <button
-                                            className="bg-fuchsia-800 py-3.5 px-4 rounded-md text-white font-bold"
-                                            onClick={() => alert("Pressed!")}
-                                            >
-                                            Export as CSV
-                                            </button>
-                                        </div>
-                                    </div>
-                                )}
-                                {/* Order History */}
-                                {accountTab === "Order History" && (
-                                    <div className="py-4">
-                                        <div className="overflow-x-auto">
-                                            <table className="w-full text-left border-collapse">
-                                            {/* Table Head */}
-                                            <thead>
-                                                <tr className="text-zinc-400 text-sm font-bold">
-                                                <th className="py-2 px-2">Time</th>
-                                                <th className="py-2 px-2">Type</th>
-                                                <th className="py-2 px-2">Coin</th>
-                                                <th className="py-2 px-2">Direction</th>
-                                                <th className="py-2 px-2">Size / Filled Size</th>
-                                                <th className="py-2 px-2">Order Value</th>
-                                                <th className="py-2 px-2">Price / Trigger</th>
-                                                <th className="py-2 px-2">Reduce Only</th>
-                                                <th className="py-2 px-2">TP/SL</th>
-                                                <th className="py-2 px-2">Status</th>
-                                                <th className="py-2 px-2">Order ID</th>
-                                                </tr>
-                                            </thead>
-
-                                            {/* Table Body */}
-                                            <tbody className="text-sm text-white">
-                                                {[
-                                                {
-                                                    time: "9/12/2025 17:30:13",
-                                                    type: "Take Profit Market",
-                                                    coin: "HYPE",
-                                                    direction: { text: "Close Long", color: "text-[#F85149]" },
-                                                    size: "-- / --",
-                                                    orderValue: "--",
-                                                    trigger: "Market /Price > 60",
-                                                    reduceOnly: "Yes",
-                                                    tpSl: "--",
-                                                    status: "Open",
-                                                    orderId: "160687782672",
-                                                },
-                                                {
-                                                    time: "9/12/2025 17:03:27",
-                                                    type: "Take Profit Market",
-                                                    coin: "HYPE",
-                                                    direction: { text: "Close Long", color: "text-[#F85149]" },
-                                                    size: "-- / --",
-                                                    orderValue: "--",
-                                                    trigger: "Market /Price > 56",
-                                                    reduceOnly: "Yes",
-                                                    tpSl: "--",
-                                                    status: "Cancelled",
-                                                    orderId: "160656988197",
-                                                },
-                                                ].map((row, idx) => (
-                                                <tr key={idx} className="border-b border-[#30363D]">
-                                                    <td className="py-2 px-2 whitespace-pre">{row.time}</td>
-                                                    <td className="py-2 px-2">{row.type}</td>
-                                                    <td className="py-2 px-2">{row.coin}</td>
-                                                    <td className={`py-2 px-2 ${row.direction.color}`}>{row.direction.text}</td>
-                                                    <td className="py-2 px-2">{row.size}</td>
-                                                    <td className="py-2 px-2">{row.orderValue}</td>
-                                                    <td className="py-2 px-2">{row.trigger}</td>
-                                                    <td className="py-2 px-2">{row.reduceOnly}</td>
-                                                    <td className="py-2 px-2">{row.tpSl}</td>
-                                                    <td className="py-2 px-2">{row.status}</td>
-                                                    <td className="py-2 px-2">{row.orderId}</td>
-                                                </tr>
-                                                ))}
-                                            </tbody>
-                                            </table>
-                                        </div>
-
-                                        {/* Buttons */}
-                                        <div className="flex justify-end mt-3">
-                                            <button
-                                            className="bg-fuchsia-800 py-3.5 px-[19px] rounded-md text-white font-bold"
-                                            onClick={() => alert("Pressed!")}
-                                            >
-                                            View All
-                                            </button>
-                                        </div>
-                                    </div>
-
-                                )}
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* Order Book + Trading Form wrapper */}
-                    <div className="md:col-span-2 grid 2xl:grid-cols-2 gap-2 w-full  xl:gap-2">
-                        {/* Order Book/Trades (col-span-1 on desktop, full width on mobile) */}
-                        <div className="flex flex-col gap-2 items-center bg-zinc-900 p-[1px] rounded-sm border border-solid border-[#30363D] w-full">
-                            {/* Tabs for Order Book/Trades */}
-                            <div className="w-full">
-                                <Tabs
-                                    tabs={["Order Book", "Trades"]}
-                                    activeTab={orderBookTab}
-                                    onTabChange={setOrderBookTab}
-                                    />
-                            </div>
-                            
-
-                            {/* Tab Content */}
-                            {orderBookTab === "Order Book" && (
-                                <div className="flex flex-col items-start w-full">
-                                    {/* --- BEGIN Order Book Content (lines 353-640) --- */}
-                                    {/* Paste all the JSX from line 353 to 640 here */}
+                                {orderBookTab === "Trades" && (
                                     <div className="flex flex-col items-start w-full">
                                         <div className="flex flex-col items-center py-1 w-full">
                                             <div className="flex items-start pr-[1px] w-full">
@@ -1132,181 +715,607 @@ const Trading = () => {
                                                     {"Size"}
                                                 </span>
                                                 <span className="text-zinc-400 text-sm my-1 w-full" >
-                                                    {"Total"}
+                                                    {"Time"}
                                                 </span>
                                             </div>
                                         </div>
                                         <div className="flex flex-col w-full">
                                             {[
-                                                { price: "110,595.00", size: "2.376", total: "16.500", barWidth: "80%" },
-                                                { price: "110,594.00", size: "1.359", total: "15.200", barWidth: "70%" },
-                                                { price: "110,593.00", size: "0.990", total: "13.900", barWidth: "60%" },
-                                                { price: "110,592.00", size: "3.025", total: "12.600", barWidth: "50%" },
-                                                { price: "110,591.00", size: "1.146", total: "11.300", barWidth: "45%" },
-                                                { price: "110,590.00", size: "2.852", total: "10.000", barWidth: "37%" },
-                                                { price: "110,589.00", size: "2.852", total: "10.000", barWidth: "33%" },
-                                                { price: "110,588.00", size: "2.852", total: "10.000", barWidth: "25%" },
-                                                { price: "110,587.00", size: "2.852", total: "0.190",  barWidth: "20%" },
+                                                { price: "110,584.00", priceColor: "text-[#2DA44E]", qty: "14.35", time: "00:49:51" },
+                                                { price: "110,589.00", priceColor: "text-[#2DA44E]", qty: "0.31", time: "00:49:51" },
+                                                { price: "110,595.00", priceColor: "text-[#F85149]", qty: "0.20", time: "00:49:51" },
+                                                { price: "110,594.00", priceColor: "text-[#F85149]", qty: "1.359", time: "00:49:51" },
+                                                { price: "110,585.00", priceColor: "text-[#2DA44E]", qty: "0.172", time: "00:49:51" },
+                                                { price: "110,593.00", priceColor: "text-[#F85149]", qty: "0.990", time: "00:49:51" },
+                                                { price: "110,588.00", priceColor: "text-[#2DA44E]", qty: "1.755", time: "00:49:51" },
+                                                { price: "110,592.00", priceColor: "text-[#F85149]", qty: "3.025", time: "00:49:51" },
+                                                { price: "110,589.00", priceColor: "text-[#2DA44E]", qty: "1.799", time: "00:49:51" },
+                                                { price: "110,591.00", priceColor: "text-[#F85149]", qty: "1.146", time: "00:49:51" },
+                                                { price: "110,589.00", priceColor: "text-[#2DA44E]", qty: "1.799", time: "00:49:51" },
+                                                { price: "110,590.00", priceColor: "text-[#F85149]", qty: "2.852", time: "00:49:51" },
+                                                { price: "110,587.00", priceColor: "text-[#2DA44E]", qty: "0.351", time: "00:49:51" },
+                                                { price: "110,590.00", priceColor: "text-[#F85149]", qty: "2.852", time: "00:49:51" },
+                                                { price: "110,589.00", priceColor: "text-[#2DA44E]", qty: "1.799", time: "00:49:51" },
+                                                { price: "110,590.00", priceColor: "text-[#F85149]", qty: "2.852", time: "00:49:51" },
+                                                { price: "110,590.00", priceColor: "text-[#F85149]", qty: "2.852", time: "00:49:51" },
+                                                { price: "110,586.00", priceColor: "text-[#2DA44E]", qty: "2.952", time: "00:49:51" },
+                                                { price: "110,590.00", priceColor: "text-[#F85149]", qty: "2.852", time: "00:49:51" },
+                                                { price: "110,589.00", priceColor: "text-[#2DA44E]", qty: "1.799", time: "00:49:51" },
                                             ].map((row, idx) => (
-                                                <div
-                                                key={idx}
-                                                className="relative flex w-full items-center text-sm text-white"
-                                                >
-                                                {/* 背景色 box */}
-                                                <div
-                                                    className="absolute left-0 top-0 h-full bg-[#EF44441A]"
-                                                    style={{ width: row.barWidth }}
-                                                />
-
-                                                {/* 三欄內容 */}
-                                                <div className="grid grid-cols-3 w-full relative z-10 py-2">
-                                                    <span className="text-[#F85149]">{row.price}</span>
-                                                    <span>{row.size}</span>
-                                                    <span className="text-zinc-400">{row.total}</span>
-                                                </div>
+                                                <div key={idx} className="grid grid-cols-3 w-full text-sm py-2">
+                                                <span className={row.priceColor}>{row.price}</span>
+                                                <span className="text-white">{row.qty}</span>
+                                                <span className="text-zinc-400">{row.time}</span>
                                                 </div>
                                             ))}
                                         </div>
-
-                                        <div className="flex w-full flex-col items-center p-3">
-                                            <span className="text-zinc-400 text-sm " >
-                                                {"Spread: 1 (0.001%)"}
-                                            </span>
-                                        </div>
-                                        <div className="flex flex-col w-full">
-                                            {(() => {
-                                                const bids = [
-                                                { price: "110,589.00", size: 1.799, total: 0.270 },
-                                                { price: "110,589.00", size: 1.799, total: 8.000 },
-                                                { price: "110,589.00", size: 1.799, total: 8.000 },
-                                                { price: "110,588.00", size: 1.755, total: 9.100 },
-                                                { price: "110,587.00", size: 0.351, total: 10.200 },
-                                                { price: "110,586.00", size: 2.952, total: 11.300 },
-                                                { price: "110,585.00", size: 0.172, total: 12.400 },
-                                                { price: "110,584.00", size: 2.474, total: 13.500 },
-                                                ];
-
-                                                const maxTotal = Math.max(...bids.map(b => b.total));
-
-                                                return bids.map((row, idx) => {
-                                                const barWidth = `${(row.total / maxTotal) * 100}%`;
-
-                                                return (
-                                                    <div
-                                                    key={idx}
-                                                    className="relative flex w-full items-center text-sm text-white"
-                                                    >
-                                                    {/* 背景色 bar */}
-                                                    <div
-                                                        className="absolute left-0 top-0 h-full bg-[#22C55E1A]"
-                                                        style={{ width: barWidth }}
-                                                    />
-
-                                                    {/* 三欄內容 */}
-                                                    <div className="grid grid-cols-3 w-full relative z-10 py-2">
-                                                        <span className="text-[#2DA44E]">{row.price}</span>
-                                                        <span>{row.size}</span>
-                                                        <span className="text-zinc-400">{row.total}</span>
-                                                    </div>
-                                                    </div>
-                                                );
-                                                });
-                                            })()}
-                                        </div>
-
                                     </div>
-                                </div>
-                            )}
-                            {orderBookTab === "Trades" && (
-                                <div className="flex flex-col items-start w-full">
-                                    <div className="flex flex-col items-center py-1 w-full">
-                                        <div className="flex items-start pr-[1px] w-full">
-                                            <span className="text-zinc-400 text-sm my-1 w-full" >
-                                                {"Price"}
-                                            </span>
-                                            <span className="text-zinc-400 text-sm my-1 w-full" >
-                                                {"Size"}
-                                            </span>
-                                            <span className="text-zinc-400 text-sm my-1 w-full" >
-                                                {"Time"}
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div className="flex flex-col w-full">
-                                        {[
-                                            { price: "110,584.00", priceColor: "text-[#2DA44E]", qty: "14.35", time: "00:49:51" },
-                                            { price: "110,589.00", priceColor: "text-[#2DA44E]", qty: "0.31", time: "00:49:51" },
-                                            { price: "110,595.00", priceColor: "text-[#F85149]", qty: "0.20", time: "00:49:51" },
-                                            { price: "110,594.00", priceColor: "text-[#F85149]", qty: "1.359", time: "00:49:51" },
-                                            { price: "110,585.00", priceColor: "text-[#2DA44E]", qty: "0.172", time: "00:49:51" },
-                                            { price: "110,593.00", priceColor: "text-[#F85149]", qty: "0.990", time: "00:49:51" },
-                                            { price: "110,588.00", priceColor: "text-[#2DA44E]", qty: "1.755", time: "00:49:51" },
-                                            { price: "110,592.00", priceColor: "text-[#F85149]", qty: "3.025", time: "00:49:51" },
-                                            { price: "110,589.00", priceColor: "text-[#2DA44E]", qty: "1.799", time: "00:49:51" },
-                                            { price: "110,591.00", priceColor: "text-[#F85149]", qty: "1.146", time: "00:49:51" },
-                                            { price: "110,589.00", priceColor: "text-[#2DA44E]", qty: "1.799", time: "00:49:51" },
-                                            { price: "110,590.00", priceColor: "text-[#F85149]", qty: "2.852", time: "00:49:51" },
-                                            { price: "110,587.00", priceColor: "text-[#2DA44E]", qty: "0.351", time: "00:49:51" },
-                                            { price: "110,590.00", priceColor: "text-[#F85149]", qty: "2.852", time: "00:49:51" },
-                                            { price: "110,589.00", priceColor: "text-[#2DA44E]", qty: "1.799", time: "00:49:51" },
-                                            { price: "110,590.00", priceColor: "text-[#F85149]", qty: "2.852", time: "00:49:51" },
-                                            { price: "110,590.00", priceColor: "text-[#F85149]", qty: "2.852", time: "00:49:51" },
-                                            { price: "110,586.00", priceColor: "text-[#2DA44E]", qty: "2.952", time: "00:49:51" },
-                                            { price: "110,590.00", priceColor: "text-[#F85149]", qty: "2.852", time: "00:49:51" },
-                                            { price: "110,589.00", priceColor: "text-[#2DA44E]", qty: "1.799", time: "00:49:51" },
-                                        ].map((row, idx) => (
-                                            <div key={idx} className="grid grid-cols-3 w-full text-sm py-2">
-                                            <span className={row.priceColor}>{row.price}</span>
-                                            <span className="text-white">{row.qty}</span>
-                                            <span className="text-zinc-400">{row.time}</span>
-                                            </div>
-                                        ))}
-                                    </div>
-                                </div>
-                            )}
+                                )}
+                            </div>
                         </div>
-                        {/* Trading Form (col-span-1 on desktop, full width on mobile) */}
-                        <div className="flex flex-col gap-2 items-center bg-zinc-900 rounded-sm border border-solid border-[#30363D] w-full ">
-                            {/* Cross Margin, Leverage and AI Trading */}
-                            <div className="flex items-center justify-between p-3 w-full gap-2">
-                                {/* Cross Margin Toggle */}
-                                <button
-                                    className={`flex-1 flex flex-col items-center justify-center text-center bg-zinc-950 py-3 px-2 rounded-sm border border-[#30363D]`}
-                                    onClick={() => setCrossSelected((v) => !v)}
-                                >
-                                    <span className="text-[#A6A6B5] text-sm text-nowrap">
-                                        {crossSelected ? "Cross Margin" : "Isolated"}
-                                    </span>
-                                </button>
+                        {/* Tabs + Filter (below, span 4 cols) */}
+                        <div className="bg-zinc-900 rounded-lg border border-[#30363D] px-2 flex flex-col w-full">
+                            {/* Tabs */}
+                            <div className="overflow-x-auto">
+                                <div className="flex gap-4 justify-between items-center border-b border-[#30363D] min-w-[600px] flex-nowrap">
+                                    
+                                    <Tabs
+                                        tabs={[
+                                            "Balance",
+                                            "Positions",
+                                            "Open Orders",
+                                            "Trade History",
+                                            "Funding History",
+                                            "Order History",
+                                        ]}
+                                        activeTab={accountTab}
+                                        onTabChange={setAccountTab}
+                                        />
 
-                                {/* Leverage Dropdown */}
-                                <div className="flex-1 flex items-center justify-center">
-                                    <button
-                                        className="flex-1 flex flex-col items-center justify-center text-center bg-zinc-950 py-3 px-2 rounded-sm border-[#30363D] border"
-                                        onClick={() => setShowAdjustLeverageModal(true)}
-                                    >
-                                        <span className="text-[#A6A6B5] text-sm">{leverage}x</span>
-                                    </button>
+                                    {/* Filter Selector */}
+                                    <div className="relative">
+                                        <Select
+                                            value={filterValue}
+                                            onChange={setFilterValue}
+                                            placeholder="Filter"
+                                            options={[
+                                                { label: "All", value: "All" },
+                                                { label: "Active", value: "Active" },
+                                                { label: "Long", value: "Long" },
+                                                { label: "Short", value: "Short" },
+                                            ]}
+                                            minWidth="min-w-32"
+                                            />
+                                    </div>
+                                </div>
+                            </div>
+                            {/* Balance */}
+                            {accountTab === "Balance" && (
+                                <div className="overflow-x-auto py-4 text-left">
+                                    <table className="w-full text-left border-collapse min-w-[400px]">
+                                        <thead className="text-sm text-zinc-400 font-bold">
+                                        <tr>
+                                            <th className="py-2 px-2">Currency</th>
+                                            <th className="py-2 px-2">Available</th>
+                                            <th className="py-2 px-2">In Orders</th>
+                                            <th className="py-2 px-2">Value($)</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody className="text-white text-sm">
+                                        {balanceTableData.map((row, idx) => (
+                                            <tr key={idx} className="border-b border-[#30363D]">
+                                                <td className="py-2 px-2">{row.currency}</td>
+                                                <td className="py-2 px-2">{row.available}</td>
+                                                <td className="py-2 px-2">{row.inOrders}</td>
+                                                <td className="py-2 px-2">{row.value}</td>
+                                            </tr>
+                                        ))}
+                                        </tbody>
+                                    </table>
                                 </div>
                                 
+                            )}
+                            {/* Positions */}
+                            {accountTab === "Positions" && (
+                                <div className="py-4">
+                                    <div className="overflow-x-auto">
+                                        <table className="w-full text-left border-collapse">
+                                            {/* Table Head */}
+                                            <thead>
+                                            <tr className="text-zinc-400 text-sm font-bold gap-2">
+                                                <th className="py-2 px-2">Coin</th>
+                                                <th className="py-2 px-2">Position</th>
+                                                <th className="py-2 px-2">Funding Rate</th>
+                                                <th className="py-2 px-2">PNL (ROE%)</th>
+                                                <th className="py-2 px-2">Liq. Price</th>
+                                                <th className="py-2 px-2">Margin</th>
+                                                <th className="py-2 px-2">TP/SL</th>
+                                                <th className="py-2 px-2">Actions</th>
+                                            </tr>
+                                            </thead>
 
-                                {/* AI Trading Toggle */}
+                                            {/* Table Body */}
+                                            <tbody className="text-white text-sm">
+                                            {[
+                                                {
+                                                coin: "xAAPL",
+                                                tags: ["8x", "Cross"],
+                                                extra: "$12.50/day",
+                                                position: { value: "$25,000 @227.10", side: "Long" },
+                                                fundingRate: "+0.0100%",
+                                                pnl: { value: "+$98.00", roe: "+3.92%" },
+                                                liqPrice: "198.20",
+                                                margin: { value: "$3,125", percent: "42%" },
+                                                tpSl: "--/--",
+                                                action: "Close",
+                                                },
+                                            ].map((row, idx) => (
+                                                <tr key={idx} className="border-b border-[#30363D] gap-2 py-2">
+                                                {/* Coin */}
+                                                <td>
+                                                    <div className="flex flex-col items-start">
+                                                    <span>{row.coin}</span>
+                                                    <div className="flex gap-1 mt-1">
+                                                        {row.tags.map((tag, i) => (
+                                                        <div
+                                                            key={i}
+                                                            className="inline-flex bg-[#30363D] py-1 px-2 rounded text-zinc-400 text-[10px] font-bold"
+                                                        >
+                                                            {tag}
+                                                        </div>
+                                                        ))}
+                                                    </div>
+                                                    <div className="inline-flex bg-[#30363D] py-1 px-2 rounded text-zinc-400 text-[10px] font-bold mt-1">
+                                                        {row.extra}
+                                                    </div>
+                                                    </div>
+                                                </td>
+
+                                                {/* Position */}
+                                                <td className="py-2 px-2">
+                                                    <div className="flex flex-col gap-1 items-start">
+                                                    <span>{row.position.value}</span>
+                                                    <div className="inline-flex bg-[#30363D] py-1 px-2 rounded text-zinc-400 text-[10px] font-bold">
+                                                        {row.position.side}
+                                                    </div>
+                                                    </div>
+                                                </td>
+
+                                                {/* Funding Rate */}
+                                                <td className="py-2 px-2">{row.fundingRate}</td>
+
+                                                {/* PNL */}
+                                                <td className="py-2 px-2">
+                                                    <div className="flex flex-col gap-1">
+                                                    <span>{row.pnl.value}</span>
+                                                    <div className="inline-flex bg-[#22C55E1A] py-1 px-2 rounded text-[#2DA44E] text-[10px] font-bold">
+                                                        {row.pnl.roe}
+                                                    </div>
+                                                    </div>
+                                                </td>
+
+                                                {/* Liq Price */}
+                                                <td className="py-2 px-2">{row.liqPrice}</td>
+
+                                                {/* Margin */}
+                                                <td className="py-2 px-2">
+                                                    <div className="flex flex-col gap-1 items-start">
+                                                    <span>{row.margin.value}</span>
+                                                    <div className="inline-flex bg-[#30363D] py-1 px-2 rounded text-zinc-400 text-[10px] font-bold">
+                                                        {row.margin.percent}
+                                                    </div>
+                                                    </div>
+                                                </td>
+
+                                                {/* TP/SL */}
+                                                <td className="py-2 px-2">
+                                                    <div className="flex gap-1 items-center">
+                                                        <span>{row.tpSl}</span>
+                                                        <img
+                                                        src="https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/l0hc3xdh_expires_30_days.png"
+                                                        className="w-4 h-4 object-fill cursor-pointer"
+                                                        onClick={() => {
+                                                            setModalData({
+                                                                time: "9/12/2025 17:30:13",
+                                                                coin: row.coin,
+                                                                position: row.position.value,
+                                                                entryPrice: "55.116",
+                                                                markPrice: "55.252",
+                                                                takeProfit: "Price above 60",
+                                                                stopLoss: "--",
+                                                                orderId: "160687782672",
+                                                                expectedProfit: "39.51 USDC",
+                                                            } as TpslModalData);
+                                                            setShowTPSLModal(true);
+                                                        }}
+                                                        alt="TP/SL"
+                                                        />
+                                                    </div>
+                                                </td>
+                                                
+                                                {/* Actions */}
+                                                <td className="py-2 px-2 font-bold text-fuchsia-800">
+                                                    <button
+                                                        onClick={() => {
+                                                        setModalCoin(row.coin); // state 存住要關閉嘅 coin 名稱
+                                                        setShowCloseModal(true); // state 控制 modal 顯示
+                                                        }}
+                                                    >
+                                                        {row.action}
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            ))}
+                                            </tbody>
+                                        </table>
+
+                                        {showCloseModal && (
+                                            <ConfirmCloseModal
+                                                coinName={modalCoin}
+                                                onClose={() => setShowCloseModal(false)}
+                                                onConfirm={() => {
+                                                handleClosePosition(modalCoin);
+                                                setShowCloseModal(false);
+                                                }}
+                                            />
+                                        )}
+
+
+                                        {showTPSLModal && modalData && (
+                                        <div className="w-full fixed inset-0 z-50 flex items-center justify-center bg-black/60">
+                                            <div
+                                            className="relative w-full h-full md:w-[500px] md:h-auto md:rounded-xl flex flex-col justify-center"
+                                            style={{ maxWidth: "100vw", maxHeight: "100vh" }}
+                                            >
+                                            {/* Modal Content */}
+                                            <PositionsTPSLModal
+                                                data={modalData} 
+                                                inputTPSLPrice={inputTPSLPrice} 
+                                                onChangeInputTPSLPrice={setInputTPSLPrice} 
+                                                inputTPSLPercent={inputTPSLPercent} 
+                                                onChangeInputTPSLPercent={setInputTPSLPercent} 
+                                                onClose={() => setShowTPSLModal(false)}
+                                                onConfirm={() => {
+                                                console.log("Confirmed", inputTPSLPrice, inputTPSLPercent);
+                                                setShowTPSLModal(false);
+                                                }}
+                                            />
+                                            </div>
+                                        </div>
+                                        )}
+                                    </div>
+                                    {/* Close All button */}
+                                    <div className="flex justify-end mt-3">
+                                        <button
+                                        className="bg-fuchsia-800 w-[100px] py-3.5 rounded-md text-white font-bold"
+                                        onClick={() => setShowCloseAllModal(true)}
+                                        >
+                                        Close All
+                                        </button>
+                                    </div>
+
+                                    {/* Confirm Close Modal */}
+                                    {showCloseAllModal && (
+                                        <ConfirmCloseModal
+                                        coinName="all positions"
+                                        onClose={() => setShowCloseAllModal(false)}
+                                        onConfirm={handleCloseAllConfirm}
+                                        />
+                                    )}
+                                </div>
+                            )}
+                            {/* Open Orders */}
+                            {accountTab === "Open Orders" && (
+                                <div className="py-4">
+                                    <div className="overflow-x-auto">
+                                        <table className="w-full text-left border-collapse">
+                                            {/* Table Head */}
+                                            <thead>
+                                            <tr className="text-zinc-400 text-sm font-bold">
+                                                <th className="py-2 px-2">Time</th>
+                                                <th className="py-2 px-2">Type</th>
+                                                <th className="py-2 px-2">Coin</th>
+                                                <th className="py-2 px-2">Direction</th>
+                                                <th className="py-2 px-2">Size / Original Size</th>
+                                                <th className="py-2 px-2">Order Value</th>
+                                                <th className="py-2 px-2">Price / Trigger</th>
+                                                <th className="py-2 px-2">Reduce Only</th>
+                                                <th className="py-2 px-2">TP/SL</th>
+                                                <th className="py-2 px-2">Actions</th>
+                                            </tr>
+                                            </thead>
+
+                                            {/* Table Body */}
+                                            <tbody className="text-sm text-white">
+                                            {[
+                                                {
+                                                time: "9/12/2025 17:30:13",
+                                                type: "Take Profit Market",
+                                                coin: "HYPE",
+                                                direction: { text: "Close Long", color: "text-[#F85149]" },
+                                                size: "-- / --",
+                                                orderValue: "--",
+                                                price: "Market / Price > 60",
+                                                reduceOnly: "Yes",
+                                                tpSl: "--",
+                                                action: { text: "Cancel", color: "text-fuchsia-800" },
+                                                },
+                                            ].map((row, idx) => (
+                                                <tr key={idx} className="border-b border-[#30363D]">
+                                                <td className="py-2 px-2 whitespace-pre">{row.time}</td>
+                                                <td className="py-2 px-2">{row.type}</td>
+                                                <td className="py-2 px-2">{row.coin}</td>
+                                                <td className={`py-2 px-2 ${row.direction.color}`}>{row.direction.text}</td>
+                                                <td className="py-2 px-2">{row.size}</td>
+                                                <td className="py-2 px-2">{row.orderValue}</td>
+                                                <td className="py-2 px-2">{row.price}</td>
+                                                <td className="py-2 px-2">{row.reduceOnly}</td>
+                                                <td className="py-2 px-2">{row.tpSl}</td>
+                                                <td className={`py-2 px-2 font-bold ${row.action.color}`}>{row.action.text}</td>
+                                                </tr>
+                                            ))}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    {/* View All button */}
+                                    <div className="flex justify-end mt-3">
+                                        <button className="bg-fuchsia-800 w-[100px] py-3.5 rounded-md text-white font-bold">
+                                        View All
+                                        </button>
+                                    </div>
+                                </div>
+                            )}
+                            {/* Trade History */}
+                            {accountTab === "Trade History" && (
+                                <div className="py-4">
+                                    <div className="overflow-x-auto">
+                                        <table className="w-full text-left border-collapse">
+                                            {/* Table Head */}
+                                            <thead>
+                                            <tr className="text-zinc-400 text-sm font-bold">
+                                                <th className="py-2 px-2">Time</th>
+                                                <th className="py-2 px-2">Coin</th>
+                                                <th className="py-2 px-2">Direction</th>
+                                                <th className="py-2 px-2">Price</th>
+                                                <th className="py-2 px-2">Size</th>
+                                                <th className="py-2 px-2">Trade Value</th>
+                                                <th className="py-2 px-2">Fee</th>
+                                                <th className="py-2 px-2">Closed PNL</th>
+                                            </tr>
+                                            </thead>
+
+                                            {/* Table Body */}
+                                            <tbody className="text-sm text-white">
+                                            {[
+                                                {
+                                                time: "9/12/2025 16:41:34",
+                                                coin: "HYPE",
+                                                direction: { text: "Open Long", color: "text-[#2DA44E]" },
+                                                price: "55.116",
+                                                size: "8.09 HYPE",
+                                                tradeValue: "445.89 USDC",
+                                                fee: "0.20 USDC",
+                                                pnl: "-0.20 USDC",
+                                                },
+                                            ].map((row, idx) => (
+                                                <tr key={idx} className="border-b border-[#30363D]">
+                                                <td className="py-2 px-2 whitespace-pre">{row.time}</td>
+                                                <td className="py-2 px-2">{row.coin}</td>
+                                                <td className={`py-2 px-2 ${row.direction.color}`}>{row.direction.text}</td>
+                                                <td className="py-2 px-2">{row.price}</td>
+                                                <td className="py-2 px-2">{row.size}</td>
+                                                <td className="py-2 px-2">{row.tradeValue}</td>
+                                                <td className="py-2 px-2">{row.fee}</td>
+                                                <td className="py-2 px-2">{row.pnl}</td>
+                                                </tr>
+                                            ))}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    {/* Buttons */}
+                                    <div className="flex justify-end mt-3 gap-4">
+                                        <button
+                                        className="bg-fuchsia-800 py-3.5 px-[19px] rounded-md text-white font-bold"
+                                        onClick={() => alert("Pressed!")}
+                                        >
+                                        View All
+                                        </button>
+                                        <button
+                                        className="bg-fuchsia-800 py-3.5 px-4 rounded-md text-white font-bold"
+                                        onClick={() => alert("Pressed!")}
+                                        >
+                                        Export as CSV
+                                        </button>
+                                    </div>
+                                </div>
+                            )}
+                            {/* Funding History */}
+                            {accountTab === "Funding History" && (
+                                <div className="py-4">
+                                    <div className="overflow-x-auto">
+                                        <table className="w-full text-left border-collapse">
+                                        {/* Table Head */}
+                                        <thead>
+                                            <tr className="text-zinc-400 text-sm font-bold">
+                                            <th className="py-2 px-2">Time</th>
+                                            <th className="py-2 px-2">Coin</th>
+                                            <th className="py-2 px-2">Size</th>
+                                            <th className="py-2 px-2">Position Side</th>
+                                            <th className="py-2 px-2">Payment</th>
+                                            <th className="py-2 px-2">Rate</th>
+                                            </tr>
+                                        </thead>
+
+                                        {/* Table Body */}
+                                        <tbody className="text-sm text-white">
+                                            {[
+                                            {
+                                                time: "9/12/2025 17:00:00",
+                                                coin: "HYPE",
+                                                size: "8.09 HYPE",
+                                                side: { text: "Long", color: "text-[#2DA44E]" },
+                                                payment: { text: "$0.0012", color: "text-[#2DA44E]" },
+                                                rate: "-0.0003%",
+                                            },
+                                            ].map((row, idx) => (
+                                            <tr key={idx} className="border-b border-[#30363D]">
+                                                <td className="py-2 px-2 whitespace-pre">{row.time}</td>
+                                                <td className="py-2 px-2">{row.coin}</td>
+                                                <td className="py-2 px-2">{row.size}</td>
+                                                <td className={`py-2 px-2 ${row.side.color}`}>{row.side.text}</td>
+                                                <td className={`py-2 px-2 ${row.payment.color}`}>{row.payment.text}</td>
+                                                <td className="py-2 px-2">{row.rate}</td>
+                                            </tr>
+                                            ))}
+                                        </tbody>
+                                        </table>
+                                    </div>
+
+                                    {/* Buttons */}
+                                    <div className="flex justify-end mt-3 gap-4">
+                                        <button
+                                        className="bg-fuchsia-800 py-3.5 px-[19px] rounded-md text-white font-bold"
+                                        onClick={() => alert("Pressed!")}
+                                        >
+                                        View All
+                                        </button>
+                                        <button
+                                        className="bg-fuchsia-800 py-3.5 px-4 rounded-md text-white font-bold"
+                                        onClick={() => alert("Pressed!")}
+                                        >
+                                        Export as CSV
+                                        </button>
+                                    </div>
+                                </div>
+                            )}
+                            {/* Order History */}
+                            {accountTab === "Order History" && (
+                                <div className="py-4">
+                                    <div className="overflow-x-auto">
+                                        <table className="w-full text-left border-collapse">
+                                        {/* Table Head */}
+                                        <thead>
+                                            <tr className="text-zinc-400 text-sm font-bold">
+                                            <th className="py-2 px-2">Time</th>
+                                            <th className="py-2 px-2">Type</th>
+                                            <th className="py-2 px-2">Coin</th>
+                                            <th className="py-2 px-2">Direction</th>
+                                            <th className="py-2 px-2">Size / Filled Size</th>
+                                            <th className="py-2 px-2">Order Value</th>
+                                            <th className="py-2 px-2">Price / Trigger</th>
+                                            <th className="py-2 px-2">Reduce Only</th>
+                                            <th className="py-2 px-2">TP/SL</th>
+                                            <th className="py-2 px-2">Status</th>
+                                            <th className="py-2 px-2">Order ID</th>
+                                            </tr>
+                                        </thead>
+
+                                        {/* Table Body */}
+                                        <tbody className="text-sm text-white">
+                                            {[
+                                            {
+                                                time: "9/12/2025 17:30:13",
+                                                type: "Take Profit Market",
+                                                coin: "HYPE",
+                                                direction: { text: "Close Long", color: "text-[#F85149]" },
+                                                size: "-- / --",
+                                                orderValue: "--",
+                                                trigger: "Market /Price > 60",
+                                                reduceOnly: "Yes",
+                                                tpSl: "--",
+                                                status: "Open",
+                                                orderId: "160687782672",
+                                            },
+                                            {
+                                                time: "9/12/2025 17:03:27",
+                                                type: "Take Profit Market",
+                                                coin: "HYPE",
+                                                direction: { text: "Close Long", color: "text-[#F85149]" },
+                                                size: "-- / --",
+                                                orderValue: "--",
+                                                trigger: "Market /Price > 56",
+                                                reduceOnly: "Yes",
+                                                tpSl: "--",
+                                                status: "Cancelled",
+                                                orderId: "160656988197",
+                                            },
+                                            ].map((row, idx) => (
+                                            <tr key={idx} className="border-b border-[#30363D]">
+                                                <td className="py-2 px-2 whitespace-pre">{row.time}</td>
+                                                <td className="py-2 px-2">{row.type}</td>
+                                                <td className="py-2 px-2">{row.coin}</td>
+                                                <td className={`py-2 px-2 ${row.direction.color}`}>{row.direction.text}</td>
+                                                <td className="py-2 px-2">{row.size}</td>
+                                                <td className="py-2 px-2">{row.orderValue}</td>
+                                                <td className="py-2 px-2">{row.trigger}</td>
+                                                <td className="py-2 px-2">{row.reduceOnly}</td>
+                                                <td className="py-2 px-2">{row.tpSl}</td>
+                                                <td className="py-2 px-2">{row.status}</td>
+                                                <td className="py-2 px-2">{row.orderId}</td>
+                                            </tr>
+                                            ))}
+                                        </tbody>
+                                        </table>
+                                    </div>
+
+                                    {/* Buttons */}
+                                    <div className="flex justify-end mt-3">
+                                        <button
+                                        className="bg-fuchsia-800 py-3.5 px-[19px] rounded-md text-white font-bold"
+                                        onClick={() => alert("Pressed!")}
+                                        >
+                                        View All
+                                        </button>
+                                    </div>
+                                </div>
+
+                            )}
+                        </div>
+                    </div>
+                    
+
+                    {/* Trading Form (col-span-1 on desktop, full width on mobile) */}
+                    <div className="xl:col-span-1 flex flex-col bg-zinc-900 p-4 rounded-lg border border-[#30363D]">
+                        {/* Cross Margin, Leverage and AI Trading */}
+                        <div className="flex items-center justify-between w-full gap-2">
+                            {/* Cross Margin Toggle */}
+                            <button
+                                className={`flex-1 flex flex-col items-center justify-center text-center bg-zinc-950 py-3 px-2 rounded-sm border border-[#30363D]`}
+                                onClick={() => setCrossSelected((v) => !v)}
+                            >
+                                <span className="text-[#A6A6B5] text-sm text-nowrap">
+                                    {crossSelected ? "Cross Margin" : "Isolated"}
+                                </span>
+                            </button>
+
+                            {/* Leverage Dropdown */}
+                            <div className="flex-1 flex items-center justify-center">
                                 <button
-                                    className={`flex-1 flex flex-col items-center justify-center text-center bg-zinc-950 py-3 px-2 rounded-sm border ${
-                                        showAIWidget ? "border-fuchsia-800 border-2" : "border-[#30363D]"
-                                    } border-solid`}
-                                    onClick={() => setShowAIWidget((prev) => !prev)}
+                                    className="flex-1 flex flex-col items-center justify-center text-center bg-zinc-950 py-3 px-2 rounded-sm border-[#30363D] border"
+                                    onClick={() => setShowAdjustLeverageModal(true)}
                                 >
-                                    <span className="text-[#A6A6B5] text-sm">
-                                        {"AI Trading"}
-                                    </span>
+                                    <span className="text-[#A6A6B5] text-sm">{leverage}x</span>
                                 </button>
                             </div>
+                            
 
-                            <div className="flex flex-col w-full h-full">
+                            {/* AI Trading Toggle */}
+                            <button
+                                className={`flex-1 flex flex-col items-center justify-center text-center bg-zinc-950 py-3 px-2 rounded-sm border ${
+                                    showAIWidget ? "border-fuchsia-800 border-2" : "border-[#30363D]"
+                                } border-solid`}
+                                onClick={() => setShowAIWidget((prev) => !prev)}
+                            >
+                                <span className="text-[#A6A6B5] text-sm">
+                                    {"AI Trading"}
+                                </span>
+                            </button>
+                        </div>
+
+                        <div className="flex flex-col w-full h-full">
                             {showAIWidget ? (
-                            <AIChatWidget />
-                        ) : (
+                                <AIChatWidget />
+                            ) : (
                                 <div>
                                     <Tabs
                                         tabs={["Market", "Limit", "Advanced"]}
@@ -1315,7 +1324,7 @@ const Trading = () => {
                                     />
                                     {/* Tab Content */}
                                     {orderPanelTab === "Market" && (
-                                        <div className="w-full flex flex-col items-start px-4 py-4 gap-4">
+                                        <div className="w-full flex flex-col items-start py-4 gap-4">
                                             {/* --- BEGIN Market Tab Content --- */}
                                             <div className="flex items-center bg-zinc-950 py-1 pl-1 pr-[5px] gap-6 rounded-sm w-full">
                                                 {/* Toggle Buttons */}
@@ -2203,8 +2212,6 @@ const Trading = () => {
                                     )}
                                 </div>
                             )}
-                            </div>
-
                         </div>
                     </div>
                 </div>
