@@ -1274,10 +1274,10 @@ const Trading = () => {
                                             {/* --- BEGIN Market Tab Content --- */}
                                             <div className="flex items-center bg-zinc-950 py-1 pl-1 pr-[5px] gap-6 rounded-sm w-full">
                                                 {/* Toggle Buttons */}
-                                                <div className="flex w-full gap-2">
+                                                <div className="flex w-full gap-2 text-nowrap">
                                                     <button
                                                         type="button"
-                                                        className={`flex-1 flex flex-col items-center py-[11px] px-6 rounded-sm transition-all
+                                                        className={`w-full py-3 flex flex-col items-center rounded-sm transition-all
                                                             ${input1 !== "Sell / Short"
                                                                 ? "bg-[#2DA44E33] text-[#2DA44E]"
                                                                 : "bg-transparent text-zinc-400"
@@ -1288,7 +1288,7 @@ const Trading = () => {
                                                     </button>
                                                     <button
                                                         type="button"
-                                                        className={`flex-1 flex flex-col items-center py-[11px] px-6 rounded-sm transition-all
+                                                        className={`w-full py-3 flex flex-col items-center rounded-sm transition-all
                                                             ${input1 === "Sell / Short"
                                                                 ? "bg-[#EF444433] text-[#F85149]"
                                                                 : "bg-transparent text-zinc-400"
@@ -1308,7 +1308,7 @@ const Trading = () => {
                                                 </div>
                                                 <div className="flex flex-col items-start gap-4 w-full">
                                                     {/* 金額輸入框與貨幣標籤 */}
-                                                    <div className="flex justify-between bg-zinc-950 py-[9px] px-3 rounded-sm border border-solid border-[#30363D] w-full ">
+                                                    <div className="flex justify-between bg-zinc-950 py-[9px] px-3 rounded-sm border border-solid border-[#30363D] w-full">
                                                         <input
                                                             placeholder="0"
                                                             value={input2}
@@ -1316,7 +1316,7 @@ const Trading = () => {
                                                                 const value = Number(e.target.value.replace(/,/g, ""));
                                                                 onChangeInput2(isNaN(value) ? "" : value.toString());
                                                             }}
-                                                            className="text-white bg-transparent text-base w-40 py-[3px] border-0"
+                                                            className="w-full text-white bg-transparent text-base py-[3px] border-0"
                                                         />
                                                         <div className="flex shrink-0 items-center bg-zinc-700 py-[7px] pl-2 pr-[7px] gap-1.5 rounded">
                                                             <span className="text-zinc-400 text-sm font-bold">USDT</span>
