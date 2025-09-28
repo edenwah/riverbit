@@ -16,6 +16,7 @@ import Select from "../components/Select";
 import AdjustLeverageModal from "../components/AdjustLeverageModal";
 import AIChatWidget from "../components/AIChatWidget";
 import Toast from "../components/Toast";
+import ConfirmCloseModal from "../components/ConfirmCloseModal";
 
 const Trading = () => {
     const [input1, onChangeInput1] = useState('');
@@ -38,6 +39,7 @@ const Trading = () => {
 	const [accountTab, setAccountTab] = useState("Balance"); 
     const [searchFilterTab, setSearchFilterTab] = useState("All Coins");
     const [granularity, setGranularity] = useState("")
+    const [stoplossType, setStoplossType] = useState("Stop Market")
     const [indicator, setIndicator] = useState("")
     const [filterValue, setFilterValue] = useState("")
     const [tif, setTif] = useState("GTC");
@@ -47,8 +49,22 @@ const Trading = () => {
     const [showAIWidget, setShowAIWidget] = useState(false);
     const [showAssetPopup, setShowAssetPopup] = useState(false);
     const [showAdjustLeverageModal, setShowAdjustLeverageModal] = useState(false);
+    const [showCloseModal, setShowCloseModal] = useState(false);
+    const [showCloseAllModal, setShowCloseAllModal] = useState(false);
+    const [modalCoin, setModalCoin] = useState("");
 
-    // Toast Notification
+    const handleClosePosition = (coinName: string) => {
+    // TODO: 實際平倉邏輯，例如更新 table data
+    console.log("Closing position for", coinName);
+    };
+
+    const handleCloseAllConfirm = () => {
+    console.log("Confirmed: close all positions");
+    // 這裡放真正平倉邏輯
+    setShowCloseAllModal(false);
+    };
+
+    {/* Toast Notification */}
     const [toast, setToast] = useState<{
         title: string;
         message?: string;
@@ -745,13 +761,34 @@ const Trading = () => {
                                                             />
                                                         </div>
                                                     </td>
-
+                                                    
                                                     {/* Actions */}
-                                                    <td className="py-2 px-2 text-fuchsia-800 font-bold">{row.action}</td>
-                                                    </tr>
+                                                    <td className="py-2 px-2 font-bold text-fuchsia-800">
+                                                        <button
+                                                            onClick={() => {
+                                                            setModalCoin(row.coin); // state 存住要關閉嘅 coin 名稱
+                                                            setShowCloseModal(true); // state 控制 modal 顯示
+                                                            }}
+                                                        >
+                                                            {row.action}
+                                                        </button>
+                                                    </td>
+                                                </tr>
                                                 ))}
                                                 </tbody>
                                             </table>
+
+                                            {showCloseModal && (
+                                                <ConfirmCloseModal
+                                                    coinName={modalCoin}
+                                                    onClose={() => setShowCloseModal(false)}
+                                                    onConfirm={() => {
+                                                    handleClosePosition(modalCoin);
+                                                    setShowCloseModal(false);
+                                                    }}
+                                                />
+                                            )}
+
 
                                             {showTPSLModal && modalData && (
                                             <div className="w-full fixed inset-0 z-50 flex items-center justify-center bg-black/60">
@@ -778,10 +815,22 @@ const Trading = () => {
                                         </div>
                                         {/* Close All button */}
                                         <div className="flex justify-end mt-3">
-                                            <button className="bg-fuchsia-800 w-[100px] py-3.5 rounded-md text-white font-bold">
+                                            <button
+                                            className="bg-fuchsia-800 w-[100px] py-3.5 rounded-md text-white font-bold"
+                                            onClick={() => setShowCloseAllModal(true)}
+                                            >
                                             Close All
                                             </button>
                                         </div>
+
+                                        {/* Confirm Close Modal */}
+                                        {showCloseAllModal && (
+                                            <ConfirmCloseModal
+                                            coinName="all positions"
+                                            onClose={() => setShowCloseAllModal(false)}
+                                            onConfirm={handleCloseAllConfirm}
+                                            />
+                                        )}
                                     </div>
                                 )}
                                 {/* Open Orders */}
@@ -1233,12 +1282,10 @@ const Trading = () => {
                                 {/* Leverage Dropdown */}
                                 <div className="flex-1 flex items-center justify-center">
                                     <button
-                                        className={`flex-1 flex flex-col items-center justify-center text-center bg-zinc-950 py-3 px-2 rounded-sm border-[#30363D] border`}
+                                        className="flex-1 flex flex-col items-center justify-center text-center bg-zinc-950 py-3 px-2 rounded-sm border-[#30363D] border"
                                         onClick={() => setShowAdjustLeverageModal(true)}
                                     >
-                                        <span className="text-[#A6A6B5] text-sm">
-                                            {"20x"}
-                                        </span>
+                                        <span className="text-[#A6A6B5] text-sm">{leverage}x</span>
                                     </button>
                                 </div>
                                 
@@ -1885,17 +1932,19 @@ const Trading = () => {
                                                         {"Stop-Loss Type"}
                                                     </span>
                                                 </div>
-                                                <button className="flex w-full items-center bg-[#0D1117] text-left p-3 rounded-md border border-solid border-[#30363D]"
-                                                    onClick={()=>alert("Pressed!")}>
-                                                    <span className="text-white text-base mr-[123px]" >
-                                                        {"Stop Market"}
-                                                    </span>
-                                                    <img
-                                                        src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/lwwwj2o4_expires_30_days.png"} 
-                                                        className="w-3 h-[15px] rounded-md object-fill"
+                                                {/* Stop-Loss Type Dropdown */}
+                                                <Select
+                                                    value={stoplossType}
+                                                    onChange={setStoplossType}
+                                                    placeholder="Stop-Loss Type"
+                                                    options={[
+                                                        { label: "Stop Market", value: "Stop Market" },
+                                                        { label: "Stop Limit", value: "Stop Limit" },
+                                                    ]}
+                                                    minWidth="min-w-32"
                                                     />
-                                                </button>
                                             </div>
+                                            {/* Input fields */}
                                             <div className="flex flex-col items-start gap-2 w-full">
                                                 <div className="flex flex-col items-center pb-[1px]">
                                                     <span className="text-[#9D9DAF] text-sm" >
@@ -2251,18 +2300,15 @@ const Trading = () => {
                     </div>
                 </div>
                 {showAdjustLeverageModal && (
-					<div className="w-full fixed inset-0 z-50 flex items-center justify-center bg-black/60">
-						<div
-						className="relative w-full h-full md:w-[500px] md:h-auto md:rounded-xl flex flex-col justify-center"
-						style={{ maxWidth: "100vw", maxHeight: "100vh" }}
-						>
-						{/* Modal Content */}
-						<AdjustLeverageModal 
-							leverage={leverage}
-                            setLeverage={setLeverage}
-							onClose={() => setShowAdjustLeverageModal(false)} />
-						</div>
-					</div>
+                    <AdjustLeverageModal
+                        leverage={leverage}
+                        setLeverage={setLeverage}
+                        onClose={() => setShowAdjustLeverageModal(false)}
+                        onConfirm={() => {
+                        console.log("Confirmed leverage:", leverage);
+                        setShowAdjustLeverageModal(false);
+                        }}
+                    />
 				)}
                 <Footer />
             </div>
