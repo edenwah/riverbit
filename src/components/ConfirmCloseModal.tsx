@@ -1,4 +1,3 @@
-import React from "react";
 import PrimaryButton from "./Button/PrimaryButton";
 import { SecondaryButton } from "./Button/SecondaryButton";
 
@@ -10,12 +9,12 @@ type ConfirmCloseModalProps = {
 
 const ConfirmCloseModal = ({ coinName, onClose, onConfirm }: ConfirmCloseModalProps) => {
   return (
-    <div className="w-full flex flex-col items-center self-stretch bg-[#000000B0] py-[197px]">
-      <div className="w-full m-0 md:m-auto flex flex-col bg-[#272B2F] h-[200px] md:h-auto py-[1px] rounded-lg border border-solid border-gray-700">
+    <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#000000B0]">
+      <div className="w-full max-w-md mx-4 flex flex-col bg-[#272B2F] h-[100vh] md:h-auto rounded-lg border border-gray-700 overflow-hidden">
         
         {/* Header */}
-        <div className="flex items-center self-stretch p-6 mx-[1px]">
-          <span className="flex-1 text-white text-lg font-bold">Confirm Close</span>
+        <div className="flex items-center justify-between p-6 border-b border-gray-700">
+          <span className="text-white text-lg font-bold">Confirm Close</span>
           <img
             src="https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/73d3cc65_expires_30_days.png"
             className="w-11 h-11 object-fill cursor-pointer"
@@ -25,14 +24,14 @@ const ConfirmCloseModal = ({ coinName, onClose, onConfirm }: ConfirmCloseModalPr
         </div>
 
         {/* Body */}
-        <div className="flex flex-col items-center justify-center flex-1 px-6">
+        <div className="flex flex-col items-center justify-center flex-1 p-6">
           <span className="text-white text-base text-center">
             Are you sure you want to close position <strong>{coinName}</strong>?
           </span>
         </div>
 
         {/* Action Buttons */}
-        <div className="flex items-center justify-center gap-4 p-6">
+        <div className="flex items-center justify-center gap-4 p-6 border-t border-gray-700">
           <SecondaryButton size="large" onClick={onClose}>
             Cancel
           </SecondaryButton>

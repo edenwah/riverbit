@@ -51,12 +51,19 @@ export default () => {
 
     {/* Show and Hide Close Position modal */}
     const [showCloseModal, setShowCloseModal] = useState(false);
+    const [showCloseAllModal, setShowCloseAllModal] = useState(false);
     const [modalCoin, setModalCoin] = useState<string>("");
 
     const handleClosePosition = (coinName: string) => {
         // TODO: 實際平倉邏輯，例如更新 table data
         console.log("Closing position for", coinName);
     };
+
+    const handleCloseAllConfirm = () => {
+        console.log("Confirmed: close all positions");
+        // 這裡放真正平倉邏輯
+        setShowCloseAllModal(false);
+      };
 
     {/* Toast Notification */}
     const [toast, setToast] = useState<{
@@ -705,22 +712,14 @@ export default () => {
                                             </table>
 
                                             {showCloseModal && (
-                                                <div className="w-full fixed inset-0 z-50 flex items-center justify-center bg-black/60">
-                                                    <div
-                                                    className="relative w-full h-full md:w-[500px] md:h-auto md:rounded-xl flex flex-col justify-center"
-                                                    style={{ maxWidth: "100vw", maxHeight: "100vh" }}
-                                                    >
-                                                    {/* Modal Content */}
-                                                    <ConfirmCloseModal
-                                                        coinName={modalCoin}
-                                                        onClose={() => setShowCloseModal(false)}
-                                                        onConfirm={() => {
-                                                        handleClosePosition(modalCoin);
-                                                        setShowCloseModal(false);
-                                                        }}
-                                                    />
-                                                    </div>
-                                                </div>
+                                                <ConfirmCloseModal
+                                                    coinName={modalCoin}
+                                                    onClose={() => setShowCloseModal(false)}
+                                                    onConfirm={() => {
+                                                    handleClosePosition(modalCoin);
+                                                    setShowCloseModal(false);
+                                                    }}
+                                                />
                                             )}
 
 
@@ -749,10 +748,22 @@ export default () => {
                                         </div>
                                         {/* Close All button */}
                                         <div className="flex justify-end mt-3">
-                                            <button className="bg-fuchsia-800 w-[100px] py-3.5 rounded-md text-white font-bold">
+                                            <button
+                                            className="bg-fuchsia-800 w-[100px] py-3.5 rounded-md text-white font-bold"
+                                            onClick={() => setShowCloseAllModal(true)}
+                                            >
                                             Close All
                                             </button>
                                         </div>
+
+                                        {/* Confirm Close Modal */}
+                                        {showCloseAllModal && (
+                                            <ConfirmCloseModal
+                                            coinName="all positions"
+                                            onClose={() => setShowCloseAllModal(false)}
+                                            onConfirm={handleCloseAllConfirm}
+                                            />
+                                        )}
                                     </div>
                                 )}
                                 {/* Open Orders */}
