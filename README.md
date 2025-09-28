@@ -2,4 +2,4 @@
 
 ## Deployment
 
-- Merge to `prod` branch will trigger a deployment to the production environment: `https://riverbit.io`
+- Merge to `prod` branch will trigger a deployment to the production environment: `https://riverbit.io` (vercel access needed)

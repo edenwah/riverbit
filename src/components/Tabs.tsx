@@ -10,19 +10,37 @@ const Tabs: React.FC<TabsProps> = ({ tabs, activeTab, onTabChange }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [underlineStyle, setUnderlineStyle] = useState({ left: 0, width: 0 });
 
-  useEffect(() => {
+  // 更新 underline 位置
+  const updateUnderline = () => {
     if (!containerRef.current) return;
 
     const activeBtn = Array.from(containerRef.current.children).find(
       (child) => (child as HTMLElement).dataset.tab === activeTab
     ) as HTMLElement;
 
-    if (activeBtn) {
+    if (activeBtn && containerRef.current) {
+      const containerRect = containerRef.current.getBoundingClientRect();
+      const btnRect = activeBtn.getBoundingClientRect();
+
       setUnderlineStyle({
-        left: activeBtn.offsetLeft,
-        width: activeBtn.offsetWidth,
+        left: btnRect.left - containerRect.left,
+        width: btnRect.width,
       });
     }
+  };
+
+  // 初次 render 或 activeTab/tabs 改變時更新
+  useEffect(() => {
+    // 等字體 load 再計算
+    if (document.fonts) {
+      document.fonts.ready.then(updateUnderline);
+    } else {
+      updateUnderline();
+    }
+
+    // window resize 都要重新計算
+    window.addEventListener("resize", updateUnderline);
+    return () => window.removeEventListener("resize", updateUnderline);
   }, [activeTab, tabs]);
 
   return (
