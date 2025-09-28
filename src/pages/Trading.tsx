@@ -17,6 +17,7 @@ import AdjustLeverageModal from "../components/AdjustLeverageModal";
 import AIChatWidget from "../components/AIChatWidget";
 import Toast from "../components/Toast";
 import ConfirmCloseModal from "../components/ConfirmCloseModal";
+import ConfirmCancelModal from "../components/ConfirmCancelModal";
 import OrderBook from "../components/OrderBook";
 
 const Trading = () => {
@@ -63,6 +64,45 @@ const Trading = () => {
     console.log("Confirmed: close all positions");
     // 這裡放真正平倉邏輯
     setShowCloseAllModal(false);
+    };
+
+    // Open Orders Table component
+    const [cancelModalOrder, setCancelModalOrder] = useState<null | { id: number; coin: string; price: string }>(null);
+
+    const orders = [
+    {
+        id: 1,
+        time: "9/12/2025 17:30:13",
+        type: "Take Profit Market",
+        coin: "HYPE",
+        direction: { text: "Close Long", color: "text-[#F85149]" },
+        size: "-- / --",
+        orderValue: "--",
+        price: "Market / Price > 60",
+        reduceOnly: "Yes",
+        tpSl: "--",
+        action: { text: "Cancel", color: "text-fuchsia-800" },
+    },
+    {
+        id: 2,
+        time: "9/12/2025 17:32:05",
+        type: "Limit Buy",
+        coin: "ETH",
+        direction: { text: "Open Long", color: "text-[#2DA44E]" },
+        size: "0.5 / 0.5",
+        orderValue: "$227.20",
+        price: "$227.20",
+        reduceOnly: "No",
+        tpSl: "--",
+        action: { text: "Cancel", color: "text-fuchsia-800" },
+    },
+    ];
+
+    const handleConfirmCancel = () => {
+    if (!cancelModalOrder) return;
+    console.log(`Cancelled order: ${cancelModalOrder.coin} ${cancelModalOrder.price}`);
+    // 這裡可加呼叫 API 取消訂單
+    setCancelModalOrder(null);
     };
 
     {/* Toast Notification */}
@@ -913,61 +953,62 @@ const Trading = () => {
                             {accountTab === "Open Orders" && (
                                 <div className="py-4">
                                     <div className="overflow-x-auto">
-                                        <table className="w-full text-left border-collapse">
-                                            {/* Table Head */}
-                                            <thead>
-                                            <tr className="text-zinc-400 text-sm font-bold">
-                                                <th className="py-2 px-2">Time</th>
-                                                <th className="py-2 px-2">Type</th>
-                                                <th className="py-2 px-2">Coin</th>
-                                                <th className="py-2 px-2">Direction</th>
-                                                <th className="py-2 px-2">Size / Original Size</th>
-                                                <th className="py-2 px-2">Order Value</th>
-                                                <th className="py-2 px-2">Price / Trigger</th>
-                                                <th className="py-2 px-2">Reduce Only</th>
-                                                <th className="py-2 px-2">TP/SL</th>
-                                                <th className="py-2 px-2">Actions</th>
+                                    <table className="w-full text-left border-collapse">
+                                        {/* Table Head */}
+                                        <thead>
+                                        <tr className="text-zinc-400 text-sm font-bold">
+                                            <th className="py-2 px-2">Time</th>
+                                            <th className="py-2 px-2">Type</th>
+                                            <th className="py-2 px-2">Coin</th>
+                                            <th className="py-2 px-2">Direction</th>
+                                            <th className="py-2 px-2">Size / Original Size</th>
+                                            <th className="py-2 px-2">Order Value</th>
+                                            <th className="py-2 px-2">Price / Trigger</th>
+                                            <th className="py-2 px-2">Reduce Only</th>
+                                            <th className="py-2 px-2">TP/SL</th>
+                                            <th className="py-2 px-2">Actions</th>
+                                        </tr>
+                                        </thead>
+                                
+                                        {/* Table Body */}
+                                        <tbody className="text-sm text-white">
+                                        {orders.map((row) => (
+                                            <tr key={row.id} className="border-b border-[#30363D]">
+                                            <td className="py-2 px-2 whitespace-pre">{row.time}</td>
+                                            <td className="py-2 px-2">{row.type}</td>
+                                            <td className="py-2 px-2">{row.coin}</td>
+                                            <td className={`py-2 px-2 ${row.direction.color}`}>{row.direction.text}</td>
+                                            <td className="py-2 px-2">{row.size}</td>
+                                            <td className="py-2 px-2">{row.orderValue}</td>
+                                            <td className="py-2 px-2">{row.price}</td>
+                                            <td className="py-2 px-2">{row.reduceOnly}</td>
+                                            <td className="py-2 px-2">{row.tpSl}</td>
+                                            <td className={`py-2 px-2 font-bold ${row.action.color}`}>
+                                                <button
+                                                onClick={() => setCancelModalOrder({ id: row.id, coin: row.coin, price: row.price })}
+                                                >
+                                                {row.action.text}
+                                                </button>
+                                            </td>
                                             </tr>
-                                            </thead>
-
-                                            {/* Table Body */}
-                                            <tbody className="text-sm text-white">
-                                            {[
-                                                {
-                                                time: "9/12/2025 17:30:13",
-                                                type: "Take Profit Market",
-                                                coin: "HYPE",
-                                                direction: { text: "Close Long", color: "text-[#F85149]" },
-                                                size: "-- / --",
-                                                orderValue: "--",
-                                                price: "Market / Price > 60",
-                                                reduceOnly: "Yes",
-                                                tpSl: "--",
-                                                action: { text: "Cancel", color: "text-fuchsia-800" },
-                                                },
-                                            ].map((row, idx) => (
-                                                <tr key={idx} className="border-b border-[#30363D]">
-                                                <td className="py-2 px-2 whitespace-pre">{row.time}</td>
-                                                <td className="py-2 px-2">{row.type}</td>
-                                                <td className="py-2 px-2">{row.coin}</td>
-                                                <td className={`py-2 px-2 ${row.direction.color}`}>{row.direction.text}</td>
-                                                <td className="py-2 px-2">{row.size}</td>
-                                                <td className="py-2 px-2">{row.orderValue}</td>
-                                                <td className="py-2 px-2">{row.price}</td>
-                                                <td className="py-2 px-2">{row.reduceOnly}</td>
-                                                <td className="py-2 px-2">{row.tpSl}</td>
-                                                <td className={`py-2 px-2 font-bold ${row.action.color}`}>{row.action.text}</td>
-                                                </tr>
-                                            ))}
-                                            </tbody>
-                                        </table>
+                                        ))}
+                                        </tbody>
+                                    </table>
                                     </div>
+                                    
                                     {/* View All button */}
                                     <div className="flex justify-end mt-3">
-                                        <button className="bg-fuchsia-800 w-[100px] py-3.5 rounded-md text-white font-bold">
-                                        View All
-                                        </button>
+                                        <button className="bg-fuchsia-800 w-[100px] py-3.5 rounded-md text-white font-bold">View All</button>
                                     </div>
+
+                                    {/* Confirm Cancel Modal */}
+                                    {cancelModalOrder && (
+                                        <ConfirmCancelModal
+                                        orderName={`Price / Trigger ${cancelModalOrder.price}`}
+                                        onClose={() => setCancelModalOrder(null)}
+                                        onConfirm={handleConfirmCancel}
+                                        />
+                                    )}
                                 </div>
                             )}
                             {/* Trade History */}
