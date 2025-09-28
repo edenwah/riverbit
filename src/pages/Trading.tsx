@@ -18,7 +18,7 @@ import AIChatWidget from "../components/AIChatWidget";
 import Toast from "../components/Toast";
 import ConfirmCloseModal from "../components/ConfirmCloseModal";
 
-export default () => {
+const Trading = () => {
     const [input1, onChangeInput1] = useState('');
     const [input2, onChangeInput2] = useState('');
     const [input3, onChangeInput3] = useState('');
@@ -49,6 +49,20 @@ export default () => {
     const [showAIWidget, setShowAIWidget] = useState(false);
     const [showAssetPopup, setShowAssetPopup] = useState(false);
     const [showAdjustLeverageModal, setShowAdjustLeverageModal] = useState(false);
+    const [showCloseModal, setShowCloseModal] = useState(false);
+    const [showCloseAllModal, setShowCloseAllModal] = useState(false);
+    const [modalCoin, setModalCoin] = useState("");
+
+    const handleClosePosition = (coinName: string) => {
+    // TODO: 實際平倉邏輯，例如更新 table data
+    console.log("Closing position for", coinName);
+    };
+
+    const handleCloseAllConfirm = () => {
+    console.log("Confirmed: close all positions");
+    // 這裡放真正平倉邏輯
+    setShowCloseAllModal(false);
+    };
 
     {/* Show and Hide Close Position modal */}
     const [showCloseModal, setShowCloseModal] = useState(false);
@@ -72,8 +86,8 @@ export default () => {
         message?: string;
         subMessage?: string;
         type?: "success" | "loading" | "error";
-      } | null>(null);
-    
+    } | null>(null);
+
     const showToast = (
         title: string,
         type: "success" | "loading" | "error",
@@ -91,20 +105,65 @@ export default () => {
 
     // 模擬不同模式Cross / Isolated 下的資料
     const estimation = crossSelected
-    ? {
-        liquidationPrice: "$39,130.00",
-        estFee: "$2.50",
-        mode: "Cross",
-    }
-    : {
-        liquidationPrice: "$39,500.00",
-        estFee: "$1.80",
-        mode: "Isolated",
+        ? {
+            liquidationPrice: "$39,130.00",
+            estFee: "$2.50",
+            mode: "Cross",
+        }
+        : {
+            liquidationPrice: "$39,500.00",
+            estFee: "$1.80",
+            mode: "Isolated",
+        };
+
+    // Selected asset for the main chart (mocked interaction)
+    const [selectedAssetSymbol, setSelectedAssetSymbol] = useState<string>("ETH-USD");
+
+    // Map our asset symbols to TradingView symbols
+    const tradingViewSymbolMap: Record<string, string> = {
+        "BTC-USD": "BINANCE:BTCUSDT",
+        "ETH-USD": "BINANCE:ETHUSDT",
+        "SOL-USD": "BINANCE:SOLUSDT",
+        "HYPE-USD": "BINANCE:BTCUSDT", // fallback example
+        "HYPE/USDC": "BINANCE:BTCUSDT", // fallback example
+        // xStocks → US equities on TradingView
+        "xTSLA": "NASDAQ:TSLA",
+        "xAAPL": "NASDAQ:AAPL",
+        "xNVDA": "NASDAQ:NVDA",
+        "xMSFT": "NASDAQ:MSFT",
     };
 
+    const mapToTradingViewSymbol = (symbol: string): string => {
+        return tradingViewSymbolMap[symbol] || "BINANCE:ETHUSDT";
+    };
+
+    // Map granularity to TradingView interval
+    const intervalMap: Record<string, string> = {
+        "1m": "1",
+        "5m": "5",
+        "15m": "15",
+        "1h": "60",
+        "1d": "D",
+    };
+
+    const tradingViewInterval = intervalMap[granularity] || "60";
+    const tradingViewSymbol = mapToTradingViewSymbol(selectedAssetSymbol);
+    const tvSrc = `https://s.tradingview.com/widgetembed/?frameElementId=tradingview_widget&symbol=${encodeURIComponent(tradingViewSymbol)}&interval=${encodeURIComponent(tradingViewInterval)}&theme=dark&style=1&timezone=Etc%2FUTC&hide_side_toolbar=0&allow_symbol_change=1&hideideas=1&withdateranges=1&locale=en`;
+
     {/* Show and Hide TP/SL modal */}
+    interface TpslModalData {
+        time: string;
+        coin: string;
+        position: string;
+        entryPrice: string;
+        markPrice: string;
+        takeProfit: string;
+        stopLoss: string;
+        orderId: string;
+        expectedProfit: string;
+    }
     const [showTPSLModal, setShowTPSLModal] = useState(false); // 控制 modal 顯示
-    const [modalData, setModalData] = useState(null); // 儲存傳遞給 modal 的資料
+    const [modalData, setModalData] = useState<TpslModalData | null>(null); // 儲存傳遞給 modal 的資料
 
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [language, setLanguage] = useState("EN");
@@ -192,6 +251,11 @@ export default () => {
         {symbol:"SOL-USD",name:"Solana",bg:"bg-purple-500",leverage:"20x",price:"$221.94",change:"+7.47 / +3.48%",funding:"0.0100%",volume:"$1,314,153,194",oi:"$1,516,333,384", type: "Perps"},
         {symbol:"HYPE-USD",name:"Hyperliquid",bg:"bg-pink-500",leverage:"10x",price:"$54.531",change:"+1.625 / +3.07%",funding:"0.0100%",volume:"$709,614,355",oi:"$1,487,051,890", type: "Perps"},
         {symbol:"HYPE/USDC",name:"SPOT",bg:"bg-pink-500",leverage:"-",price:"$54.511",change:"+1.593 / +3.01%",funding:"-",volume:"$250,910,508",oi:"-", type: "Spot"}
+        // xStocks category (tokenized U.S. equities)
+        ,{symbol:"xTSLA",name:"Tokenized Tesla",bg:"bg-red-500",leverage:"5x",price:"$252.31",change:"+1.20 / +0.48%",funding:"-",volume:"$10,910,508",oi:"-", type: "xStocks"}
+        ,{symbol:"xAAPL",name:"Tokenized Apple",bg:"bg-green-600",leverage:"5x",price:"$225.12",change:"+0.50 / +0.22%",funding:"-",volume:"$9,210,508",oi:"-", type: "xStocks"}
+        ,{symbol:"xNVDA",name:"Tokenized Nvidia",bg:"bg-yellow-600",leverage:"5x",price:"$120.11",change:"-0.75 / -0.62%",funding:"-",volume:"$8,110,508",oi:"-", type: "xStocks"}
+        ,{symbol:"xMSFT",name:"Tokenized Microsoft",bg:"bg-blue-700",leverage:"5x",price:"$412.50",change:"+1.35 / +0.33%",funding:"-",volume:"$7,910,508",oi:"-", type: "xStocks"}
     ];
 
     const filteredMarkets = searchFilterTab === "All Coins"
@@ -199,6 +263,7 @@ export default () => {
         : allMarkets.filter(m => {
             if (searchFilterTab === "Perps") return m.type === "Perps";
             if (searchFilterTab === "Spot") return m.type === "Spot";
+            if (searchFilterTab === "xStocks") return m.type === "xStocks";
             return false;
         });
 
@@ -251,7 +316,7 @@ export default () => {
                                         className="w-3 h-7 object-fill"
                                     />
                                     <span className="text-gray-200 text-lg font-bold">
-                                        {"ETH-PERP"}
+                                        {selectedAssetSymbol}
                                     </span>
                                     {/* Select Asset */}
                                     <div className="relative">
@@ -315,7 +380,7 @@ export default () => {
 
                                                     {/* Tab Filter */}
                                                     <div className="overflow-auto flex whitespace-nowrap gap-x-4 gap-y-2 px-4 py-2 mb-2 text-sm">
-                                                        {["All Coins","Perps","Spot","Trending","DEX Only","Pre-launch","AI","DeFi","Layer 1","Layer 2","Meme"].map(tab => (
+                                                        {["All Coins","xStocks","Perps","Spot","Trending","DEX Only","Pre-launch","AI","DeFi","Layer 1","Layer 2","Meme"].map(tab => (
                                                             <button
                                                                 key={tab}
                                                                 className={`my-1 px-3 py-1 rounded transition ${
@@ -346,7 +411,14 @@ export default () => {
                                                             </thead>
                                                             <tbody>
                                                                 {filteredMarkets.map((row, idx) => (
-                                                                    <tr key={idx} className="border-b border-[#30363D] text-white">
+                                                                    <tr
+                                                                        key={idx}
+                                                                        className="border-b border-[#30363D] text-white hover:bg-[#1f2326] cursor-pointer"
+                                                                        onClick={() => {
+                                                                            setSelectedAssetSymbol(row.symbol);
+                                                                            setShowAssetPopup(false);
+                                                                        }}
+                                                                    >
                                                                         <td className="px-4 py-2">
                                                                             <div className="flex items-center gap-3">
                                                                                 <button className={`${row.bg} text-white py-2 px-3 rounded-full border-0`}>{row.symbol.charAt(0)}</button>
@@ -475,6 +547,16 @@ export default () => {
                             </div>
                         </div>
                         <div className="self-stretch bg-zinc-900 h-[500px] p-[1px] rounded-sm border border-solid border-[#30363D]">
+                            <iframe
+                                title="TradingView Chart"
+                                id="tradingview_widget"
+                                src={tvSrc}
+                                className="w-full h-full rounded-sm"
+                                frameBorder="0"
+                                allowTransparency={true}
+                                scrolling="no"
+                                allowFullScreen
+                            />
                         </div>
                         <div className="self-stretch bg-zinc-900 py-[1px] rounded-sm border border-solid border-[#30363D]">
                             <div className="flex flex-col items-start self-stretch py-4 mx-[1px] gap-2">
@@ -688,7 +770,7 @@ export default () => {
                                                                     stopLoss: "--",
                                                                     orderId: "160687782672",
                                                                     expectedProfit: "39.51 USDC",
-                                                                } as any);
+                                                                } as TpslModalData);
                                                                 setShowTPSLModal(true);
                                                             }}
                                                             alt="TP/SL"
@@ -2173,4 +2255,5 @@ export default () => {
             </div>
         </div>
     )
-}
+};
+export default Trading

@@ -5,7 +5,7 @@ import Footer from "../components/Footer";
 import DesktopNavRight from "../components/DesktopNavRight";
 import MobileHeader from "../components/MobileHeader";
 import MobileMenu from "../components/MobileMenu";
-export default () => {
+const API = () => {
 	const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 	const [language, setLanguage] = useState("EN");
 	const [showLangDropdown, setShowLangDropdown] = useState(false);
@@ -396,3 +396,5 @@ export default () => {
 		</div>
 	)
 }
+
+export default API

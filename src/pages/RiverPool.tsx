@@ -13,7 +13,7 @@ import MobileHeader from "../components/MobileHeader";
 import Select from "../components/Select";
 import StatusTag from "../components/StatusTag";
 
-export default () => {
+const RiverPool = () => {
 	const [input1, onChangeInput1] = useState('');
 	const [riverPoolTab, setRiverPoolTab] = useState("Foundation");
 	const [depositWithdrawTab, setdepositWithdrawTab] = useState("Deposit");
@@ -948,3 +948,5 @@ export default () => {
 		</div>
 	)
 }
+
+export default RiverPool
