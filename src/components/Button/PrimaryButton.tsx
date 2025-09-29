@@ -6,6 +6,7 @@ interface PrimaryButtonProps {
   children: React.ReactNode;
   size?: "small" | "medium" | "large"; // 控制大小
   icon?: React.ReactNode; // optional icon
+  disabled?: boolean; // optional disabled prop
 }
 
 const PrimaryButton: React.FC<PrimaryButtonProps> = ({
@@ -13,6 +14,7 @@ const PrimaryButton: React.FC<PrimaryButtonProps> = ({
   children,
   size = "medium",
   icon,
+  disabled = false, // 默認 false
 }) => {
   // 根據 size 設定不同 class
   let sizeClasses = "";
@@ -28,10 +30,20 @@ const PrimaryButton: React.FC<PrimaryButtonProps> = ({
       break;
   }
 
+  // 用 handleClick 確保 disabled 時不會執行 onClick 
+  const handleClick = () => {
+    if (!disabled && onClick) {
+      onClick();
+    }
+  };
+
   return (
     <button
-      className={`w-full flex flex-1 justify-center items-center gap-2 bg-fuchsia-800 rounded-sm border-0 ${sizeClasses}`}
-      onClick={onClick}
+      className={`w-full flex flex-1 justify-center items-center gap-2 bg-fuchsia-800 rounded-sm border-0 ${sizeClasses}${
+        disabled ? "opacity-50 cursor-not-allowed" : ""
+      }`}
+      onClick={handleClick}
+      disabled={disabled} 
     >
       {icon && <span className="flex items-center">{icon}</span>}
       <span className="text-white font-bold text-center">
