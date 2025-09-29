@@ -19,6 +19,7 @@ import Toast from "../components/Toast";
 import ConfirmCloseModal from "../components/ConfirmCloseModal";
 import ConfirmCancelModal from "../components/ConfirmCancelModal";
 import OrderBook from "../components/OrderBook";
+import Trades from "../components/Trades";
 
 const Trading = () => {
     const [input1, onChangeInput1] = useState('');
@@ -650,51 +651,7 @@ const Trading = () => {
                                     <OrderBook />
                                 )}
                                 {orderBookTab === "Trades" && (
-                                    <div className="flex flex-col items-start w-full">
-                                        <div className="flex flex-col items-center py-1 w-full">
-                                            <div className="flex items-start pr-[1px] w-full">
-                                                <span className="text-zinc-400 text-sm my-1 w-full" >
-                                                    {"Price"}
-                                                </span>
-                                                <span className="text-zinc-400 text-sm my-1 w-full" >
-                                                    {"Size"}
-                                                </span>
-                                                <span className="text-zinc-400 text-sm my-1 w-full" >
-                                                    {"Time"}
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <div className="flex flex-col w-full">
-                                            {[
-                                                { price: "110,584.00", priceColor: "text-[#2DA44E]", qty: "14.35", time: "00:49:51" },
-                                                { price: "110,589.00", priceColor: "text-[#2DA44E]", qty: "0.31", time: "00:49:51" },
-                                                { price: "110,595.00", priceColor: "text-[#F85149]", qty: "0.20", time: "00:49:51" },
-                                                { price: "110,594.00", priceColor: "text-[#F85149]", qty: "1.359", time: "00:49:51" },
-                                                { price: "110,585.00", priceColor: "text-[#2DA44E]", qty: "0.172", time: "00:49:51" },
-                                                { price: "110,593.00", priceColor: "text-[#F85149]", qty: "0.990", time: "00:49:51" },
-                                                { price: "110,588.00", priceColor: "text-[#2DA44E]", qty: "1.755", time: "00:49:51" },
-                                                { price: "110,592.00", priceColor: "text-[#F85149]", qty: "3.025", time: "00:49:51" },
-                                                { price: "110,589.00", priceColor: "text-[#2DA44E]", qty: "1.799", time: "00:49:51" },
-                                                { price: "110,591.00", priceColor: "text-[#F85149]", qty: "1.146", time: "00:49:51" },
-                                                { price: "110,589.00", priceColor: "text-[#2DA44E]", qty: "1.799", time: "00:49:51" },
-                                                { price: "110,590.00", priceColor: "text-[#F85149]", qty: "2.852", time: "00:49:51" },
-                                                { price: "110,587.00", priceColor: "text-[#2DA44E]", qty: "0.351", time: "00:49:51" },
-                                                { price: "110,590.00", priceColor: "text-[#F85149]", qty: "2.852", time: "00:49:51" },
-                                                { price: "110,589.00", priceColor: "text-[#2DA44E]", qty: "1.799", time: "00:49:51" },
-                                                { price: "110,590.00", priceColor: "text-[#F85149]", qty: "2.852", time: "00:49:51" },
-                                                { price: "110,590.00", priceColor: "text-[#F85149]", qty: "2.852", time: "00:49:51" },
-                                                { price: "110,586.00", priceColor: "text-[#2DA44E]", qty: "2.952", time: "00:49:51" },
-                                                { price: "110,590.00", priceColor: "text-[#F85149]", qty: "2.852", time: "00:49:51" },
-                                                { price: "110,589.00", priceColor: "text-[#2DA44E]", qty: "1.799", time: "00:49:51" },
-                                            ].map((row, idx) => (
-                                                <div key={idx} className="grid grid-cols-3 w-full text-sm py-2">
-                                                <span className={row.priceColor}>{row.price}</span>
-                                                <span className="text-white">{row.qty}</span>
-                                                <span className="text-zinc-400">{row.time}</span>
-                                                </div>
-                                            ))}
-                                        </div>
-                                    </div>
+                                    <Trades />
                                 )}
                             </div>
                         </div>
