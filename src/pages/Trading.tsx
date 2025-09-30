@@ -55,6 +55,9 @@ const Trading = () => {
     const [showCloseModal, setShowCloseModal] = useState(false);
     const [showCloseAllModal, setShowCloseAllModal] = useState(false);
     const [modalCoin, setModalCoin] = useState("");
+    const [showAllTradeHistory, setShowAllTradeHistory] = useState(false);
+    const [showAllFundingHistory, setShowAllFundingHistory] = useState(false);
+    const [showAllOrderHistory, setShowAllOrderHistory] = useState(false);
 
     const handleClosePosition = (coinName: string) => {
     // TODO: 實際平倉邏輯，例如更新 table data
@@ -63,7 +66,8 @@ const Trading = () => {
 
     const handleCloseAllConfirm = () => {
     console.log("Confirmed: close all positions");
-    // 這裡放真正平倉邏輯
+    // 清空所有持仓
+    setPositions([]);
     setShowCloseAllModal(false);
     };
 
@@ -83,6 +87,266 @@ const Trading = () => {
         margin: { value: "$3,125", percent: "42%" },
         tpSl: "--/--",
         action: "Close",
+        },
+    ]);
+
+    // Trade History state
+    const [tradeHistory, setTradeHistory] = useState([
+        {
+            time: "9/12/2025 16:41:34",
+            coin: "HYPE",
+            direction: { text: "Open Long", color: "text-[#2DA44E]" },
+            price: "55.116",
+            size: "8.09 HYPE",
+            tradeValue: "445.89 USDC",
+            fee: "0.20 USDC",
+            pnl: "-0.20 USDC",
+        },
+        {
+            time: "9/12/2025 14:23:10",
+            coin: "BTC",
+            direction: { text: "Close Long", color: "text-[#CF222E]" },
+            price: "64250.50",
+            size: "0.05 BTC",
+            tradeValue: "3212.53 USDC",
+            fee: "1.61 USDC",
+            pnl: "+125.40 USDC",
+        },
+        {
+            time: "9/12/2025 12:15:42",
+            coin: "ETH",
+            direction: { text: "Open Short", color: "text-[#CF222E]" },
+            price: "3456.80",
+            size: "1.5 ETH",
+            tradeValue: "5185.20 USDC",
+            fee: "2.59 USDC",
+            pnl: "-2.59 USDC",
+        },
+        {
+            time: "9/12/2025 10:08:55",
+            coin: "SOL",
+            direction: { text: "Close Short", color: "text-[#2DA44E]" },
+            price: "145.30",
+            size: "20 SOL",
+            tradeValue: "2906.00 USDC",
+            fee: "1.45 USDC",
+            pnl: "+89.75 USDC",
+        },
+        {
+            time: "9/12/2025 08:45:21",
+            coin: "xAAPL",
+            direction: { text: "Open Long", color: "text-[#2DA44E]" },
+            price: "227.10",
+            size: "110 xAAPL",
+            tradeValue: "24981.00 USDC",
+            fee: "12.49 USDC",
+            pnl: "-12.49 USDC",
+        },
+        {
+            time: "9/11/2025 22:33:18",
+            coin: "AVAX",
+            direction: { text: "Close Long", color: "text-[#CF222E]" },
+            price: "38.75",
+            size: "50 AVAX",
+            tradeValue: "1937.50 USDC",
+            fee: "0.97 USDC",
+            pnl: "+45.20 USDC",
+        },
+        {
+            time: "9/11/2025 18:12:05",
+            coin: "LINK",
+            direction: { text: "Open Short", color: "text-[#CF222E]" },
+            price: "15.85",
+            size: "200 LINK",
+            tradeValue: "3170.00 USDC",
+            fee: "1.59 USDC",
+            pnl: "-1.59 USDC",
+        },
+        {
+            time: "9/11/2025 15:55:30",
+            coin: "DOGE",
+            direction: { text: "Close Short", color: "text-[#2DA44E]" },
+            price: "0.0825",
+            size: "10000 DOGE",
+            tradeValue: "825.00 USDC",
+            fee: "0.41 USDC",
+            pnl: "+32.15 USDC",
+        },
+    ]);
+
+    // Funding History state
+    const [fundingHistory, setFundingHistory] = useState([
+        {
+            time: "9/12/2025 17:00:00",
+            coin: "HYPE",
+            size: "8.09 HYPE",
+            side: { text: "Long", color: "text-[#2DA44E]" },
+            payment: { text: "$0.0012", color: "text-[#2DA44E]" },
+            rate: "-0.0003%",
+        },
+        {
+            time: "9/12/2025 13:00:00",
+            coin: "BTC",
+            size: "0.05 BTC",
+            side: { text: "Long", color: "text-[#2DA44E]" },
+            payment: { text: "-$0.85", color: "text-[#CF222E]" },
+            rate: "0.0012%",
+        },
+        {
+            time: "9/12/2025 09:00:00",
+            coin: "ETH",
+            size: "1.5 ETH",
+            side: { text: "Short", color: "text-[#CF222E]" },
+            payment: { text: "$0.45", color: "text-[#2DA44E]" },
+            rate: "-0.0008%",
+        },
+        {
+            time: "9/12/2025 05:00:00",
+            coin: "SOL",
+            size: "20 SOL",
+            side: { text: "Short", color: "text-[#CF222E]" },
+            payment: { text: "$0.32", color: "text-[#2DA44E]" },
+            rate: "-0.0005%",
+        },
+        {
+            time: "9/12/2025 01:00:00",
+            coin: "xAAPL",
+            size: "110 xAAPL",
+            side: { text: "Long", color: "text-[#2DA44E]" },
+            payment: { text: "-$3.25", color: "text-[#CF222E]" },
+            rate: "0.0015%",
+        },
+        {
+            time: "9/11/2025 21:00:00",
+            coin: "AVAX",
+            size: "50 AVAX",
+            side: { text: "Long", color: "text-[#2DA44E]" },
+            payment: { text: "-$0.18", color: "text-[#CF222E]" },
+            rate: "0.0009%",
+        },
+        {
+            time: "9/11/2025 17:00:00",
+            coin: "LINK",
+            size: "200 LINK",
+            side: { text: "Short", color: "text-[#CF222E]" },
+            payment: { text: "$0.28", color: "text-[#2DA44E]" },
+            rate: "-0.0007%",
+        },
+        {
+            time: "9/11/2025 13:00:00",
+            coin: "DOGE",
+            size: "10000 DOGE",
+            side: { text: "Short", color: "text-[#CF222E]" },
+            payment: { text: "$0.08", color: "text-[#2DA44E]" },
+            rate: "-0.0002%",
+        },
+    ]);
+
+    // Order History state
+    const [orderHistory, setOrderHistory] = useState([
+        {
+            time: "9/12/2025 17:30:13",
+            type: "Take Profit Market",
+            coin: "HYPE",
+            direction: { text: "Close Long", color: "text-[#F85149]" },
+            size: "-- / --",
+            orderValue: "--",
+            trigger: "Market /Price > 60",
+            reduceOnly: "Yes",
+            tpSl: "--",
+            status: "Open",
+            orderId: "160687782672",
+        },
+        {
+            time: "9/12/2025 17:03:27",
+            type: "Take Profit Market",
+            coin: "HYPE",
+            direction: { text: "Close Long", color: "text-[#F85149]" },
+            size: "-- / --",
+            orderValue: "--",
+            trigger: "Market /Price > 56",
+            reduceOnly: "Yes",
+            tpSl: "--",
+            status: "Cancelled",
+            orderId: "160656988197",
+        },
+        {
+            time: "9/12/2025 14:15:32",
+            type: "Limit",
+            coin: "BTC",
+            direction: { text: "Buy Long", color: "text-[#2DA44E]" },
+            size: "0.1 / 0.1",
+            orderValue: "$6,400",
+            trigger: "64000.00",
+            reduceOnly: "No",
+            tpSl: "65000/63000",
+            status: "Filled",
+            orderId: "160642531288",
+        },
+        {
+            time: "9/12/2025 12:08:45",
+            type: "Market",
+            coin: "ETH",
+            direction: { text: "Sell Short", color: "text-[#CF222E]" },
+            size: "1.5 / 1.5",
+            orderValue: "$5,185.20",
+            trigger: "Market",
+            reduceOnly: "No",
+            tpSl: "--",
+            status: "Filled",
+            orderId: "160628745193",
+        },
+        {
+            time: "9/12/2025 10:22:11",
+            type: "Stop Loss Market",
+            coin: "SOL",
+            direction: { text: "Close Short", color: "text-[#2DA44E]" },
+            size: "-- / --",
+            orderValue: "--",
+            trigger: "Market /Price < 140",
+            reduceOnly: "Yes",
+            tpSl: "--",
+            status: "Cancelled",
+            orderId: "160615829447",
+        },
+        {
+            time: "9/12/2025 08:45:21",
+            type: "Market",
+            coin: "xAAPL",
+            direction: { text: "Buy Long", color: "text-[#2DA44E]" },
+            size: "110 / 110",
+            orderValue: "$24,981.00",
+            trigger: "Market",
+            reduceOnly: "No",
+            tpSl: "--",
+            status: "Filled",
+            orderId: "160603721556",
+        },
+        {
+            time: "9/11/2025 22:35:50",
+            type: "Limit",
+            coin: "AVAX",
+            direction: { text: "Sell Short", color: "text-[#CF222E]" },
+            size: "0 / 100",
+            orderValue: "$3,900",
+            trigger: "39.00",
+            reduceOnly: "No",
+            tpSl: "--",
+            status: "Cancelled",
+            orderId: "160589314822",
+        },
+        {
+            time: "9/11/2025 18:10:33",
+            type: "Market",
+            coin: "LINK",
+            direction: { text: "Sell Short", color: "text-[#CF222E]" },
+            size: "200 / 200",
+            orderValue: "$3,170.00",
+            trigger: "Market",
+            reduceOnly: "No",
+            tpSl: "15.00/16.50",
+            status: "Filled",
+            orderId: "160572445911",
         },
     ]);
 
@@ -986,18 +1250,7 @@ const Trading = () => {
 
                                             {/* Table Body */}
                                             <tbody className="text-sm text-white">
-                                            {[
-                                                {
-                                                time: "9/12/2025 16:41:34",
-                                                coin: "HYPE",
-                                                direction: { text: "Open Long", color: "text-[#2DA44E]" },
-                                                price: "55.116",
-                                                size: "8.09 HYPE",
-                                                tradeValue: "445.89 USDC",
-                                                fee: "0.20 USDC",
-                                                pnl: "-0.20 USDC",
-                                                },
-                                            ].map((row, idx) => (
+                                            {(showAllTradeHistory ? tradeHistory : tradeHistory.slice(0, 5)).map((row, idx) => (
                                                 <tr key={idx} className="border-b border-[#30363D]">
                                                 <td className="py-2 px-2 whitespace-pre">{row.time}</td>
                                                 <td className="py-2 px-2">{row.coin}</td>
@@ -1016,13 +1269,38 @@ const Trading = () => {
                                     <div className="flex justify-end mt-3 gap-4">
                                         <button
                                         className="bg-fuchsia-800 py-3.5 px-[19px] rounded-md text-white font-bold"
-                                        onClick={() => alert("Pressed!")}
+                                        onClick={() => setShowAllTradeHistory(!showAllTradeHistory)}
                                         >
-                                        View All
+                                        {showAllTradeHistory ? "Show Less" : "View All"}
                                         </button>
                                         <button
                                         className="bg-fuchsia-800 py-3.5 px-4 rounded-md text-white font-bold"
-                                        onClick={() => alert("Pressed!")}
+                                        onClick={() => {
+                                            // Convert trade history to CSV
+                                            const headers = ["Time", "Coin", "Direction", "Price", "Size", "Trade Value", "Fee", "Closed PNL"];
+                                            const csvContent = [
+                                                headers.join(","),
+                                                ...tradeHistory.map(row => [
+                                                    row.time,
+                                                    row.coin,
+                                                    row.direction.text,
+                                                    row.price,
+                                                    row.size,
+                                                    row.tradeValue,
+                                                    row.fee,
+                                                    row.pnl
+                                                ].join(","))
+                                            ].join("\n");
+
+                                            // Create download link
+                                            const blob = new Blob([csvContent], { type: "text/csv" });
+                                            const url = window.URL.createObjectURL(blob);
+                                            const a = document.createElement("a");
+                                            a.href = url;
+                                            a.download = `trade-history-${new Date().toISOString().split('T')[0]}.csv`;
+                                            a.click();
+                                            window.URL.revokeObjectURL(url);
+                                        }}
                                         >
                                         Export as CSV
                                         </button>
@@ -1048,16 +1326,7 @@ const Trading = () => {
 
                                         {/* Table Body */}
                                         <tbody className="text-sm text-white">
-                                            {[
-                                            {
-                                                time: "9/12/2025 17:00:00",
-                                                coin: "HYPE",
-                                                size: "8.09 HYPE",
-                                                side: { text: "Long", color: "text-[#2DA44E]" },
-                                                payment: { text: "$0.0012", color: "text-[#2DA44E]" },
-                                                rate: "-0.0003%",
-                                            },
-                                            ].map((row, idx) => (
+                                            {(showAllFundingHistory ? fundingHistory : fundingHistory.slice(0, 5)).map((row, idx) => (
                                             <tr key={idx} className="border-b border-[#30363D]">
                                                 <td className="py-2 px-2 whitespace-pre">{row.time}</td>
                                                 <td className="py-2 px-2">{row.coin}</td>
@@ -1075,13 +1344,36 @@ const Trading = () => {
                                     <div className="flex justify-end mt-3 gap-4">
                                         <button
                                         className="bg-fuchsia-800 py-3.5 px-[19px] rounded-md text-white font-bold"
-                                        onClick={() => alert("Pressed!")}
+                                        onClick={() => setShowAllFundingHistory(!showAllFundingHistory)}
                                         >
-                                        View All
+                                        {showAllFundingHistory ? "Show Less" : "View All"}
                                         </button>
                                         <button
                                         className="bg-fuchsia-800 py-3.5 px-4 rounded-md text-white font-bold"
-                                        onClick={() => alert("Pressed!")}
+                                        onClick={() => {
+                                            // Convert funding history to CSV
+                                            const headers = ["Time", "Coin", "Size", "Position Side", "Payment", "Rate"];
+                                            const csvContent = [
+                                                headers.join(","),
+                                                ...fundingHistory.map(row => [
+                                                    row.time,
+                                                    row.coin,
+                                                    row.size,
+                                                    row.side.text,
+                                                    row.payment.text,
+                                                    row.rate
+                                                ].join(","))
+                                            ].join("\n");
+
+                                            // Create download link
+                                            const blob = new Blob([csvContent], { type: "text/csv" });
+                                            const url = window.URL.createObjectURL(blob);
+                                            const a = document.createElement("a");
+                                            a.href = url;
+                                            a.download = `funding-history-${new Date().toISOString().split('T')[0]}.csv`;
+                                            a.click();
+                                            window.URL.revokeObjectURL(url);
+                                        }}
                                         >
                                         Export as CSV
                                         </button>
@@ -1112,34 +1404,7 @@ const Trading = () => {
 
                                         {/* Table Body */}
                                         <tbody className="text-sm text-white">
-                                            {[
-                                            {
-                                                time: "9/12/2025 17:30:13",
-                                                type: "Take Profit Market",
-                                                coin: "HYPE",
-                                                direction: { text: "Close Long", color: "text-[#F85149]" },
-                                                size: "-- / --",
-                                                orderValue: "--",
-                                                trigger: "Market /Price > 60",
-                                                reduceOnly: "Yes",
-                                                tpSl: "--",
-                                                status: "Open",
-                                                orderId: "160687782672",
-                                            },
-                                            {
-                                                time: "9/12/2025 17:03:27",
-                                                type: "Take Profit Market",
-                                                coin: "HYPE",
-                                                direction: { text: "Close Long", color: "text-[#F85149]" },
-                                                size: "-- / --",
-                                                orderValue: "--",
-                                                trigger: "Market /Price > 56",
-                                                reduceOnly: "Yes",
-                                                tpSl: "--",
-                                                status: "Cancelled",
-                                                orderId: "160656988197",
-                                            },
-                                            ].map((row, idx) => (
+                                            {(showAllOrderHistory ? orderHistory : orderHistory.slice(0, 5)).map((row, idx) => (
                                             <tr key={idx} className="border-b border-[#30363D]">
                                                 <td className="py-2 px-2 whitespace-pre">{row.time}</td>
                                                 <td className="py-2 px-2">{row.type}</td>
@@ -1162,9 +1427,9 @@ const Trading = () => {
                                     <div className="flex justify-end mt-3">
                                         <button
                                         className="bg-fuchsia-800 py-3.5 px-[19px] rounded-md text-white font-bold"
-                                        onClick={() => alert("Pressed!")}
+                                        onClick={() => setShowAllOrderHistory(!showAllOrderHistory)}
                                         >
-                                        View All
+                                        {showAllOrderHistory ? "Show Less" : "View All"}
                                         </button>
                                     </div>
                                 </div>

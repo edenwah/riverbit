@@ -151,14 +151,10 @@ const RiverPool = () => {
 													{"0x•••abcd"}
 												</span>
 												<img
-													src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/8y7btkl5_expires_30_days.png"} 
+													src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/8y7btkl5_expires_30_days.png"}
 													className="w-3.5 h-5 object-fill"
 												/>
 											</div>
-										</div>
-										<div className="flex shrink-0 gap-2">
-											<SecondaryButton size="medium" onClick={() => alert("Pressed!")}>Withdraw</SecondaryButton>
-											<PrimaryButton size="medium" onClick={() => alert("Pressed!")}>Deposit</PrimaryButton>
 										</div>
 									</div>
 									<div className="flex flex-col self-stretch gap-3">
@@ -328,15 +324,6 @@ const RiverPool = () => {
 													{error && (
 													<div className="text-red-500 text-xs mt-2">{error}</div>
 													)}
-													
-													{/* Toast Message */}
-													<Toast
-														title={toast?.title ?? ""}
-														message={toast?.message}
-														subMessage={toast?.subMessage}
-														type={toast?.type}
-														onClose={() => setToast(null)}
-														/>
 												</div>
 											</div>
 										</div>
@@ -590,14 +577,10 @@ const RiverPool = () => {
 													{"0x•••abcd"}
 												</span>
 												<img
-													src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/8y7btkl5_expires_30_days.png"} 
+													src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/8y7btkl5_expires_30_days.png"}
 													className="w-3.5 h-5 object-fill"
 												/>
 											</div>
-										</div>
-										<div className="flex shrink-0 gap-2">
-											<SecondaryButton size="medium" onClick={() => alert("Pressed!")}>Withdraw</SecondaryButton>
-											<PrimaryButton size="medium" onClick={() => alert("Pressed!")}>Deposit</PrimaryButton>
 										</div>
 									</div>
 									<div className="flex flex-col self-stretch gap-3">
@@ -769,15 +752,6 @@ const RiverPool = () => {
 													{error && (
 													<div className="text-red-500 text-xs mt-2">{error}</div>
 													)}
-
-													{/* Toast Message */}
-													<Toast
-														title={toast?.title ?? ""}
-														message={toast?.message}
-														subMessage={toast?.subMessage}
-														type={toast?.type}
-														onClose={() => setToast(null)}
-														/>
 
 												</div>
 											</div>
@@ -1032,6 +1006,16 @@ const RiverPool = () => {
 				</div>
 				<Footer />
 			</div>
+			{/* Toast Notification - Global */}
+			{toast && (
+				<Toast
+					title={toast.title}
+					message={toast.message}
+					subMessage={toast.subMessage}
+					type={toast.type}
+					onClose={() => setToast(null)}
+				/>
+			)}
 		</div>
 	)
 }
