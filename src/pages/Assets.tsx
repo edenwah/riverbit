@@ -9,6 +9,7 @@ import PrimaryButton from "../components/Button/PrimaryButton";
 import { SecondaryButton } from "../components/Button/SecondaryButton";
 import Tabs from "../components/Tabs";
 import Select from "../components/Select";
+import Tips from "../components/Tips";
 
 const Assets = () => {
 	const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -355,24 +356,33 @@ const Assets = () => {
 							{assetsTab === "Detailed Analysis" && (
 								<div className="flex flex-col w-full gap-6">
 									{/* Top 4 Summary Blocks */}
-									<div className="flex flex-wrap w-full text-left my-4">
+									<div className="flex flex-col w-full text-left my-4 gap-4">
 										<div className="w-full text-white font-bold my-2 text-left text-2xl">Detailed Analysis</div>
-										<div className="flex flex-col items-start gap-2 my-4 w-full lg:w-1/4">
-											<span className="text-[#8B949E] text-sm">Total P&L</span>
-											<span className="text-white text-3xl font-bold ">+$2,345.67</span>
+										<Tips
+											iconUrl="https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/1uh405kh_expires_30_days.png"
+											tips={[
+												"The following analysis data is for reference only. Historical data is not indicative of future performance; please use caution.",
+											]}
+											/>
+										<div className="flex flex-wrap w-full">
+											<div className="flex flex-col items-start gap-2 my-4 w-full lg:w-1/4">
+												<span className="text-[#8B949E] text-sm">Total P&L</span>
+												<span className="text-white text-3xl font-bold ">+$2,345.67</span>
+											</div>
+											<div className="flex flex-col items-start gap-2 my-4 w-full lg:w-1/4">
+												<span className="text-[#8B949E] text-sm">Max Drawdown</span>
+												<span className="text-white text-3xl font-bold">-12.5%</span>
+											</div>
+											<div className="flex flex-col items-start gap-2 my-4 w-full lg:w-1/4">
+												<span className="text-[#8B949E] text-sm">Win Rate</span>
+												<span className="text-white text-3xl font-bold">68.5%</span>
+											</div>
+											<div className="flex flex-col items-start gap-2 my-4 w-full lg:w-1/4">
+												<span className="text-[#8B949E] text-sm">Sharpe Ratio</span>
+												<span className="text-white text-3xl font-bold">1.24</span>
+											</div>
 										</div>
-										<div className="flex flex-col items-start gap-2 my-4 w-full lg:w-1/4">
-											<span className="text-[#8B949E] text-sm">Max Drawdown</span>
-											<span className="text-white text-3xl font-bold">-12.5%</span>
-										</div>
-										<div className="flex flex-col items-start gap-2 my-4 w-full lg:w-1/4">
-											<span className="text-[#8B949E] text-sm">Win Rate</span>
-											<span className="text-white text-3xl font-bold">68.5%</span>
-										</div>
-										<div className="flex flex-col items-start gap-2 my-4 w-full lg:w-1/4">
-											<span className="text-[#8B949E] text-sm">Sharpe Ratio</span>
-											<span className="text-white text-3xl font-bold">1.24</span>
-										</div>
+
 									</div>
 								
 									{/* Bottom 2 Chart Placeholders */}
@@ -380,7 +390,7 @@ const Assets = () => {
 									{/* Trend Chart */}
 									<div className="flex flex-col w-full">
 										<div className="flex flex-row justify-between w-full items-end">
-											<h3 className="w-full text-white font-bold mb-2 text-left">Historical Performance Backtest</h3>
+											<h3 className="w-full text-white font-bold text-xl mb-2 text-left">Historical Performance Backtest</h3>
 											<div className="bg-zinc-900/20 text-[#8B949E] text-right">
 											<Select
 												value={historyTime}
