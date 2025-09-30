@@ -70,6 +70,37 @@ const Trading = () => {
     // Open Orders Table component
     const [cancelModalOrder, setCancelModalOrder] = useState<null | { id: number; coin: string; price: string }>(null);
 
+    // Positions state
+    const [positions, setPositions] = useState([
+        {
+        coin: "xAAPL",
+        tags: ["8x", "Cross"],
+        extra: "$12.50/day",
+        position: { value: "$25,000 @227.10", side: "Long" },
+        fundingRate: "+0.0100%",
+        pnl: { value: "+$98.00", roe: "+3.92%" },
+        liqPrice: "198.20",
+        margin: { value: "$3,125", percent: "42%" },
+        tpSl: "--/--",
+        action: "Close",
+        },
+    ]);
+
+    // New mock positions
+    const newPosition = {
+        coin: "ETH",
+        tags: ["10x", "Cross"],
+        extra: "$15.00/day",
+        position: { value: "$500 @ 60.00", side: "Long" },
+        fundingRate: "+0.0200%",
+        pnl: { value: "+$0.00", roe: "0.00%" },
+        liqPrice: "45.00",
+        margin: { value: "$500", percent: "10%" },
+        tpSl: "--/--",
+        action: "Close",
+    };
+
+    // Open Orders Table data
     const orders = [
     {
         id: 1,
@@ -738,116 +769,82 @@ const Trading = () => {
 
                                             {/* Table Body */}
                                             <tbody className="text-white text-sm">
-                                            {[
-                                                {
-                                                coin: "xAAPL",
-                                                tags: ["8x", "Cross"],
-                                                extra: "$12.50/day",
-                                                position: { value: "$25,000 @227.10", side: "Long" },
-                                                fundingRate: "+0.0100%",
-                                                pnl: { value: "+$98.00", roe: "+3.92%" },
-                                                liqPrice: "198.20",
-                                                margin: { value: "$3,125", percent: "42%" },
-                                                tpSl: "--/--",
-                                                action: "Close",
-                                                },
-                                            ].map((row, idx) => (
-                                                <tr key={idx} className="border-b border-[#30363D] gap-2 py-2">
-                                                {/* Coin */}
-                                                <td>
-                                                    <div className="flex flex-col items-start">
-                                                    <span>{row.coin}</span>
-                                                    <div className="flex gap-1 mt-1">
-                                                        {row.tags.map((tag, i) => (
-                                                        <div
-                                                            key={i}
-                                                            className="inline-flex bg-[#30363D] py-1 px-2 rounded text-zinc-400 text-[10px] font-bold"
-                                                        >
-                                                            {tag}
+                                                {positions.map((row, idx) => (
+                                                    <tr key={idx} className="border-b border-[#30363D] gap-2 py-2">
+                                                    {/* Coin */}
+                                                    <td>
+                                                        <div className="flex flex-col items-start">
+                                                        <span>{row.coin}</span>
+                                                        <div className="flex gap-1 mt-1">
+                                                            {row.tags.map((tag, i) => (
+                                                            <div
+                                                                key={i}
+                                                                className="inline-flex bg-[#30363D] py-1 px-2 rounded text-zinc-400 text-[10px] font-bold"
+                                                            >
+                                                                {tag}
+                                                            </div>
+                                                            ))}
                                                         </div>
-                                                        ))}
-                                                    </div>
-                                                    <div className="inline-flex bg-[#30363D] py-1 px-2 rounded text-zinc-400 text-[10px] font-bold mt-1">
-                                                        {row.extra}
-                                                    </div>
-                                                    </div>
-                                                </td>
+                                                        <div className="inline-flex bg-[#30363D] py-1 px-2 rounded text-zinc-400 text-[10px] font-bold mt-1">
+                                                            {row.extra}
+                                                        </div>
+                                                        </div>
+                                                    </td>
 
-                                                {/* Position */}
-                                                <td className="py-2 px-2">
-                                                    <div className="flex flex-col gap-1 items-start">
-                                                    <span>{row.position.value}</span>
-                                                    <div className="inline-flex bg-[#30363D] py-1 px-2 rounded text-zinc-400 text-[10px] font-bold">
-                                                        {row.position.side}
-                                                    </div>
-                                                    </div>
-                                                </td>
+                                                    {/* Position */}
+                                                    <td className="py-2 px-2">
+                                                        <div className="flex flex-col gap-1 items-start">
+                                                        <span>{row.position.value}</span>
+                                                        <div className="inline-flex bg-[#30363D] py-1 px-2 rounded text-zinc-400 text-[10px] font-bold">
+                                                            {row.position.side}
+                                                        </div>
+                                                        </div>
+                                                    </td>
 
-                                                {/* Funding Rate */}
-                                                <td className="py-2 px-2">{row.fundingRate}</td>
+                                                    {/* Funding Rate */}
+                                                    <td className="py-2 px-2">{row.fundingRate}</td>
 
-                                                {/* PNL */}
-                                                <td className="py-2 px-2">
-                                                    <div className="flex flex-col gap-1">
-                                                    <span>{row.pnl.value}</span>
-                                                    <div className="inline-flex bg-[#22C55E1A] py-1 px-2 rounded text-[#2DA44E] text-[10px] font-bold">
-                                                        {row.pnl.roe}
-                                                    </div>
-                                                    </div>
-                                                </td>
+                                                    {/* PNL */}
+                                                    <td className="py-2 px-2">
+                                                        <div className="flex flex-col gap-1">
+                                                        <span>{row.pnl.value}</span>
+                                                        <div className="inline-flex bg-[#22C55E1A] py-1 px-2 rounded text-[#2DA44E] text-[10px] font-bold">
+                                                            {row.pnl.roe}
+                                                        </div>
+                                                        </div>
+                                                    </td>
 
-                                                {/* Liq Price */}
-                                                <td className="py-2 px-2">{row.liqPrice}</td>
+                                                    {/* Liq Price */}
+                                                    <td className="py-2 px-2">{row.liqPrice}</td>
 
-                                                {/* Margin */}
-                                                <td className="py-2 px-2">
-                                                    <div className="flex flex-col gap-1 items-start">
-                                                    <span>{row.margin.value}</span>
-                                                    <div className="inline-flex bg-[#30363D] py-1 px-2 rounded text-zinc-400 text-[10px] font-bold">
-                                                        {row.margin.percent}
-                                                    </div>
-                                                    </div>
-                                                </td>
+                                                    {/* Margin */}
+                                                    <td className="py-2 px-2">
+                                                        <div className="flex flex-col gap-1 items-start">
+                                                        <span>{row.margin.value}</span>
+                                                        <div className="inline-flex bg-[#30363D] py-1 px-2 rounded text-zinc-400 text-[10px] font-bold">
+                                                            {row.margin.percent}
+                                                        </div>
+                                                        </div>
+                                                    </td>
 
-                                                {/* TP/SL */}
-                                                <td className="py-2 px-2">
-                                                    <div className="flex gap-1 items-center">
+                                                    {/* TP/SL */}
+                                                    <td className="py-2 px-2">
                                                         <span>{row.tpSl}</span>
-                                                        <img
-                                                        src="https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/l0hc3xdh_expires_30_days.png"
-                                                        className="w-4 h-4 object-fill cursor-pointer"
+                                                    </td>
+
+                                                    {/* Actions */}
+                                                    <td className="py-2 px-2 font-bold text-fuchsia-800">
+                                                        <button
                                                         onClick={() => {
-                                                            setModalData({
-                                                                time: "9/12/2025 17:30:13",
-                                                                coin: row.coin,
-                                                                position: row.position.value,
-                                                                entryPrice: "55.116",
-                                                                markPrice: "55.252",
-                                                                takeProfit: "Price above 60",
-                                                                stopLoss: "--",
-                                                                orderId: "160687782672",
-                                                                expectedProfit: "39.51 USDC",
-                                                            } as TpslModalData);
-                                                            setShowTPSLModal(true);
+                                                            setModalCoin(row.coin);
+                                                            setShowCloseModal(true);
                                                         }}
-                                                        alt="TP/SL"
-                                                        />
-                                                    </div>
-                                                </td>
-                                                
-                                                {/* Actions */}
-                                                <td className="py-2 px-2 font-bold text-fuchsia-800">
-                                                    <button
-                                                        onClick={() => {
-                                                        setModalCoin(row.coin); // state 存住要關閉嘅 coin 名稱
-                                                        setShowCloseModal(true); // state 控制 modal 顯示
-                                                        }}
-                                                    >
+                                                        >
                                                         {row.action}
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                            ))}
+                                                        </button>
+                                                    </td>
+                                                    </tr>
+                                                ))}
                                             </tbody>
                                         </table>
 
@@ -1412,32 +1409,46 @@ const Trading = () => {
                                                     showToast(
                                                     "Order Placed",
                                                     "success",
-                                                    "Amount: 500 USDT",
+                                                    `Amount: ${input2} USDT`,
                                                     "Processing time: ~15s"
                                                     );
 
-                                                    // Update table data inline
-                                                    setBalanceTableData(prev =>
+                                                    // Update table data 
+                                                    setBalanceTableData((prev) =>
                                                         prev.map((row, idx) => {
-                                                        if (idx === 0) { // 假設落單在第一行 USDC
-                                                            const available = parseFloat(row.available.replace(/,/g, "")) - 500;
-                                                            const inOrders = parseFloat(row.inOrders.replace(/,/g, "")) + 500;
-                                                            const value = `$${(available + inOrders).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+                                                        if (idx === 0) {
+                                                            const available =
+                                                            parseFloat(row.available.replace(/,/g, "")) - 500;
+                                                            const inOrders =
+                                                            parseFloat(row.inOrders.replace(/,/g, "")) + 500;
+                                                            const value = `$${(
+                                                            available + inOrders
+                                                            ).toLocaleString(undefined, {
+                                                            minimumFractionDigits: 2,
+                                                            maximumFractionDigits: 2,
+                                                            })}`;
                                                             return {
                                                             ...row,
-                                                            available: available.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }),
-                                                            inOrders: inOrders.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }),
+                                                            available: available.toLocaleString(undefined, {
+                                                                minimumFractionDigits: 2,
+                                                                maximumFractionDigits: 2,
+                                                            }),
+                                                            inOrders: inOrders.toLocaleString(undefined, {
+                                                                minimumFractionDigits: 2,
+                                                                maximumFractionDigits: 2,
+                                                            }),
                                                             value,
                                                             };
                                                         }
                                                         return row;
                                                         })
                                                     );
+                                                
+                                                    setPositions((prev) => [newPosition, ...prev]); // insert top
                                                     }}
                                                 >
                                                 {input1 === "Sell / Short" ? "Sell / Short" : "Buy / Long"}
                                             </PrimaryButton>
-
 
                                             {toast && (
                                                 <Toast
@@ -1452,14 +1463,14 @@ const Trading = () => {
                                         </div>
                                     )}
                                     {orderPanelTab === "Limit" && (
-                                        <div className="w-full flex flex-col items-start px-4 py-4 gap-4">
+                                        <div className="w-full flex flex-col items-start py-4 gap-4">
                                             {/* --- BEGIN Limit Tab Content --- */}
                                             <div className="flex items-center bg-zinc-950 py-1 pl-1 pr-[5px] gap-6 rounded-sm w-full">
                                                 {/* Toggle Buttons */}
-                                                <div className="flex w-full gap-2">
+                                                <div className="flex w-full gap-2 text-nowrap">
                                                     <button
                                                         type="button"
-                                                        className={`flex-1 flex flex-col items-center py-[11px] px-6 rounded-sm transition-all
+                                                        className={`w-full py-3 flex flex-col items-center rounded-sm transition-all
                                                             ${input1 !== "Sell / Short"
                                                                 ? "bg-[#2DA44E33] text-[#2DA44E]"
                                                                 : "bg-transparent text-zinc-400"
@@ -1470,7 +1481,7 @@ const Trading = () => {
                                                     </button>
                                                     <button
                                                         type="button"
-                                                        className={`flex-1 flex flex-col items-center py-[11px] px-6 rounded-sm transition-all
+                                                        className={`w-full py-3 flex flex-col items-center rounded-sm transition-all
                                                             ${input1 === "Sell / Short"
                                                                 ? "bg-[#EF444433] text-[#F85149]"
                                                                 : "bg-transparent text-zinc-400"
@@ -1687,27 +1698,42 @@ const Trading = () => {
                                                     showToast(
                                                     "Order Placed",
                                                     "success",
-                                                    "Amount: 500 USDT",
+                                                    `Amount: ${input2} USDT`,
                                                     "Processing time: ~15s"
                                                     );
 
-                                                    // Update table data inline
-                                                    setBalanceTableData(prev =>
+                                                    // Update table data 
+                                                    setBalanceTableData((prev) =>
                                                         prev.map((row, idx) => {
-                                                        if (idx === 0) { // 假設落單在第一行 USDC
-                                                            const available = parseFloat(row.available.replace(/,/g, "")) - 500;
-                                                            const inOrders = parseFloat(row.inOrders.replace(/,/g, "")) + 500;
-                                                            const value = `$${(available + inOrders).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+                                                        if (idx === 0) {
+                                                            const available =
+                                                            parseFloat(row.available.replace(/,/g, "")) - 500;
+                                                            const inOrders =
+                                                            parseFloat(row.inOrders.replace(/,/g, "")) + 500;
+                                                            const value = `$${(
+                                                            available + inOrders
+                                                            ).toLocaleString(undefined, {
+                                                            minimumFractionDigits: 2,
+                                                            maximumFractionDigits: 2,
+                                                            })}`;
                                                             return {
                                                             ...row,
-                                                            available: available.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }),
-                                                            inOrders: inOrders.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }),
+                                                            available: available.toLocaleString(undefined, {
+                                                                minimumFractionDigits: 2,
+                                                                maximumFractionDigits: 2,
+                                                            }),
+                                                            inOrders: inOrders.toLocaleString(undefined, {
+                                                                minimumFractionDigits: 2,
+                                                                maximumFractionDigits: 2,
+                                                            }),
                                                             value,
                                                             };
                                                         }
                                                         return row;
                                                         })
                                                     );
+                                                
+                                                    setPositions((prev) => [newPosition, ...prev]); // insert top
                                                     }}
                                                 >
                                                 {input1 === "Sell / Short" ? "Sell / Short" : "Buy / Long"}
@@ -1726,14 +1752,14 @@ const Trading = () => {
                                         </div>
                                     )}
                                     {orderPanelTab === "Advanced" && (
-                                        <div className="w-full flex flex-col items-start px-4 py-4 gap-4">
+                                        <div className="w-full flex flex-col items-start py-4 gap-4">
                                             {/* --- BEGIN Advanced Tab Content --- */}
                                             <div className="flex items-center bg-zinc-950 py-1 pl-1 pr-[5px] gap-6 rounded-sm w-full">
                                                 {/* Toggle Buttons */}
-                                                <div className="flex w-full gap-2">
+                                                <div className="flex w-full gap-2 text-nowrap">
                                                     <button
                                                         type="button"
-                                                        className={`flex-1 flex flex-col items-center py-[11px] px-6 rounded-sm transition-all
+                                                        className={`w-full py-3 flex flex-col items-center rounded-sm transition-all
                                                             ${input1 !== "Sell / Short"
                                                                 ? "bg-[#2DA44E33] text-[#2DA44E]"
                                                                 : "bg-transparent text-zinc-400"
@@ -1744,7 +1770,7 @@ const Trading = () => {
                                                     </button>
                                                     <button
                                                         type="button"
-                                                        className={`flex-1 flex flex-col items-center py-[11px] px-6 rounded-sm transition-all
+                                                        className={`w-full py-3 flex flex-col items-center rounded-sm transition-all
                                                             ${input1 === "Sell / Short"
                                                                 ? "bg-[#EF444433] text-[#F85149]"
                                                                 : "bg-transparent text-zinc-400"
@@ -2075,27 +2101,42 @@ const Trading = () => {
                                                     showToast(
                                                     "Order Placed",
                                                     "success",
-                                                    "Amount: 500 USDT",
+                                                    `Amount: ${input2} USDT`,
                                                     "Processing time: ~15s"
                                                     );
 
-                                                    // Update table data inline
-                                                    setBalanceTableData(prev =>
+                                                    // Update table data 
+                                                    setBalanceTableData((prev) =>
                                                         prev.map((row, idx) => {
-                                                        if (idx === 0) { // 假設落單在第一行 USDC
-                                                            const available = parseFloat(row.available.replace(/,/g, "")) - 500;
-                                                            const inOrders = parseFloat(row.inOrders.replace(/,/g, "")) + 500;
-                                                            const value = `$${(available + inOrders).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+                                                        if (idx === 0) {
+                                                            const available =
+                                                            parseFloat(row.available.replace(/,/g, "")) - 500;
+                                                            const inOrders =
+                                                            parseFloat(row.inOrders.replace(/,/g, "")) + 500;
+                                                            const value = `$${(
+                                                            available + inOrders
+                                                            ).toLocaleString(undefined, {
+                                                            minimumFractionDigits: 2,
+                                                            maximumFractionDigits: 2,
+                                                            })}`;
                                                             return {
                                                             ...row,
-                                                            available: available.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }),
-                                                            inOrders: inOrders.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }),
+                                                            available: available.toLocaleString(undefined, {
+                                                                minimumFractionDigits: 2,
+                                                                maximumFractionDigits: 2,
+                                                            }),
+                                                            inOrders: inOrders.toLocaleString(undefined, {
+                                                                minimumFractionDigits: 2,
+                                                                maximumFractionDigits: 2,
+                                                            }),
                                                             value,
                                                             };
                                                         }
                                                         return row;
                                                         })
                                                     );
+                                                
+                                                    setPositions((prev) => [newPosition, ...prev]); // insert top
                                                     }}
                                                 >
                                                 {input1 === "Sell / Short" ? "Sell / Short" : "Buy / Long"}
