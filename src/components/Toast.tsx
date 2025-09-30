@@ -32,7 +32,7 @@ export default function Toast({
 
   return (
     <div
-      className={`fixed bottom-4 right-4 w-80 flex flex-col items-start py-4 rounded-lg border-l-4 border-solid ${borderColor} shadow-lg bg-black`}
+      className={`fixed bottom-4 md:right-0 md:mx-4 max-md:w-11/12 mx-auto md:w-80 flex flex-col items-start py-4 rounded-lg border-l-4 border-solid ${borderColor} shadow-lg bg-black`}
     >
       <span className="text-white text-base font-bold ml-5">{title}</span>
       {message && (
