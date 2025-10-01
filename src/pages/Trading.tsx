@@ -1771,6 +1771,7 @@ const Trading = () => {
                                                     className="text-white bg-[#0D1117] text-base p-3 rounded-md border border-solid border-[#30363D] w-full"
                                                 />
                                             </div>
+                                            {/* 價格輸入框 */}
                                             <div className="flex flex-col items-start gap-2 w-full">
                                                 <div className="flex flex-col items-center pb-[1px]">
                                                     <span className="text-[#9D9DAF] text-sm" >
@@ -1779,7 +1780,7 @@ const Trading = () => {
                                                 </div>
                                                 <div className="flex flex-col items-start gap-4 w-full">
                                                     {/* 金額輸入框與貨幣標籤 */}
-                                                    <div className="flex justify-between bg-zinc-950 py-[9px] px-3 rounded-sm border border-solid border-[#30363D] w-full ">
+                                                    <div className="flex justify-between bg-zinc-950 py-[9px] px-3 rounded-sm border border-solid border-[#30363D] w-full">
                                                         <input
                                                             placeholder="0"
                                                             value={input2}
@@ -1787,7 +1788,7 @@ const Trading = () => {
                                                                 const value = Number(e.target.value.replace(/,/g, ""));
                                                                 onChangeInput2(isNaN(value) ? "" : value.toString());
                                                             }}
-                                                            className="text-white bg-transparent text-base w-40 py-[3px] border-0"
+                                                            className="w-full text-white bg-transparent text-base py-[3px] border-0"
                                                         />
                                                         <div className="flex shrink-0 items-center bg-zinc-700 py-[7px] pl-2 pr-[7px] gap-1.5 rounded">
                                                             <span className="text-zinc-400 text-sm font-bold">USDT</span>
@@ -1798,40 +1799,12 @@ const Trading = () => {
                                                         </div>
                                                     </div>
                                                     {/* 滑桿與快捷百分比按鈕 */}
-                                                    <div className="flex flex-col w-full">
-                                                        <input
-                                                            type="range"
-                                                            min={0}
-                                                            max={100}
-                                                            step={1}
-                                                            value={percentValue}
-                                                            onChange={(e) => {
-                                                                const percent = Number(e.target.value);
-                                                                const amount = Math.round((percent / 100) * AMOUNT_TOTAL);
-                                                                onChangeInput2(amount.toString());
-                                                            }}
-                                                            className="w-full accent-fuchsia-800 h-2 rounded-lg appearance-none bg-zinc-700 my-2"
+                                                    <PercentSlider
+                                                        value={percentValue}
+                                                        maxAmount={AMOUNT_TOTAL}
+                                                        onChangeAmount={onChangeInput2}
                                                         />
-                                                        <div className="flex justify-between gap-2 w-full mt-1">
-                                                            {[0, 25, 50, 75, 100].map((percent) => (
-                                                                <button
-                                                                    key={percent}
-                                                                    type="button"
-                                                                    className={`py-[11px] w-full rounded-sm border ${
-                                                                        percentValue === percent
-                                                                            ? "border-2 border-fuchsia-800 font-bold"
-                                                                            : "border border-[#30363D]"
-                                                                    } bg-zinc-900 text-white text-sm`}
-                                                                    onClick={() => {
-                                                                        const amount = Math.round((percent / 100) * AMOUNT_TOTAL);
-                                                                        onChangeInput2(amount.toString());
-                                                                    }}
-                                                                >
-                                                                    {percent}%
-                                                                </button>
-                                                            ))}
-                                                        </div>
-                                                    </div>
+
                                                 </div>
                                             </div>
                                             <ToggleButton
@@ -2068,6 +2041,7 @@ const Trading = () => {
                                                     </span>
                                                 </div>
                                             </div>
+                                            {/* 價格輸入框 */}
                                             <div className="flex flex-col items-start gap-2 w-full">
                                                 <div className="flex flex-col items-center pb-[1px]">
                                                     <span className="text-[#9D9DAF] text-sm" >
@@ -2076,7 +2050,7 @@ const Trading = () => {
                                                 </div>
                                                 <div className="flex flex-col items-start gap-4 w-full">
                                                     {/* 金額輸入框與貨幣標籤 */}
-                                                    <div className="flex justify-between bg-zinc-950 py-[9px] px-3 rounded-sm border border-solid border-[#30363D] w-full ">
+                                                    <div className="flex justify-between bg-zinc-950 py-[9px] px-3 rounded-sm border border-solid border-[#30363D] w-full">
                                                         <input
                                                             placeholder="0"
                                                             value={input2}
@@ -2084,7 +2058,7 @@ const Trading = () => {
                                                                 const value = Number(e.target.value.replace(/,/g, ""));
                                                                 onChangeInput2(isNaN(value) ? "" : value.toString());
                                                             }}
-                                                            className="text-white bg-transparent text-base w-40 py-[3px] border-0"
+                                                            className="w-full text-white bg-transparent text-base py-[3px] border-0"
                                                         />
                                                         <div className="flex shrink-0 items-center bg-zinc-700 py-[7px] pl-2 pr-[7px] gap-1.5 rounded">
                                                             <span className="text-zinc-400 text-sm font-bold">USDT</span>
@@ -2095,40 +2069,12 @@ const Trading = () => {
                                                         </div>
                                                     </div>
                                                     {/* 滑桿與快捷百分比按鈕 */}
-                                                    <div className="flex flex-col w-full">
-                                                        <input
-                                                            type="range"
-                                                            min={0}
-                                                            max={100}
-                                                            step={1}
-                                                            value={percentValue}
-                                                            onChange={(e) => {
-                                                                const percent = Number(e.target.value);
-                                                                const amount = Math.round((percent / 100) * AMOUNT_TOTAL);
-                                                                onChangeInput2(amount.toString());
-                                                            }}
-                                                            className="w-full accent-fuchsia-800 h-2 rounded-lg appearance-none bg-zinc-700 my-2"
+                                                    <PercentSlider
+                                                        value={percentValue}
+                                                        maxAmount={AMOUNT_TOTAL}
+                                                        onChangeAmount={onChangeInput2}
                                                         />
-                                                        <div className="flex justify-between gap-2 w-full mt-1">
-                                                            {[0, 25, 50, 75, 100].map((percent) => (
-                                                                <button
-                                                                    key={percent}
-                                                                    type="button"
-                                                                    className={`py-[11px] w-full rounded-sm border ${
-                                                                        percentValue === percent
-                                                                            ? "border-2 border-fuchsia-800 font-bold"
-                                                                            : "border border-[#30363D]"
-                                                                    } bg-zinc-900 text-white text-sm`}
-                                                                    onClick={() => {
-                                                                        const amount = Math.round((percent / 100) * AMOUNT_TOTAL);
-                                                                        onChangeInput2(amount.toString());
-                                                                    }}
-                                                                >
-                                                                    {percent}%
-                                                                </button>
-                                                            ))}
-                                                        </div>
-                                                    </div>
+
                                                 </div>
                                             </div>
                                             <ToggleButton
