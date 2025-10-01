@@ -20,10 +20,10 @@ import ConfirmCloseModal from "../components/ConfirmCloseModal";
 import ConfirmCancelModal from "../components/ConfirmCancelModal";
 import OrderBook from "../components/OrderBook";
 import Trades from "../components/Trades";
+import AmountInput from "../components/AmountInput";
 
 const Trading = () => {
     const [input1, onChangeInput1] = useState('');
-    const [input2, onChangeInput2] = useState('');
     const [input3, onChangeInput3] = useState('');
     const [input4, onChangeInput4] = useState('');
     const [input5, onChangeInput5] = useState('');
@@ -58,6 +58,15 @@ const Trading = () => {
     const [showAllTradeHistory, setShowAllTradeHistory] = useState(false);
     const [showAllFundingHistory, setShowAllFundingHistory] = useState(false);
     const [showAllOrderHistory, setShowAllOrderHistory] = useState(false);
+
+    // Amount Input
+    const [amount, setAmount] = useState("");
+    // Assume a total for percent calculation
+    const AMOUNT_TOTAL = 1000;
+    // Calculate percent from amount
+    const percentValue = amount
+      ? Math.max(0, Math.min(100, Math.round((Number(amount) / AMOUNT_TOTAL) * 100)))
+      : 0;
 
     const handleClosePosition = (coinName: string) => {
     // TODO: 實際平倉邏輯，例如更新 table data
@@ -558,14 +567,6 @@ const Trading = () => {
         };
     }, [showAssetPopup]);
 
-    // Assume a total amount for percent calculation
-    const AMOUNT_TOTAL = 1000;
-
-    // Calculate percent from input2 (amount)
-    const percentValue = input2
-      ? Math.max(0, Math.min(100, Math.round((Number(input2) / AMOUNT_TOTAL) * 100)))
-      : 0;
-
     const allMarkets = [
         {symbol:"BTC-USD",name:"Bitcoin",bg:"bg-orange-500",leverage:"40x",price:"$113,479",change:"+2,530 / +2.28%",funding:"0.0100%",volume:"$3,294,291,814",oi:"$3,989,216,288", type: "Perps"},
         {symbol:"ETH-USD",name:"Ethereum",bg:"bg-blue-500",leverage:"25x",price:"$4,350.7",change:"+66.3 / +1.55%",funding:"0.0100%",volume:"$2,603,760,484",oi:"$2,911,409,736", type: "Perps"},
@@ -601,15 +602,12 @@ const Trading = () => {
                     </div>
                     {/* Right side (Balance, Points, Wallet, Language, Buttons) */}
                     <DesktopNavRight
-                        balance="$27,345.12"
-                        points="1,250,000"
                         language={language}
                         setLanguage={setLanguage}
                     />
                 </div>
                 {/* Mobile header: show below xl */}
                 <MobileHeader
-                    balance="$27,345.12"
                     onDeposit={() => alert("Deposit pressed!")}
                     onMenuToggle={() => setMobileMenuOpen(!mobileMenuOpen)}
                     />
@@ -618,8 +616,6 @@ const Trading = () => {
                     <MobileMenu
                         isOpen={mobileMenuOpen}
                         onClose={() => setMobileMenuOpen(false)}
-                        balance="$27,345.12"
-                        points="1,250,000"
                         language={language}
                         setLanguage={setLanguage}
                         />
@@ -1449,7 +1445,7 @@ const Trading = () => {
                                 onClick={() => setCrossSelected((v) => !v)}
                             >
                                 <span className="text-[#A6A6B5] text-sm text-nowrap">
-                                    {crossSelected ? "Cross Margin" : "Isolated"}
+                                    {crossSelected ? "Cross" : "Isolated"}
                                 </span>
                             </button>
 
@@ -1519,41 +1515,13 @@ const Trading = () => {
                                                 </div>
                                             </div>
                                             {/* 價格輸入框 */}
-                                            <div className="flex flex-col items-start gap-2 w-full">
-                                                <div className="flex flex-col items-center pb-[1px]">
-                                                    <span className="text-[#9D9DAF] text-sm" >
-                                                        {"Amount"}
-                                                    </span>
-                                                </div>
-                                                <div className="flex flex-col items-start gap-4 w-full">
-                                                    {/* 金額輸入框與貨幣標籤 */}
-                                                    <div className="flex justify-between bg-zinc-950 py-[9px] px-3 rounded-sm border border-solid border-[#30363D] w-full">
-                                                        <input
-                                                            placeholder="0"
-                                                            value={input2}
-                                                            onChange={(e) => {
-                                                                const value = Number(e.target.value.replace(/,/g, ""));
-                                                                onChangeInput2(isNaN(value) ? "" : value.toString());
-                                                            }}
-                                                            className="w-full text-white bg-transparent text-base py-[3px] border-0"
-                                                        />
-                                                        <div className="flex shrink-0 items-center bg-zinc-700 py-[7px] pl-2 pr-[7px] gap-1.5 rounded">
-                                                            <span className="text-zinc-400 text-sm font-bold">USDT</span>
-                                                            <img
-                                                                src="https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/bvauf8h6_expires_30_days.png"
-                                                                className="w-3 h-[15px] rounded-sm object-fill"
-                                                            />
-                                                        </div>
-                                                    </div>
-                                                    {/* 滑桿與快捷百分比按鈕 */}
-                                                    <PercentSlider
-                                                        value={percentValue}
-                                                        maxAmount={AMOUNT_TOTAL}
-                                                        onChangeAmount={onChangeInput2}
-                                                        />
+                                            <AmountInput
+                                                value={amount}
+                                                onChange={setAmount}
+                                                percentValue={percentValue}
+                                                maxAmount={AMOUNT_TOTAL}
+                                            />
 
-                                                </div>
-                                            </div>
                                             <ToggleButton
                                                 label="Reduce Only"
                                                 value={reduceOnly}
@@ -1674,7 +1642,7 @@ const Trading = () => {
                                                     showToast(
                                                     "Order Placed",
                                                     "success",
-                                                    `Amount: ${input2} USDT`,
+                                                    `Amount: ${amount} USDT`,
                                                     "Processing time: ~15s"
                                                     );
 
@@ -1772,41 +1740,12 @@ const Trading = () => {
                                                 />
                                             </div>
                                             {/* 價格輸入框 */}
-                                            <div className="flex flex-col items-start gap-2 w-full">
-                                                <div className="flex flex-col items-center pb-[1px]">
-                                                    <span className="text-[#9D9DAF] text-sm" >
-                                                        {"Amount"}
-                                                    </span>
-                                                </div>
-                                                <div className="flex flex-col items-start gap-4 w-full">
-                                                    {/* 金額輸入框與貨幣標籤 */}
-                                                    <div className="flex justify-between bg-zinc-950 py-[9px] px-3 rounded-sm border border-solid border-[#30363D] w-full">
-                                                        <input
-                                                            placeholder="0"
-                                                            value={input2}
-                                                            onChange={(e) => {
-                                                                const value = Number(e.target.value.replace(/,/g, ""));
-                                                                onChangeInput2(isNaN(value) ? "" : value.toString());
-                                                            }}
-                                                            className="w-full text-white bg-transparent text-base py-[3px] border-0"
-                                                        />
-                                                        <div className="flex shrink-0 items-center bg-zinc-700 py-[7px] pl-2 pr-[7px] gap-1.5 rounded">
-                                                            <span className="text-zinc-400 text-sm font-bold">USDT</span>
-                                                            <img
-                                                                src="https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/bvauf8h6_expires_30_days.png"
-                                                                className="w-3 h-[15px] rounded-sm object-fill"
-                                                            />
-                                                        </div>
-                                                    </div>
-                                                    {/* 滑桿與快捷百分比按鈕 */}
-                                                    <PercentSlider
-                                                        value={percentValue}
-                                                        maxAmount={AMOUNT_TOTAL}
-                                                        onChangeAmount={onChangeInput2}
-                                                        />
-
-                                                </div>
-                                            </div>
+                                            <AmountInput
+                                                value={amount}
+                                                onChange={setAmount}
+                                                percentValue={percentValue}
+                                                maxAmount={AMOUNT_TOTAL}
+                                            />
                                             <ToggleButton
                                                 label="Reduce Only"
                                                 value={reduceOnly}
@@ -1906,7 +1845,7 @@ const Trading = () => {
                                                     showToast(
                                                     "Order Placed",
                                                     "success",
-                                                    `Amount: ${input2} USDT`,
+                                                    `Amount: ${amount} USDT`,
                                                     "Processing time: ~15s"
                                                     );
 
@@ -2042,41 +1981,12 @@ const Trading = () => {
                                                 </div>
                                             </div>
                                             {/* 價格輸入框 */}
-                                            <div className="flex flex-col items-start gap-2 w-full">
-                                                <div className="flex flex-col items-center pb-[1px]">
-                                                    <span className="text-[#9D9DAF] text-sm" >
-                                                        {"Amount"}
-                                                    </span>
-                                                </div>
-                                                <div className="flex flex-col items-start gap-4 w-full">
-                                                    {/* 金額輸入框與貨幣標籤 */}
-                                                    <div className="flex justify-between bg-zinc-950 py-[9px] px-3 rounded-sm border border-solid border-[#30363D] w-full">
-                                                        <input
-                                                            placeholder="0"
-                                                            value={input2}
-                                                            onChange={(e) => {
-                                                                const value = Number(e.target.value.replace(/,/g, ""));
-                                                                onChangeInput2(isNaN(value) ? "" : value.toString());
-                                                            }}
-                                                            className="w-full text-white bg-transparent text-base py-[3px] border-0"
-                                                        />
-                                                        <div className="flex shrink-0 items-center bg-zinc-700 py-[7px] pl-2 pr-[7px] gap-1.5 rounded">
-                                                            <span className="text-zinc-400 text-sm font-bold">USDT</span>
-                                                            <img
-                                                                src="https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/bvauf8h6_expires_30_days.png"
-                                                                className="w-3 h-[15px] rounded-sm object-fill"
-                                                            />
-                                                        </div>
-                                                    </div>
-                                                    {/* 滑桿與快捷百分比按鈕 */}
-                                                    <PercentSlider
-                                                        value={percentValue}
-                                                        maxAmount={AMOUNT_TOTAL}
-                                                        onChangeAmount={onChangeInput2}
-                                                        />
-
-                                                </div>
-                                            </div>
+                                            <AmountInput
+                                                value={amount}
+                                                onChange={setAmount}
+                                                percentValue={percentValue}
+                                                maxAmount={AMOUNT_TOTAL}
+                                            />
                                             <ToggleButton
                                                 label="Reduce Only"
                                                 value={reduceOnly}
@@ -2252,7 +2162,7 @@ const Trading = () => {
                                                     showToast(
                                                     "Order Placed",
                                                     "success",
-                                                    `Amount: ${input2} USDT`,
+                                                    `Amount: ${amount} USDT`,
                                                     "Processing time: ~15s"
                                                     );
 
