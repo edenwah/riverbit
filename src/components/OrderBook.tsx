@@ -6,15 +6,20 @@ type OrderRow = {
   total: string | number;
   barWidth?: string;
 };
+interface OrderBookProps {
+  unitGranularity: string; 
+}
 
-export default function OrderBook() {
+export default function OrderBook({ unitGranularity }: OrderBookProps) {
   const [asks, setAsks] = useState<OrderRow[]>([]);
   const [bids, setBids] = useState<OrderRow[]>([]);
 
   const generateMockData = () => {
+    const step = Number(unitGranularity) || 0.01; 
+
     // 隨機產生 asks
     const newAsks: OrderRow[] = Array.from({ length: 9 }, (_, i) => {
-      const price = (110595 - i).toLocaleString();
+      const price = (110595 - i * step).toFixed(3);
       const size = (Math.random() * 3).toFixed(3);
       const total = (Math.random() * 16 + 0.2).toFixed(3);
       const barWidth = `${Math.random() * 100}%`;
@@ -23,7 +28,7 @@ export default function OrderBook() {
 
     // 隨機產生 bids
     const newBids: OrderRow[] = Array.from({ length: 9 }, (_, i) => {
-      const price = (110589 - i).toLocaleString();
+      const price = (110589 - i * step).toFixed(3);
       const size = (Math.random() * 3).toFixed(3);
       const total = (Math.random() * 12 + 0.2).toFixed(3);
       return { price, size, total };
@@ -37,7 +42,7 @@ export default function OrderBook() {
     generateMockData(); // 初始化
     const interval = setInterval(generateMockData, 5000); // 每 5 秒刷新
     return () => clearInterval(interval);
-  }, []);
+  }, [unitGranularity]); // 👈 unitGranularity 變動會刷新數據
 
   const maxBidTotal = Math.max(...bids.map(b => Number(b.total)));
 
@@ -68,7 +73,9 @@ export default function OrderBook() {
       </div>
 
       <div className="flex w-full flex-col items-center p-3">
-        <span className="text-zinc-400 text-sm">Spread: 1 (0.001%)</span>
+        <span className="text-zinc-400 text-sm">
+        Spread: {unitGranularity} ({((Number(unitGranularity) / 110590) * 100).toFixed(3)}%)
+        </span>
       </div>
 
       {/* Bids */}

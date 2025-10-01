@@ -7,7 +7,6 @@ import PrimaryButton from "../components/Button/PrimaryButton";
 import Tabs from "../components/Tabs";
 import PositionsTPSLModal from "../components/PositionsTPSLModal";
 import ToggleButton from "../components/ToggleButton";
-import PercentSlider from "../components/PercentSlider";
 import Footer from "../components/Footer";
 import Tips from "../components/Tips";
 import MobileHeader from "../components/MobileHeader";
@@ -58,6 +57,7 @@ const Trading = () => {
     const [showAllTradeHistory, setShowAllTradeHistory] = useState(false);
     const [showAllFundingHistory, setShowAllFundingHistory] = useState(false);
     const [showAllOrderHistory, setShowAllOrderHistory] = useState(false);
+    const [unitGranularity, setUnitGranularity] = useState("0.001");
 
     // Amount Input
     const [amount, setAmount] = useState("");
@@ -939,7 +939,24 @@ const Trading = () => {
                                 
                                 {/* Tab Content */}
                                 {orderBookTab === "Order Book" && (
-                                    <OrderBook />
+                                    <div>
+                                        <div className="m-2 max-w-24">
+                                        <Select
+                                            value={unitGranularity}
+                                            onChange={setUnitGranularity}
+                                            options={[
+                                            { label: "0.001", value: "0.001" },
+                                            { label: "0.002", value: "0.002" },
+                                            { label: "0.005", value: "0.005" },
+                                            { label: "0.01", value: "0.01" },
+                                            { label: "0.1", value: "0.1" },
+                                            { label: "1", value: "1" },
+                                            ]}
+                                            minWidth="min-w-24"
+                                        />
+                                        </div>
+                                        <OrderBook unitGranularity={unitGranularity} />
+                                    </div>
                                 )}
                                 {orderBookTab === "Trades" && (
                                     <Trades />
