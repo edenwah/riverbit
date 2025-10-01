@@ -1834,46 +1834,16 @@ const Trading = () => {
                                                     </div>
                                                 </div>
                                             </div>
-                                            <button
-                                                type="button"
-                                                className="py-2 w-full flex items-center  justify-between focus:outline-none"
-                                                onClick={() => setReduceOnly((prev) => !prev)}
-                                            >
-                                                <span className="text-[#C9D1D9] text-sm">
-                                                {"Reduce Only"}
-                                                </span>
-                                                <div
-                                                className={`shrink-0 flex items-center transition-colors duration-200 rounded-full ${reduceOnly ? "bg-fuchsia-800" : "bg-zinc-700"} py-0.5 pl-2 pr-0.5`}
-                                                style={{ width: 48, height: 28 }}
-                                                >
-                                                <div
-                                                    className={`bg-white w-5 h-5 rounded-full border border-solid border-white shadow transition-transform duration-200 `}
-                                                    style={{
-                                                    transform: reduceOnly ? "translateX(16px)" : "translateX(0)",
-                                                    }}
+                                            <ToggleButton
+                                                label="Reduce Only"
+                                                value={reduceOnly}
+                                                onChange={setReduceOnly}
                                                 />
-                                            </div>
-                                            </button>
-                                            <button
-                                                type="button"
-                                                className="py-2 flex items-center w-full justify-between focus:outline-none"
-                                                onClick={() => setIsOn((prev) => !prev)}
-                                                >
-                                                <span className="text-[#C9D1D9] text-sm">Take Profit / Stop Loss</span>
-                                                <div
-                                                    className={` shrink-0 flex items-center transition-colors duration-200 rounded-full ${
-                                                    isOn ? "bg-fuchsia-800" : "bg-zinc-700"
-                                                    } py-0.5 pl-2 pr-0.5`}
-                                                    style={{ width: 48, height: 28 }}
-                                                >
-                                                    <div
-                                                    className={`bg-white w-5 h-5 rounded-full border border-solid border-white shadow transition-transform duration-200`}
-                                                    style={{
-                                                        transform: isOn ? "translateX(16px)" : "translateX(0)",
-                                                    }}
-                                                    />
-                                                </div>
-                                            </button>
+                                            <ToggleButton
+                                                label="Take Profit / Stop Loss"
+                                                value={isOn}
+                                                onChange={setIsOn}
+                                                />
                                             {/* Conditional TP/SL inputs */}
                                             {isOn && (
                                             <div className="flex flex-col gap-4 py-2 w-full">
@@ -2161,46 +2131,16 @@ const Trading = () => {
                                                     </div>
                                                 </div>
                                             </div>
-                                            <button
-                                                type="button"
-                                                className="py-2 w-full flex items-center  justify-between focus:outline-none"
-                                                onClick={() => setReduceOnly((prev) => !prev)}
-                                            >
-                                                <span className="text-[#C9D1D9] text-sm">
-                                                {"Reduce Only"}
-                                                </span>
-                                                <div
-                                                className={`shrink-0 flex items-center transition-colors duration-200 rounded-full ${reduceOnly ? "bg-fuchsia-800" : "bg-zinc-700"} py-0.5 pl-2 pr-0.5`}
-                                                style={{ width: 48, height: 28 }}
-                                                >
-                                                <div
-                                                    className={`bg-white w-5 h-5 rounded-full border border-solid border-white shadow transition-transform duration-200 `}
-                                                    style={{
-                                                    transform: reduceOnly ? "translateX(16px)" : "translateX(0)",
-                                                    }}
+                                            <ToggleButton
+                                                label="Reduce Only"
+                                                value={reduceOnly}
+                                                onChange={setReduceOnly}
                                                 />
-                                            </div>
-                                            </button>
-                                            <button
-                                                type="button"
-                                                className="py-2 flex items-center w-full justify-between focus:outline-none"
-                                                onClick={() => setIsOn((prev) => !prev)}
-                                                >
-                                                <span className="text-[#C9D1D9] text-sm">Take Profit / Stop Loss</span>
-                                                <div
-                                                    className={` shrink-0 flex items-center transition-colors duration-200 rounded-full ${
-                                                    isOn ? "bg-fuchsia-800" : "bg-zinc-700"
-                                                    } py-0.5 pl-2 pr-0.5`}
-                                                    style={{ width: 48, height: 28 }}
-                                                >
-                                                    <div
-                                                    className={`bg-white w-5 h-5 rounded-full border border-solid border-white shadow transition-transform duration-200`}
-                                                    style={{
-                                                        transform: isOn ? "translateX(16px)" : "translateX(0)",
-                                                    }}
-                                                    />
-                                                </div>
-                                            </button>
+                                            <ToggleButton
+                                                label="Take Profit / Stop Loss"
+                                                value={isOn}
+                                                onChange={setIsOn}
+                                                />
                                             {/* Conditional TP/SL inputs */}
                                             {isOn && (
                                             <div className="flex flex-col gap-4 py-2 w-full">
