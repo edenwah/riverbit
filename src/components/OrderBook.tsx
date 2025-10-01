@@ -22,7 +22,7 @@ export default function OrderBook() {
     });
 
     // 隨機產生 bids
-    const newBids: OrderRow[] = Array.from({ length: 8 }, (_, i) => {
+    const newBids: OrderRow[] = Array.from({ length: 9 }, (_, i) => {
       const price = (110589 - i).toLocaleString();
       const size = (Math.random() * 3).toFixed(3);
       const total = (Math.random() * 12 + 0.2).toFixed(3);
