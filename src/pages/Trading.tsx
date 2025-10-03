@@ -20,6 +20,7 @@ import ConfirmCancelModal from "../components/ConfirmCancelModal";
 import OrderBook from "../components/OrderBook";
 import Trades from "../components/Trades";
 import AmountInput from "../components/AmountInput";
+import CategoryTab from "../components/CategoryTab";
 
 const Trading = () => {
     const [input1, onChangeInput1] = useState('');
@@ -678,7 +679,7 @@ const Trading = () => {
                                                             </div>
 
                                                             {/* Search + Filter */}
-                                                            <div className="flex items-center justify-between w-full px-4 py-6 gap-2 border-b border-[#374151]">
+                                                            <div className="flex items-center justify-between w-full px-4 py-4 gap-2 border-b border-[#374151]">
                                                                 <div className="flex items-center flex-1 bg-[#0D1117] py-3 px-2 rounded-sm border border-[#30363D]">
                                                                     <img
                                                                         src="https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/alyycaw7_expires_30_days.png"
@@ -700,23 +701,26 @@ const Trading = () => {
 
                                                             </div>
 
-                                                            {/* Tab Filter */}
-                                                            <div className="overflow-auto flex whitespace-nowrap gap-x-4 gap-y-2 px-4 py-2 mb-2 text-sm">
-                                                                {["All Coins","xStocks","Perps","Spot","Trending","DEX Only","Pre-launch","AI","DeFi","Layer 1","Layer 2","Meme"].map(tab => (
-                                                                    <button
-                                                                        key={tab}
-                                                                        className={`my-1 px-3 py-1 rounded transition ${
-                                                                            searchFilterTab === tab
-                                                                                ? "bg-fuchsia-800 text-white font-bold"
-                                                                                : "bg-transparent text-zinc-400"
-                                                                        }`}
-                                                                        onClick={() => setSearchFilterTab(tab)}
-                                                                        type="button"
-                                                                    >
-                                                                        {tab}
-                                                                    </button>
-                                                                ))}
-                                                            </div>
+                                                            {/* Category Tab */}
+                                                            <CategoryTab
+                                                                tabs={[
+                                                                    "All Coins",
+                                                                    "xStocks",
+                                                                    "Perps",
+                                                                    "Spot",
+                                                                    "Trending",
+                                                                    "DEX Only",
+                                                                    "Pre-launch",
+                                                                    "AI",
+                                                                    "DeFi",
+                                                                    "Layer 1",
+                                                                    "Layer 2",
+                                                                    "Meme",
+                                                                ]}
+                                                                activeTab={searchFilterTab}
+                                                                onTabChange={setSearchFilterTab}
+                                                                />
+
 
                                                             <div className="w-full overflow-auto text-left">
                                                                 <table className="min-w-[700px] w-full text-sm">
