@@ -1335,7 +1335,28 @@ const Trading = () => {
                                             <td className="py-2 px-2">{row.orderValue}</td>
                                             <td className="py-2 px-2">{row.price}</td>
                                             <td className="py-2 px-2">{row.reduceOnly}</td>
-                                            <td className="py-2 px-2">{row.tpSl}</td>
+                                            <td className="py-2 px-2 flex flex-wrap gap-2 items-center">
+                                                {row.tpSl}
+                                                <img
+                                                    src="https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/l0hc3xdh_expires_30_days.png"
+                                                    className="w-4 h-4 object-fill cursor-pointer"
+                                                    onClick={() => {
+                                                        setModalData({
+                                                            time: "9/12/2025 17:30:13",
+                                                            coin: row.coin,
+                                                            // position: row.position.value,
+                                                            entryPrice: "55.116",
+                                                            markPrice: "55.252",
+                                                            takeProfit: "Price above 60",
+                                                            stopLoss: "--",
+                                                            orderId: "160687782672",
+                                                            expectedProfit: "39.51 USDC",
+                                                        } as TpslModalData);
+                                                        setShowTPSLModal(true);
+                                                    }}
+                                                    alt="TP/SL"
+                                                    />
+                                            </td>
                                             <td className={`py-2 px-2 font-bold ${row.action.color}`}>
                                                 <button
                                                 onClick={() => setCancelModalOrder({ id: row.id, coin: row.coin, price: row.price })}
@@ -1360,6 +1381,21 @@ const Trading = () => {
                                         orderName={`Price / Trigger ${cancelModalOrder.price}`}
                                         onClose={() => setCancelModalOrder(null)}
                                         onConfirm={handleConfirmCancel}
+                                        />
+                                    )}
+
+                                    {showTPSLModal && modalData && (
+                                        <PositionsTPSLModal
+                                            data={modalData} 
+                                            inputTPSLPrice={inputTPSLPrice} 
+                                            onChangeInputTPSLPrice={setInputTPSLPrice} 
+                                            inputTPSLPercent={inputTPSLPercent} 
+                                            onChangeInputTPSLPercent={setInputTPSLPercent} 
+                                            onClose={() => setShowTPSLModal(false)}
+                                            onConfirm={() => {
+                                            console.log("Confirmed", inputTPSLPrice, inputTPSLPercent);
+                                            setShowTPSLModal(false);
+                                            }}
                                         />
                                     )}
                                 </div>
