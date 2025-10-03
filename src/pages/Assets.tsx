@@ -125,6 +125,8 @@ const Assets = () => {
 											"Funds Changes",
 											"Points Center",
 											"Detailed Analysis",
+											"Withdrawal History",
+											"Deposit History",
 										]}
 										activeTab={assetsTab}
 										onTabChange={setAssetsTab}
@@ -414,6 +416,80 @@ const Assets = () => {
 									</div>
 								</div>
 							</div>
+							)}
+							{/* Withdrawal History */}
+							{assetsTab === "Withdrawal History" && (
+								<div className="flex flex-col self-stretch w-full py-4 overflow-x-auto">
+									<table className="text-sm text-left">
+										<thead>
+											<tr className="text-[#8B949E] font-bold">
+											<th className="px-2 py-4">Time</th>
+											<th className="px-2 py-4">Type</th>
+											<th className="px-2 py-4">Amount</th>
+											<th className="px-2 py-4">Balance</th>
+											<th className="px-2 py-4">Remark</th>
+											</tr>
+										</thead>
+										<tbody className="text-white">
+										{[
+											{ time: "2025-10-04 18:22", type: "Withdraw", amount: "-$500.00", balance: "$26,845.12", remark: "To Binance (TxID 0x8f...a2)" },
+											{ time: "2025-10-04 14:10", type: "Withdraw", amount: "-$1,200.00", balance: "$27,345.12", remark: "To Bank (Ref# 09234)" },
+											{ time: "2025-10-03 19:45", type: "Withdraw", amount: "-$250.00", balance: "$28,545.12", remark: "To Wallet (TxID 0x7b...91)" },
+											{ time: "2025-10-03 10:05", type: "Withdraw", amount: "-$100.00", balance: "$28,795.12", remark: "To Coinbase (TxID 0x9d...e7)" },
+											{ time: "2025-10-02 22:12", type: "Withdraw", amount: "-$2,000.00", balance: "$28,895.12", remark: "To Bank (Ref# 08121)" },
+										].map((row, idx) => (
+											<tr key={idx} className="border-t border-[#30363D]">
+											<td className="px-2 py-2">{row.time}</td>
+											<td className="px-2 py-2">{row.type}</td>
+											<td
+												className={`px-2 py-2 font-bold text-[#F85149]`}
+											>
+												{row.amount}
+											</td>
+											<td className="px-2 py-2">{row.balance}</td>
+											<td className="px-2 py-2">{row.remark}</td>
+											</tr>
+										))}
+										</tbody>
+									</table>
+								</div>
+							)}
+							{/* Deposit History */}
+							{assetsTab === "Deposit History" && (
+								<div className="flex flex-col self-stretch w-full py-4 overflow-x-auto">
+									<table className="text-sm text-left">
+										<thead>
+											<tr className="text-[#8B949E] font-bold">
+											<th className="px-2 py-4">Time</th>
+											<th className="px-2 py-4">Type</th>
+											<th className="px-2 py-4">Amount</th>
+											<th className="px-2 py-4">Balance</th>
+											<th className="px-2 py-4">Remark</th>
+											</tr>
+										</thead>
+										<tbody className="text-white">
+										{[
+											{ time: "2025-10-04 18:22", type: "Deposit", amount: "+$500.00", balance: "$26,845.12", remark: "From Binance (TxID 0x8f...a2)" },
+											{ time: "2025-10-04 14:10", type: "Deposit", amount: "+$1,200.00", balance: "$27,345.12", remark: "From Bank (Ref# 09234)" },
+											{ time: "2025-10-03 19:45", type: "Deposit", amount: "+$250.00", balance: "$28,545.12", remark: "From Wallet (TxID 0x7b...91)" },
+											{ time: "2025-10-03 10:05", type: "Deposit", amount: "+$100.00", balance: "$28,795.12", remark: "From Coinbase (TxID 0x9d...e7)" },
+											{ time: "2025-10-02 22:12", type: "Deposit", amount: "+$2,000.00", balance: "$28,895.12", remark: "From Bank (Ref# 08121)" },
+										].map((row, idx) => (
+											<tr key={idx} className="border-t border-[#30363D]">
+											<td className="px-2 py-2">{row.time}</td>
+											<td className="px-2 py-2">{row.type}</td>
+											<td
+												className={`px-2 py-2 font-bold text-[#2DA44E]`}
+											>
+												{row.amount}
+											</td>
+											<td className="px-2 py-2">{row.balance}</td>
+											<td className="px-2 py-2">{row.remark}</td>
+											</tr>
+										))}
+										</tbody>
+									</table>
+								</div>
 							)}
 						</div>
 					</div>
