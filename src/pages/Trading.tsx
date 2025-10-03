@@ -1594,6 +1594,8 @@ const Trading = () => {
                                                 onChange={setAmount}
                                                 percentValue={percentValue}
                                                 maxAmount={AMOUNT_TOTAL}
+                                                assets={["ETH", "USD"]}
+                                                selectedAsset={selectedAssetSymbol}
                                             />
 
                                             <ToggleButton

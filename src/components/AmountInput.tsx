@@ -1,19 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import PercentSlider from "./PercentSlider";
 
 type AmountInputProps = {
-    value: string;
-    onChange: (val: string) => void;
-    percentValue: number;
-    maxAmount: number;
-  };
+  value: string;
+  onChange: (val: string) => void;
+  percentValue: number;
+  maxAmount: number;
+  assets: string[]; // ["ETH", "USD"]
+  selectedAsset: string; // 外層傳入初始值
+};
 
 const AmountInput: React.FC<AmountInputProps> = ({
   value,
   onChange,
   percentValue,
   maxAmount,
+  assets,
+  selectedAsset,
 }) => {
+  const [localAsset, setLocalAsset] = useState(selectedAsset);
+
   return (
     <div className="flex flex-col items-start gap-2 w-full">
       {/* Label */}
@@ -33,23 +39,27 @@ const AmountInput: React.FC<AmountInputProps> = ({
             }}
             className="w-full text-white bg-transparent text-base py-[3px] border-0"
           />
-          <div className="flex shrink-0 items-center bg-zinc-700 py-[7px] pl-2 pr-[7px] gap-1.5 rounded">
-            <span className="text-zinc-400 text-sm font-bold">USDT</span>
-            <img
-              src="https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/bvauf8h6_expires_30_days.png"
-              className="w-3 h-[15px] rounded-sm object-fill"
-              alt="USDT"
-            />
+          <div className="flex shrink-0 items-center gap-1.5 rounded">
+            <select
+              value={localAsset}
+              onChange={(e) => setLocalAsset(e.target.value)}
+              className="bg-zinc-700 text-white text-sm font-bold py-[7px] pl-2 pr-[7px] rounded"
+            >
+              {assets.map((asset) => (
+                <option key={asset} value={asset}>
+                  {asset}
+                </option>
+              ))}
+            </select>
           </div>
         </div>
 
         {/* Slider + quick buttons */}
         <PercentSlider
-            value={percentValue}    
-            maxAmount={maxAmount}
-            onChangeAmount={onChange}
+          value={percentValue}
+          maxAmount={maxAmount}
+          onChangeAmount={onChange}
         />
-
       </div>
     </div>
   );
