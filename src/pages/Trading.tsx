@@ -1594,7 +1594,6 @@ const Trading = () => {
                                                 onChange={setAmount}
                                                 percentValue={percentValue}
                                                 maxAmount={AMOUNT_TOTAL}
-                                                assets={["ETH", "USD"]}
                                                 selectedAsset={selectedAssetSymbol}
                                             />
 
@@ -1821,6 +1820,7 @@ const Trading = () => {
                                                 onChange={setAmount}
                                                 percentValue={percentValue}
                                                 maxAmount={AMOUNT_TOTAL}
+                                                selectedAsset={selectedAssetSymbol}
                                             />
                                             <ToggleButton
                                                 label="Reduce Only"
@@ -2062,6 +2062,7 @@ const Trading = () => {
                                                 onChange={setAmount}
                                                 percentValue={percentValue}
                                                 maxAmount={AMOUNT_TOTAL}
+                                                selectedAsset={selectedAssetSymbol}
                                             />
                                             <ToggleButton
                                                 label="Reduce Only"
