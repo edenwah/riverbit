@@ -48,7 +48,7 @@ const AIChatWidget = ({ onClose }: AIChatWidgetProps) => {
   };
 
   return (
-    <div className="w-full h-full bg-[#1F2226] border border-gray-700 rounded-lg shadow-lg flex flex-col overflow-hidden text-white text-sm">
+    <div className="w-full min-h-[400px] xl:min-h-7/10 bg-[#1F2226] border border-gray-700 rounded-lg shadow-lg flex flex-col overflow-hidden text-white text-sm">
       {/* Header */}
       <div className="flex items-center justify-between p-4 border-b border-gray-600">
         <span className="flex items-center gap-1 text-left">🤖 AI Assistant Connected</span>
