@@ -6,6 +6,7 @@ import MobileMenu from "../components/MobileMenu";
 import PrimaryButton from "../components/Button/PrimaryButton";
 import Tabs from "../components/Tabs";
 import PositionsTPSLModal from "../components/PositionsTPSLModal";
+import AdjustMarginModal from "../components/AdjustMarginModal";
 import ToggleButton from "../components/ToggleButton";
 import Footer from "../components/Footer";
 import Tips from "../components/Tips";
@@ -496,6 +497,16 @@ const Trading = () => {
     }
     const [showTPSLModal, setShowTPSLModal] = useState(false); // 控制 modal 顯示
     const [modalData, setModalData] = useState<TpslModalData | null>(null); // 儲存傳遞給 modal 的資料
+    
+    {/* Adjust Margin modal */}
+    const [showAdjustMarginModal, setShowAdjustMarginModal] = useState(false);
+    interface AdjustMarginData {
+        coin: string;
+        currentMargin: number;
+        availableMargin: number;
+    }
+    const [adjustMarginData, setAdjustMarginData] = useState<AdjustMarginData | null>(null);
+
 
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [language, setLanguage] = useState("EN");
@@ -1153,13 +1164,34 @@ const Trading = () => {
 
                                                     {/* Margin */}
                                                     <td className="py-2 px-2">
-                                                        <div className="flex flex-col gap-1 items-start">
-                                                        <span>{row.margin.value}</span>
-                                                        <div className="inline-flex bg-[#30363D] py-1 px-2 rounded text-zinc-400 text-[10px] font-bold">
+                                                        <div className="flex flex-wrap gap-2 items-center">
+                                                            <span>{row.margin.value}</span>
+                                                            <div className="inline-flex bg-[#30363D] py-1 px-2 rounded text-zinc-400 text-[10px] font-bold cursor-pointer">
                                                             {row.margin.percent}
-                                                        </div>
+                                                            </div>
+                                                            <img
+                                                            src="https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/l0hc3xdh_expires_30_days.png"
+                                                            className="w-4 h-4 object-fill cursor-pointer"
+                                                            onClick={() => {
+                                                                const currentMargin = Number(row.margin.value);
+                                                                const availableMargin =
+                                                                    !row.margin.percent || row.margin.percent === "--"
+                                                                        ? 0
+                                                                        : currentMargin * (100 / parseFloat(row.margin.percent.replace("%", "")) - 1);
+
+
+                                                                setAdjustMarginData({
+                                                                coin: row.coin,
+                                                                currentMargin,
+                                                                availableMargin,
+                                                                });
+                                                                setShowAdjustMarginModal(true);
+                                                            }}
+                                                            alt="Adjust Margin"
+                                                            />
                                                         </div>
                                                     </td>
+
 
                                                     {/* TP/SL */}
                                                     <td className="py-2 px-2">
@@ -1214,14 +1246,20 @@ const Trading = () => {
                                             />
                                         )}
 
+                                        {showAdjustMarginModal && adjustMarginData && (
+                                            <AdjustMarginModal
+                                                coin={adjustMarginData.coin}
+                                                currentMargin={adjustMarginData.currentMargin}
+                                                availableMargin={adjustMarginData.availableMargin}
+                                                onClose={() => setShowAdjustMarginModal(false)}
+                                                onConfirm={(amount: number) => {
+                                                    console.log("Add margin:", amount);
+                                                    setShowAdjustMarginModal(false);
+                                                }}
+                                                />
+                                        )}
 
                                         {showTPSLModal && modalData && (
-                                        <div className="w-full fixed inset-0 z-50 flex items-center justify-center bg-black/60">
-                                            <div
-                                            className="relative w-full h-full md:w-[500px] md:h-auto md:rounded-xl flex flex-col justify-center"
-                                            style={{ maxWidth: "100vw", maxHeight: "100vh" }}
-                                            >
-                                            {/* Modal Content */}
                                             <PositionsTPSLModal
                                                 data={modalData} 
                                                 inputTPSLPrice={inputTPSLPrice} 
@@ -1234,8 +1272,6 @@ const Trading = () => {
                                                 setShowTPSLModal(false);
                                                 }}
                                             />
-                                            </div>
-                                        </div>
                                         )}
                                     </div>
                                     {/* Close All button */}
