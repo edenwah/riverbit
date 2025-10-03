@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import PrimaryButton from "./Button/PrimaryButton";
+import Select from "./Select";
 
 interface AdjustMarginModalProps {
   coin: string; 
@@ -21,6 +22,7 @@ const AdjustMarginModal: React.FC<AdjustMarginModalProps> = ({
   const handleMax = () => {
     setAmount(Number(availableMargin.toFixed(2)));
   };
+  const [addRemove, setAddRemove] = useState<"Add" | "Remove">("Add");
 
   return (
     <div className="w-full fixed inset-0 z-50 flex items-center justify-center bg-black/60">
@@ -47,28 +49,43 @@ const AdjustMarginModal: React.FC<AdjustMarginModalProps> = ({
               Decrease the chance of liquidation by adding more margin or remove excess margin to use for other positions.
             </p>
 
-            {/* Amount Input */}
-            <div className="flex flex-col gap-2">
-              <span className="text-[#9D9DAF] text-sm text-left">Amount</span>
-              <div className="flex justify-between bg-zinc-950 py-[9px] px-3 rounded-sm border border-solid border-[#30363D] w-full">
-                <input
-                  type="number"
-                  value={amount}
-                  onChange={(e) => {
-                    const val = parseFloat(e.target.value);
-                    setAmount(isNaN(val) ? 0 : val);
-                  }}
-                  className="flex-1 text-white text-base focus:outline-none"
-                />
-                <button
-                  onClick={handleMax}
-                  className="bg-zinc-700 text-white px-3 py-2 rounded"
-                >
-                  MAX
-                </button>
+            <div className="flex flex-col gap-2 items-end w-full">
+              {/* Add or Remove Select */}
+              <div className="w-full">
+                <Select
+                  value={addRemove}
+                  onChange={setAddRemove}
+                  options={[
+                      { label: "Add", value: "Add" },
+                      { label: "Remove", value: "Remove" },
+                  ]}
+                  minWidth="min-w-24"
+                  />
+              </div>
+
+              {/* Amount Input */}
+              <div className="w-full flex flex-col gap-2">
+                <span className="text-[#9D9DAF] text-sm text-left">Amount</span>
+                <div className="flex justify-between bg-zinc-950 py-[9px] px-3 rounded-sm border border-solid border-[#30363D] w-full">
+                  <input
+                    type="number"
+                    value={amount}
+                    onChange={(e) => {
+                      const val = parseFloat(e.target.value);
+                      setAmount(isNaN(val) ? 0 : val);
+                    }}
+                    className="flex-1 text-white text-base focus:outline-none"
+                  />
+                  <button
+                    onClick={handleMax}
+                    className="bg-zinc-700 text-white px-3 py-2 rounded"
+                  >
+                    MAX
+                  </button>
+                </div>
               </div>
             </div>
-
+            
             {/* Info Rows */}
             <div className="flex flex-col gap-1 text-sm text-[#9D9DAF]">
               <div className="flex justify-between">
