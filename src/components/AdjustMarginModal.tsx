@@ -49,17 +49,16 @@ const AdjustMarginModal: React.FC<AdjustMarginModalProps> = ({
 
             {/* Amount Input */}
             <div className="flex flex-col gap-2">
-              <span className="text-[#9D9DAF] text-sm">Amount</span>
-              <div className="flex items-center gap-2">
+              <span className="text-[#9D9DAF] text-sm text-left">Amount</span>
+              <div className="flex justify-between bg-zinc-950 py-[9px] px-3 rounded-sm border border-solid border-[#30363D] w-full">
                 <input
                   type="number"
-                  placeholder="0"
                   value={amount}
                   onChange={(e) => {
                     const val = parseFloat(e.target.value);
                     setAmount(isNaN(val) ? 0 : val);
                   }}
-                  className="flex-1 bg-zinc-950 text-white p-3 rounded-sm border border-[#30363D] focus:outline-none"
+                  className="flex-1 text-white text-base focus:outline-none"
                 />
                 <button
                   onClick={handleMax}
