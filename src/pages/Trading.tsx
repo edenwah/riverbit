@@ -1138,7 +1138,7 @@ const Trading = () => {
 
                                                     {/* Position */}
                                                     <td className="py-2 px-2">
-                                                        <div className="flex flex-col gap-1 items-start">
+                                                        <div className="flex flex-wrap gap-2 items-start">
                                                         <span>{row.position.value}</span>
                                                         <div className="inline-flex bg-[#30363D] py-1 px-2 rounded text-zinc-400 text-[10px] font-bold">
                                                             {row.position.side}
@@ -1151,7 +1151,7 @@ const Trading = () => {
 
                                                     {/* PNL */}
                                                     <td className="py-2 px-2">
-                                                        <div className="flex flex-col gap-1">
+                                                        <div className="flex flex-wrap gap-2">
                                                         <span>{row.pnl.value}</span>
                                                         <div className="inline-flex bg-[#22C55E1A] py-1 px-2 rounded text-[#2DA44E] text-[10px] font-bold">
                                                             {row.pnl.roe}

@@ -30,8 +30,8 @@ const AdjustMarginModal: React.FC<AdjustMarginModalProps> = ({
       className="relative w-full h-full md:w-[500px] md:h-auto md:rounded-xl flex flex-col justify-center"
       style={{ maxWidth: "100vw", maxHeight: "100vh" }}
       >
-        <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50">
-          <div className="bg-[#272B2F] rounded-lg border border-gray-700 w-full max-w-md p-6 flex flex-col gap-4">
+        <div className="w-full flex flex-col items-center self-stretch bg-[#000000B0] py-[197px]">
+          <div className="bg-[#272B2F] rounded-lg border border-gray-700 w-full max-w-md md:h-auto h-[100vh] p-6 flex flex-col gap-4">
             
             {/* Header */}
             <div className="flex justify-between items-center mb-4">
@@ -99,12 +99,14 @@ const AdjustMarginModal: React.FC<AdjustMarginModalProps> = ({
             </div>
 
             {/* Confirm */}
-            <PrimaryButton
-              size="large"
-              onClick={() => onConfirm && onConfirm(amount)}
-            >
-              Confirm
-            </PrimaryButton>
+            <div className="flex items-start self-stretch gap-3">
+              <PrimaryButton
+                size="large"
+                onClick={() => onConfirm && onConfirm(amount)}
+              >
+                Confirm
+              </PrimaryButton>
+            </div>
 
           </div>
         </div>
