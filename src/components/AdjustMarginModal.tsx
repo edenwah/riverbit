@@ -19,7 +19,7 @@ const AdjustMarginModal: React.FC<AdjustMarginModalProps> = ({
   const [amount, setAmount] = useState<number>(0);
 
   const handleMax = () => {
-    setAmount(availableMargin);
+    setAmount(Number(availableMargin.toFixed(2)));
   };
 
   return (

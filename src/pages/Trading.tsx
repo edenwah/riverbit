@@ -102,6 +102,20 @@ const Trading = () => {
         },
     ]);
 
+    // New mock positions
+    const newPosition = {
+        coin: "ETH",
+        tags: ["10x", "Cross"],
+        extra: "$15.00/day",
+        position: { value: "$500 @ 60.00", side: "Long" },
+        fundingRate: "+0.0200%",
+        pnl: { value: "+$0.00", roe: "0.00%" },
+        liqPrice: "45.00",
+        margin: { value: "$500", percent: "10%" },
+        tpSl: "--/--",
+        action: "Close",
+    };
+
     // Trade History state
     const [tradeHistory, setTradeHistory] = useState([
         {
@@ -361,20 +375,6 @@ const Trading = () => {
             orderId: "160572445911",
         },
     ]);
-
-    // New mock positions
-    const newPosition = {
-        coin: "ETH",
-        tags: ["10x", "Cross"],
-        extra: "$15.00/day",
-        position: { value: "$500 @ 60.00", side: "Long" },
-        fundingRate: "+0.0200%",
-        pnl: { value: "+$0.00", roe: "0.00%" },
-        liqPrice: "45.00",
-        margin: { value: "$500", percent: "10%" },
-        tpSl: "--/--",
-        action: "Close",
-    };
 
     // Open Orders Table data
     const orders = [
@@ -1173,19 +1173,27 @@ const Trading = () => {
                                                             src="https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/l0hc3xdh_expires_30_days.png"
                                                             className="w-4 h-4 object-fill cursor-pointer"
                                                             onClick={() => {
-                                                                const currentMargin = Number(row.margin.value);
-                                                                const availableMargin =
-                                                                    !row.margin.percent || row.margin.percent === "--"
-                                                                        ? 0
-                                                                        : currentMargin * (100 / parseFloat(row.margin.percent.replace("%", "")) - 1);
+                                                                // currentMargin
+                                                                const currentMargin = parseFloat(
+                                                                row.margin.value.replace(/[$,]/g, "")
+                                                                ) || 0;
 
+                                                                // percent
+                                                                let percentUsed = parseFloat(row.margin.percent.replace("%", "")) || 0;
 
+                                                                // availableMargin
+                                                                const availableMargin = percentUsed > 0
+                                                                ? currentMargin * (100 / percentUsed - 1)
+                                                                : 0;
+
+                                                                // 傳入 modal
                                                                 setAdjustMarginData({
                                                                 coin: row.coin,
                                                                 currentMargin,
                                                                 availableMargin,
                                                                 });
                                                                 setShowAdjustMarginModal(true);
+
                                                             }}
                                                             alt="Adjust Margin"
                                                             />
