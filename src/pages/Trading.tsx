@@ -712,7 +712,7 @@ const Trading = () => {
                                                             </div>
 
                                                             {/* Category Tab */}
-                                                            <div className="w-full px-4 py-2 mb-2">
+                                                            <div className="w-full px-4 py-2 mb-2 border-b border-[#374151]">
                                                                 <CategoryTab
                                                                 tabs={[
                                                                     "All Coins",
