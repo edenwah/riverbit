@@ -8,11 +8,11 @@ type CategoryTabProps = {
 
 const CategoryTab: React.FC<CategoryTabProps> = ({ tabs, activeTab, onTabChange }) => {
   return (
-    <div className="overflow-auto flex whitespace-nowrap gap-x-4 gap-y-2 px-4 py-2 mb-2 text-sm">
+    <div className="overflow-auto flex whitespace-nowrap text-md w-full">
       {tabs.map((tab) => (
         <button
           key={tab}
-          className={`my-1 px-3 py-1 rounded transition ${
+          className={`px-3 py-3 w-full rounded transition ${
             activeTab === tab
               ? "bg-fuchsia-800 text-white font-bold"
               : "bg-transparent text-zinc-400"

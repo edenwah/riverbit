@@ -702,7 +702,8 @@ const Trading = () => {
                                                             </div>
 
                                                             {/* Category Tab */}
-                                                            <CategoryTab
+                                                            <div className="w-full px-4 py-2 mb-2">
+                                                                <CategoryTab
                                                                 tabs={[
                                                                     "All Coins",
                                                                     "xStocks",
@@ -720,6 +721,8 @@ const Trading = () => {
                                                                 activeTab={searchFilterTab}
                                                                 onTabChange={setSearchFilterTab}
                                                                 />
+                                                            </div>
+                                                            
 
 
                                                             <div className="w-full overflow-auto text-left">

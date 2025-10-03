@@ -2,6 +2,7 @@ import { useState } from "react";
 import ToggleWithText from "./ToggleWithText";
 import PrimaryButton from "./Button/PrimaryButton";
 import type { SVGProps } from "react";
+import CategoryTab from "./CategoryTab";
 
 const MicrophoneIcon = (props: SVGProps<SVGSVGElement>) => (
   <svg
@@ -50,7 +51,7 @@ const AIChatWidget = ({ onClose }: AIChatWidgetProps) => {
     <div className="w-full h-full bg-[#1F2226] border border-gray-700 rounded-lg shadow-lg flex flex-col overflow-hidden text-white text-sm">
       {/* Header */}
       <div className="flex items-center justify-between p-4 border-b border-gray-600">
-        <span className="flex items-center gap-1">🤖 AI Assistant Connected</span>
+        <span className="flex items-center gap-1 text-left">🤖 AI Assistant Connected</span>
         <div className="flex gap-2">
           <img
             src="https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/73d3cc65_expires_30_days.png"
@@ -146,12 +147,13 @@ const AIChatWidget = ({ onClose }: AIChatWidgetProps) => {
       </div>
 
       {/* Footer Tabs */}
-      <div className="p-2">
-        <ToggleWithText
-          options={["Chat", "Analysis", "Strategy"]}
-          value={tab}
-          onChange={setTab}
+      <div className="px-2 pb-2">
+        <CategoryTab
+          tabs={["Chat", "Analysis", "Strategy"]}
+          activeTab={tab}
+          onTabChange={setTab}
         />
+        
       </div>
     </div>
   );
