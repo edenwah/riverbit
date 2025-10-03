@@ -40,7 +40,8 @@ const Trading = () => {
     const [orderPanelTab, setOrderPanelTab] = useState("Market"); 
     const [orderBookTab, setOrderBookTab] = useState("Order Book"); 
 	const [accountTab, setAccountTab] = useState("Balance"); 
-    const [searchFilterTab, setSearchFilterTab] = useState("All Coins");
+    const [searchCategoryTab, setSearchCategoryTab] = useState("All Coins");
+    const [savedSymbols, setSavedSymbols] = useState<string[]>([]);
     const [granularity, setGranularity] = useState("")
     const [stoplossType, setStoplossType] = useState("Stop Market")
     const [indicator, setIndicator] = useState("")
@@ -581,14 +582,25 @@ const Trading = () => {
         ,{symbol:"xMSFT",name:"Tokenized Microsoft",bg:"bg-blue-700",leverage:"5x",price:"$412.50",change:"+1.35 / +0.33%",funding:"-",volume:"$7,910,508",oi:"-", type: "xStocks"}
     ];
 
-    const filteredMarkets = searchFilterTab === "All Coins"
+    // 根據 searchCategoryTab 過濾市場列表
+    const filteredMarkets = searchCategoryTab === "All Coins"
         ? allMarkets
         : allMarkets.filter(m => {
-            if (searchFilterTab === "Perps") return m.type === "Perps";
-            if (searchFilterTab === "Spot") return m.type === "Spot";
-            if (searchFilterTab === "xStocks") return m.type === "xStocks";
+            if (searchCategoryTab === "Perps") return m.type === "Perps";
+            if (searchCategoryTab === "Spot") return m.type === "Spot";
+            if (searchCategoryTab === "xStocks") return m.type === "xStocks";
+            if (searchCategoryTab === "Saved") return savedSymbols.includes(m.symbol);
             return false;
         });
+
+    // 切換收藏
+    const toggleSaved = (symbol: string) => {
+        setSavedSymbols((prev) =>
+        prev.includes(symbol)
+            ? prev.filter((s) => s !== symbol) // 已收藏 → 取消
+            : [...prev, symbol] // 未收藏 → 加入
+        );
+    };
 
     return (
         <div className="flex flex-col bg-black">
@@ -697,8 +709,6 @@ const Trading = () => {
                                                                     value={input11}
                                                                     onChange={onChangeInput11}
                                                                     />
-
-
                                                             </div>
 
                                                             {/* Category Tab */}
@@ -707,6 +717,7 @@ const Trading = () => {
                                                                 tabs={[
                                                                     "All Coins",
                                                                     "xStocks",
+                                                                    "Saved",
                                                                     "Perps",
                                                                     "Spot",
                                                                     "Trending",
@@ -718,13 +729,11 @@ const Trading = () => {
                                                                     "Layer 2",
                                                                     "Meme",
                                                                 ]}
-                                                                activeTab={searchFilterTab}
-                                                                onTabChange={setSearchFilterTab}
+                                                                activeTab={searchCategoryTab}
+                                                                onTabChange={setSearchCategoryTab}
                                                                 />
                                                             </div>
-                                                            
-
-
+                                                            {/* Table */}
                                                             <div className="w-full overflow-auto text-left">
                                                                 <table className="min-w-[700px] w-full text-sm">
                                                                     <thead>
@@ -750,6 +759,47 @@ const Trading = () => {
                                                                             >
                                                                                 <td className="px-4 py-2">
                                                                                     <div className="flex items-center gap-3">
+                                                                                        {/* Saved Button */}
+                                                                                        <button
+                                                                                            type="button"
+                                                                                            onClick={(e) => {
+                                                                                            e.stopPropagation(); // 避免觸發 row onClick
+                                                                                            toggleSaved(row.symbol);
+                                                                                            }}
+                                                                                            className="ml-2 text-lg"
+                                                                                        >
+                                                                                            {savedSymbols.includes(row.symbol) ? (
+                                                                                                // Solid Bookmark (已收藏)
+                                                                                                <svg
+                                                                                                xmlns="http://www.w3.org/2000/svg"
+                                                                                                fill="currentColor"
+                                                                                                viewBox="0 0 24 24"
+                                                                                                className="w-5 h-5"
+                                                                                                >
+                                                                                                <path
+                                                                                                    fillRule="evenodd"
+                                                                                                    d="M6.32 3.375A49.255 49.255 0 0 1 12 3c1.91 0 3.78.128 5.68.375a1.88 1.88 0 0 1 1.64 1.86v15.91c0 .299-.158.576-.417.729a.812.812 0 0 1-.83.01L12 18.69l-6.073 3.194a.812.812 0 0 1-.83-.01 0.84 0.84 0 0 1-.417-.729V5.236c0-.928.668-1.72 1.64-1.861Z"
+                                                                                                    clipRule="evenodd"
+                                                                                                />
+                                                                                                </svg>
+                                                                                            ) : (
+                                                                                                // Outline Bookmark (未收藏)
+                                                                                                <svg
+                                                                                                xmlns="http://www.w3.org/2000/svg"
+                                                                                                fill="none"
+                                                                                                viewBox="0 0 24 24"
+                                                                                                strokeWidth={1.5}
+                                                                                                stroke="currentColor"
+                                                                                                className="w-5 h-5"
+                                                                                                >
+                                                                                                <path
+                                                                                                    strokeLinecap="round"
+                                                                                                    strokeLinejoin="round"
+                                                                                                    d="M17.68 4.235A48.3 48.3 0 0 0 12 3c-1.91 0-3.78.128-5.68.375A1.88 1.88 0 0 0 4.68 5.236v15.91c0 .3.158.577.417.73.259.152.58.165.83.01L12 18.691l6.073 3.195c.25.155.571.142.83-.01.259-.153.417-.43.417-.73V5.236c0-.928-.668-1.72-1.64-1.861Z"
+                                                                                                />
+                                                                                                </svg>
+                                                                                            )}
+                                                                                        </button>
                                                                                         <button className={`${row.bg} text-white py-2 px-3 rounded-full border-0`}>{row.symbol.charAt(0)}</button>
                                                                                         <div className="flex flex-col">
                                                                                             <span className="font-bold">{row.symbol}</span>
