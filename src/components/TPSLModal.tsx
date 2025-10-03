@@ -25,7 +25,7 @@ interface ModalData {
   expectedProfit: string;
 }
 
-const PositionsTPSLModal = ({
+const TPSLModal = ({
   data,            // Object with position info
   inputTPSLPrice,          // Stop Loss Price input value
   onChangeInputTPSLPrice,  // Stop Loss Price input handler
@@ -147,4 +147,4 @@ const PositionsTPSLModal = ({
   );
 };
 
-export default PositionsTPSLModal;
+export default TPSLModal;

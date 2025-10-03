@@ -5,7 +5,7 @@ import DesktopNavRight from "../components/DesktopNavRight";
 import MobileMenu from "../components/MobileMenu";
 import PrimaryButton from "../components/Button/PrimaryButton";
 import Tabs from "../components/Tabs";
-import PositionsTPSLModal from "../components/PositionsTPSLModal";
+import TPSLModal from "../components/TPSLModal";
 import AdjustMarginModal from "../components/AdjustMarginModal";
 import ToggleButton from "../components/ToggleButton";
 import Footer from "../components/Footer";
@@ -1268,7 +1268,7 @@ const Trading = () => {
                                         )}
 
                                         {showTPSLModal && modalData && (
-                                            <PositionsTPSLModal
+                                            <TPSLModal
                                                 data={modalData} 
                                                 inputTPSLPrice={inputTPSLPrice} 
                                                 onChangeInputTPSLPrice={setInputTPSLPrice} 
@@ -1385,7 +1385,7 @@ const Trading = () => {
                                     )}
 
                                     {showTPSLModal && modalData && (
-                                        <PositionsTPSLModal
+                                        <TPSLModal
                                             data={modalData} 
                                             inputTPSLPrice={inputTPSLPrice} 
                                             onChangeInputTPSLPrice={setInputTPSLPrice} 
