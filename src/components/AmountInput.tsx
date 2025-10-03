@@ -23,9 +23,18 @@ const AmountInput: React.FC<AmountInputProps> = ({
     ? assets
     : selectedAsset.includes("-")
     ? selectedAsset.split("-")
-    : [selectedAsset, "USD"]; // fallback
+    : ["USD"]; // 無 '-' 就只顯示 USD
 
   const [localAsset, setLocalAsset] = useState(derivedAssets[0]);
+
+  React.useEffect(() => {
+    const newDerivedAssets = assets
+      ? assets
+      : selectedAsset.includes("-")
+      ? selectedAsset.split("-")
+      : ["USD"]; // 無 '-' 就只顯示 USD
+    setLocalAsset(newDerivedAssets[0]);
+  }, [selectedAsset, assets]);
 
   return (
     <div className="flex flex-col items-start gap-2 w-full">
