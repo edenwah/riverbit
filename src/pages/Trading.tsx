@@ -1163,7 +1163,28 @@ const Trading = () => {
 
                                                     {/* TP/SL */}
                                                     <td className="py-2 px-2">
-                                                        <span>{row.tpSl}</span>
+                                                        <div className="flex gap-1 items-center">
+                                                            <span>{row.tpSl}</span>
+                                                            <img
+                                                            src="https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/l0hc3xdh_expires_30_days.png"
+                                                            className="w-4 h-4 object-fill cursor-pointer"
+                                                            onClick={() => {
+                                                                setModalData({
+                                                                    time: "9/12/2025 17:30:13",
+                                                                    coin: row.coin,
+                                                                    position: row.position.value,
+                                                                    entryPrice: "55.116",
+                                                                    markPrice: "55.252",
+                                                                    takeProfit: "Price above 60",
+                                                                    stopLoss: "--",
+                                                                    orderId: "160687782672",
+                                                                    expectedProfit: "39.51 USDC",
+                                                                } as TpslModalData);
+                                                                setShowTPSLModal(true);
+                                                            }}
+                                                            alt="TP/SL"
+                                                            />
+                                                        </div>
                                                     </td>
 
                                                     {/* Actions */}
