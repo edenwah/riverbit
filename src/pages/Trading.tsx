@@ -59,6 +59,7 @@ const Trading = () => {
     const [showCloseAllModal, setShowCloseAllModal] = useState(false);
     const [modalCoin, setModalCoin] = useState("");
     const [modalLiqPrice, setModalLiqPrice] = useState("");
+    const [modalPercent, setModalPercent] = useState("");
     const [showShareModal, setShowShareModal] = useState(false);
     const [showAllTradeHistory, setShowAllTradeHistory] = useState(false);
     const [showAllFundingHistory, setShowAllFundingHistory] = useState(false);
@@ -1244,6 +1245,7 @@ const Trading = () => {
                                                         onClick={() => {
                                                             setModalCoin(row.coin);
                                                             setModalLiqPrice(row.liqPrice);
+                                                            setModalPercent(row.pnl.roe);
                                                             setShowShareModal(true);
                                                         }}
                                                         >
@@ -1297,7 +1299,7 @@ const Trading = () => {
                                             <ShareModal
                                                 coinName={modalCoin}
                                                 logoUrl={<RiverbitLogo />}
-                                                changePercent="-13.2%"
+                                                changePercent={modalPercent}
                                                 liqPrice={modalLiqPrice}
                                                 onClose={() => setShowShareModal(false)}
                                             />

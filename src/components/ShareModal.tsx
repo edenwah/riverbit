@@ -6,9 +6,7 @@ import { SecondaryButton } from "./Button/SecondaryButton";
 type ShareModalProps = {
   coinName: string;
   logoUrl: string | JSX.Element;
-  changePercent: string;
-  entryPrice?: string;
-  markPrice?: string;
+  changePercent?: string;
   liqPrice?: string;
   onClose: () => void;
 };
@@ -17,8 +15,6 @@ const ShareModal = ({
   coinName,
   logoUrl,
   changePercent,
-  entryPrice,
-  markPrice,
   liqPrice,
   onClose,
 }: ShareModalProps) => {
@@ -110,11 +106,11 @@ const ShareModal = ({
         </div>
 
         {/* Body */}
-        <div className="flex flex-col md:flex-row gap-4 relative text-left bg-[#272B2F]">
+        <div className="flex flex-col md:flex-row relative m-6 gap-4 text-left bg-[#272B2F]">
           {/* 左邊：logo + coin info + background */}
           <div
             ref={leftRef}
-            className="relative flex flex-col gap-4 p-6 w-full md:w-1/2 rounded-lg"
+            className="relative flex flex-col gap-4 p-6 w-full md:w-1/2 rounded-xl min-h-[450px] border border-gray-700"
             style={{
               backgroundImage: selectedOverlay ? `url(${selectedOverlay})` : "none",
               backgroundSize: "cover",
@@ -123,7 +119,9 @@ const ShareModal = ({
           >
             <div
               className="absolute inset-0 rounded-lg pointer-events-none"
-              style={{ backgroundColor: "rgba(39, 43, 47, 0.8)" }}
+              style={{
+                backgroundColor: "rgb(39, 43, 47)",
+              }}
             ></div>
 
             <div className="relative z-10 flex flex-col gap-4 text-white justify-between h-full">
@@ -136,8 +134,8 @@ const ShareModal = ({
                 <div className="flex flex-wrap gap-4 items-center">
                   <div className="font-bold text-3xl">{coinName}</div>
                   <div
-                    className={`px-2 py-1 text-xl text-white rounded-md ${
-                      changePercent.startsWith("-") ? "bg-[#F85149]" : "bg-[#2DA44E]"
+                    className={`px-2 py-1 text-xl rounded ${
+                      changePercent?.startsWith("-") ? "bg-[#EF44441A] text-[#F85149]" : "bg-[#22C55E1A] text-[#2DA44E]"
                     }`}
                   >
                     {changePercent}
@@ -153,7 +151,7 @@ const ShareModal = ({
                 </div>
 
                 {/* 加入 custom message */}
-                <div className="mt-4 rounded-md text-white font-bold text-3xl text-wrap">
+                <div className="rounded-md text-white text-2xl max-h-28 overflow-auto break-words whitespace-pre-wrap">
                   {customText}
                 </div>
 
@@ -166,8 +164,8 @@ const ShareModal = ({
           </div>
 
           {/* 右邊：custom content */}
-          <div className="flex flex-col gap-4 p-6 w-full md:w-1/2">
-            {/* Referral Link */}
+          <div className="flex flex-col gap-4 w-full md:w-1/2">
+            {/* Referral Link and Copy */}
             <div className="flex flex-col items-start self-stretch gap-2">
               <div className="flex flex-col items-center pb-[1px]">
                 <span className="text-[#8B949E] text-sm">Your Referral Link:</span>
@@ -176,8 +174,8 @@ const ShareModal = ({
                 <input
                   placeholder="https://app.hyperliquid.xyz/join/"
                   value={input1}
-                  onChange={(event) => onChangeInput1(event.target.value)}
-                  className="w-full text-white bg-[#0D1117] text-sm py-4 px-4 rounded-md border border-solid border-[#30363D]"
+                  onChange={(event) => setInput1(event.target.value)}
+                  className="w-full text-white bg-zinc-950 text-sm py-4 px-4 rounded-md border border-solid border-[#30363D]"
                 />
                 <PrimaryButton
                   size="small"
@@ -201,10 +199,13 @@ const ShareModal = ({
               <div className="text-[#8B949E] text-sm mb-1">Customize your message</div>
               <textarea
                 value={customText}
-                onChange={(e) => setCustomText(e.target.value)}
-                className="w-full p-2 rounded bg-[#1C1F23] border border-gray-700 text-white text-sm resize-none"
+                onChange={(e) => setCustomText(e.target.value.slice(0, 80))}
+                className="w-full p-2 rounded bg-zinc-950 border border-gray-700 text-white text-sm resize-none"
                 rows={3}
               />
+              <div className="text-xs text-[#8B949E] text-right">
+                {customText.length}/80
+              </div>
             </div>
 
             {/* Upload */}
