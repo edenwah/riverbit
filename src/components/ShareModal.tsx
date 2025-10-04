@@ -23,7 +23,7 @@ const ShareModal = ({
   onClose,
 }: ShareModalProps) => {
   const [customText, setCustomText] = useState(
-    `Trade ${coinName} seamlessly on @RiverBit — join me!`
+    `Trade ${coinName} seamlessly on RiverBit — join me!`
   );
   const [overlays, setOverlays] = useState<string[]>([]);
   const [selectedOverlay, setSelectedOverlay] = useState<string | null>(null);
@@ -152,9 +152,14 @@ const ShareModal = ({
                   )}
                 </div>
 
+                {/* 加入 custom message */}
+                <div className="mt-4 rounded-md text-white font-bold text-3xl text-wrap">
+                  {customText}
+                </div>
+
                 <div className="text-sm">
                   <div className="text-[#8B949E]">Referral Link:</div>
-                  <div className="break-all">https://app.hyperliquid.xyz/join/</div>
+                  <div className="break-all">{input1}</div>
                 </div>
               </div>
             </div>
