@@ -1,5 +1,5 @@
 import { useState, type JSX, useRef } from "react";
-import html2canvas from "html2canvas";
+import html2canvas from "html2canvas-pro";
 import PrimaryButton from "./Button/PrimaryButton";
 import { SecondaryButton } from "./Button/SecondaryButton";
 
@@ -27,9 +27,9 @@ const ShareModal = ({
   const handleUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
-    const allowedTypes = ["image/png", "image/svg+xml"];
+    const allowedTypes = ["image/png", "image/jpeg", "image/jpg", "image/svg+xml"];
     if (!allowedTypes.includes(file.type)) {
-      alert("Please upload a PNG or SVG image.");
+      alert("Please upload a PNG, JPG, or SVG image.");
       return;
     }
     if (file.size > 2 * 1024 * 1024) {
@@ -121,6 +121,7 @@ const ShareModal = ({
               className="absolute inset-0 rounded-lg pointer-events-none"
               style={{
                 backgroundColor: "rgb(39, 43, 47)",
+                opacity: 0.8,
               }}
             ></div>
 
@@ -211,12 +212,12 @@ const ShareModal = ({
             {/* Upload */}
             <div className="flex flex-col gap-2">
               <label className="text-[#8B949E] text-sm">Overlay</label>
-              <span className="text-white text-sm">PNG or SVG only, max 2MB</span>
+              <span className="text-white text-sm">JPG, PNG or SVG only, max 2MB</span>
 
               <input
                 id="overlay-upload"
                 type="file"
-                accept=".png, .svg"
+                accept=".jpg, .png, .svg"
                 onChange={handleUpload}
                 className="hidden"
               />
