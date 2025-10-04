@@ -3,13 +3,13 @@ import PrimaryButton from "./Button/PrimaryButton";
 import { SecondaryButton } from "./Button/SecondaryButton";
 
 type ShareModalProps = {
-  coinName: string;                     // e.g. "ETH/USD"
-  logoUrl: string | JSX.Element;        // coin logo (image URL or component)
-  changePercent: string;                // e.g. "-13.2%"
+  coinName: string;
+  logoUrl: string | JSX.Element;
+  changePercent: string;
   entryPrice?: string;
   markPrice?: string;
   liqPrice?: string;
-  onClose: () => void;                  // close modal
+  onClose: () => void;
 };
 
 const ShareModal = ({
@@ -22,38 +22,56 @@ const ShareModal = ({
   onClose,
 }: ShareModalProps) => {
   const [customText, setCustomText] = useState(
-    `Trade $${coinName} seamlessly on @RiverBit — join me!`
+    `Trade ${coinName} seamlessly on @RiverBit — join me!`
   );
-  const [overlay, setOverlay] = useState<string | null>(null);
+  const [overlays, setOverlays] = useState<string[]>([]); // 所有上傳過嘅圖
+  const [selectedOverlay, setSelectedOverlay] = useState<string | null>(null); // 現時背景圖
 
   const handleUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    if (file) {
-      // only accept PNG / SVG
-      const allowedTypes = ["image/png", "image/svg+xml"];
-      if (!allowedTypes.includes(file.type)) {
-        alert("Please upload a PNG or SVG image.");
-        return;
-      }
+    if (!file) return;
 
-      const reader = new FileReader();
-      reader.onload = (ev) => setOverlay(ev.target?.result as string);
-      reader.readAsDataURL(file);
+    // 檢查類型
+    const allowedTypes = ["image/png", "image/svg+xml"];
+    if (!allowedTypes.includes(file.type)) {
+      alert("Please upload a PNG or SVG image.");
+      return;
     }
+
+    // 檢查大小
+    if (file.size > 2 * 1024 * 1024) {
+      alert("File size must be under 2MB.");
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+      const imgData = ev.target?.result as string;
+      setOverlays((prev) => [...prev, imgData]);
+      setSelectedOverlay(imgData); // 自動選中
+    };
+    reader.readAsDataURL(file);
   };
 
-  // helper to trigger hidden file input
   const handleChooseFile = () => {
-    const fileInput = document.getElementById("overlay-upload");
-    fileInput?.click();
+    const input = document.getElementById("overlay-upload");
+    input?.click();
   };
+
+  const handleDelete = (img: string) => {
+    setOverlays((prev) => prev.filter((o) => o !== img));
+    if (selectedOverlay === img) setSelectedOverlay(null);
+  };
+
+  
 
   return (
     <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#000000B0]">
-      <div className="w-full max-w-3xl mx-4 flex flex-col bg-[#272B2F] rounded-lg border border-gray-700 overflow-hidden">
-        
+      <div
+        className="w-full max-w-3xl mx-4 flex flex-col bg-[#272B2F] rounded-lg border border-gray-700 overflow-hidden relative"
+      >
         {/* Header */}
-        <div className="flex items-center justify-between p-6 border-b border-gray-700">
+        <div className="flex items-center justify-between p-6 border-b border-gray-700 bg-[#272B2FCC]">
           <span className="text-white text-lg font-bold">Share</span>
           <img
             src="https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/73d3cc65_expires_30_days.png"
@@ -64,7 +82,12 @@ const ShareModal = ({
         </div>
 
         {/* Body */}
-        <div className="text-left items-start flex flex-col m-6 gap-4">
+        <div className="text-left items-start flex flex-col gap-4 bg-[#272B2FCC] rounded-lg p-6"
+        style={{
+          backgroundImage: selectedOverlay ? `url(${selectedOverlay})` : "none",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}>
           {/* Logo */}
           {typeof logoUrl === "string" ? (
             <img src={logoUrl} alt={coinName} className="w-10 h-10 rounded-full" />
@@ -73,7 +96,7 @@ const ShareModal = ({
           )}
 
           <div className="flex flex-col md:flex-row gap-6 text-white w-full">
-            {/* Left side: Coin info */}
+            {/* Left side */}
             <div className="flex flex-col items-start gap-4 w-full">
               <div className="font-bold text-xl">{coinName}</div>
               <div
@@ -111,7 +134,7 @@ const ShareModal = ({
               </div>
             </div>
 
-            {/* Right side: customization */}
+            {/* Right side */}
             <div className="flex flex-col gap-4 w-full">
               <div>
                 <div className="text-[#8B949E] text-sm mb-1">Customize your text</div>
@@ -123,11 +146,11 @@ const ShareModal = ({
                 />
               </div>
 
-              {/* Overlay upload */}
+              {/* Upload */}
               <div className="flex flex-col gap-2">
                 <label className="text-[#8B949E] text-sm">Overlay background image</label>
                 <span className="text-sm">PNG or SVG only, max 2MB</span>
-                {/* Hidden input */}
+
                 <input
                   id="overlay-upload"
                   type="file"
@@ -140,30 +163,74 @@ const ShareModal = ({
                   Choose File
                 </SecondaryButton>
 
-                {overlay && (
-                  <img
-                    src={overlay}
-                    alt="Overlay"
-                    className="w-full h-32 object-cover rounded"
-                  />
+                {/* 已上傳圖片 */}
+                {overlays.length > 0 && (
+                  <div className="flex flex-wrap gap-2 mt-2">
+                    {overlays.map((img, index) => (
+                      <div
+                        key={index}
+                        className={`relative w-20 h-20 rounded overflow-hidden border-2 cursor-pointer ${
+                          selectedOverlay === img
+                            ? "border-[#2DA44E]"
+                            : "border-gray-600"
+                        }`}
+                        onClick={() => setSelectedOverlay(img)}
+                      >
+                        <img
+                          src={img}
+                          alt={`overlay-${index}`}
+                          className="w-full h-full object-cover"
+                        />
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleDelete(img);
+                          }}
+                          className="absolute top-1 right-1 bg-black/70 rounded-full p-1"
+                        >
+                          {/* inline Heroicon X (use inside your delete button) */}
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="h-3.5 w-3.5 text-white"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth={2}
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            aria-hidden="true"
+                          >
+                            <path d="M6 18L18 6" />
+                            <path d="M6 6l12 12" />
+                          </svg>
+
+                        </button>
+                      </div>
+                    ))}
+                  </div>
                 )}
               </div>
             </div>
           </div>
         </div>
 
-        {/* Action Buttons */}
-        <div className="flex flex-col gap-3 p-6 border-t border-gray-700">
-          <PrimaryButton size="large" onClick={() => alert("Image saved!")}>
-            Save Image
-          </PrimaryButton>
-          <SecondaryButton size="large" onClick={() => alert("Link copied!")}>
-            Copy Link
-          </SecondaryButton>
-          <PrimaryButton size="large" onClick={() => alert("Shared on X!")}>
-            Share on X
-          </PrimaryButton>
+        {/* Buttons */}
+        <div className="flex flex-col gap-3 p-6 border-t border-gray-700 bg-[#272B2FCC]">
+          <div className="flex flex-row gap-3">
+            <SecondaryButton size="large" onClick={() => alert("Image saved!")}>
+              Save Image
+            </SecondaryButton>
+            <SecondaryButton size="large" onClick={() => alert("Link copied!")}>
+              Copy Link
+            </SecondaryButton>
+          </div>
+          <div className="flex flex-col gap-3">
+            <PrimaryButton size="large" onClick={() => alert("Shared on X!")}>
+              Share on X
+            </PrimaryButton>
+          </div>
         </div>
+        
       </div>
     </div>
   );
