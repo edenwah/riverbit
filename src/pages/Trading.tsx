@@ -1231,8 +1231,8 @@ const Trading = () => {
                                                     </td>
 
                                                     {/* Actions */}
-                                                    <td className="py-2 px-2 font-bold text-fuchsia-800">
-                                                        <button
+                                                    <td className="py-2 px-2 font-bold text-fuchsia-800 gap-2">
+                                                        <button className="py-2 mr-4"
                                                         onClick={() => {
                                                             setModalCoin(row.coin);
                                                             setShowCloseModal(true);
@@ -1240,7 +1240,7 @@ const Trading = () => {
                                                         >
                                                         {row.action}
                                                         </button>
-                                                        <button
+                                                        <button className="py-2"
                                                         onClick={() => {
                                                             setModalCoin(row.coin);
                                                             setModalLiqPrice(row.liqPrice);
