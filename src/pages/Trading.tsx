@@ -18,6 +18,7 @@ import AIChatWidget from "../components/AIChatWidget";
 import Toast from "../components/Toast";
 import ConfirmCloseModal from "../components/ConfirmCloseModal";
 import ConfirmCancelModal from "../components/ConfirmCancelModal";
+import ShareModal from "../components/ShareModal";
 import OrderBook from "../components/OrderBook";
 import Trades from "../components/Trades";
 import AmountInput from "../components/AmountInput";
@@ -57,6 +58,8 @@ const Trading = () => {
     const [showCloseModal, setShowCloseModal] = useState(false);
     const [showCloseAllModal, setShowCloseAllModal] = useState(false);
     const [modalCoin, setModalCoin] = useState("");
+    const [modalLiqPrice, setModalLiqPrice] = useState("");
+    const [showShareModal, setShowShareModal] = useState(false);
     const [showAllTradeHistory, setShowAllTradeHistory] = useState(false);
     const [showAllFundingHistory, setShowAllFundingHistory] = useState(false);
     const [showAllOrderHistory, setShowAllOrderHistory] = useState(false);
@@ -1237,6 +1240,15 @@ const Trading = () => {
                                                         >
                                                         {row.action}
                                                         </button>
+                                                        <button
+                                                        onClick={() => {
+                                                            setModalCoin(row.coin);
+                                                            setModalLiqPrice(row.liqPrice);
+                                                            setShowShareModal(true);
+                                                        }}
+                                                        >
+                                                        Share
+                                                        </button>
                                                     </td>
                                                     </tr>
                                                 ))}
@@ -1279,6 +1291,15 @@ const Trading = () => {
                                                 console.log("Confirmed", inputTPSLPrice, inputTPSLPercent);
                                                 setShowTPSLModal(false);
                                                 }}
+                                            />
+                                        )}
+                                        {showShareModal && (
+                                            <ShareModal
+                                                coinName={modalCoin}
+                                                logoUrl={<RiverbitLogo />}
+                                                changePercent="-13.2%"
+                                                liqPrice={modalLiqPrice}
+                                                onClose={() => setShowShareModal(false)}
                                             />
                                         )}
                                     </div>
