@@ -53,7 +53,6 @@ const Referral = () => {
 		};
 	}, [showMoreDropdown, showWalletDropdown, showLangDropdown]);
 	
-	const [input1, onChangeInput1] = useState('');
 	const [role, setRole] = useState("Candidate User");
 	const [referralTab, setReferralTab] = useState("Direct Referrals");
 	const [showAdjustCommissionRateModal, setShowAdjustCommissionRateModal] = useState(false); // 控制 modal 顯示
