@@ -68,7 +68,8 @@ const Trading = () => {
     const [unitGranularity, setUnitGranularity] = useState("0.001");
 
     // Amount Input
-    const [amount, setAmount] = useState("");
+    const [amount, setAmount] = useState<number>(0); // number
+
     // Assume a total for percent calculation
     const AMOUNT_TOTAL = 1000;
     // Calculate percent from amount

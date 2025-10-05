@@ -3,14 +3,14 @@ import React from "react";
 interface PercentSliderProps {
   value: number; // 已經計算好的 percentValue
   maxAmount: number; // 例如 AMOUNT_TOTAL
-  onChangeAmount: (amount: string) => void; // 更新 input2
+  onChangeAmount: (amount: number) => void; // 更新 input2
 }
 
 const PercentSlider: React.FC<PercentSliderProps> = ({ value, maxAmount, onChangeAmount }) => {
   const handleSliderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const percent = Number(e.target.value);
     const amount = Math.round((percent / 100) * maxAmount);
-    onChangeAmount(amount.toString());
+    onChangeAmount(amount);
   };
 
   return (
@@ -37,7 +37,7 @@ const PercentSlider: React.FC<PercentSliderProps> = ({ value, maxAmount, onChang
             } bg-zinc-900 text-white text-sm`}
             onClick={() => {
               const amount = Math.round((percent / 100) * maxAmount);
-              onChangeAmount(amount.toString());
+              onChangeAmount(amount);
             }}
           >
             {percent}%
