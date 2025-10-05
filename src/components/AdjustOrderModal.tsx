@@ -33,6 +33,10 @@ const AdjustOrderModal: React.FC<AdjustOrderModalProps> = ({
   const [leverage, setLeverage] = useState<number>(10);
   const [marginMode, setMarginMode] = useState<string>("Cross");
 
+  const maxAmount = 10000;
+  const percentValue = maxAmount ? (amount / maxAmount) * 100 : 0;
+  const selectedAssetSymbol = coin;
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60">
       <div
@@ -119,13 +123,13 @@ const AdjustOrderModal: React.FC<AdjustOrderModalProps> = ({
 
             </div>
 
-            {/* Amount (using AmountInput component) */}
+            {/* Amount */}
             <AmountInput
               value={amount}
-              onChange={setAmount}
-              percentValue={0}
-              maxAmount={100000} // placeholder max, can be dynamic
-              selectedAsset={coin}
+              onChange={setAmount} // 直接更新 amount
+              percentValue={percentValue} // 父層計算百分比
+              maxAmount={maxAmount}
+              selectedAsset={selectedAssetSymbol}
             />
           </div>
 

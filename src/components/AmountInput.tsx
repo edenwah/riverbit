@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import PercentSlider from "./PercentSlider";
 
 type AmountInputProps = {
-  value: number; // 主 state 用 number
+  value: number;
   onChange: (val: number) => void;
-  percentValue: number;
+  percentValue: number; // 保留
   maxAmount: number;
   assets?: string[];
   selectedAsset: string;
@@ -47,10 +47,10 @@ const AmountInput: React.FC<AmountInputProps> = ({
         <div className="flex justify-between bg-zinc-950 py-[9px] px-3 rounded-sm border border-solid border-[#30363D] w-full">
           <input
             placeholder="0"
-            value={value === 0 ? "" : value.toString()} // 顯示用 string
+            value={value === 0 ? "" : value.toString()}
             onChange={(e) => {
               const parsed = Number(e.target.value.replace(/,/g, ""));
-              onChange(isNaN(parsed) ? 0 : parsed); // 傳 number
+              onChange(isNaN(parsed) ? 0 : parsed);
             }}
             className="w-full text-white bg-transparent text-base py-[3px] border-0"
           />
@@ -82,7 +82,6 @@ const AmountInput: React.FC<AmountInputProps> = ({
           maxAmount={maxAmount}
           onChangeAmount={onChange} // 直接傳 number
         />
-
       </div>
     </div>
   );

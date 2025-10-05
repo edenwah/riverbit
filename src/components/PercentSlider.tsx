@@ -12,7 +12,7 @@ const PercentSlider: React.FC<PercentSliderProps> = ({ value, maxAmount, onChang
     const amount = Math.round((percent / 100) * maxAmount);
     onChangeAmount(amount);
   };
-
+  
   return (
     <div className="flex flex-col w-full">
       <input
