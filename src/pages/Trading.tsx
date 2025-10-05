@@ -121,7 +121,7 @@ const Trading = () => {
     };
 
     // Trade History state
-    const [tradeHistory, setTradeHistory] = useState([
+    const [tradeHistory] = useState([
         {
             time: "9/12/2025 16:41:34",
             coin: "HYPE",
@@ -205,7 +205,7 @@ const Trading = () => {
     ]);
 
     // Funding History state
-    const [fundingHistory, setFundingHistory] = useState([
+    const [fundingHistory] = useState([
         {
             time: "9/12/2025 17:00:00",
             coin: "HYPE",
@@ -273,7 +273,7 @@ const Trading = () => {
     ]);
 
     // Order History state
-    const [orderHistory, setOrderHistory] = useState([
+    const [orderHistory] = useState([
         {
             time: "9/12/2025 17:30:13",
             type: "Take Profit Market",

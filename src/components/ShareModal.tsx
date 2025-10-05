@@ -2,6 +2,7 @@ import { useState, type JSX, useRef } from "react";
 import html2canvas from "html2canvas-pro";
 import PrimaryButton from "./Button/PrimaryButton";
 import { SecondaryButton } from "./Button/SecondaryButton";
+import CopyReferralLink from "./CopyReferralLink";
 
 type ShareModalProps = {
   coinName: string;
@@ -89,7 +90,7 @@ const ShareModal = ({
     link.click();
   };
 
-  const [input1, setInput1] = useState("https://app.hyperliquid.xyz/join/");
+  const [input1] = useState("https://app.hyperliquid.xyz/join/");
 
   return (
     <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#000000B0]">
@@ -167,33 +168,8 @@ const ShareModal = ({
           {/* 右邊：custom content */}
           <div className="flex flex-col gap-4 w-full md:w-1/2">
             {/* Referral Link and Copy */}
-            <div className="flex flex-col items-start self-stretch gap-2">
-              <div className="flex flex-col items-center pb-[1px]">
-                <span className="text-[#8B949E] text-sm">Your Referral Link:</span>
-              </div>
-              <div className="flex flex-row w-full gap-4">
-                <input
-                  placeholder="https://app.hyperliquid.xyz/join/"
-                  value={input1}
-                  onChange={(event) => setInput1(event.target.value)}
-                  className="w-full text-white bg-zinc-950 text-sm py-4 px-4 rounded-md border border-solid border-[#30363D]"
-                />
-                <PrimaryButton
-                  size="small"
-                  onClick={() => {
-                    navigator.clipboard.writeText(input1)
-                      .then(() => {
-                        alert("Referral link copied!");
-                      })
-                      .catch(() => {
-                        alert("Failed to copy. Please try manually.");
-                      });
-                  }}
-                >
-                  Copy
-                </PrimaryButton>
-              </div>
-            </div>
+            <CopyReferralLink defaultValue="https://app.hyperliquid.xyz/join/" />
+            
 
             {/* Textarea */}
             <div>

@@ -12,6 +12,7 @@ import PrimaryButton from "../components/Button/PrimaryButton";
 import StatusTag from "../components/StatusTag";
 import Tips from "../components/Tips";
 import AdjustCommissionRateModal from "../components/AdjustCommissionRateModal";
+import CopyReferralLink from "../components/CopyReferralLink";
 const Referral = () => {
 	const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 	const [language, setLanguage] = useState("EN");
@@ -69,15 +70,12 @@ const Referral = () => {
                     </div>
                     {/* Right side (Balance, Points, Wallet, Language, Buttons) */}
 					<DesktopNavRight
-						balance="$27,345.12"
-						points="1,250,000"
 						language={language}
 						setLanguage={setLanguage}
 					/>
                 </div>
 				{/* Mobile header: show below xl */}
                 <MobileHeader
-                    balance="$27,345.12"
                     onDeposit={() => alert("Deposit pressed!")}
                     onMenuToggle={() => setMobileMenuOpen(!mobileMenuOpen)}
                     />
@@ -393,25 +391,10 @@ const Referral = () => {
 										</span>
 									</div>
 									<div className="flex flex-col items-start self-stretch gap-2">
-										<div className="flex flex-col items-center pb-[1px]">
-											<span className="text-[#8B949E] text-sm" >
-												{"Your Referral Link:"}
-											</span>
-										</div>
 										{/* Input and Buttons */}
-										<div className="flex flex-col md:flex-row items-start self-stretch gap-2 w-full">
-											{/* Input */}
-											<div className="flex flex-row w-full gap-4">
-												<input
-													placeholder="https://riverbit.com/ref/sub_0xdef456"
-													value={input1}
-													onChange={(event) => onChangeInput1(event.target.value)}
-													className="w-full text-white bg-[#0D1117] text-sm py-4 px-4 rounded-md border border-solid border-[#30363D]"
-												/>
-												<PrimaryButton size="small" onClick={() => alert("Pressed")}>
-												Copy
-												</PrimaryButton>
-											</div>
+										<div className="flex flex-col md:flex-row items-end self-stretch gap-2 w-full">
+											{/* Referral Link and Copy */}
+											<CopyReferralLink defaultValue="https://riverbit.com/ref/sub_0xdef456" />
 											
 											{/* Buttons container */}
 											<div className="flex flex-col md:flex-row w-full md:w-auto gap-2 text-nowrap">
@@ -784,25 +767,10 @@ const Referral = () => {
 											</span>
 										</div>
 										<div className="flex flex-col items-start self-stretch gap-2">
-											<div className="flex flex-col items-center pb-[1px]">
-												<span className="text-[#8B949E] text-sm" >
-													{"Your Referral Link:"}
-												</span>
-											</div>
 											{/* Input and Buttons */}
 											<div className="flex flex-col items-start self-stretch gap-2 w-full">
-												{/* Input */}
-												<div className="flex flex-row w-full gap-4">
-													<input
-														placeholder="https://riverbit.com/ref/sub_0xdef456"
-														value={input1}
-														onChange={(event) => onChangeInput1(event.target.value)}
-														className="w-full text-white bg-[#0D1117] text-sm py-4 px-4 rounded-md border border-solid border-[#30363D]"
-													/>
-													<PrimaryButton size="small" onClick={() => alert("Pressed")}>
-													Copy
-													</PrimaryButton>
-												</div>
+												{/* Referral Link and Copy */}
+												<CopyReferralLink defaultValue="https://riverbit.com/ref/sub_0xdef456" />
 												
 												{/* Buttons container */}
 												<div className="flex flex-col md:flex-row w-full md:w-auto gap-2 text-nowrap">
@@ -1305,25 +1273,10 @@ const Referral = () => {
 											</span>
 										</div>
 										<div className="flex flex-col items-start self-stretch gap-2">
-											<div className="flex flex-col items-center pb-[1px]">
-												<span className="text-[#8B949E] text-sm" >
-													{"Your Referral Link:"}
-												</span>
-											</div>
 											{/* Input and Buttons */}
 											<div className="flex flex-col items-start self-stretch gap-2 w-full">
-												{/* Input */}
-												<div className="flex flex-row w-full gap-4">
-													<input
-														placeholder="https://riverbit.com/ref/sub_0xdef456"
-														value={input1}
-														onChange={(event) => onChangeInput1(event.target.value)}
-														className="w-full text-white bg-[#0D1117] text-sm py-4 px-4 rounded-md border border-solid border-[#30363D]"
-													/>
-													<PrimaryButton size="small" onClick={() => alert("Pressed")}>
-													Copy
-													</PrimaryButton>
-												</div>
+												{/* Referral Link and Copy */}
+												<CopyReferralLink defaultValue="https://riverbit.com/ref/sub_0xdef456" />
 												
 												{/* Buttons container */}
 												<div className="flex flex-col md:flex-row w-full md:w-auto gap-2 text-nowrap">
@@ -1626,25 +1579,9 @@ const Referral = () => {
 											</span>
 										</div>
 										<div className="flex flex-col items-start self-stretch gap-2">
-											<div className="flex flex-col items-center pb-[1px]">
-												<span className="text-[#8B949E] text-sm" >
-													{"Your Referral Link:"}
-												</span>
-											</div>
-											{/* Input and Buttons */}
 											<div className="flex flex-col items-start self-stretch gap-2 w-full">
-												{/* Input */}
-												<div className="flex flex-row w-full gap-4">
-													<input
-														placeholder="https://riverbit.com/ref/0xabc123"
-														value={input1}
-														onChange={(event) => onChangeInput1(event.target.value)}
-														className="w-full text-white bg-[#0D1117] text-sm py-4 px-4 rounded-md border border-solid border-[#30363D]"
-													/>
-													<PrimaryButton size="small" onClick={() => alert("Pressed")}>
-													Copy
-													</PrimaryButton>
-												</div>
+												{/* Referral Link and Copy */}
+            									<CopyReferralLink defaultValue="https://riverbit.com/ref/0xabc123" />
 												
 												{/* Buttons container */}
 												<div className="flex flex-col md:flex-row w-full md:w-auto gap-2 text-nowrap">
