@@ -1391,8 +1391,9 @@ const Trading = () => {
                                                     alt="TP/SL"
                                                     />
                                             </td>
-                                            <td className={`py-2 px-2 font-bold ${row.action.color}`}>
+                                            <td className={`py-2 px-2 font-bold gap-2 ${row.action.color}`}>
                                                 <button
+                                                    className="py-2 mr-4"
                                                     onClick={() => {
                                                         setAdjustOrderModal({
                                                         coin: row.coin,
@@ -1407,7 +1408,8 @@ const Trading = () => {
                                                 </button>
 
                                                 <button
-                                                onClick={() => setCancelModalOrder({ id: row.id, coin: row.coin, price: row.price })}
+                                                    className="py-2"
+                                                    onClick={() => setCancelModalOrder({ id: row.id, coin: row.coin, price: row.price })}
                                                 >
                                                 {row.action.text}
                                                 </button>
@@ -1477,6 +1479,7 @@ const Trading = () => {
                                                 <th className="py-2 px-2">Trade Value</th>
                                                 <th className="py-2 px-2">Fee</th>
                                                 <th className="py-2 px-2">Closed PNL</th>
+                                                <th className="py-2 px-2">Actions</th>
                                             </tr>
                                             </thead>
 
@@ -1484,18 +1487,40 @@ const Trading = () => {
                                             <tbody className="text-sm text-white">
                                             {(showAllTradeHistory ? tradeHistory : tradeHistory.slice(0, 5)).map((row, idx) => (
                                                 <tr key={idx} className="border-b border-[#30363D]">
-                                                <td className="py-2 px-2 whitespace-pre">{row.time}</td>
-                                                <td className="py-2 px-2">{row.coin}</td>
-                                                <td className={`py-2 px-2 ${row.direction.color}`}>{row.direction.text}</td>
-                                                <td className="py-2 px-2">{row.price}</td>
-                                                <td className="py-2 px-2">{row.size}</td>
-                                                <td className="py-2 px-2">{row.tradeValue}</td>
-                                                <td className="py-2 px-2">{row.fee}</td>
-                                                <td className="py-2 px-2">{row.pnl}</td>
+                                                    <td className="py-2 px-2 whitespace-pre">{row.time}</td>
+                                                    <td className="py-2 px-2">{row.coin}</td>
+                                                    <td className={`py-2 px-2 ${row.direction.color}`}>{row.direction.text}</td>
+                                                    <td className="py-2 px-2">{row.price}</td>
+                                                    <td className="py-2 px-2">{row.size}</td>
+                                                    <td className="py-2 px-2">{row.tradeValue}</td>
+                                                    <td className="py-2 px-2">{row.fee}</td>
+                                                    <td className="py-2 px-2">{row.pnl}</td>
+                                                    {/* Actions */}
+                                                    <td className="py-2 px-2 font-bold text-fuchsia-800 gap-2">
+                                                        <button className="py-2"
+                                                        onClick={() => {
+                                                            setModalCoin(row.coin);
+                                                            setModalLiqPrice(row.price);
+                                                            setModalPercent(row.pnl);
+                                                            setShowShareModal(true);
+                                                        }}
+                                                        >
+                                                        Share
+                                                        </button>
+                                                    </td>
                                                 </tr>
                                             ))}
                                             </tbody>
                                         </table>
+                                        {showShareModal && (
+                                            <ShareModal
+                                                coinName={modalCoin}
+                                                logoUrl={<RiverbitLogo />}
+                                                changePercent={modalPercent}
+                                                liqPrice={modalLiqPrice}
+                                                onClose={() => setShowShareModal(false)}
+                                            />
+                                        )}
                                     </div>
                                     {/* Buttons */}
                                     <div className="flex justify-end mt-3 gap-4">
