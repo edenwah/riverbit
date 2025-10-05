@@ -23,6 +23,7 @@ import OrderBook from "../components/OrderBook";
 import Trades from "../components/Trades";
 import AmountInput from "../components/AmountInput";
 import CategoryTab from "../components/CategoryTab";
+import AdjustOrderModal from "../components/AdjustOrderModal";
 
 const Trading = () => {
     const [input1, onChangeInput1] = useState('');
@@ -89,6 +90,15 @@ const Trading = () => {
 
     // Open Orders Table component
     const [cancelModalOrder, setCancelModalOrder] = useState<null | { id: number; coin: string; price: string }>(null);
+
+    // Adjust Order Modal component
+    const [adjustOrderModal, setAdjustOrderModal] = useState<{
+    coin: string;
+    orderType: string;
+    currentPrice: number;
+    currentAmount: number;
+    status: string;
+    } | null>(null);
 
     // Positions state
     const [positions, setPositions] = useState([
@@ -1382,6 +1392,20 @@ const Trading = () => {
                                             </td>
                                             <td className={`py-2 px-2 font-bold ${row.action.color}`}>
                                                 <button
+                                                    onClick={() => {
+                                                        setAdjustOrderModal({
+                                                        coin: row.coin,
+                                                        orderType: "Limit Buy",
+                                                        currentPrice: Number(row.price),
+                                                        currentAmount: Number(row.size),
+                                                        status: "Pending",
+                                                        });
+                                                    }}
+                                                    >
+                                                    Adjust
+                                                </button>
+
+                                                <button
                                                 onClick={() => setCancelModalOrder({ id: row.id, coin: row.coin, price: row.price })}
                                                 >
                                                 {row.action.text}
@@ -1397,6 +1421,19 @@ const Trading = () => {
                                     <div className="flex justify-end mt-3">
                                         <button className="bg-fuchsia-800 w-[100px] py-3.5 rounded-md text-white font-bold">View All</button>
                                     </div>
+
+                                    {/* Adjust Order Modal */}
+                                    {adjustOrderModal && (
+                                        <AdjustOrderModal
+                                            coin={adjustOrderModal.coin}
+                                            orderType={adjustOrderModal.orderType}
+                                            currentPrice={adjustOrderModal.currentPrice}
+                                            currentAmount={adjustOrderModal.currentAmount}
+                                            status={adjustOrderModal.status}
+                                            onClose={() => setAdjustOrderModal(null)}
+                                            onConfirm={(data) => console.log("Adjusted:", data)}
+                                        />
+                                    )}
 
                                     {/* Confirm Cancel Modal */}
                                     {cancelModalOrder && (

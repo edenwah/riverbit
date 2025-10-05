@@ -1,11 +1,11 @@
 import React from "react";
 
 interface SelectProps {
-  value: string;
-  onChange: (val: string) => void;
-  options: { label: string; value: string }[];
+  value: string | number;
+  onChange: (val: string | number | React.SetStateAction<any>) => void;
+  options: { label: string; value: string | number }[];
   placeholder?: string;
-  minWidth?: string; // optional prop for minimum width
+  minWidth?: string;
 }
 
 const Select: React.FC<SelectProps> = ({

@@ -1,12 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PercentSlider from "./PercentSlider";
 
 type AmountInputProps = {
-  value: string;
-  onChange: (val: string) => void;
+  value: number; // 主 state 用 number
+  onChange: (val: number) => void;
   percentValue: number;
   maxAmount: number;
-  assets?: string[]; // optional
+  assets?: string[];
   selectedAsset: string;
 };
 
@@ -18,21 +18,20 @@ const AmountInput: React.FC<AmountInputProps> = ({
   assets,
   selectedAsset,
 }) => {
-  // 如果 assets 冇傳入，用 selectedAsset 拆開
   const derivedAssets = assets
     ? assets
     : selectedAsset.includes("-")
     ? selectedAsset.split("-")
-    : ["USD"]; // 無 '-' 就只顯示 USD
+    : ["USD"];
 
   const [localAsset, setLocalAsset] = useState(derivedAssets[0]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const newDerivedAssets = assets
       ? assets
       : selectedAsset.includes("-")
       ? selectedAsset.split("-")
-      : ["USD"]; // 無 '-' 就只顯示 USD
+      : ["USD"];
     setLocalAsset(newDerivedAssets[0]);
   }, [selectedAsset, assets]);
 
@@ -48,13 +47,14 @@ const AmountInput: React.FC<AmountInputProps> = ({
         <div className="flex justify-between bg-zinc-950 py-[9px] px-3 rounded-sm border border-solid border-[#30363D] w-full">
           <input
             placeholder="0"
-            value={value}
+            value={value === 0 ? "" : value.toString()} // 顯示用 string
             onChange={(e) => {
               const parsed = Number(e.target.value.replace(/,/g, ""));
-              onChange(isNaN(parsed) ? "" : parsed.toString());
+              onChange(isNaN(parsed) ? 0 : parsed); // 傳 number
             }}
             className="w-full text-white bg-transparent text-base py-[3px] border-0"
           />
+
           <div className="flex shrink-0 items-center gap-1.5 rounded">
             <select
               value={localAsset}
@@ -73,7 +73,6 @@ const AmountInput: React.FC<AmountInputProps> = ({
                 </option>
               ))}
             </select>
-
           </div>
         </div>
 
@@ -81,8 +80,9 @@ const AmountInput: React.FC<AmountInputProps> = ({
         <PercentSlider
           value={percentValue}
           maxAmount={maxAmount}
-          onChangeAmount={onChange}
+          onChangeAmount={onChange} // 直接傳 number
         />
+
       </div>
     </div>
   );
