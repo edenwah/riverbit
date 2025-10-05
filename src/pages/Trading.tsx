@@ -1398,8 +1398,10 @@ const Trading = () => {
                                                         setAdjustOrderModal({
                                                         coin: row.coin,
                                                         orderType: "Limit Buy",
-                                                        currentPrice: Number(row.price),
-                                                        currentAmount: Number(row.size),
+                                                        currentPrice: row.price ? Number(row.price.toString().replace(/[^0-9.]/g, "")) : 0,
+                                                        currentAmount: row.size
+                                                        ? Number(row.size.toString().split("/")[0].trim().replace(/[^0-9.]/g, "")) 
+                                                        : 0,
                                                         status: "Pending",
                                                         });
                                                     }}
