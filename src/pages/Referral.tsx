@@ -1683,7 +1683,7 @@ const Referral = () => {
 							</div>
 							
 							<div className="text-left flex flex-col items-start self-stretch bg-[#161B22] p-4 gap-4 rounded-lg border border-solid border-[#30363D]">
-								<span className="w-full *:text-white text-lg font-bold" >
+								<span className="w-full text-white text-lg font-bold" >
 									{"Remain Progress to C2C User"}
 								</span>
 								<div className="flex flex-col self-stretch gap-2 mb-4">
