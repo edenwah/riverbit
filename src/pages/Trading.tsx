@@ -668,293 +668,293 @@ const Trading = () => {
                             {/* Main Chart (3 cols) */}
                             <div className="xl:col-span-3 flex flex-col gap-2">
                                 {/* Asset Info */}
-                                <div className="flex flex-col self-stretch bg-zinc-900 py-4 gap-3 rounded-lg border border-solid border-[#30363D]">
-                                    <div className="flex flex-col md:flex-row md:items-center self-stretch mx-3 gap-2">
-                                        {/* Row 1: Asset Name + Select Asset */}
-                                        <div className="flex w-full items-center gap-2 mb-1 md:mb-0 md:mr-7">
-                                            <img
-                                                src="https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/11z6u7t1_expires_30_days.png"
-                                                className="w-3 h-7 object-fill"
-                                            />
-                                            <span className="text-gray-200 text-lg font-bold">
-                                                {selectedAssetSymbol}
-                                            </span>
-                                            {/* Select Asset */}
-                                            <div className="relative">
-                                                <button
-                                                    type="button"
-                                                    className="flex items-center gap-1 ml-4 px-3 py-2 bg-zinc-900 rounded-sm  text-zinc-400 text-sm font-bold focus:outline-none"
-                                                    onClick={() => setShowAssetPopup((v) => !v)}
-                                                >
-                                                    <span>Select Asset</span>
-                                                    <img
-                                                        src="https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/rnvmw36i_expires_30_days.png"
-                                                        className="w-3 h-[15px] rounded-sm object-fill"
-                                                        alt="Select Asset"
-                                                    />
-                                                </button>
-                                                {showAssetPopup && (
-                                                    <div className="fixed inset-0 z-50 flex items-start md:mt-40 md:ml-4">
-                                                        {/* 背景遮罩 */}
-                                                        <div
-                                                            className="absolute inset-0 bg-black/50 md:bg-transparent"
-                                                            // Remove onClick here, handled by effect
+                                <div className="flex flex-col self-stretch bg-zinc-900 py-2 gap-3 rounded-lg border border-solid border-[#30363D]">
+                                    <div className="flex flex-col md:flex-row items-start self-stretch mx-3 gap-3">
+                                        <div className="flex flex-col shrink-0 gap-1">
+                                            {/* Asset Name + Select Asset */}
+                                            <div className="flex shrink-0 items-center gap-2">
+                                                <span className="text-gray-200 text-lg font-bold">
+                                                    {selectedAssetSymbol}
+                                                </span>
+                                                {/* Select Asset */}
+                                                <div className="relative">
+                                                    <button
+                                                        type="button"
+                                                        className="flex items-center gap-1 px-3 py-2 bg-zinc-900 rounded-sm  text-zinc-400 text-sm font-bold focus:outline-none"
+                                                        onClick={() => setShowAssetPopup((v) => !v)}
+                                                    >
+                                                        <img
+                                                            src="https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/rnvmw36i_expires_30_days.png"
+                                                            className="w-3 h-[15px] rounded-sm object-fill"
+                                                            alt="Select Asset"
                                                         />
-                                                        {/* Popup 內容 */}
-                                                        <div
-                                                            ref={assetPopupRef}
-                                                            className="relative w-full max-w-[910px] bg-[#272B2F] overflow-auto flex flex-col
-                                                                md:rounded-lg md:border md:border-[#30363D] md:ml-0 md:mr-0
-                                                                h-[100vh] md:h-auto
-                                                                mt-auto md:mt-0
-                                                                rounded-t-lg"
-                                                        >
-                                                            {/* Close button for mobile */}
-                                                            <div className="md:hidden w-full flex justify-end p-4">
-                                                                <button className="text-white text-lg font-bold" onClick={() => setShowAssetPopup(false)}>
-                                                                ✕
-                                                                </button>
-                                                            </div>
+                                                    </button>
+                                                    {showAssetPopup && (
+                                                        <div className="fixed inset-0 z-50 flex items-start md:mt-30 md:ml-4">
+                                                            {/* 背景遮罩 */}
+                                                            <div
+                                                                className="absolute inset-0 bg-black/50 md:bg-transparent"
+                                                                // Remove onClick here, handled by effect
+                                                            />
+                                                            {/* Popup 內容 */}
+                                                            <div
+                                                                ref={assetPopupRef}
+                                                                className="relative w-full max-w-[910px] bg-[#272B2F] overflow-auto flex flex-col
+                                                                    md:rounded-lg md:border md:border-[#30363D] md:ml-0 md:mr-0
+                                                                    h-[100vh] md:h-auto
+                                                                    mt-auto md:mt-0
+                                                                    rounded-t-lg"
+                                                            >
+                                                                {/* Close button for mobile */}
+                                                                <div className="md:hidden w-full flex justify-end p-4">
+                                                                    <button className="text-white text-lg font-bold" onClick={() => setShowAssetPopup(false)}>
+                                                                    ✕
+                                                                    </button>
+                                                                </div>
 
-                                                            {/* Search + Filter */}
-                                                            <div className="flex items-center justify-between w-full px-4 py-4 gap-2 border-b border-[#374151]">
-                                                                <div className="flex items-center flex-1 bg-[#0D1117] py-3 px-2 rounded-sm border border-[#30363D]">
-                                                                    <img
-                                                                        src="https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/alyycaw7_expires_30_days.png"
-                                                                        className="w-4 h-6 mx-4 object-fill"
-                                                                    />
-                                                                    <input
-                                                                        placeholder="Search"
-                                                                        value={input10}
-                                                                        onChange={(event) => onChangeInput10(event.target.value)}
-                                                                        className="w-full flex-1 text-[#ADAEBC] text-base border-0"
+                                                                {/* Search + Filter */}
+                                                                <div className="flex items-center justify-between w-full px-4 py-4 gap-2 border-b border-[#374151]">
+                                                                    <div className="flex items-center flex-1 bg-[#0D1117] py-3 px-2 rounded-sm border border-[#30363D]">
+                                                                        <img
+                                                                            src="https://storage.googleapis.com/tagjs-prod.appspot.com/v1/ZlYhP85oka/alyycaw7_expires_30_days.png"
+                                                                            className="w-4 h-6 mx-4 object-fill"
+                                                                        />
+                                                                        <input
+                                                                            placeholder="Search"
+                                                                            value={input10}
+                                                                            onChange={(event) => onChangeInput10(event.target.value)}
+                                                                            className="w-full flex-1 text-[#ADAEBC] text-base border-0"
+                                                                        />
+                                                                    </div>
+                                                                    <ToggleWithText
+                                                                        options={["Strict", "All"]}
+                                                                        value={input11}
+                                                                        onChange={onChangeInput11}
+                                                                        />
+                                                                </div>
+
+                                                                {/* Category Tab */}
+                                                                <div className="w-full px-4 py-2 mb-2 border-b border-[#374151]">
+                                                                    <CategoryTab
+                                                                    tabs={[
+                                                                        "All Coins",
+                                                                        "xStocks",
+                                                                        "Saved",
+                                                                        "Perps",
+                                                                        "Spot",
+                                                                        "Trending",
+                                                                        "DEX Only",
+                                                                        "Pre-launch",
+                                                                        "AI",
+                                                                        "DeFi",
+                                                                        "Layer 1",
+                                                                        "Layer 2",
+                                                                        "Meme",
+                                                                    ]}
+                                                                    activeTab={searchCategoryTab}
+                                                                    onTabChange={setSearchCategoryTab}
                                                                     />
                                                                 </div>
-                                                                <ToggleWithText
-                                                                    options={["Strict", "All"]}
-                                                                    value={input11}
-                                                                    onChange={onChangeInput11}
-                                                                    />
-                                                            </div>
-
-                                                            {/* Category Tab */}
-                                                            <div className="w-full px-4 py-2 mb-2 border-b border-[#374151]">
-                                                                <CategoryTab
-                                                                tabs={[
-                                                                    "All Coins",
-                                                                    "xStocks",
-                                                                    "Saved",
-                                                                    "Perps",
-                                                                    "Spot",
-                                                                    "Trending",
-                                                                    "DEX Only",
-                                                                    "Pre-launch",
-                                                                    "AI",
-                                                                    "DeFi",
-                                                                    "Layer 1",
-                                                                    "Layer 2",
-                                                                    "Meme",
-                                                                ]}
-                                                                activeTab={searchCategoryTab}
-                                                                onTabChange={setSearchCategoryTab}
-                                                                />
-                                                            </div>
-                                                            {/* Table */}
-                                                            <div className="w-full overflow-auto text-left">
-                                                                <table className="min-w-[700px] w-full text-sm">
-                                                                    <thead>
-                                                                        <tr className="text-zinc-400 font-bold border-b border-[#30363D]">
-                                                                            <th className="px-4 py-3 text-left">Symbol</th>
-                                                                            <th className="px-4 py-3 text-left">Leverage</th>
-                                                                            <th className="px-4 py-3 text-left">Last Price</th>
-                                                                            <th className="px-4 py-3 text-left">24h Change</th>
-                                                                            <th className="px-4 py-3 text-left">8h Funding</th>
-                                                                            <th className="px-4 py-3 text-left">24h Volume</th>
-                                                                            <th className="px-4 py-3 text-left">Open Interest</th>
-                                                                        </tr>
-                                                                    </thead>
-                                                                    <tbody>
-                                                                        {filteredMarkets.map((row, idx) => (
-                                                                            <tr
-                                                                                key={idx}
-                                                                                className="border-b border-[#30363D] text-white hover:bg-[#1f2326] cursor-pointer"
-                                                                                onClick={() => {
-                                                                                    setSelectedAssetSymbol(row.symbol);
-                                                                                    setShowAssetPopup(false);
-                                                                                }}
-                                                                            >
-                                                                                <td className="px-4 py-2">
-                                                                                    <div className="flex items-center gap-3">
-                                                                                        {/* Saved Button */}
-                                                                                        <button
-                                                                                            type="button"
-                                                                                            onClick={(e) => {
-                                                                                            e.stopPropagation(); // 避免觸發 row onClick
-                                                                                            toggleSaved(row.symbol);
-                                                                                            }}
-                                                                                            className="ml-2 text-lg"
-                                                                                        >
-                                                                                            {savedSymbols.includes(row.symbol) ? (
-                                                                                                // Solid Bookmark (已收藏)
-                                                                                                <svg
-                                                                                                xmlns="http://www.w3.org/2000/svg"
-                                                                                                fill="currentColor"
-                                                                                                viewBox="0 0 24 24"
-                                                                                                className="w-5 h-5"
-                                                                                                >
-                                                                                                <path
-                                                                                                    fillRule="evenodd"
-                                                                                                    d="M6.32 3.375A49.255 49.255 0 0 1 12 3c1.91 0 3.78.128 5.68.375a1.88 1.88 0 0 1 1.64 1.86v15.91c0 .299-.158.576-.417.729a.812.812 0 0 1-.83.01L12 18.69l-6.073 3.194a.812.812 0 0 1-.83-.01 0.84 0.84 0 0 1-.417-.729V5.236c0-.928.668-1.72 1.64-1.861Z"
-                                                                                                    clipRule="evenodd"
-                                                                                                />
-                                                                                                </svg>
-                                                                                            ) : (
-                                                                                                // Outline Bookmark (未收藏)
-                                                                                                <svg
-                                                                                                xmlns="http://www.w3.org/2000/svg"
-                                                                                                fill="none"
-                                                                                                viewBox="0 0 24 24"
-                                                                                                strokeWidth={1.5}
-                                                                                                stroke="currentColor"
-                                                                                                className="w-5 h-5"
-                                                                                                >
-                                                                                                <path
-                                                                                                    strokeLinecap="round"
-                                                                                                    strokeLinejoin="round"
-                                                                                                    d="M17.68 4.235A48.3 48.3 0 0 0 12 3c-1.91 0-3.78.128-5.68.375A1.88 1.88 0 0 0 4.68 5.236v15.91c0 .3.158.577.417.73.259.152.58.165.83.01L12 18.691l6.073 3.195c.25.155.571.142.83-.01.259-.153.417-.43.417-.73V5.236c0-.928-.668-1.72-1.64-1.861Z"
-                                                                                                />
-                                                                                                </svg>
-                                                                                            )}
-                                                                                        </button>
-                                                                                        <button className={`${row.bg} text-white py-2 px-3 rounded-full border-0`}>{row.symbol.charAt(0)}</button>
-                                                                                        <div className="flex flex-col">
-                                                                                            <span className="font-bold">{row.symbol}</span>
-                                                                                            <span className="text-gray-400 text-sm">{row.name}</span>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </td>
-                                                                                <td className="px-4 py-2">{row.leverage}</td>
-                                                                                <td className="px-4 py-2 font-bold">{row.price}</td>
-                                                                                <td className="px-4 py-2 text-[#2DA44E]">{row.change}</td>
-                                                                                <td className="px-4 py-2">{row.funding}</td>
-                                                                                <td className="px-4 py-2">{row.volume}</td>
-                                                                                <td className="px-4 py-2">{row.oi}</td>
+                                                                {/* Table */}
+                                                                <div className="w-full overflow-auto text-left">
+                                                                    <table className="min-w-[700px] w-full text-sm">
+                                                                        <thead>
+                                                                            <tr className="text-zinc-400 font-bold border-b border-[#30363D]">
+                                                                                <th className="px-4 py-3 text-left">Symbol</th>
+                                                                                <th className="px-4 py-3 text-left">Leverage</th>
+                                                                                <th className="px-4 py-3 text-left">Last Price</th>
+                                                                                <th className="px-4 py-3 text-left">24h Change</th>
+                                                                                <th className="px-4 py-3 text-left">8h Funding</th>
+                                                                                <th className="px-4 py-3 text-left">24h Volume</th>
+                                                                                <th className="px-4 py-3 text-left">Open Interest</th>
                                                                             </tr>
-                                                                        ))}
-                                                                    </tbody>
-                                                                </table>
-                                                            </div>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            {filteredMarkets.map((row, idx) => (
+                                                                                <tr
+                                                                                    key={idx}
+                                                                                    className="border-b border-[#30363D] text-white hover:bg-[#1f2326] cursor-pointer"
+                                                                                    onClick={() => {
+                                                                                        setSelectedAssetSymbol(row.symbol);
+                                                                                        setShowAssetPopup(false);
+                                                                                    }}
+                                                                                >
+                                                                                    <td className="px-4 py-2">
+                                                                                        <div className="flex items-center gap-3">
+                                                                                            {/* Saved Button */}
+                                                                                            <button
+                                                                                                type="button"
+                                                                                                onClick={(e) => {
+                                                                                                e.stopPropagation(); // 避免觸發 row onClick
+                                                                                                toggleSaved(row.symbol);
+                                                                                                }}
+                                                                                                className="ml-2 text-lg"
+                                                                                            >
+                                                                                                {savedSymbols.includes(row.symbol) ? (
+                                                                                                    // Solid Bookmark (已收藏)
+                                                                                                    <svg
+                                                                                                    xmlns="http://www.w3.org/2000/svg"
+                                                                                                    fill="currentColor"
+                                                                                                    viewBox="0 0 24 24"
+                                                                                                    className="w-5 h-5"
+                                                                                                    >
+                                                                                                    <path
+                                                                                                        fillRule="evenodd"
+                                                                                                        d="M6.32 3.375A49.255 49.255 0 0 1 12 3c1.91 0 3.78.128 5.68.375a1.88 1.88 0 0 1 1.64 1.86v15.91c0 .299-.158.576-.417.729a.812.812 0 0 1-.83.01L12 18.69l-6.073 3.194a.812.812 0 0 1-.83-.01 0.84 0.84 0 0 1-.417-.729V5.236c0-.928.668-1.72 1.64-1.861Z"
+                                                                                                        clipRule="evenodd"
+                                                                                                    />
+                                                                                                    </svg>
+                                                                                                ) : (
+                                                                                                    // Outline Bookmark (未收藏)
+                                                                                                    <svg
+                                                                                                    xmlns="http://www.w3.org/2000/svg"
+                                                                                                    fill="none"
+                                                                                                    viewBox="0 0 24 24"
+                                                                                                    strokeWidth={1.5}
+                                                                                                    stroke="currentColor"
+                                                                                                    className="w-5 h-5"
+                                                                                                    >
+                                                                                                    <path
+                                                                                                        strokeLinecap="round"
+                                                                                                        strokeLinejoin="round"
+                                                                                                        d="M17.68 4.235A48.3 48.3 0 0 0 12 3c-1.91 0-3.78.128-5.68.375A1.88 1.88 0 0 0 4.68 5.236v15.91c0 .3.158.577.417.73.259.152.58.165.83.01L12 18.691l6.073 3.195c.25.155.571.142.83-.01.259-.153.417-.43.417-.73V5.236c0-.928-.668-1.72-1.64-1.861Z"
+                                                                                                    />
+                                                                                                    </svg>
+                                                                                                )}
+                                                                                            </button>
+                                                                                            <button className={`${row.bg} text-white py-2 px-3 rounded-full border-0`}>{row.symbol.charAt(0)}</button>
+                                                                                            <div className="flex flex-col">
+                                                                                                <span className="font-bold">{row.symbol}</span>
+                                                                                                <span className="text-gray-400 text-sm">{row.name}</span>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td className="px-4 py-2">{row.leverage}</td>
+                                                                                    <td className="px-4 py-2 font-bold">{row.price}</td>
+                                                                                    <td className="px-4 py-2 text-[#2DA44E]">{row.change}</td>
+                                                                                    <td className="px-4 py-2">{row.funding}</td>
+                                                                                    <td className="px-4 py-2">{row.volume}</td>
+                                                                                    <td className="px-4 py-2">{row.oi}</td>
+                                                                                </tr>
+                                                                            ))}
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
 
-                                                            {/* Footer */}
-                                                            <div className="flex items-center justify-between px-4 py-2 text-sm text-zinc-400 mt-4">
-                                                                <span>Showing 5 of 247 markets</span>
-                                                                <span className="max-md:hidden">Press <button className="px-2 py-1 bg-gray-600 rounded text-sm">ESC</button> to close</span>
-                                                            </div>
+                                                                {/* Footer */}
+                                                                <div className="flex items-center justify-between px-4 py-2 text-sm text-zinc-400 mt-4">
+                                                                    <span>Showing 5 of 247 markets</span>
+                                                                    <span className="max-md:hidden">Press <button className="px-2 py-1 bg-gray-600 rounded text-sm">ESC</button> to close</span>
+                                                                </div>
 
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                )}
+                                                    )}
+
+                                                </div>
+                                            </div>
+                                            {/* Granularity + Indicator */}
+                                            <div className="flex gap-2 flex-row shrink-0">
+                                                {/* Granularity */}
+                                                <Select
+                                                    value={granularity}
+                                                    onChange={setGranularity}
+                                                    placeholder="Granularity"
+                                                    options={[
+                                                        { label: "1m", value: "1m" },
+                                                        { label: "5m", value: "5m" },
+                                                        { label: "15m", value: "15m" },
+                                                        { label: "1h", value: "1h" },
+                                                        { label: "1d", value: "1d" },
+                                                    ]}
+                                                    minWidth="min-w-20"
+                                                    />
+
+                                                {/* Indicator */}
+                                                <Select
+                                                    value={indicator}
+                                                    onChange={setIndicator}
+                                                    placeholder="Indicator"
+                                                    options={[
+                                                        { label: "None", value: "None" },
+                                                        { label: "EMA", value: "EMA" },
+                                                        { label: "SMA", value: "SMA" },
+                                                        { label: "RSI", value: "RSI" },
+                                                        { label: "MACD", value: "MACD" },
+                                                    ]}
+                                                    minWidth="min-w-20"
+                                                    />
 
                                             </div>
                                         </div>
-                                        {/* Row 2: Granularity + Indicator */}
-                                        <div className="flex gap-2  md:ml-auto">
-                                            {/* Granularity */}
-                                            <Select
-                                                value={granularity}
-                                                onChange={setGranularity}
-                                                placeholder="Granularity"
-                                                options={[
-                                                    { label: "1m", value: "1m" },
-                                                    { label: "5m", value: "5m" },
-                                                    { label: "15m", value: "15m" },
-                                                    { label: "1h", value: "1h" },
-                                                    { label: "1d", value: "1d" },
-                                                ]}
-                                                minWidth="min-w-32"
-                                                />
-
-                                            {/* Indicator */}
-                                            <Select
-                                                value={indicator}
-                                                onChange={setIndicator}
-                                                placeholder="Indicator"
-                                                options={[
-                                                    { label: "None", value: "None" },
-                                                    { label: "EMA", value: "EMA" },
-                                                    { label: "SMA", value: "SMA" },
-                                                    { label: "RSI", value: "RSI" },
-                                                    { label: "MACD", value: "MACD" },
-                                                ]}
-                                                minWidth="min-w-32"
-                                                />
-
+                                        
+                                        {/* Stats */}
+                                        <div className="w-full flex flex-wrap items-center self-stretch gap-1 text-left">
+                                            <div className="flex flex-1 flex-col items-start min-w-24">
+                                                <span className="text-zinc-400 text-xs" >
+                                                    {"Mark Price"}
+                                                </span>
+                                                <span className="text-gray-200 text-sm font-bold  " >
+                                                    {"227.34"}
+                                                </span>
+                                            </div>
+                                            <div className="flex flex-1 flex-col items-start min-w-24">
+                                                <span className="text-zinc-400 text-xs" >
+                                                    {"Index Price"}
+                                                </span>
+                                                <span className="text-gray-200 text-sm font-bold " >
+                                                    {"227.30"}
+                                                </span>
+                                            </div>
+                                            <div className="flex flex-1 flex-col items-start min-w-24">
+                                                <span className="text-zinc-400 text-xs" >
+                                                    {"24h Change"}
+                                                </span>
+                                                <span className="text-[#F85149] text-sm font-bold  " >
+                                                    {"-0.97%"}
+                                                </span>
+                                            </div>
+                                            <div className="flex flex-1 flex-col items-start min-w-24">
+                                                <span className="text-zinc-400 text-xs" >
+                                                    {"24h Volume"}
+                                                </span>
+                                                <span className="text-gray-200 text-sm font-bold  " >
+                                                    {"3.2B"}
+                                                </span>
+                                            </div>
+                                            <div className="flex flex-1 flex-col items-start min-w-24">
+                                                <span className="text-zinc-400 text-xs" >
+                                                    {"Open Interest"}
+                                                </span>
+                                                <span className="text-gray-200 text-sm font-bold " >
+                                                    {"3.5B"}
+                                                </span>
+                                            </div>
+                                            <div className="flex flex-1 flex-col items-start min-w-24">
+                                                <span className="text-zinc-400 text-xs" >
+                                                    {"Funding Rate"}
+                                                </span>
+                                                <span className="text-[#2DA44E] text-sm font-bold " >
+                                                    {"0.1300%"}
+                                                </span>
+                                            </div>
+                                            <div className="flex flex-1 flex-col items-start min-w-24">
+                                                <span className="text-zinc-400 text-xs" >
+                                                    {"Next Settlement"}
+                                                </span>
+                                                <span className="text-gray-200 text-sm font-bold " >
+                                                    {"00:52:54"}
+                                                </span>
+                                            </div>
                                         </div>
+                                        
                                     </div>
-
-                                    <div className="flex flex-wrap items-start self-stretch mx-3 gap-3 text-left">
-                                        <div className="flex flex-1 flex-col items-start min-w-24">
-                                            <span className="text-zinc-400 text-sm " >
-                                                {"Mark Price"}
-                                            </span>
-                                            <span className="text-gray-200 text-sm font-bold  " >
-                                                {"227.34"}
-                                            </span>
-                                        </div>
-                                        <div className="flex flex-1 flex-col items-start min-w-24">
-                                            <span className="text-zinc-400 text-sm " >
-                                                {"Index Price"}
-                                            </span>
-                                            <span className="text-gray-200 text-sm font-bold " >
-                                                {"227.30"}
-                                            </span>
-                                        </div>
-                                        <div className="flex flex-1 flex-col items-start min-w-24">
-                                            <span className="text-zinc-400 text-sm " >
-                                                {"24h Change"}
-                                            </span>
-                                            <span className="text-[#F85149] text-sm font-bold  " >
-                                                {"-0.97%"}
-                                            </span>
-                                        </div>
-                                        <div className="flex flex-1 flex-col items-start min-w-24">
-                                            <span className="text-zinc-400 text-sm " >
-                                                {"24h Volume"}
-                                            </span>
-                                            <span className="text-gray-200 text-sm font-bold  " >
-                                                {"3.2B"}
-                                            </span>
-                                        </div>
-                                        <div className="flex flex-1 flex-col items-start min-w-24">
-                                            <span className="text-zinc-400 text-sm " >
-                                                {"Open Interest"}
-                                            </span>
-                                            <span className="text-gray-200 text-sm font-bold " >
-                                                {"3.5B"}
-                                            </span>
-                                        </div>
-                                        <div className="flex flex-1 flex-col items-start min-w-24">
-                                            <span className="text-zinc-400 text-sm " >
-                                                {"Funding Rate"}
-                                            </span>
-                                            <span className="text-[#2DA44E] text-sm font-bold " >
-                                                {"0.1300%"}
-                                            </span>
-                                        </div>
-                                        <div className="flex flex-1 flex-col items-start min-w-24">
-                                            <span className="text-zinc-400 text-sm " >
-                                                {"Next Settlement"}
-                                            </span>
-                                            <span className="text-gray-200 text-sm font-bold " >
-                                                {"00:52:54"}
-                                            </span>
-                                        </div>
-                                    </div>
+                                    
                                 </div>
                                 {/* TradingView Chart + Account Overview */}
                                 <div className="flex flex-col self-stretch bg-zinc-900 h-full p-0 rounded-lg border border-solid border-[#30363D]">
                                     {/* TradingView Widget */}
-                                    <div className="h-full min-h-[400px]">
+                                    <div className="h-full min-h-[450px]">
                                         <iframe
                                             title="TradingView Chart"
                                             id="tradingview_widget"
